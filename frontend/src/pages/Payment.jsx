@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaCheck } from "react-icons/fa";
 import secure from "../assets/secure.svg";
 import lck from "../assets/lck.svg";
-import { GST_RATE } from "../data/testPackages";
+import { formatPaise, splitInclusiveGST } from "../utils/money";
 import api from "../api/api";
 import { AuthContext } from "../context/AuthContext";
 import { invalidateApiCache } from "../utils/apiCache";
@@ -44,6 +44,7 @@ const Payment = () => {
     phone: "",
     address: "",
     city: "",
+    state: "",
     pincode: "",
     gstNumber: "",
   });
@@ -92,6 +93,7 @@ const Payment = () => {
       email: user.email,
       phone: user.studentProfile?.phone || user.mobile,
       city: user.studentProfile?.city || user.city,
+      state: user.studentProfile?.state || user.state,
     };
 
     setBilling((prev) => {
@@ -110,7 +112,6 @@ const Payment = () => {
     });
   }, [user]);
 
-  const formatPrice = (n) => `₹${Number(n).toLocaleString("en-IN")}`;
   // Package prices are GST-INCLUSIVE. plan.amount already contains the GST,
   // so we must NOT add 18% on top — the split is a decomposition of a price
   // we already have, never an addition on top of one.
@@ -125,12 +126,16 @@ const Payment = () => {
   // grossPrice. Tax is owed on the consideration received, so decomposing the
   // list price would report the GST on ₹1999 while collecting ₹1799.
   //
-  // gstAmount is the REMAINDER, never rounded on its own, so
-  // baseAmount + gstAmount === total exactly for every input.
-  // Mirrors backend/utils/money.js splitInclusiveGST (which works in paise).
-  const baseAmount = Math.round(total / (1 + GST_RATE));
-  const gstAmount = total - baseAmount;
-  const subtotal = baseAmount; // shown as "taxable value (excl. GST)"
+  // gstPaise is the REMAINDER, never rounded on its own, so
+  // basePaise + gstPaise === totalPaise exactly for every input.
+  //
+  // Computed in integer PAISE with the shared splitInclusiveGST (a mirror of
+  // backend/utils/money.js) and displayed with the shared formatPaise, so the
+  // quote prints the same bytes as the confirmation receipt.
+  const grossPaise = Math.round(grossPrice * 100);
+  const discountPaise = Math.round(discount * 100);
+  const totalPaise = Math.round(total * 100);
+  const { base: basePaise, gst: gstPaise } = splitInclusiveGST(totalPaise);
 
   // --- Billing validation ------------------------------------------------
   // Inline predicates rather than a schema library: this is one form with
@@ -153,6 +158,7 @@ const Payment = () => {
       : "Enter a 10-digit mobile number.",
     address: billing.address.trim() ? "" : "Enter your billing address.",
     city: billing.city.trim() ? "" : "Enter your city.",
+    state: billing.state.trim() ? "" : "Enter your state.",
     pincode: /^\d{6}$/.test(billing.pincode.trim())
       ? ""
       : "Enter a 6-digit pincode.",
@@ -174,6 +180,7 @@ const Payment = () => {
       phone: true,
       address: true,
       city: true,
+      state: true,
       pincode: true,
     });
 
@@ -242,10 +249,8 @@ const Payment = () => {
   // split) and when /verify failed — the rupee fields remain the fallback.
   const buildConfirmationState = (paidTotal, money = null) => ({
     plan,
-    subtotal,
     discount,
     couponCode: appliedCoupon?.code || null,
-    gstAmount,
     total: paidTotal,
     money,
     paidAt: new Date().toISOString(),
@@ -583,7 +588,7 @@ const Payment = () => {
                   ) : null}
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                   <div>
                     <label
                       htmlFor="billing-city"
@@ -604,6 +609,29 @@ const Payment = () => {
                     {billingErrorFor("city") ? (
                       <p className="mt-2 text-xs font-medium text-red-600">
                         {billingErrorFor("city")}
+                      </p>
+                    ) : null}
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="billing-state"
+                      className="block text-sm font-medium text-[#0F1729] mb-2"
+                    >
+                      State *
+                    </label>
+                    <input
+                      id="billing-state"
+                      autoComplete="address-level1"
+                      value={billing.state}
+                      onChange={handleBillingChange("state")}
+                      onBlur={handleBillingBlur("state")}
+                      aria-invalid={Boolean(billingErrorFor("state"))}
+                      className={billingInputClass("state")}
+                      placeholder="Gujarat"
+                    />
+                    {billingErrorFor("state") ? (
+                      <p className="mt-2 text-xs font-medium text-red-600">
+                        {billingErrorFor("state")}
                       </p>
                     ) : null}
                   </div>
@@ -669,13 +697,13 @@ const Payment = () => {
               <div className="flex justify-between">
                 <span className="text-[#0F1729] font-medium">{plan.title}</span>
                 <span className="text-[#0F1729] text-base font-semibold">
-                  {formatPrice(grossPrice)}
+                  {formatPaise(grossPaise)}
                 </span>
               </div>
               {appliedCoupon ? (
                 <div className="flex justify-between text-emerald-700">
                   <span className="font-medium">Coupon ({appliedCoupon.code})</span>
-                  <span className="font-semibold">− {formatPrice(discount)}</span>
+                  <span className="font-semibold">− {formatPaise(discountPaise)}</span>
                 </div>
               ) : null}
 
@@ -683,11 +711,11 @@ const Payment = () => {
                   rows decompose `total`; they are never added on top. */}
               <div className="pt-3 border-t border-[#EEF2F5] flex justify-between text-slate-500">
                 <span className="text-[#65758B]">Taxable value</span>
-                <span>{formatPrice(subtotal)}</span>
+                <span>{formatPaise(basePaise)}</span>
               </div>
               <div className="flex justify-between text-slate-500">
                 <span className="text-[#65758B]">GST (18%, included)</span>
-                <span>{formatPrice(gstAmount)}</span>
+                <span>{formatPaise(gstPaise)}</span>
               </div>
             </div>
 
@@ -716,7 +744,7 @@ const Payment = () => {
                       {appliedCoupon.code}
                     </span>
                     <span className="ml-2 text-emerald-700">
-                      Coupon applied — {formatPrice(discount)} off
+                      Coupon applied — {formatPaise(discountPaise)} off
                     </span>
                   </div>
                   <button
@@ -765,7 +793,7 @@ const Payment = () => {
 
             <div className="flex justify-between items-center mb-1 font-inter">
               <span className="font-semibold text-[#0F1729]">Total Amount</span>
-              <span className="text-2xl font-bold text-[#188B8B]">{formatPrice(total)}</span>
+              <span className="text-2xl font-bold text-[#188B8B]">{formatPaise(totalPaise)}</span>
             </div>
             <p className="text-[11px] text-[#65758B] mb-6 font-inter">
               Inclusive of all taxes (GST included)

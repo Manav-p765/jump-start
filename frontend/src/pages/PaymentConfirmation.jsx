@@ -10,20 +10,7 @@ import {
 } from "lucide-react";
 import api from "../api/api";
 import { AuthContext } from "../context/AuthContext";
-import { GST_RATE } from "../data/testPackages";
-
-const formatPrice = (amount) => `₹ ${Number(amount || 0).toLocaleString("en-IN")}`;
-
-// Paise -> displayed rupees, at the display edge only. Two decimals always:
-// these figures come off the ledger, where the GST split is exact to the
-// paisa, and the invoice prints the same numbers. Whole-rupee rounding here
-// is what previously let the screen and the invoice disagree by up to 50p,
-// so ₹1,524.58 is shown in full and a round amount reads "₹ 1,799.00".
-const formatPaise = (paise) =>
-  `₹ ${(Number(paise || 0) / 100).toLocaleString("en-IN", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  })}`;
+import { formatPaise, splitInclusiveGST } from "../utils/money";
 
 const formatDate = (isoString) => {
   const value = new Date(isoString);
@@ -127,30 +114,31 @@ export default function PaymentConfirmation() {
   //
   //   2. Rupee fallback — free activations (no gateway order, so no ledger
   //      split), a failed /verify, and direct navigation with no state.
-  //      Derived the same way as the payment page, in whole rupees.
+  //      Rupee figures converted to paise once, then split with the same
+  //      shared splitInclusiveGST the payment page uses.
   //
-  // `isPaise` drives the formatter, since the two sources carry different
-  // units and one of them needs two decimals.
+  // Both sources end up as integer paise and go through the one shared
+  // formatPaise, so the two paths print identical bytes for an amount.
   const money = paymentState.money || null;
   const isPaise = Boolean(money);
-  const fmt = isPaise ? formatPaise : formatPrice;
+  const fmt = formatPaise;
+  const toPaise = (rupees) => Math.round(Number(rupees || 0) * 100);
 
   const fallbackTotal = paymentState.total ?? plan?.amount ?? 0;
-  const total = isPaise ? money.amount : fallbackTotal;
-  const subtotal = isPaise
-    ? money.base
-    : Math.round(fallbackTotal / (1 + GST_RATE));
-  const gstAmount = isPaise ? money.gst : fallbackTotal - subtotal;
+  const fallbackSplit = splitInclusiveGST(toPaise(fallbackTotal));
+  const total = isPaise ? money.amount : fallbackSplit.total;
+  const subtotal = isPaise ? money.base : fallbackSplit.base;
+  const gstAmount = isPaise ? money.gst : fallbackSplit.gst;
 
   // List price and coupon, for the "how we got to this price" group. Both
   // are informational — the split above is already net of the discount.
   const discount = isPaise
     ? money.discountAmount || 0
-    : paymentState.discount || 0;
+    : toPaise(paymentState.discount);
   const couponCode = (isPaise ? money.couponCode : paymentState.couponCode) || null;
   const listPrice = isPaise
     ? money.originalAmount || money.amount
-    : paymentState.plan?.amount ?? plan?.amount ?? fallbackTotal;
+    : toPaise(paymentState.plan?.amount ?? plan?.amount ?? fallbackTotal);
   const validityEnd = useMemo(() => addDays(issuedAt, 15), [issuedAt]);
   const features = plan?.features?.length
     ? plan.features.slice(0, 4)

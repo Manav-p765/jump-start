@@ -70,7 +70,11 @@ const Payments = () => {
         .map((v) => `"${String(v).replace(/"/g, '""')}"`)
         .join(",")
     );
-    const blob = new Blob([[headers.join(","), ...lines].join("\n")], { type: "text/csv;charset=utf-8" });
+    // Leading BOM: Excel assumes the system codepage for a .csv otherwise,
+    // which mangles any non-ASCII name. The charset in the MIME type is
+    // not enough — Excel reads the bytes, not the Blob type.
+    const csv = "\uFEFF" + [headers.join(","), ...lines].join("\n");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;

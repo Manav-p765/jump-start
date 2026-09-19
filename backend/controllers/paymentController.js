@@ -62,12 +62,13 @@ const validateBilling = (raw) => {
     phone: asTrimmedString(raw.phone),
     address: asTrimmedString(raw.address),
     city: asTrimmedString(raw.city),
+    state: asTrimmedString(raw.state),
     pincode: asTrimmedString(raw.pincode),
     gstNumber: asTrimmedString(raw.gstNumber),
   };
 
   // Non-empty after trim.
-  if (!billing.fullName || !billing.address || !billing.city) {
+  if (!billing.fullName || !billing.address || !billing.city || !billing.state) {
     return { ok: false };
   }
 
