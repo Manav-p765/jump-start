@@ -8,7 +8,7 @@ This document covers the 129-career database, the four dimensions used to match 
 
 ### The 129-career database
 
-Jumpstart maintains a curated list of **129 careers** spanning 12 categories. Each career has a "fingerprint" describing the kind of person who tends to do well in it — primary interests, dominant intelligence types, key aptitudes, and the EQ traits the role rewards.
+Jumpstride maintains a curated list of **129 careers** spanning 12 categories. Each career has a "fingerprint" describing the kind of person who tends to do well in it — primary interests, dominant intelligence types, key aptitudes, and the EQ traits the role rewards.
 
 The 12 categories:
 

@@ -590,7 +590,7 @@ const buildAdminNotifications = (users, cfg, limit = 12) => {
         id: `registration-${String(user._id)}`,
         type: "registration",
         title: "New Registration",
-        message: `${user.name || "A new student"} created a Jumpstart account.`,
+        message: `${user.name || "A new student"} created a Jumpstride account.`,
         eventAt: user.createdAt,
         link: "/admin/usermanagement",
       })

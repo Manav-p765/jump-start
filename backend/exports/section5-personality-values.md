@@ -1,4 +1,4 @@
-# JUMPSTART CAREER APTITUDE TEST
+# JUMPSTRIDE CAREER APTITUDE TEST
 # Section 5 — Emotional Intelligence Assessment
 # Answer Key / Question Bank
 

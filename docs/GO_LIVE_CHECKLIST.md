@@ -1,7 +1,7 @@
 
 # Go-Live Checklist
 
-This is the final pre-flight before flipping the Jumpstart production deployment
+This is the final pre-flight before flipping the Jumpstride production deployment
 public. Work through it top to bottom; the order is the order in which downstream
 items depend on upstream items being correct.
 

@@ -1,6 +1,6 @@
 # Troubleshooting Guide
 
-This guide covers common issues developers are likely to hit while working on Jumpstart.
+This guide covers common issues developers are likely to hit while working on Jumpstride.
 
 Each section is organized as:
 

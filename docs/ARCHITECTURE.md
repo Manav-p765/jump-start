@@ -1,10 +1,10 @@
 # Architecture
 
-This document gives a quick technical overview of the Jumpstart system so a new developer can understand how the application is structured and where core logic lives.
+This document gives a quick technical overview of the Jumpstride system so a new developer can understand how the application is structured and where core logic lives.
 
 ## 1. High-Level System Overview
 
-Jumpstart is a MERN application with:
+Jumpstride is a MERN application with:
 
 - a React + Vite frontend for student and admin interfaces
 - an Express API backend for authentication, assessment workflows, reporting, and admin operations

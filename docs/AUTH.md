@@ -1,10 +1,10 @@
 # Authentication and Authorization
 
-This document explains how authentication and authorization are currently implemented in Jumpstart.
+This document explains how authentication and authorization are currently implemented in Jumpstride.
 
 ## 1. Authentication Method
 
-Jumpstart uses **JWT-based authentication**.
+Jumpstride uses **JWT-based authentication**.
 
 Supported login methods:
 
@@ -353,7 +353,7 @@ Because auth uses bearer tokens in headers rather than cookies:
 
 ## Summary
 
-Jumpstart currently enforces authentication and authorization through:
+Jumpstride currently enforces authentication and authorization through:
 
 - JWT bearer tokens
 - backend auth middleware

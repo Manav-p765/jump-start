@@ -23,7 +23,7 @@ export const fallbackSupportPages = {
   privacyPolicy: {
     ...supportPageDefinitions.privacyPolicy,
     enabled: true,
-    summary: "How Jumpstart collects, uses, and protects student information.",
+    summary: `How ${company.brandName} collects, uses, and protects student information.`,
     items: [
       "We collect only the information needed to create your account, run assessments, and generate your report.",
       "Assessment responses and profile details are used to prepare reports, recommendations, and support services.",
@@ -33,7 +33,7 @@ export const fallbackSupportPages = {
   termsOfService: {
     ...supportPageDefinitions.termsOfService,
     enabled: true,
-    summary: "Rules and responsibilities for using Jumpstart assessments and reports.",
+    summary: `Rules and responsibilities for using ${company.brandName} assessments and reports.`,
     items: [
       "Assessment purchases unlock access to the selected package and related report features.",
       "Users must provide accurate information and must not misuse or disrupt the platform.",

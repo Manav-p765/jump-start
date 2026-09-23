@@ -239,23 +239,23 @@ const createDefaultSupportPages = () => ({
   privacyPolicy: {
     enabled: true,
     title: "Privacy Policy",
-    summary: "How Jumpstart collects, uses, and protects student information.",
+    summary: "How Jumpstride collects, uses, and protects student information.",
     items: [
       "We collect only the information needed to create your account, run assessments, and generate your report.",
       "Assessment responses and profile details are used to prepare result analysis, recommendations, and support services.",
       "Your personal information is not sold to third parties and is shared only when required to deliver the service or meet legal obligations.",
-      "You can contact Jumpstart support to request updates or removal of your stored personal information.",
+      "You can contact Jumpstride support to request updates or removal of your stored personal information.",
     ],
   },
   termsOfService: {
     enabled: true,
     title: "Terms of Service",
-    summary: "Rules and responsibilities for using Jumpstart assessments and reports.",
+    summary: "Rules and responsibilities for using Jumpstride assessments and reports.",
     items: [
       "Assessment purchases provide access to the selected test package and related report features available on your account.",
       "Users must provide accurate information and must not misuse the platform, attempt unauthorized access, or disrupt the service.",
       "Reports and recommendations are guidance tools and should be used alongside professional advice where appropriate.",
-      "Jumpstart may update platform features, pricing, or service terms when necessary to improve the product or comply with policy changes.",
+      "Jumpstride may update platform features, pricing, or service terms when necessary to improve the product or comply with policy changes.",
     ],
   },
   faqs: {

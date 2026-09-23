@@ -13,6 +13,8 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
+import { company } from "../config/company.js";
+
 import enCommon from "./locales/en/common.json";
 // gu/common.json is NOT imported statically. It is 105 KB of JSON that,
 // with the language hard-locked to `en` below, can never be read at
@@ -61,6 +63,10 @@ i18n.use(initReactI18next).init({
   interpolation: {
     // React already escapes — no need for i18next to do it again.
     escapeValue: false,
+    // Brand name is injected into every translation as {{brand}} so the
+    // locale files never hardcode it. Renaming the product is a one-line
+    // edit in config/company.js, not a sweep through two locale bundles.
+    defaultVariables: { brand: company.brandName },
   },
 });
 

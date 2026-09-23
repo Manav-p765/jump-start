@@ -1,4 +1,4 @@
-# Jumpstart Backend (MERN - Node + Express + MongoDB)
+# Jumpstride Backend (MERN - Node + Express + MongoDB)
 
 ## Setup
 

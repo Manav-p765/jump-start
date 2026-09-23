@@ -1,6 +1,6 @@
 # API Documentation
 
-Jumpstart backend REST API reference.
+Jumpstride backend REST API reference.
 
 ## Base URL
 
@@ -139,7 +139,7 @@ They are documented as implemented, not as intended.
 ```json
 {
   "success": true,
-  "message": "Jumpstart API is running",
+  "message": "Jumpstride API is running",
   "endpoints": {
     "health": "GET /api/health",
     "register": "POST /api/v1/user/auth/register",
@@ -166,7 +166,7 @@ They are documented as implemented, not as intended.
 ```json
 {
   "ok": true,
-  "message": "Jumpstart API running"
+  "message": "Jumpstride API running"
 }
 ```
 

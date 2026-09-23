@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { ArrowRight, CheckCircle2, Eye, EyeOff, ShieldCheck } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
 import jumpstartLogo from "../assets/jumpstart-logo.png";
+import { company } from "../config/company";
 import {
   googleClientId,
   googleConfigMessage,
@@ -117,7 +118,7 @@ export default function Login() {
         <div className="surface-card rounded-[32px] p-8 sm:p-10">
           <img
             src={jumpstartLogo}
-            alt="Jumpstart"
+            alt={company.brandName}
             width="333"
             height="235"
             fetchPriority="high"

@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { ArrowRight, BadgeCheck, Eye, EyeOff, Sparkles } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
 import jumpstartLogo from "../assets/jumpstart-logo.png";
+import { company } from "../config/company";
 import {
   apiUnavailableMessage,
   getApiV1Url,
@@ -157,7 +158,7 @@ export default function Signup() {
         <div className="surface-card rounded-[32px] p-8 sm:p-10">
           <img
             src={jumpstartLogo}
-            alt="Jumpstart"
+            alt={company.brandName}
             width="333"
             height="235"
             fetchPriority="high"
