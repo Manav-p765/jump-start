@@ -1,4 +1,4 @@
-# JUMPSTART CAREER APTITUDE TEST
+# JUMPSTRIDE CAREER APTITUDE TEST
 # Section 4 — Aptitude Battery
 # Answer Key / Question Bank
 

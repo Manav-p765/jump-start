@@ -1,6 +1,6 @@
 # Contributing
 
-This document defines how code changes should be proposed, reviewed, and merged in Jumpstart.
+This document defines how code changes should be proposed, reviewed, and merged in Jumpstride.
 
 The goal is to keep changes safe, readable, and easy to review.
 

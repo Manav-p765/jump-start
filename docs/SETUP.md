@@ -1,6 +1,6 @@
 # Setup Guide
 
-This document explains how to set up the Jumpstart project on a new machine.  
+This document explains how to set up the Jumpstride project on a new machine.  
 Follow the steps in order. If you skip a required step, the frontend, backend, authentication, or database connection will fail.
 
 ## 1. Prerequisites

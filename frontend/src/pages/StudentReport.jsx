@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { ArrowLeft, Download, Sparkles } from "lucide-react";
 import api from "../api/api";
 import jumpstartLogo from "../assets/jumpstart-logo.png";
+import { company } from "../config/company";
 import { StudentReportSkeleton } from "../components/Skeletons";
 import ResultPendingPanel from "../components/ResultPendingPanel";
 import usePrintableDocument from "../hooks/usePrintableDocument";
@@ -651,7 +652,7 @@ export default function StudentReport() {
             <div className="flex items-center gap-3">
               <img
                 src={jumpstartLogo}
-                alt="Jumpstart"
+                alt={company.brandName}
                 width="333"
                 height="235"
                 className="report-print-logo h-9 w-auto"
@@ -691,7 +692,7 @@ export default function StudentReport() {
               ) : null}
               {student.jumpstartId ? (
                 <p className="mt-5 text-[11px] font-medium text-[#8A94A6]">
-                  Jumpstart ID: {student.jumpstartId}
+                  {company.brandName} ID: {student.jumpstartId}
                   {student.profile?.schoolOrCollege
                     ? ` · ${student.profile.schoolOrCollege}`
                     : ""}

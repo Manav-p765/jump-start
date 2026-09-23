@@ -1,4 +1,4 @@
-# JUMPSTART CAREER APTITUDE TEST
+# JUMPSTRIDE CAREER APTITUDE TEST
 # Section 1 — Personality Assessment
 # Answer Key / Question Bank
 

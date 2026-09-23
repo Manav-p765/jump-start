@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import jumpstartIcon from "../../assets/jumpstart-icon.png";
+import { company } from "../../config/company";
 import {
   LayoutDashboard,
   Users,
@@ -56,7 +57,7 @@ const AdminSidebar = ({ isOpen, onClose }) => {
           {/* Logo — icon-only mark for the collapsed (w-20) sidebar rail. */}
           <img
             src={jumpstartIcon}
-            alt="Jumpstart"
+            alt={company.brandName}
             width="187"
             height="187"
             className="w-10 h-10 mb-10"

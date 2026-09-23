@@ -306,7 +306,7 @@ const buildSectionFile = (section, meta, subsections) => {
   const lastId = total ? idOf(questions[total - 1]) : "?";
 
   const lines = [];
-  lines.push("# JUMPSTART CAREER APTITUDE TEST");
+  lines.push("# JUMPSTRIDE CAREER APTITUDE TEST");
   lines.push(`# Section ${section.sectionId} — ${meta.title}`);
   lines.push("# Answer Key / Question Bank");
   lines.push("");

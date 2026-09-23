@@ -1,6 +1,6 @@
 # Deployment Guide
 
-This document explains how to deploy Jumpstart in a production-oriented setup and how to recover when deployment issues happen.
+This document explains how to deploy Jumpstride in a production-oriented setup and how to recover when deployment issues happen.
 
 ## 1. Hosting Platforms
 

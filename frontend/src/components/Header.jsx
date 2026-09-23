@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { AuthContext } from "../context/AuthContext";
 import ConfirmDialog from "./ConfirmDialog";
 import AssetImage from "./AssetImage";
+import { company } from "../config/company";
 
 // Nav items live by translation key now. The `to` path is preserved;
 // `labelKey` looks up the localized string under the `common.nav`
@@ -144,7 +145,7 @@ export default function Header() {
       <header className="sticky top-0 z-40 border-b border-[#E8EDF3] bg-white/95 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-10">
-            <Link to="/" className="flex items-center" aria-label="Jumpstart home">
+            <Link to="/" className="flex items-center" aria-label={`${company.brandName} home`}>
               {/* Full wordmark logo on sm+; icon-only mark on the narrowest
                   screens where the wordmark would crowd the header bar.
 
@@ -155,7 +156,7 @@ export default function Header() {
                   top of the page that pushes every section below it. */}
               <AssetImage
                 name="jumpstart-logo"
-                alt="Jumpstart"
+                alt={company.brandName}
                 width={333}
                 height={235}
                 priority
@@ -163,7 +164,7 @@ export default function Header() {
               />
               <AssetImage
                 name="jumpstart-icon"
-                alt="Jumpstart"
+                alt={company.brandName}
                 width={187}
                 height={187}
                 priority
@@ -242,7 +243,7 @@ export default function Header() {
             <div className="flex items-center">
               <AssetImage
                 name="jumpstart-logo"
-                alt="Jumpstart"
+                alt={company.brandName}
                 width={333}
                 height={235}
                 className="h-10 w-auto"
@@ -306,7 +307,7 @@ export default function Header() {
       <ConfirmDialog
         open={showLogoutDialog}
         title="Confirm Logout"
-        description="Are you sure you want to log out of your Jumpstart account?"
+        description={`Are you sure you want to log out of your ${company.brandName} account?`}
         confirmLabel="Logout"
         cancelLabel="Stay Logged In"
         onCancel={() => setShowLogoutDialog(false)}

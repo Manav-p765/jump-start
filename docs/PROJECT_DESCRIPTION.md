@@ -1,7 +1,7 @@
-# Jumpstart Career Aptitude Test Platform
+# Jumpstride Career Aptitude Test Platform
 
 ## Project Overview
-Jumpstart is a comprehensive psychometric web application designed to help students discover their career pathways. It administers a 500-question assessment across five key sections and maps the results to over 121 career recommendations using Holland Codes (RIASEC), Multiple Intelligences, and specific Aptitude scores.
+Jumpstride is a comprehensive psychometric web application designed to help students discover their career pathways. It administers a 500-question assessment across five key sections and maps the results to over 121 career recommendations using Holland Codes (RIASEC), Multiple Intelligences, and specific Aptitude scores.
 
 ## Architecture
 - **Frontend**: React (Vite) with Tailwind CSS for a modern, responsive UI.

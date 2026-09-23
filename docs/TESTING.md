@@ -1,6 +1,6 @@
 # Testing Guide
 
-This document explains the current testing setup in Jumpstart and how to extend it.
+This document explains the current testing setup in Jumpstride and how to extend it.
 
 ## 1. Testing Overview
 

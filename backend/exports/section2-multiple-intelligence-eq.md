@@ -1,4 +1,4 @@
-# JUMPSTART CAREER APTITUDE TEST
+# JUMPSTRIDE CAREER APTITUDE TEST
 # Section 2 — Multiple Intelligence Assessment
 # Answer Key / Question Bank
 

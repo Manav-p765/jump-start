@@ -104,14 +104,14 @@ export default function Footer() {
                 charcoal and would vanish on this near-black footer. */}
             <img
               src={jumpstartIcon}
-              alt="Jumpstart"
+              alt={company.brandName}
               width="187"
               height="187"
               loading="lazy"
               decoding="async"
               className="h-10 w-10 shrink-0"
             />
-            <h3 className="text-2xl font-bold">Jumpstart</h3>
+            <h3 className="text-2xl font-bold">{company.brandName}</h3>
           </div>
           <p className="mt-4 max-w-xs text-sm leading-6 text-white/70">
             {t("footer.tagline")}

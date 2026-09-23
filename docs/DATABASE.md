@@ -1,10 +1,10 @@
 # Database Schema
 
-This document describes the current MongoDB schema used by Jumpstart.
+This document describes the current MongoDB schema used by Jumpstride.
 
 ## 1. Overview of Database Design
 
-Jumpstart uses a **small-collection, embedded-document** design.
+Jumpstride uses a **small-collection, embedded-document** design.
 
 Current characteristics:
 

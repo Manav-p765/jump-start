@@ -171,8 +171,6 @@ Replaced by a self-hosted beacon (`src/lib/reportWebVitals.js` →
   hashed); `index.html` gets `no-cache, must-revalidate`. Getting that
   last one wrong is how a deploy white-screens returning visitors —
   a cached `index.html` references bundle filenames that no longer exist.
-- `deploy/caddy/Caddyfile` — simpler alternative (auto-TLS, HTTP/3 by
-  default). Use one or the other.
 - `deploy/systemd/jumpstart-api.service` — supervision, restart backoff,
   hardening, secrets in a root-owned `EnvironmentFile`. Keeps the process
   resident so no request pays for Mongo connect + admin bootstrap +

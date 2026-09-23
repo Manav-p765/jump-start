@@ -1,6 +1,6 @@
 # Personality Assessment
 
-This document covers how Jumpstart measures personality, what the four sub-frameworks reveal, and how the system produces the final MBTI type, archetype name, and work-style profile shown on the student's report.
+This document covers how Jumpstride measures personality, what the four sub-frameworks reveal, and how the system produces the final MBTI type, archetype name, and work-style profile shown on the student's report.
 
 ---
 
@@ -10,7 +10,7 @@ This document covers how Jumpstart measures personality, what the four sub-frame
 
 Personality assessment helps match students to careers that suit **how they naturally think and work** — not just what they're good at. Two students with the same aptitude scores can thrive in very different careers depending on personality.
 
-Jumpstart uses four personality frameworks together, because no single framework captures everything:
+Jumpstride uses four personality frameworks together, because no single framework captures everything:
 
 | Framework | What it reveals |
 |---|---|

@@ -13,7 +13,6 @@ that now have to be configured explicitly:
 Files:
 
 - `deploy/nginx/jumpstart.conf` — reverse proxy, compression, cache headers
-- `deploy/caddy/Caddyfile` — simpler alternative to the above (pick one)
 - `deploy/systemd/jumpstart-api.service` — process supervision
 - `deploy/pm2/ecosystem.config.cjs` — PM2 alternative (pick one)
 
@@ -58,7 +57,7 @@ The frontend build is static — build it in CI or on the box, then serve
 cd /var/www/jumpstart/frontend
 npm ci
 npm run fonts:fetch          # only when the font list changes
-VITE_API_URL=https://jumpstartedu.com/api npm run build
+VITE_API_URL=https://jumpstride.in/api npm run build
 
 cd ../backend
 npm ci --omit=dev
@@ -90,7 +89,7 @@ triggers it.
 sudo cp deploy/nginx/jumpstart.conf /etc/nginx/sites-available/jumpstart
 sudo ln -s /etc/nginx/sites-available/jumpstart /etc/nginx/sites-enabled/
 sudo rm -f /etc/nginx/sites-enabled/default
-sudo certbot --nginx -d jumpstartedu.com -d www.jumpstartedu.com
+sudo certbot --nginx -d jumpstride.in -d www.jumpstride.in
 sudo nginx -t && sudo systemctl reload nginx
 ```
 
@@ -136,7 +135,7 @@ TTFB — the number that gates every paint metric:
 ```bash
 curl -o /dev/null -s -w 'dns=%{time_namelookup} connect=%{time_connect} \
 tls=%{time_appconnect} ttfb=%{time_starttransfer} total=%{time_total}\n' \
-  https://jumpstartedu.com/
+  https://jumpstride.in/
 ```
 
 Read it as: `ttfb - tls` is origin think-time, `tls - connect` is
@@ -149,19 +148,19 @@ Compression and protocol:
 
 ```bash
 # Expect: content-encoding: br
-curl -sI -H 'Accept-Encoding: br' https://jumpstartedu.com/assets/index-*.js \
+curl -sI -H 'Accept-Encoding: br' https://jumpstride.in/assets/index-*.js \
   | grep -i 'content-encoding\|cache-control'
 
 # Expect: HTTP/3 200
-curl -sI --http3 https://jumpstartedu.com/ | head -1
+curl -sI --http3 https://jumpstride.in/ | head -1
 ```
 
 Cache headers — the split is the thing to confirm:
 
 ```bash
-curl -sI https://jumpstartedu.com/assets/<hashed>.js | grep -i cache-control
+curl -sI https://jumpstride.in/assets/<hashed>.js | grep -i cache-control
 #   -> public, max-age=31536000, immutable
-curl -sI https://jumpstartedu.com/ | grep -i cache-control
+curl -sI https://jumpstride.in/ | grep -i cache-control
 #   -> no-cache, must-revalidate
 ```
 
@@ -194,16 +193,16 @@ Check it is flowing after deploy:
 
 ```bash
 # Should return 204 with no body
-curl -i -X POST https://jumpstartedu.com/api/vitals \
+curl -i -X POST https://jumpstride.in/api/vitals \
   -H 'Content-Type: application/json' \
   -d '{"name":"LCP","value":2530,"rating":"needs-improvement","path":"/"}'
 
 # Should return 400
-curl -s -o /dev/null -w '%{http_code}\n' -X POST https://jumpstartedu.com/api/vitals \
+curl -s -o /dev/null -w '%{http_code}\n' -X POST https://jumpstride.in/api/vitals \
   -H 'Content-Type: application/json' -d '{"name":"BOGUS","value":1}'
 
 # p75 per metric (needs an admin bearer token)
-curl -s https://jumpstartedu.com/api/v1/admin/vitals/summary?days=7 \
+curl -s https://jumpstride.in/api/v1/admin/vitals/summary?days=7 \
   -H "Authorization: Bearer $ADMIN_TOKEN" | jq
 ```
 

@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import api from "../api/api";
 import { AuthContext } from "../context/AuthContext";
+import { company } from "../config/company";
 import StatusPill from "../components/results/StatusPill";
 import usePrintableDocument from "../hooks/usePrintableDocument";
 import { ResultPageSkeleton } from "../components/Skeletons";
@@ -259,7 +260,7 @@ export default function Result() {
     try {
       if (navigator.share) {
         await navigator.share({
-          title: "Jumpstart Career Profile",
+          title: `${company.brandName} Career Profile`,
           url: shareUrl,
         });
         setShareFeedback("Shared successfully.");

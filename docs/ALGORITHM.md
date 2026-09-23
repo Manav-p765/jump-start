@@ -1,4 +1,4 @@
-# How Jumpstart Scores Your Assessment
+# How Jumpstride Scores Your Assessment
 
 This document explains how the test you take becomes a career profile — first in plain English (for students, parents, counsellors, and anyone evaluating the platform), then in technical detail (for developers maintaining the system).
 
@@ -8,7 +8,7 @@ This document explains how the test you take becomes a career profile — first 
 
 ### The 5 Sections — what each one measures
 
-Every Jumpstart assessment is built from five distinct sections. Each one measures something different about you, and each one tells the career algorithm something different about which paths suit you.
+Every Jumpstride assessment is built from five distinct sections. Each one measures something different about you, and each one tells the career algorithm something different about which paths suit you.
 
 | # | Section | What it measures | Why it matters for career guidance |
 |---|---|---|---|

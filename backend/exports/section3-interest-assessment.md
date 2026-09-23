@@ -1,4 +1,4 @@
-# JUMPSTART CAREER APTITUDE TEST
+# JUMPSTRIDE CAREER APTITUDE TEST
 # Section 3 — Interest Assessment
 # Answer Key / Question Bank
 

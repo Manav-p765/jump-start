@@ -16,7 +16,7 @@ export const company = {
   legalName: "Monani Business Services Private Limited",
 
   // Consumer-facing brand.
-  brandName: "Jumpstart",
+  brandName: "Jumpstride",
 
   address: {
     line1: "Opp. Hotel Natraj, MG Road",
