@@ -1,3 +1,5 @@
+import { company } from "../config/company";
+
 export const supportPageDefinitions = {
   privacyPolicy: {
     key: "privacyPolicy",
