@@ -11,6 +11,7 @@ import {
 import api from "../api/api";
 import { AuthContext } from "../context/AuthContext";
 import { formatPaise, splitInclusiveGST } from "../utils/money";
+import { company } from "../config/company";
 
 const formatDate = (isoString) => {
   const value = new Date(isoString);
@@ -146,7 +147,7 @@ export default function PaymentConfirmation() {
 
   const handleDownloadInvoice = () => {
     const lines = [
-      "Jumpstart Payment Confirmation",
+      `${company.brandName} Payment Confirmation`,
       `Date: ${formatDate(issuedAt)}`,
       `Customer: ${user?.name || "User"}`,
       `Email: ${user?.email || "Not available"}`,
@@ -169,7 +170,7 @@ export default function PaymentConfirmation() {
     const url = URL.createObjectURL(blob);
     const anchor = document.createElement("a");
     anchor.href = url;
-    anchor.download = `jumpstart-invoice-${plan?.id || "package"}.txt`;
+    anchor.download = `jumpstride-invoice-${plan?.id || "package"}.txt`;
     anchor.click();
     URL.revokeObjectURL(url);
   };

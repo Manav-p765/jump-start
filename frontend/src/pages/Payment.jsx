@@ -8,6 +8,7 @@ import api from "../api/api";
 import { AuthContext } from "../context/AuthContext";
 import { invalidateApiCache } from "../utils/apiCache";
 import { loadRazorpayCheckout } from "../utils/loadRazorpay";
+import { company } from "../config/company";
 
 // The site's primary teal, handed to Razorpay's modal so the checkout does
 // not look like a different product bolted on at the last step.
@@ -423,12 +424,14 @@ const Payment = () => {
       order_id: order.orderId,
       amount: order.amount,
       currency: order.currency,
-      name: "Jumpstart",
+      name: company.brandName,
       description: order.packageTitle || plan.title,
-      // Absolute-from-root, not a bundler import: Razorpay's modal is served
-      // from checkout.razorpay.com and fetches this over the network, so it
-      // needs a real URL. File lives at frontend/public/jumpstart-icon.png.
-      image: "/jumpstart-icon.png",
+      // Full URL, not a bundler import or a root-relative path: Razorpay's
+      // modal is served from checkout.razorpay.com and fetches this over the
+      // network, so it needs our origin spelled out. Built at runtime so it
+      // points at whichever host (staging or production) served the page.
+      // File lives at frontend/public/jumpstart-icon.png.
+      image: `${window.location.origin}/jumpstart-icon.png`,
       // Fed from the billing form, which is validated before we get here —
       // so the student never re-types a number they just entered. `contact`
       // was previously unset, which is why Razorpay re-prompted for phone.
