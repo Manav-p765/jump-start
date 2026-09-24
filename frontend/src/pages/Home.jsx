@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ArrowRight, CheckCircle2, Sparkles, Star } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
-import takeTestImg from "../assets/Take-the-Test.png";
-import getResultsImg from "../assets/Get-Results.png";
-import counsellingImg from "../assets/Expert-Counselling.png";
+import AssetImage from "../components/AssetImage";
 
 export default function Home() {
   const { t } = useTranslation();
@@ -17,19 +15,19 @@ export default function Home() {
     {
       title: t("home.takeTheTest"),
       description: t("home.takeTheTestBody"),
-      image: takeTestImg,
+      image: "journey-test",
       link: "/test",
     },
     {
       title: t("home.getResults"),
       description: t("home.getResultsBody"),
-      image: getResultsImg,
+      image: "journey-results",
       link: "/result",
     },
     {
       title: t("home.expertCounselling"),
       description: t("home.expertCounsellingBody"),
-      image: counsellingImg,
+      image: "journey-counselling",
       link: "/bookcounselling",
     },
   ];
@@ -43,8 +41,23 @@ export default function Home() {
 
   return (
     <div className="bg-white">
-      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(52,211,203,0.24),_transparent_36%),linear-gradient(180deg,#F4FEFE_0%,#FFFFFF_54%)]">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 md:py-20 lg:grid-cols-[1.02fr_0.98fr] lg:items-center lg:px-8">
+      <section className="relative isolate overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(52,211,203,0.24),_transparent_36%),linear-gradient(180deg,#F4FEFE_0%,#FFFFFF_54%)]">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 w-full lg:w-[68%]">
+          <AssetImage
+            name="home-hero"
+            alt=""
+            width={1160}
+            height={952}
+            sizes="(min-width: 1024px) 68vw, 100vw"
+            priority
+            className="h-full w-full object-contain object-right opacity-90"
+            style={{
+              maskImage: "linear-gradient(to right, transparent 0%, black 42%, black 100%)",
+              WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 42%, black 100%)",
+            }}
+          />
+        </div>
+        <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-[#BAECEA] bg-white/80 px-4 py-2 text-sm font-semibold text-[#188B8B] shadow-sm">
               <Sparkles className="h-4 w-4" />
@@ -79,64 +92,51 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="relative">
-            <div className="absolute inset-x-6 top-8 h-64 rounded-[32px] bg-[#D8F6F5] blur-3xl" />
-            <div className="surface-card relative rounded-[32px] border border-white/80 bg-white/90 p-6 sm:p-8">
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="rounded-[28px] bg-[linear-gradient(180deg,#E8FBFA_0%,#F8FEFE_100%)] p-6">
-                  <p className="text-sm font-semibold text-[#188B8B]">
-                    {t("home.personalizedInsights")}
-                  </p>
-                  <p className="mt-2 text-3xl font-bold text-[#0F1729]">
-                    92%
-                  </p>
-                  <p className="mt-3 text-sm leading-6 text-[#65758B]">
-                    {t("home.matchStrengths")}
-                  </p>
+      <section className="bg-[#F8FCFC]">
+        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+          <div className="surface-card mx-auto max-w-5xl rounded-[32px] border border-[#DDECEF] bg-white p-5 sm:p-8">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-[28px] bg-[linear-gradient(180deg,#E8FBFA_0%,#F8FEFE_100%)] p-6">
+                    <p className="text-sm font-semibold text-[#188B8B]">
+                      {t("home.personalizedInsights")}
+                    </p>
+                    <p className="mt-2 text-3xl font-bold text-[#0F1729]">92%</p>
+                    <p className="mt-3 text-sm leading-6 text-[#65758B]">
+                      {t("home.matchStrengths")}
+                    </p>
+                  </div>
+                  <div className="rounded-[28px] bg-[#0F1729] p-6 text-white">
+                    <p className="text-sm font-semibold text-white/70">
+                      {t("home.whatYouUnlock")}
+                    </p>
+                    <ul className="mt-4 space-y-3 text-sm text-white/90">
+                      <li>{t("home.unlockCareerReport")}</li>
+                      <li>{t("home.unlockSectionProgress")}</li>
+                      <li>{t("home.unlockActionSteps")}</li>
+                    </ul>
+                  </div>
                 </div>
-                <div className="rounded-[28px] bg-[#0F1729] p-6 text-white">
-                  <p className="text-sm font-semibold text-white/70">
-                    {t("home.whatYouUnlock")}
-                  </p>
-                  <ul className="mt-4 space-y-3 text-sm text-white/90">
-                    <li>{t("home.unlockCareerReport")}</li>
-                    <li>{t("home.unlockSectionProgress")}</li>
-                    <li>{t("home.unlockActionSteps")}</li>
-                  </ul>
-                </div>
-              </div>
 
-              <div className="mt-5 grid gap-4 sm:grid-cols-3">
-                <div className="rounded-3xl border border-[#E6EFF5] bg-[#F8FAFC] p-5">
-                  <Star className="h-5 w-5 text-[#F59F0A]" />
-                  <p className="mt-4 text-sm font-semibold text-[#0F1729]">
-                    {t("home.aptitude")}
-                  </p>
-                  <p className="mt-1 text-sm leading-6 text-[#65758B]">
-                    {t("home.aptitudeBody")}
-                  </p>
+                <div className="mt-5 grid gap-4 sm:grid-cols-3">
+                  <div className="rounded-3xl border border-[#E6EFF5] bg-[#F8FAFC] p-5">
+                    <Star className="h-5 w-5 text-[#F59F0A]" />
+                    <p className="mt-4 text-sm font-semibold text-[#0F1729]">{t("home.aptitude")}</p>
+                    <p className="mt-1 text-sm leading-6 text-[#65758B]">{t("home.aptitudeBody")}</p>
+                  </div>
+                  <div className="rounded-3xl border border-[#E6EFF5] bg-[#F8FAFC] p-5">
+                    <Star className="h-5 w-5 text-[#188B8B]" />
+                    <p className="mt-4 text-sm font-semibold text-[#0F1729]">{t("home.interests")}</p>
+                    <p className="mt-1 text-sm leading-6 text-[#65758B]">{t("home.interestsBody")}</p>
+                  </div>
+                  <div className="rounded-3xl border border-[#E6EFF5] bg-[#F8FAFC] p-5">
+                    <Star className="h-5 w-5 text-[#0F1729]" />
+                    <p className="mt-4 text-sm font-semibold text-[#0F1729]">{t("home.guidance")}</p>
+                    <p className="mt-1 text-sm leading-6 text-[#65758B]">{t("home.guidanceBody")}</p>
+                  </div>
                 </div>
-                <div className="rounded-3xl border border-[#E6EFF5] bg-[#F8FAFC] p-5">
-                  <Star className="h-5 w-5 text-[#188B8B]" />
-                  <p className="mt-4 text-sm font-semibold text-[#0F1729]">
-                    {t("home.interests")}
-                  </p>
-                  <p className="mt-1 text-sm leading-6 text-[#65758B]">
-                    {t("home.interestsBody")}
-                  </p>
-                </div>
-                <div className="rounded-3xl border border-[#E6EFF5] bg-[#F8FAFC] p-5">
-                  <Star className="h-5 w-5 text-[#0F1729]" />
-                  <p className="mt-4 text-sm font-semibold text-[#0F1729]">
-                    {t("home.guidance")}
-                  </p>
-                  <p className="mt-1 text-sm leading-6 text-[#65758B]">
-                    {t("home.guidanceBody")}
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -151,12 +151,12 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-3">
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 sm:gap-6 xl:grid-cols-3">
           {journeyCards.map((card) => (
             <Link
               key={card.title}
               to={card.link}
-              className="surface-card group rounded-[28px] p-6 hover:-translate-y-1"
+              className="surface-card group flex h-full flex-col rounded-[28px] p-5 transition-transform hover:-translate-y-1 motion-reduce:transform-none sm:p-6"
             >
               <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#E8F9F8] text-sm font-bold text-[#188B8B]">
                 {card.title.charAt(0)}
@@ -167,24 +167,16 @@ export default function Home() {
               <p className="mt-3 text-sm leading-7 text-[#65758B]">
                 {card.description}
               </p>
-              <div className="mt-6 overflow-hidden rounded-[24px] bg-[linear-gradient(180deg,#E5FBFB_0%,#CDEEEE_100%)] p-4">
-                {/* h-64 already pins the height in CSS, so these do not
-                    shift — but they sit well below the fold, so defer them
-                    off the initial load path entirely.
-
-                    object-contain, not object-cover: the artwork is 1:1 and
-                    the box is much wider than it is tall, so `cover` would
-                    scale to fill the width and crop the top and bottom off
-                    the icon. That went unnoticed while these were 48px
-                    sources upscaled into mush. */}
-                <img
-                  src={card.image}
+              <div className="mt-6 aspect-[941/615] overflow-hidden rounded-[24px] bg-[linear-gradient(180deg,#E5FBFB_0%,#CDEEEE_100%)]">
+                {/* Matching the image's source ratio lets it fill this area
+                    without cropping or leaving a coloured border. */}
+                <AssetImage
+                  name={card.image}
                   alt={card.title}
-                  width="1080"
-                  height="1080"
-                  loading="lazy"
-                  decoding="async"
-                  className="h-64 w-full rounded-[20px] object-contain transition duration-300 group-hover:scale-[1.02]"
+                  width={941}
+                  height={615}
+                  sizes="(min-width: 1280px) 390px, (min-width: 640px) 50vw, 100vw"
+                  className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02] motion-reduce:transform-none"
                 />
               </div>
             </Link>
