@@ -26,7 +26,7 @@ export const company = {
     country: "India",
   },
 
-  email: "support@jumpstartedu.com",
+  email: "connect@jumpstride.in",
 
   // E.164 for tel: links; `phoneDisplay` is the human-readable form.
   phone: "+919409081798",
