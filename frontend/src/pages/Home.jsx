@@ -1,13 +1,26 @@
-import { useContext } from "react";
+import { useContext, useSyncExternalStore } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ArrowRight, CheckCircle2, Sparkles, Star } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
 import AssetImage from "../components/AssetImage";
 
+// Tailwind's `lg`. Below it the hero image would sit behind the text, so it
+// is not rendered at all — not just hidden with CSS, which would still
+// download it on phones.
+const HERO_IMAGE_QUERY = "(min-width: 1024px)";
+
+const subscribeHeroQuery = (onChange) => {
+  const mql = window.matchMedia(HERO_IMAGE_QUERY);
+  mql.addEventListener("change", onChange);
+  return () => mql.removeEventListener("change", onChange);
+};
+const getHeroQuery = () => window.matchMedia(HERO_IMAGE_QUERY).matches;
+
 export default function Home() {
   const { t } = useTranslation();
   const { user } = useContext(AuthContext);
+  const showHeroImage = useSyncExternalStore(subscribeHeroQuery, getHeroQuery);
   const primaryDestination = user ? "/test" : "/signup";
   const secondaryDestination = user ? "/dashboard" : "/test";
 
@@ -42,21 +55,23 @@ export default function Home() {
   return (
     <div className="bg-white">
       <section className="relative isolate overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(52,211,203,0.24),_transparent_36%),linear-gradient(180deg,#F4FEFE_0%,#FFFFFF_54%)]">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 w-full lg:w-[68%]">
-          <AssetImage
-            name="home-hero"
-            alt=""
-            width={1160}
-            height={952}
-            sizes="(min-width: 1024px) 68vw, 100vw"
-            priority
-            className="h-full w-full object-contain object-right opacity-90"
-            style={{
-              maskImage: "linear-gradient(to right, transparent 0%, black 42%, black 100%)",
-              WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 42%, black 100%)",
-            }}
-          />
-        </div>
+        {showHeroImage && (
+          <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 hidden w-[68%] lg:block">
+            <AssetImage
+              name="home-hero"
+              alt=""
+              width={1160}
+              height={952}
+              sizes="68vw"
+              priority
+              className="h-full w-full object-contain object-right opacity-90"
+              style={{
+                maskImage: "linear-gradient(to right, transparent 0%, black 42%, black 100%)",
+                WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 42%, black 100%)",
+              }}
+            />
+          </div>
+        )}
         <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-[#BAECEA] bg-white/80 px-4 py-2 text-sm font-semibold text-[#188B8B] shadow-sm">
