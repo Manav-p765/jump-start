@@ -7,7 +7,7 @@ Always push to `develop` first. Never push straight to `main`.
 |---|---|
 | Production | https://jumpstride.in |
 | Staging | https://staging.jumpstartedu.com (not yet moved to the new domain) |
-| Repo | github.com/manav859/jump-start |
+| Repo | github.com/Manav-p765/jump-start |
 | Server | 200.141.13.94 (Hostinger KVM, Ubuntu 24.04) |
 
 ---
