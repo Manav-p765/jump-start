@@ -12,6 +12,7 @@ import api from "../api/api";
 import { AuthContext } from "../context/AuthContext";
 import { formatPaise, splitInclusiveGST } from "../utils/money";
 import { company } from "../config/company";
+import downloadReceipt from "../utils/downloadReceipt";
 
 const formatDate = (isoString) => {
   const value = new Date(isoString);
@@ -145,34 +146,22 @@ export default function PaymentConfirmation() {
     ? plan.features.slice(0, 4)
     : getFallbackFeatures(fallbackSections);
 
-  const handleDownloadInvoice = () => {
-    const lines = [
-      `${company.brandName} Payment Confirmation`,
-      `Date: ${formatDate(issuedAt)}`,
-      `Customer: ${user?.name || "User"}`,
-      `Email: ${user?.email || "Not available"}`,
-      `Package: ${plan?.title || "Selected Package"}`,
-      // Same figures and same formatter as the rows on screen, so the
-      // downloaded text and the confirmation card cannot disagree.
-      `List price: ${fmt(listPrice)}`,
-      ...(discount
-        ? [`Discount${couponCode ? ` (${couponCode})` : ""}: -${fmt(discount)}`]
-        : []),
-      `Taxable value: ${fmt(subtotal)}`,
-      `GST (18%, included): ${fmt(gstAmount)}`,
-      `Total (incl. GST): ${fmt(total)}`,
-      `Valid Until: ${formatDate(validityEnd)}`,
-    ];
+  // PDF receipt, rendered server-side off the Payment ledger row. Only a
+  // Razorpay payment has a ledger row: /verify hands back its id. A free
+  // activation never touches the gateway, so there is no receipt to issue.
+  const receiptPaymentId = paymentState.paymentId || null;
+  const isFreeActivation = !receiptPaymentId && total <= 0;
+  const [receiptState, setReceiptState] = useState({ loading: false, error: "" });
 
-    const blob = new Blob([lines.join("\n")], {
-      type: "text/plain;charset=utf-8",
-    });
-    const url = URL.createObjectURL(blob);
-    const anchor = document.createElement("a");
-    anchor.href = url;
-    anchor.download = `jumpstride-invoice-${plan?.id || "package"}.txt`;
-    anchor.click();
-    URL.revokeObjectURL(url);
+  const handleDownloadReceipt = async () => {
+    if (!receiptPaymentId || receiptState.loading) return;
+    setReceiptState({ loading: true, error: "" });
+    try {
+      await downloadReceipt(`/v1/user/payment/${receiptPaymentId}/receipt`);
+      setReceiptState({ loading: false, error: "" });
+    } catch (err) {
+      setReceiptState({ loading: false, error: err.message });
+    }
   };
 
   if (loading) {
@@ -359,14 +348,30 @@ export default function PaymentConfirmation() {
               Inclusive of all taxes (GST included)
             </p>
 
-            <button
-              type="button"
-              onClick={handleDownloadInvoice}
-              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#F59F0A] px-5 py-3 font-semibold text-[#0F1729] transition hover:bg-[#E89206]"
-            >
-              <Receipt className="h-4 w-4" />
-              Download Invoice
-            </button>
+            {receiptPaymentId ? (
+              <>
+                <button
+                  type="button"
+                  onClick={handleDownloadReceipt}
+                  disabled={receiptState.loading}
+                  className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#F59F0A] px-5 py-3 font-semibold text-[#0F1729] transition hover:bg-[#E89206] disabled:cursor-wait disabled:opacity-70"
+                >
+                  <Receipt className="h-4 w-4" />
+                  {receiptState.loading ? "Preparing receipt..." : "Download Receipt (PDF)"}
+                </button>
+                {receiptState.error ? (
+                  <p className="mt-2 text-xs text-red-600" role="alert">
+                    {receiptState.error}
+                  </p>
+                ) : null}
+              </>
+            ) : (
+              <p className="mt-6 rounded-xl bg-[#F8FAFA] px-4 py-3 text-sm text-[#65758B]">
+                {isFreeActivation
+                  ? "This package was activated free of charge, so there is no payment receipt to download."
+                  : `Your receipt isn't available on this screen. Email ${company.email} with your registered email address and we'll send it to you.`}
+              </p>
+            )}
           </aside>
         </div>
       </div>

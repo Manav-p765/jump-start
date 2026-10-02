@@ -1,6 +1,7 @@
 import User from "../models/User.js";
 import AssessmentConfig from "../models/AssessmentConfig.js";
 import Coupon from "../models/Coupon.js";
+import Payment from "../models/Payment.js";
 import WebVital, { METRIC_NAMES } from "../models/WebVital.js";
 import {
   getResultPublicationState,
@@ -73,7 +74,11 @@ const getConfigLookup = (cfg) => {
   return map;
 };
 
-const getUserPurchaseEntries = (user, packageMap) => {
+// `paymentIdByOrderId` (optional) maps razorpayOrderId -> Payment._id for
+// captured ledger rows. Only the admin Payments table passes it, to put the
+// real Payment id on each row for the receipt download; purchases with no
+// ledger row (free activations, legacy records) get paymentId null.
+const getUserPurchaseEntries = (user, packageMap, paymentIdByOrderId = new Map()) => {
   const explicitHistory = Array.isArray(user?.purchaseHistory)
     ? user.purchaseHistory.filter((item) => item?.packageId)
     : [];
@@ -119,6 +124,10 @@ const getUserPurchaseEntries = (user, packageMap) => {
         discountAmountLabel: fmtCurrency(discountAmount),
         method: purchase.paymentMethod || "Online",
         date: purchasedAt,
+        paymentId:
+          (purchase.razorpayOrderId &&
+            paymentIdByOrderId.get(purchase.razorpayOrderId)) ||
+          null,
         fallback: false,
       };
     });
@@ -139,15 +148,16 @@ const getUserPurchaseEntries = (user, packageMap) => {
       amountLabel: fmtCurrency(amount),
       method: idx % 2 === 0 ? "UPI" : "Card",
       date: user.updatedAt || user.createdAt || null,
+      paymentId: null,
       fallback: true,
     };
   });
 };
 
-const buildPayments = (users, packageMap) => {
+const buildPayments = (users, packageMap, paymentIdByOrderId) => {
   const rows = [];
   for (const u of users) {
-    getUserPurchaseEntries(u, packageMap).forEach((purchase) => {
+    getUserPurchaseEntries(u, packageMap, paymentIdByOrderId).forEach((purchase) => {
       rows.push({
         ...purchase,
         status: "Completed",
@@ -862,16 +872,22 @@ export const deleteAdminUser = async (req, res) => {
 // GET /api/v1/admin/payments
 export const getAdminPayments = async (req, res) => {
   try {
-    const [users, cfg] = await Promise.all([
+    const [users, cfg, ledger] = await Promise.all([
       User.find({ role: { $ne: "admin" } })
         .select(
           "name email purchasedPackages purchaseHistory updatedAt createdAt"
         )
         .lean(),
       AssessmentConfig.getOrCreateDefault(),
+      // Captured ledger rows, to attach the real Payment id (the receipt
+      // endpoint's key) to each purchaseHistory row via razorpayOrderId.
+      Payment.find({ status: "paid" }).select("_id razorpayOrderId").lean(),
     ]);
     const packageMap = getConfigLookup(cfg);
-    const payments = buildPayments(users, packageMap);
+    const paymentIdByOrderId = new Map(
+      ledger.map((p) => [p.razorpayOrderId, String(p._id)])
+    );
+    const payments = buildPayments(users, packageMap, paymentIdByOrderId);
     const totalRevenue = payments.reduce((sum, p) => sum + Number(p.amount || 0), 0);
     const startOfMonth = new Date();
     startOfMonth.setDate(1);

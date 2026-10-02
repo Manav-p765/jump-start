@@ -248,12 +248,14 @@ const Payment = () => {
   // invoice prints off the same ledger row and the two must agree exactly.
   // It is absent on the free-activation path (no gateway order, so no ledger
   // split) and when /verify failed — the rupee fields remain the fallback.
-  const buildConfirmationState = (paidTotal, money = null) => ({
+  const buildConfirmationState = (paidTotal, money = null, paymentId = null) => ({
     plan,
     discount,
     couponCode: appliedCoupon?.code || null,
     total: paidTotal,
     money,
+    // Payment ledger _id from /verify — keys the PDF receipt download.
+    paymentId,
     paidAt: new Date().toISOString(),
   });
 
@@ -291,6 +293,7 @@ const Payment = () => {
     const paidTotal = Number(order.finalAmount ?? total);
 
     let money = null;
+    let paymentId = null;
     try {
       const res = await api.post("/v1/user/payment/verify", {
         razorpay_order_id: response.razorpay_order_id,
@@ -302,6 +305,7 @@ const Payment = () => {
       // the confirmation screen must not re-derive the split, or it drifts
       // from the invoice again.
       const d = res?.data?.data;
+      paymentId = d?.paymentId || null;
       if (d && Number.isFinite(d.amount) && Number.isFinite(d.base)) {
         money = {
           amount: d.amount,
@@ -331,7 +335,7 @@ const Payment = () => {
     invalidateApiCache("userInit");
     navigate("/payment-confirmation", {
       replace: true,
-      state: buildConfirmationState(paidTotal, money),
+      state: buildConfirmationState(paidTotal, money, paymentId),
     });
   };
 

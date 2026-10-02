@@ -8,6 +8,7 @@
 // The webhook (next) will call the same grantPackageEntitlement(), which is
 // idempotent on razorpayPaymentId, so whichever arrives second is a no-op.
 import crypto from "crypto";
+import mongoose from "mongoose";
 import {
   validatePaymentVerification,
   validateWebhookSignature,
@@ -20,6 +21,11 @@ import Payment from "../models/Payment.js";
 import { getActivePackages } from "./userController.js";
 import { getRazorpayClient, getRazorpayKeyId } from "../config/razorpay.js";
 import { grantPackageEntitlement } from "../services/entitlementService.js";
+import {
+  hasFinalReceiptNumber,
+  stampReceiptFields,
+} from "../services/receiptService.js";
+import { renderReceiptPdf } from "../utils/receiptPdf.js";
 import { GST_RATE, splitInclusiveGST } from "../utils/money.js";
 import Booking from "../models/Booking.js";
 import { COUNSELLING_NOTE_TYPE } from "../config/counselling.js";
@@ -378,6 +384,21 @@ export const verifyPayment = async (req, res) => {
       await payment.save();
     }
 
+    // --- Receipt fields ----------------------------------------------------
+    // Each is set only if still unset, so this and the webhook can both run
+    // in either order. /verify has no payment entity, so the method is
+    // fetched from Razorpay. A failure here must not fail the verification:
+    // the money has moved and access is granted; the webhook or the receipt
+    // endpoint fills in whatever is missing.
+    try {
+      await stampReceiptFields(payment._id, {
+        paidAt: new Date(),
+        fetchMethod: true,
+      });
+    } catch (err) {
+      console.error("[verify] receipt stamping failed", String(payment._id), err);
+    }
+
     // --- Authoritative money figures, in PAISE -----------------------------
     // The confirmation screen renders these verbatim rather than re-deriving
     // in rupees, so what the student sees on screen and what the invoice
@@ -403,6 +424,8 @@ export const verifyPayment = async (req, res) => {
     return res.status(200).json({
       success: true,
       data: {
+        // Our ledger row's _id — what the receipt endpoint is keyed on.
+        paymentId: String(payment._id),
         packageId: pkg.id,
         packageTitle: pkg.title,
         razorpayOrderId: orderId,
@@ -625,6 +648,16 @@ async function onPaymentCaptured(event) {
   }
   await payment.save();
 
+  // Receipt fields, each only if still unset (verify may have got there
+  // first, and a resent webhook must change nothing). The payment entity
+  // carries the method, so no Razorpay fetch is needed here; the event's
+  // created_at is the capture time.
+  await stampReceiptFields(payment._id, {
+    paidAt: event?.created_at ? new Date(event.created_at * 1000) : new Date(),
+    paymentMethod: entity.method || null,
+    fetchMethod: !entity.method,
+  });
+
   console.log("[webhook] payment.captured processed", {
     orderId,
     paymentId,
@@ -733,3 +766,83 @@ async function onRefund(event, eventName) {
     refundStatus: payment.refundStatus,
   });
 }
+
+// --- PDF receipt -------------------------------------------------------------
+//
+// One renderer (utils/receiptPdf.js), two routes:
+//   GET /api/v1/user/payment/:id/receipt     protect, owner only
+//   GET /api/v1/admin/payments/:id/receipt   protect + adminOnly
+// :id is our Payment._id (returned by /verify and on admin payment rows).
+//
+// Everything printed comes off the Payment row as stored. Only captured
+// (status "paid") rows have a receipt; anything else is a 404, as is an id
+// that does not parse, so the response never reveals which ids exist.
+const sendReceipt = async (req, res, { ownerOnly }) => {
+  try {
+    const { id } = req.params;
+    if (!mongoose.isValidObjectId(id)) {
+      return res.status(404).json({ success: false, msg: "Receipt not found" });
+    }
+
+    let payment = await Payment.findById(id).lean();
+    if (!payment) {
+      return res.status(404).json({ success: false, msg: "Receipt not found" });
+    }
+    // Same ownership rule as verifyPayment.
+    if (ownerOnly && String(payment.userId) !== String(req.user.id)) {
+      return res
+        .status(403)
+        .json({ success: false, msg: "This receipt belongs to another account" });
+    }
+    if (payment.status !== "paid") {
+      return res.status(404).json({ success: false, msg: "Receipt not found" });
+    }
+
+    // A paid row with no receipt number yet: verify's stamping failed and
+    // the webhook has not landed, or the row predates receipts and the
+    // backfill has not run. Stamp it now (idempotent) rather than refuse.
+    if (!hasFinalReceiptNumber(payment) || !payment.paidAt) {
+      payment = await stampReceiptFields(payment._id, {
+        paidAt: payment.paidAt || payment.updatedAt,
+        fetchMethod: true,
+      });
+    }
+    if (!hasFinalReceiptNumber(payment)) {
+      return res.status(503).json({
+        success: false,
+        msg: "Your receipt is being prepared. Please try again in a minute.",
+      });
+    }
+
+    // Rows from before the billing snapshot existed: bill to the account.
+    let fallbackCustomer = {};
+    if (!payment.billing?.fullName) {
+      const owner = await User.findById(payment.userId).select("name email").lean();
+      fallbackCustomer = { name: owner?.name, email: owner?.email };
+    }
+
+    const pdf = await renderReceiptPdf(payment, { fallbackCustomer });
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader(
+      "Content-Disposition",
+      `attachment; filename="jumpstride-receipt-${payment.receiptNumber}.pdf"`
+    );
+    // The frontend reads the filename off this header; cross-origin it is
+    // hidden from JS unless exposed. Scoped to this response only.
+    res.setHeader("Access-Control-Expose-Headers", "Content-Disposition");
+    res.setHeader("Content-Length", pdf.length);
+    res.setHeader("Cache-Control", "private, no-store");
+    return res.status(200).end(pdf);
+  } catch (err) {
+    console.error("[receipt] render failed", req.params?.id, err);
+    return res
+      .status(500)
+      .json({ success: false, msg: "Failed to generate receipt" });
+  }
+};
+
+export const getMyPaymentReceipt = (req, res) =>
+  sendReceipt(req, res, { ownerOnly: true });
+
+export const getAdminPaymentReceipt = (req, res) =>
+  sendReceipt(req, res, { ownerOnly: false });

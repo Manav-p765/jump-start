@@ -8,6 +8,10 @@
 // Anything unverified belongs in the TODO block at the bottom, not
 // inlined as a plausible-looking value: a wrong GSTIN or registered
 // address on a payments page is a compliance problem, not a typo.
+//
+// KEEP IN SYNC with backend/config/company.js, which carries the same
+// legal name, address and contact details for the server-rendered PDF
+// receipt. A change here must land there too.
 
 export const company = {
   // Registered legal entity. Distinct from the brand name below — the

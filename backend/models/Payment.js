@@ -84,6 +84,20 @@ const paymentSchema = new mongoose.Schema(
     // Our own idempotency handle, echoed back by Razorpay. Max 40 chars.
     receipt: { type: String, required: true, unique: true, index: true },
 
+    // --- Receipt fields, stamped once at capture --------------------------
+    // Set by services/receiptService.js from BOTH /verify and the
+    // payment.captured webhook, each field only if still unset, so the two
+    // racing (or a resent webhook) never overwrite one another. Rows paid
+    // before these existed are filled by scripts/backfillReceipts.mjs.
+    //
+    // No defaults, same reasoning as razorpayPaymentId: receiptNumber has a
+    // sparse unique index, and an explicit null would be indexed.
+    paidAt: { type: Date },
+    // JS-RCPT-<YYYY>-<00001>, sequential per calendar year (IST).
+    receiptNumber: { type: String, unique: true, sparse: true },
+    // Razorpay's payment.method: upi / card / netbanking / wallet / emi ...
+    paymentMethod: { type: String },
+
     // Billing details as given by the student at checkout, snapshotted here
     // so a later invoice reproduces what was on screen at the time — not
     // whatever the profile says when the invoice is downloaded months on.
