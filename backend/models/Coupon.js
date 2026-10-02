@@ -14,6 +14,7 @@
 //    `maxUses` is honoured under concurrent purchases.
 
 import mongoose from "mongoose";
+import { MIN_ORDER_PAISE } from "../utils/money.js";
 
 const couponSchema = new mongoose.Schema(
   {
@@ -82,6 +83,21 @@ couponSchema.methods.applyToAmount = function applyToAmount(subtotal) {
   }
   const finalPrice = Math.max(0, amount - discount);
   return { discount, finalPrice };
+};
+
+// Full discounts are not supported: a paid package must still cost at least
+// Razorpay's ₹1 minimum after the coupon, because there is no gateway-free
+// path for paid packages. Checked at coupon creation/activation (admin),
+// /coupon/validate and /payment/order.
+export const FULL_DISCOUNT_MSG = "This code can't be used for a full discount";
+
+// True when this coupon would take a PAID package (amount in rupees) below
+// the ₹1 minimum. Free packages (amount 0) never trip it.
+couponSchema.methods.makesFree = function makesFree(subtotal) {
+  const amount = Math.max(0, Number(subtotal || 0));
+  if (amount <= 0) return false;
+  const { finalPrice } = this.applyToAmount(amount);
+  return Math.round(finalPrice * 100) < MIN_ORDER_PAISE;
 };
 
 const Coupon = mongoose.models.Coupon || mongoose.model("Coupon", couponSchema);

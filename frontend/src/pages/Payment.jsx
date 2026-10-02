@@ -14,6 +14,11 @@ import { company } from "../config/company";
 // not look like a different product bolted on at the last step.
 const BRAND_COLOR = "#188B8B";
 
+// Same text as backend models/Coupon.js FULL_DISCOUNT_MSG, which the
+// coupon/validate and payment/order endpoints return for a code that would
+// make a paid package free.
+const FULL_DISCOUNT_MSG = "This code can't be used for a full discount";
+
 const Payment = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -259,12 +264,12 @@ const Payment = () => {
     paidAt: new Date().toISOString(),
   });
 
-  // A 100%-off coupon or a free package has nothing to charge. Razorpay
-  // cannot create a zero-amount order (the backend rejects it with 400 and
-  // points here), so these keep the original free-activation route.
+  // A genuinely free package (list price ₹0) has nothing to charge, so it
+  // keeps the free-activation route. Paid packages NEVER come here: a coupon
+  // that would make one free is refused by the server (FULL_DISCOUNT_MSG)
+  // and by the guard in handleCompletePayment.
   const activateFreePackage = async () => {
     const payload = { packageId: plan.id };
-    if (appliedCoupon?.code) payload.couponCode = appliedCoupon.code;
 
     try {
       await api.post("/v1/user/package/purchase", payload);
@@ -358,8 +363,15 @@ const Payment = () => {
     setCheckoutNotice(null);
     setSubmitting(true);
 
-    if (total <= 0) {
+    if (grossPrice <= 0) {
       await activateFreePackage();
+      return;
+    }
+    // Belt and braces: the server already refuses coupons that would take a
+    // paid package below ₹1, so this only fires on a stale coupon state.
+    if (total < 1) {
+      setCheckoutNotice({ tone: "error", text: FULL_DISCOUNT_MSG });
+      setSubmitting(false);
       return;
     }
 

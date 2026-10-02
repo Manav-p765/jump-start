@@ -16,7 +16,7 @@ import {
 
 import User from "../models/User.js";
 import AssessmentConfig from "../models/AssessmentConfig.js";
-import Coupon from "../models/Coupon.js";
+import Coupon, { FULL_DISCOUNT_MSG } from "../models/Coupon.js";
 import Payment from "../models/Payment.js";
 import { getActivePackages } from "./userController.js";
 import { getRazorpayClient, getRazorpayKeyId } from "../config/razorpay.js";
@@ -26,7 +26,11 @@ import {
   stampReceiptFields,
 } from "../services/receiptService.js";
 import { renderReceiptPdf } from "../utils/receiptPdf.js";
-import { GST_RATE, splitInclusiveGST } from "../utils/money.js";
+import {
+  GST_RATE,
+  MIN_ORDER_PAISE,
+  splitInclusiveGST,
+} from "../utils/money.js";
 import Booking from "../models/Booking.js";
 import { COUNSELLING_NOTE_TYPE } from "../config/counselling.js";
 import {
@@ -172,6 +176,12 @@ export const createOrder = async (req, res) => {
       if (!redeemable.ok) {
         return res.status(400).json({ success: false, msg: redeemable.reason });
       }
+      // A coupon that would take a paid package below Razorpay's ₹1 minimum
+      // is refused outright — no gateway order, no ledger row. There is no
+      // free-activation path for paid packages to fall back to.
+      if (coupon.makesFree(originalAmount)) {
+        return res.status(400).json({ success: false, msg: FULL_DISCOUNT_MSG });
+      }
       const { discount, finalPrice } = coupon.applyToAmount(originalAmount);
       appliedCouponCode = coupon.code;
       discountAmount = discount;
@@ -179,8 +189,8 @@ export const createOrder = async (req, res) => {
     }
 
     const amountPaise = toPaise(finalAmount);
-    if (amountPaise <= 0) {
-      // A zero-rupee order cannot be created at the gateway. Free packages
+    if (amountPaise < MIN_ORDER_PAISE) {
+      // Below ₹1 an order cannot be created at the gateway. Free packages
       // (the demo) still go through userController.purchasePackage.
       return res.status(400).json({
         success: false,
@@ -334,9 +344,31 @@ export const verifyPayment = async (req, res) => {
     );
 
     if (!validSignature) {
-      payment.status = "failed";
-      payment.failureReason = "signature_verification_failed";
-      await payment.save();
+      // Never downgrade a captured order. A bad signature on /verify says
+      // nothing about the money (the webhook may already have confirmed it,
+      // or a stale/tampered retry arrived after a good one), so the flip is
+      // a conditional update: it applies only while the row is still unpaid,
+      // which also covers the webhook marking it paid after we loaded it.
+      const flip = await Payment.updateOne(
+        { _id: payment._id, status: { $ne: "paid" } },
+        {
+          $set: {
+            status: "failed",
+            failureReason: "signature_verification_failed",
+          },
+        }
+      );
+      if (flip.modifiedCount === 0) {
+        console.warn(
+          "[verify] invalid signature on an already-paid order — status kept",
+          { orderId, paymentId, userId: String(req.user.id) }
+        );
+      } else {
+        console.warn("[verify] invalid signature — order marked failed", {
+          orderId,
+          paymentId,
+        });
+      }
       return res
         .status(400)
         .json({ success: false, msg: "Payment signature verification failed" });
@@ -605,7 +637,17 @@ async function onPaymentCaptured(event) {
   }
   noteEvent(payment, "payment.captured");
 
-  const userId = notes.userId || String(payment.userId || "");
+  // Our own ledger row decides who paid; notes.userId is only a fallback for
+  // rows that somehow lack it. A mismatch is logged, never acted on.
+  const ledgerUserId = payment.userId ? String(payment.userId) : "";
+  const userId = ledgerUserId || notes.userId || "";
+  if (ledgerUserId && notes.userId && String(notes.userId) !== ledgerUserId) {
+    console.warn("[webhook] payment.captured: notes.userId differs from ledger", {
+      orderId,
+      ledgerUserId,
+      notesUserId: String(notes.userId),
+    });
+  }
   const user = userId ? await User.findById(userId) : null;
   if (!user) {
     console.warn("[webhook] payment.captured: user not found", { orderId, userId });

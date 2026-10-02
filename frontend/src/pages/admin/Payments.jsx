@@ -165,7 +165,7 @@ const Payments = () => {
                 <tr><td colSpan={11} className="p-0 border-none"><TableSkeleton rows={5} cols={11} /></td></tr>
               ) : filteredPayments.length > 0 ? (
                 filteredPayments.map((item) => (
-                  <tr key={item.id} className="hover:bg-gray-50/50 transition-colors">
+                  <tr key={item.rowKey} className="hover:bg-gray-50/50 transition-colors">
                     <td className="px-6 py-5 text-xs font-bold text-gray-500 whitespace-nowrap">{item.id}</td>
                     <td className="px-6 py-5">
                       <div className="flex flex-col">
@@ -219,7 +219,11 @@ const Payments = () => {
                             {receiptLoadingId === item.paymentId ? "..." : "Receipt"}
                           </button>
                         ) : null}
-                        <button onClick={() => navigator.clipboard?.writeText(item.id)} title={t("payments.copyOrderTitle")} className="px-2 py-1 text-xs border rounded-lg hover:bg-gray-50">{t("payments.copyIdButton")}</button>
+                        {/* id is the Razorpay order (or payment) id; "—" when the row has
+                            no gateway record, so there is nothing to copy. */}
+                        {item.id !== "—" ? (
+                          <button onClick={() => navigator.clipboard?.writeText(item.id)} title={t("payments.copyOrderTitle")} className="px-2 py-1 text-xs border rounded-lg hover:bg-gray-50">{t("payments.copyIdButton")}</button>
+                        ) : null}
                       </div>
                     </td>
                   </tr>

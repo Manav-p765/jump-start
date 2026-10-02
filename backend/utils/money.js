@@ -11,6 +11,10 @@
 
 export const GST_RATE = 0.18;
 
+// Razorpay rejects orders below ₹1 (100 paise). Anything that would price
+// below this is not payable through the gateway at all.
+export const MIN_ORDER_PAISE = 100;
+
 /**
  * Split a GST-INCLUSIVE total into its taxable base and the tax inside it.
  *
@@ -36,4 +40,4 @@ export const splitInclusiveGST = (totalPaise) => {
   return { base, gst, total: t, gstRate: GST_RATE };
 };
 
-export default { GST_RATE, splitInclusiveGST };
+export default { GST_RATE, MIN_ORDER_PAISE, splitInclusiveGST };
