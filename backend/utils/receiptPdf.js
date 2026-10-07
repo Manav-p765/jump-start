@@ -14,9 +14,8 @@
 // Helvetica has no ₹ glyph; Noto Sans does, and pdfkit embeds only the
 // glyphs used, so the PDF stays small.
 //
-// Logo: assets/jumpstart-icon.png, a copy of frontend/public/jumpstart-icon.png.
-// The filename is kept identical on purpose — when the new logo lands,
-// replace BOTH files.
+// Logo: assets/jumpstride-logo.png, the full Jumpstride logo (icon + wordmark),
+// trimmed tight to its content so it sits flush with the top-left margin.
 import path from "path";
 import { fileURLToPath } from "url";
 import PDFDocument from "pdfkit";
@@ -30,7 +29,8 @@ const ASSETS_DIR = path.resolve(
 );
 const FONT_REGULAR = path.join(ASSETS_DIR, "fonts/NotoSans-Regular.ttf");
 const FONT_BOLD = path.join(ASSETS_DIR, "fonts/NotoSans-Bold.ttf");
-const LOGO_PATH = path.join(ASSETS_DIR, "jumpstart-icon.png");
+const LOGO_PATH = path.join(ASSETS_DIR, "jumpstride-logo.png");
+const LOGO_W = 150;
 
 // Palette — the site's own tokens (PaymentConfirmation.jsx).
 const C = {
@@ -201,23 +201,17 @@ export const renderReceiptPdf = (payment, { fallbackCustomer = {} } = {}) =>
 
       // ---- Header -------------------------------------------------------
       const headerTop = MARGIN;
-      doc.image(LOGO_PATH, X0, headerTop, { fit: [44, 44] });
-      doc
-        .font("Bold")
-        .fontSize(20)
-        .fillColor(C.ink)
-        .text(company.brandName, X0 + 56, headerTop + 4, { lineBreak: false });
-      doc
-        .font("Regular")
-        .fontSize(9)
-        .fillColor(C.muted)
-        .text(company.legalName, X0 + 56, headerTop + 30, { lineBreak: false });
+      const logo = doc.openImage(LOGO_PATH);
+      const logoH = (LOGO_W * logo.height) / logo.width;
+      doc.image(logo, X0, headerTop, { width: LOGO_W, height: logoH });
 
+      // "Payment Receipt" + "PAID" (~36pt tall) centred on the logo.
+      const titleTop = headerTop + logoH / 2 - 18;
       doc
         .font("Bold")
         .fontSize(18)
         .fillColor(C.brand)
-        .text("Payment Receipt", X1 - 220, headerTop + 6, {
+        .text("Payment Receipt", X1 - 220, titleTop, {
           width: 220,
           align: "right",
           lineBreak: false,
@@ -226,14 +220,14 @@ export const renderReceiptPdf = (payment, { fallbackCustomer = {} } = {}) =>
         .font("Bold")
         .fontSize(9)
         .fillColor(C.discount)
-        .text("PAID", X1 - 220, headerTop + 32, {
+        .text("PAID", X1 - 220, titleTop + 26, {
           width: 220,
           align: "right",
           characterSpacing: 1,
           lineBreak: false,
         });
 
-      let y = headerTop + 60;
+      let y = headerTop + logoH + 14;
       rule(doc, y, C.brand, 1.5);
 
       // ---- Receipt no. / date paid ----------------------------------------
