@@ -5,9 +5,6 @@ import { UserRound } from "lucide-react";
 import api from "../api/api";
 import { AuthContext } from "../context/AuthContext";
 
-const formatUserId = (id) =>
-  id ? `JS${String(id).slice(-6).toUpperCase()}` : "JS000000";
-
 const initialForm = {
   name: "",
   email: "",
@@ -139,16 +136,6 @@ export default function EditProfile() {
           </div>
 
           <div className="grid gap-5 md:grid-cols-2">
-            <div>
-              <label className="mb-2 block text-sm font-semibold text-[#344054]">
-                {t("editProfile.userIdLabel")}
-              </label>
-              <input
-                value={formatUserId(profile?._id || user?.id)}
-                disabled
-                className="h-[58px] w-full rounded-2xl border border-[#E1E7EF] bg-[#F8FAFC] px-4 text-sm text-[#0F1729]"
-              />
-            </div>
             <div>
               <label className="mb-2 block text-sm font-semibold text-[#344054]">
                 {t("editProfile.accountLabel")}

@@ -40,11 +40,7 @@ const studentProfileFields = (sp = {}, t) => [
   { label: t("profileExtra.fieldState"), value: sp.state || "-" },
 ];
 
-const formatUserId = (id) =>
-  id ? `JS${String(id).slice(-6).toUpperCase()}` : "JS000000";
-
 const profileFields = (profile, t) => [
-  { label: t("profileExtra.fieldUserId"), value: formatUserId(profile?._id || profile?.id) },
   {
     label: t("profileExtra.fieldAccount"),
     value: profile?.isSuspended

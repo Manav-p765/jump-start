@@ -108,6 +108,15 @@ export default function CouponsPanel() {
       setFormError("Discount value is required.");
       return;
     }
+    // Paid packages can't be made free (Razorpay's minimum order is ₹1).
+    // The flat-amount case depends on package prices, so the server checks
+    // that one and its message lands in formError below.
+    if (form.discountType === "percent" && Number(form.discountValue) >= 100) {
+      setFormError(
+        "This code can't be used for a full discount. Use a percentage below 100."
+      );
+      return;
+    }
     setCreating(true);
     try {
       const payload = {

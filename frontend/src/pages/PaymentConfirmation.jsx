@@ -10,9 +10,9 @@ import {
 } from "lucide-react";
 import api from "../api/api";
 import { AuthContext } from "../context/AuthContext";
-import { GST_RATE } from "../data/testPackages";
-
-const formatPrice = (amount) => `₹ ${Number(amount || 0).toLocaleString("en-IN")}`;
+import { formatPaise, splitInclusiveGST } from "../utils/money";
+import { company } from "../config/company";
+import downloadReceipt from "../utils/downloadReceipt";
 
 const formatDate = (isoString) => {
   const value = new Date(isoString);
@@ -103,40 +103,65 @@ export default function PaymentConfirmation() {
     };
   }, [navigate, paymentState.plan]);
 
-  // Prices are GST-INCLUSIVE: `total` is the amount actually paid, and the
-  // GST shown is back-calculated as already-included (base + GST = total).
-  // Nothing is added on top.
-  const total = paymentState.total ?? plan?.amount ?? 0;
-  const subtotal =
-    paymentState.subtotal ?? Math.round(total / (1 + GST_RATE));
-  const gstAmount = paymentState.gstAmount ?? total - subtotal;
+  // Prices are GST-INCLUSIVE: the total is the amount actually paid, and the
+  // GST is back-calculated as already-included (base + GST = total). Nothing
+  // is added on top.
+  //
+  // TWO SOURCES, in priority order:
+  //
+  //   1. `paymentState.money` — the paise block from /verify, read straight
+  //      off the Payment ledger row. Authoritative, and the same numbers the
+  //      invoice prints, so screen and invoice agree to the paisa. Used
+  //      VERBATIM: re-deriving here is exactly what caused the drift.
+  //
+  //   2. Rupee fallback — free activations (no gateway order, so no ledger
+  //      split), a failed /verify, and direct navigation with no state.
+  //      Rupee figures converted to paise once, then split with the same
+  //      shared splitInclusiveGST the payment page uses.
+  //
+  // Both sources end up as integer paise and go through the one shared
+  // formatPaise, so the two paths print identical bytes for an amount.
+  const money = paymentState.money || null;
+  const isPaise = Boolean(money);
+  const fmt = formatPaise;
+  const toPaise = (rupees) => Math.round(Number(rupees || 0) * 100);
+
+  const fallbackTotal = paymentState.total ?? plan?.amount ?? 0;
+  const fallbackSplit = splitInclusiveGST(toPaise(fallbackTotal));
+  const total = isPaise ? money.amount : fallbackSplit.total;
+  const subtotal = isPaise ? money.base : fallbackSplit.base;
+  const gstAmount = isPaise ? money.gst : fallbackSplit.gst;
+
+  // List price and coupon, for the "how we got to this price" group. Both
+  // are informational — the split above is already net of the discount.
+  const discount = isPaise
+    ? money.discountAmount || 0
+    : toPaise(paymentState.discount);
+  const couponCode = (isPaise ? money.couponCode : paymentState.couponCode) || null;
+  const listPrice = isPaise
+    ? money.originalAmount || money.amount
+    : toPaise(paymentState.plan?.amount ?? plan?.amount ?? fallbackTotal);
   const validityEnd = useMemo(() => addDays(issuedAt, 15), [issuedAt]);
   const features = plan?.features?.length
     ? plan.features.slice(0, 4)
     : getFallbackFeatures(fallbackSections);
 
-  const handleDownloadInvoice = () => {
-    const lines = [
-      "Jumpstart Payment Confirmation",
-      `Date: ${formatDate(issuedAt)}`,
-      `Customer: ${user?.name || "User"}`,
-      `Email: ${user?.email || "Not available"}`,
-      `Package: ${plan?.title || "Selected Package"}`,
-      `Base price (excl. GST): INR ${subtotal}`,
-      `GST (18%, included): INR ${gstAmount}`,
-      `Total (incl. GST): INR ${total}`,
-      `Valid Until: ${formatDate(validityEnd)}`,
-    ];
+  // PDF receipt, rendered server-side off the Payment ledger row. Only a
+  // Razorpay payment has a ledger row: /verify hands back its id. A free
+  // activation never touches the gateway, so there is no receipt to issue.
+  const receiptPaymentId = paymentState.paymentId || null;
+  const isFreeActivation = !receiptPaymentId && total <= 0;
+  const [receiptState, setReceiptState] = useState({ loading: false, error: "" });
 
-    const blob = new Blob([lines.join("\n")], {
-      type: "text/plain;charset=utf-8",
-    });
-    const url = URL.createObjectURL(blob);
-    const anchor = document.createElement("a");
-    anchor.href = url;
-    anchor.download = `jumpstart-invoice-${plan?.id || "package"}.txt`;
-    anchor.click();
-    URL.revokeObjectURL(url);
+  const handleDownloadReceipt = async () => {
+    if (!receiptPaymentId || receiptState.loading) return;
+    setReceiptState({ loading: true, error: "" });
+    try {
+      await downloadReceipt(`/v1/user/payment/${receiptPaymentId}/receipt`);
+      setReceiptState({ loading: false, error: "" });
+    } catch (err) {
+      setReceiptState({ loading: false, error: err.message });
+    }
   };
 
   if (loading) {
@@ -282,16 +307,32 @@ export default function PaymentConfirmation() {
               </div>
             </div>
 
+            {/* Same two reconciling groups as the payment page:
+                  list − discount = total, and base + GST = total. */}
             <div className="mt-6 space-y-3 text-sm">
               <div className="flex items-center justify-between gap-4">
                 <span className="text-[#65758B]">{plan.title}</span>
                 <span className="font-semibold text-[#0F1729]">
-                  {formatPrice(subtotal)}
+                  {fmt(listPrice)}
                 </span>
+              </div>
+              {discount ? (
+                <div className="flex items-center justify-between gap-4 text-emerald-700">
+                  <span className="font-medium">
+                    {couponCode ? `Coupon (${couponCode})` : "Discount"}
+                  </span>
+                  <span className="font-semibold">
+                    − {fmt(discount)}
+                  </span>
+                </div>
+              ) : null}
+              <div className="flex items-center justify-between gap-4 pt-3 border-t border-[#EEF2F5]">
+                <span className="text-[#65758B]">Taxable value</span>
+                <span className="text-[#65758B]">{fmt(subtotal)}</span>
               </div>
               <div className="flex items-center justify-between gap-4">
                 <span className="text-[#65758B]">GST (18%, included)</span>
-                <span className="text-[#65758B]">{formatPrice(gstAmount)}</span>
+                <span className="text-[#65758B]">{fmt(gstAmount)}</span>
               </div>
             </div>
 
@@ -300,21 +341,37 @@ export default function PaymentConfirmation() {
             <div className="flex items-center justify-between gap-4">
               <span className="font-semibold text-[#0F1729]">Total Amount</span>
               <span className="text-3xl font-bold text-[#0F1729]">
-                {formatPrice(total)}
+                {fmt(total)}
               </span>
             </div>
             <p className="mt-1 text-[11px] text-[#65758B]">
               Inclusive of all taxes (GST included)
             </p>
 
-            <button
-              type="button"
-              onClick={handleDownloadInvoice}
-              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#F59F0A] px-5 py-3 font-semibold text-[#0F1729] transition hover:bg-[#E89206]"
-            >
-              <Receipt className="h-4 w-4" />
-              Download Invoice
-            </button>
+            {receiptPaymentId ? (
+              <>
+                <button
+                  type="button"
+                  onClick={handleDownloadReceipt}
+                  disabled={receiptState.loading}
+                  className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#F59F0A] px-5 py-3 font-semibold text-[#0F1729] transition hover:bg-[#E89206] disabled:cursor-wait disabled:opacity-70"
+                >
+                  <Receipt className="h-4 w-4" />
+                  {receiptState.loading ? "Preparing receipt..." : "Download Receipt (PDF)"}
+                </button>
+                {receiptState.error ? (
+                  <p className="mt-2 text-xs text-red-600" role="alert">
+                    {receiptState.error}
+                  </p>
+                ) : null}
+              </>
+            ) : (
+              <p className="mt-6 rounded-xl bg-[#F8FAFA] px-4 py-3 text-sm text-[#65758B]">
+                {isFreeActivation
+                  ? "This package was activated free of charge, so there is no payment receipt to download."
+                  : `Your receipt isn't available on this screen. Email ${company.email} with your registered email address and we'll send it to you.`}
+              </p>
+            )}
           </aside>
         </div>
       </div>

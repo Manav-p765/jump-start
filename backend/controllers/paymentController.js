@@ -8,6 +8,7 @@
 // The webhook (next) will call the same grantPackageEntitlement(), which is
 // idempotent on razorpayPaymentId, so whichever arrives second is a no-op.
 import crypto from "crypto";
+import mongoose from "mongoose";
 import {
   validatePaymentVerification,
   validateWebhookSignature,
@@ -15,11 +16,21 @@ import {
 
 import User from "../models/User.js";
 import AssessmentConfig from "../models/AssessmentConfig.js";
-import Coupon from "../models/Coupon.js";
+import Coupon, { FULL_DISCOUNT_MSG } from "../models/Coupon.js";
 import Payment from "../models/Payment.js";
 import { getActivePackages } from "./userController.js";
 import { getRazorpayClient, getRazorpayKeyId } from "../config/razorpay.js";
 import { grantPackageEntitlement } from "../services/entitlementService.js";
+import {
+  hasFinalReceiptNumber,
+  stampReceiptFields,
+} from "../services/receiptService.js";
+import { renderReceiptPdf } from "../utils/receiptPdf.js";
+import {
+  GST_RATE,
+  MIN_ORDER_PAISE,
+  splitInclusiveGST,
+} from "../utils/money.js";
 import Booking from "../models/Booking.js";
 import { COUNSELLING_NOTE_TYPE } from "../config/counselling.js";
 import {
@@ -39,18 +50,86 @@ const buildReceipt = () =>
 // Rupees -> paise. Razorpay takes currency subunits: 1999 => 199900.
 const toPaise = (rupees) => Math.round(Number(rupees || 0) * 100);
 
+// Billing normalisation + validation.
+//
+// This is the security boundary, not the form. The client gate in
+// Payment.jsx is a courtesy to the student; anything can POST here, so the
+// same rules are re-applied to the raw body and nothing reaches the ledger
+// until they pass.
+//
+// Returns { ok: true, billing } with trimmed values, or { ok: false }.
+const asTrimmedString = (value) =>
+  typeof value === "string" ? value.trim() : "";
+
+const validateBilling = (raw) => {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) {
+    return { ok: false };
+  }
+
+  const billing = {
+    fullName: asTrimmedString(raw.fullName),
+    email: asTrimmedString(raw.email),
+    phone: asTrimmedString(raw.phone),
+    address: asTrimmedString(raw.address),
+    city: asTrimmedString(raw.city),
+    state: asTrimmedString(raw.state),
+    pincode: asTrimmedString(raw.pincode),
+    gstNumber: asTrimmedString(raw.gstNumber),
+  };
+
+  // Non-empty after trim.
+  if (!billing.fullName || !billing.address || !billing.city || !billing.state) {
+    return { ok: false };
+  }
+
+  // "@" with a "." somewhere after it.
+  const at = billing.email.indexOf("@");
+  if (at < 1 || billing.email.indexOf(".", at) <= at + 1) {
+    return { ok: false };
+  }
+
+  // Exactly 10 digits once every non-digit is stripped. Matches the client,
+  // which also tolerates a +91/0 prefix — strip that here too so a number
+  // the form accepted is not rejected server-side.
+  const phoneDigits = billing.phone
+    .replace(/\D/g, "")
+    .replace(/^(?:91|0)(?=\d{10}$)/, "");
+  if (!/^\d{10}$/.test(phoneDigits)) {
+    return { ok: false };
+  }
+
+  if (!/^\d{6}$/.test(billing.pincode)) {
+    return { ok: false };
+  }
+
+  // gstNumber is optional and unchecked — format varies and a wrong
+  // rejection here blocks a sale for no benefit.
+  return { ok: true, billing };
+};
+
 /**
  * POST /api/v1/user/payment/order
- * Body: { packageId, couponCode? }
+ * Body: { packageId, couponCode?, billing }
  */
 export const createOrder = async (req, res) => {
   try {
-    const { packageId, couponCode } = req.body || {};
+    const { packageId, couponCode, billing: billingInput } = req.body || {};
     if (!packageId) {
       return res
         .status(400)
         .json({ success: false, msg: "packageId is required" });
     }
+
+    // Before any lookup, pricing or gateway call: an invalid payload must
+    // not cost us a Razorpay order or a ledger row.
+    const billingCheck = validateBilling(billingInput);
+    if (!billingCheck.ok) {
+      return res.status(400).json({
+        success: false,
+        msg: "Billing information is incomplete or invalid",
+      });
+    }
+    const billing = billingCheck.billing;
 
     const [cfg, user] = await Promise.all([
       AssessmentConfig.getOrCreateDefault(),
@@ -97,6 +176,12 @@ export const createOrder = async (req, res) => {
       if (!redeemable.ok) {
         return res.status(400).json({ success: false, msg: redeemable.reason });
       }
+      // A coupon that would take a paid package below Razorpay's ₹1 minimum
+      // is refused outright — no gateway order, no ledger row. There is no
+      // free-activation path for paid packages to fall back to.
+      if (coupon.makesFree(originalAmount)) {
+        return res.status(400).json({ success: false, msg: FULL_DISCOUNT_MSG });
+      }
       const { discount, finalPrice } = coupon.applyToAmount(originalAmount);
       appliedCouponCode = coupon.code;
       discountAmount = discount;
@@ -104,8 +189,8 @@ export const createOrder = async (req, res) => {
     }
 
     const amountPaise = toPaise(finalAmount);
-    if (amountPaise <= 0) {
-      // A zero-rupee order cannot be created at the gateway. Free packages
+    if (amountPaise < MIN_ORDER_PAISE) {
+      // Below ₹1 an order cannot be created at the gateway. Free packages
       // (the demo) still go through userController.purchasePackage.
       return res.status(400).json({
         success: false,
@@ -113,11 +198,24 @@ export const createOrder = async (req, res) => {
       });
     }
 
+    // GST split of the amount ACTUALLY CHARGED. Deliberately derived from
+    // amountPaise (post-discount), not originalAmount: tax is owed on the
+    // consideration received, so splitting the list price would overstate it
+    // by the tax inside the discount whenever a coupon applies.
+    const { base: basePaise, gst: gstPaise, gstRate } =
+      splitInclusiveGST(amountPaise);
+
     const receipt = buildReceipt();
     const notes = {
       userId: String(user._id),
       packageId: pkg.id,
       couponCode: appliedCouponCode || "",
+      // Three billing fields only, for at-a-glance identification in the
+      // Razorpay dashboard. Notes are a capped key/value bag, not a store —
+      // the full record lives on the Payment row below.
+      billingName: billing.fullName,
+      billingPhone: billing.phone,
+      billingPincode: billing.pincode,
     };
 
     const razorpay = getRazorpayClient();
@@ -142,6 +240,13 @@ export const createOrder = async (req, res) => {
       discountAmount,
       receipt,
       notes,
+      // Snapshot of what the student entered at checkout. Read by the
+      // invoice renderer later; nothing reads it today.
+      billing,
+      // Split of `amount` above (post-discount). base + gst === amount.
+      base: basePaise,
+      gst: gstPaise,
+      gstRate,
     });
 
     return res.status(200).json({
@@ -239,9 +344,31 @@ export const verifyPayment = async (req, res) => {
     );
 
     if (!validSignature) {
-      payment.status = "failed";
-      payment.failureReason = "signature_verification_failed";
-      await payment.save();
+      // Never downgrade a captured order. A bad signature on /verify says
+      // nothing about the money (the webhook may already have confirmed it,
+      // or a stale/tampered retry arrived after a good one), so the flip is
+      // a conditional update: it applies only while the row is still unpaid,
+      // which also covers the webhook marking it paid after we loaded it.
+      const flip = await Payment.updateOne(
+        { _id: payment._id, status: { $ne: "paid" } },
+        {
+          $set: {
+            status: "failed",
+            failureReason: "signature_verification_failed",
+          },
+        }
+      );
+      if (flip.modifiedCount === 0) {
+        console.warn(
+          "[verify] invalid signature on an already-paid order — status kept",
+          { orderId, paymentId, userId: String(req.user.id) }
+        );
+      } else {
+        console.warn("[verify] invalid signature — order marked failed", {
+          orderId,
+          paymentId,
+        });
+      }
       return res
         .status(400)
         .json({ success: false, msg: "Payment signature verification failed" });
@@ -289,14 +416,68 @@ export const verifyPayment = async (req, res) => {
       await payment.save();
     }
 
+    // --- Receipt fields ----------------------------------------------------
+    // Each is set only if still unset, so this and the webhook can both run
+    // in either order. /verify has no payment entity, so the method is
+    // fetched from Razorpay. A failure here must not fail the verification:
+    // the money has moved and access is granted; the webhook or the receipt
+    // endpoint fills in whatever is missing.
+    try {
+      await stampReceiptFields(payment._id, {
+        paidAt: new Date(),
+        fetchMethod: true,
+      });
+    } catch (err) {
+      console.error("[verify] receipt stamping failed", String(payment._id), err);
+    }
+
+    // --- Authoritative money figures, in PAISE -----------------------------
+    // The confirmation screen renders these verbatim rather than re-deriving
+    // in rupees, so what the student sees on screen and what the invoice
+    // prints off this same ledger row agree to the paisa.
+    //
+    // Historical rows (orders placed before base/gst were stored) carry no
+    // split. Recompute it from the authoritative `amount` so the response
+    // shape is identical for every order and no caller has to branch.
+    const amountPaise = Number(payment.amount || 0);
+    const hasStoredSplit =
+      Number.isFinite(payment.base) && Number.isFinite(payment.gst);
+    const money = hasStoredSplit
+      ? {
+          base: payment.base,
+          gst: payment.gst,
+          gstRate: payment.gstRate ?? GST_RATE,
+        }
+      : (() => {
+          const s = splitInclusiveGST(amountPaise);
+          return { base: s.base, gst: s.gst, gstRate: s.gstRate };
+        })();
+
     return res.status(200).json({
       success: true,
       data: {
+        // Our ledger row's _id — what the receipt endpoint is keyed on.
+        paymentId: String(payment._id),
         packageId: pkg.id,
         packageTitle: pkg.title,
         razorpayOrderId: orderId,
         razorpayPaymentId: paymentId,
         alreadyGranted: result.alreadyGranted,
+        // EVERY money field below is integer PAISE. amount === base + gst.
+        //
+        // originalAmount/discountAmount are converted here: on the ledger
+        // they are stored in RUPEES (see createOrder — pkg.amount and
+        // coupon.applyToAmount both work in rupees) while amount/base/gst
+        // are paise. Emitting that split-brain to the client invites a 100x
+        // formatting bug, so the response is uniform even though the
+        // documents it reads are not.
+        amount: amountPaise,
+        base: money.base,
+        gst: money.gst,
+        gstRate: money.gstRate,
+        originalAmount: toPaise(payment.originalAmount ?? 0),
+        discountAmount: toPaise(payment.discountAmount ?? 0),
+        couponCode: payment.couponCode || null,
       },
     });
   } catch (err) {
@@ -456,7 +637,17 @@ async function onPaymentCaptured(event) {
   }
   noteEvent(payment, "payment.captured");
 
-  const userId = notes.userId || String(payment.userId || "");
+  // Our own ledger row decides who paid; notes.userId is only a fallback for
+  // rows that somehow lack it. A mismatch is logged, never acted on.
+  const ledgerUserId = payment.userId ? String(payment.userId) : "";
+  const userId = ledgerUserId || notes.userId || "";
+  if (ledgerUserId && notes.userId && String(notes.userId) !== ledgerUserId) {
+    console.warn("[webhook] payment.captured: notes.userId differs from ledger", {
+      orderId,
+      ledgerUserId,
+      notesUserId: String(notes.userId),
+    });
+  }
   const user = userId ? await User.findById(userId) : null;
   if (!user) {
     console.warn("[webhook] payment.captured: user not found", { orderId, userId });
@@ -498,6 +689,16 @@ async function onPaymentCaptured(event) {
     payment.failureReason = null;
   }
   await payment.save();
+
+  // Receipt fields, each only if still unset (verify may have got there
+  // first, and a resent webhook must change nothing). The payment entity
+  // carries the method, so no Razorpay fetch is needed here; the event's
+  // created_at is the capture time.
+  await stampReceiptFields(payment._id, {
+    paidAt: event?.created_at ? new Date(event.created_at * 1000) : new Date(),
+    paymentMethod: entity.method || null,
+    fetchMethod: !entity.method,
+  });
 
   console.log("[webhook] payment.captured processed", {
     orderId,
@@ -607,3 +808,83 @@ async function onRefund(event, eventName) {
     refundStatus: payment.refundStatus,
   });
 }
+
+// --- PDF receipt -------------------------------------------------------------
+//
+// One renderer (utils/receiptPdf.js), two routes:
+//   GET /api/v1/user/payment/:id/receipt     protect, owner only
+//   GET /api/v1/admin/payments/:id/receipt   protect + adminOnly
+// :id is our Payment._id (returned by /verify and on admin payment rows).
+//
+// Everything printed comes off the Payment row as stored. Only captured
+// (status "paid") rows have a receipt; anything else is a 404, as is an id
+// that does not parse, so the response never reveals which ids exist.
+const sendReceipt = async (req, res, { ownerOnly }) => {
+  try {
+    const { id } = req.params;
+    if (!mongoose.isValidObjectId(id)) {
+      return res.status(404).json({ success: false, msg: "Receipt not found" });
+    }
+
+    let payment = await Payment.findById(id).lean();
+    if (!payment) {
+      return res.status(404).json({ success: false, msg: "Receipt not found" });
+    }
+    // Same ownership rule as verifyPayment.
+    if (ownerOnly && String(payment.userId) !== String(req.user.id)) {
+      return res
+        .status(403)
+        .json({ success: false, msg: "This receipt belongs to another account" });
+    }
+    if (payment.status !== "paid") {
+      return res.status(404).json({ success: false, msg: "Receipt not found" });
+    }
+
+    // A paid row with no receipt number yet: verify's stamping failed and
+    // the webhook has not landed, or the row predates receipts and the
+    // backfill has not run. Stamp it now (idempotent) rather than refuse.
+    if (!hasFinalReceiptNumber(payment) || !payment.paidAt) {
+      payment = await stampReceiptFields(payment._id, {
+        paidAt: payment.paidAt || payment.updatedAt,
+        fetchMethod: true,
+      });
+    }
+    if (!hasFinalReceiptNumber(payment)) {
+      return res.status(503).json({
+        success: false,
+        msg: "Your receipt is being prepared. Please try again in a minute.",
+      });
+    }
+
+    // Rows from before the billing snapshot existed: bill to the account.
+    let fallbackCustomer = {};
+    if (!payment.billing?.fullName) {
+      const owner = await User.findById(payment.userId).select("name email").lean();
+      fallbackCustomer = { name: owner?.name, email: owner?.email };
+    }
+
+    const pdf = await renderReceiptPdf(payment, { fallbackCustomer });
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader(
+      "Content-Disposition",
+      `attachment; filename="jumpstride-receipt-${payment.receiptNumber}.pdf"`
+    );
+    // The frontend reads the filename off this header; cross-origin it is
+    // hidden from JS unless exposed. Scoped to this response only.
+    res.setHeader("Access-Control-Expose-Headers", "Content-Disposition");
+    res.setHeader("Content-Length", pdf.length);
+    res.setHeader("Cache-Control", "private, no-store");
+    return res.status(200).end(pdf);
+  } catch (err) {
+    console.error("[receipt] render failed", req.params?.id, err);
+    return res
+      .status(500)
+      .json({ success: false, msg: "Failed to generate receipt" });
+  }
+};
+
+export const getMyPaymentReceipt = (req, res) =>
+  sendReceipt(req, res, { ownerOnly: true });
+
+export const getAdminPaymentReceipt = (req, res) =>
+  sendReceipt(req, res, { ownerOnly: false });

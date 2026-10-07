@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Search, ChevronDown, Download, CreditCard, Smartphone } from "lucide-react";
 import api from "../../api/api";
+import downloadReceipt from "../../utils/downloadReceipt";
 import { TableSkeleton } from "../../components/admin/Skeletons";
 
 // Status comes back from the API as an English canonical string. We
@@ -63,6 +64,20 @@ const Payments = () => {
     [rows, searchQuery, statusFilter, methodFilter]
   );
 
+  // PDF receipt for one captured payment (row.paymentId = Payment._id).
+  const [receiptLoadingId, setReceiptLoadingId] = useState(null);
+  const handleReceipt = async (paymentId) => {
+    if (receiptLoadingId) return;
+    setReceiptLoadingId(paymentId);
+    try {
+      await downloadReceipt(`/v1/admin/payments/${paymentId}/receipt`);
+    } catch (err) {
+      window.alert(err.message);
+    } finally {
+      setReceiptLoadingId(null);
+    }
+  };
+
   const exportCsv = () => {
     const headers = ["order_id", "name", "email", "package", "amount", "method", "date", "status"];
     const lines = filteredPayments.map((p) =>
@@ -70,7 +85,11 @@ const Payments = () => {
         .map((v) => `"${String(v).replace(/"/g, '""')}"`)
         .join(",")
     );
-    const blob = new Blob([[headers.join(","), ...lines].join("\n")], { type: "text/csv;charset=utf-8" });
+    // Leading BOM: Excel assumes the system codepage for a .csv otherwise,
+    // which mangles any non-ASCII name. The charset in the MIME type is
+    // not enough — Excel reads the bytes, not the Blob type.
+    const csv = "\uFEFF" + [headers.join(","), ...lines].join("\n");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
@@ -146,7 +165,7 @@ const Payments = () => {
                 <tr><td colSpan={11} className="p-0 border-none"><TableSkeleton rows={5} cols={11} /></td></tr>
               ) : filteredPayments.length > 0 ? (
                 filteredPayments.map((item) => (
-                  <tr key={item.id} className="hover:bg-gray-50/50 transition-colors">
+                  <tr key={item.rowKey} className="hover:bg-gray-50/50 transition-colors">
                     <td className="px-6 py-5 text-xs font-bold text-gray-500 whitespace-nowrap">{item.id}</td>
                     <td className="px-6 py-5">
                       <div className="flex flex-col">
@@ -186,7 +205,26 @@ const Payments = () => {
                     <td className="px-6 py-5 text-center text-[13px] text-gray-400 font-medium whitespace-nowrap">{item.dateLabel}</td>
                     <td className="px-6 py-5 text-center"><PaymentStatusBadge status={item.status} t={t} /></td>
                     <td className="px-6 py-5 text-right">
-                      <button onClick={() => navigator.clipboard?.writeText(item.id)} title={t("payments.copyOrderTitle")} className="px-2 py-1 text-xs border rounded-lg hover:bg-gray-50">{t("payments.copyIdButton")}</button>
+                      <div className="flex items-center justify-end gap-2">
+                        {/* Only rows backed by a captured Payment ledger row
+                            have a receipt; free and legacy rows have none. */}
+                        {item.paymentId ? (
+                          <button
+                            onClick={() => handleReceipt(item.paymentId)}
+                            disabled={receiptLoadingId === item.paymentId}
+                            title="Download PDF receipt"
+                            className="inline-flex items-center gap-1 px-2 py-1 text-xs border border-[#14b8a6] text-[#14b8a6] rounded-lg hover:bg-teal-50 whitespace-nowrap disabled:opacity-60 disabled:cursor-wait"
+                          >
+                            <Download size={12} />
+                            {receiptLoadingId === item.paymentId ? "..." : "Receipt"}
+                          </button>
+                        ) : null}
+                        {/* id is the Razorpay order (or payment) id; "—" when the row has
+                            no gateway record, so there is nothing to copy. */}
+                        {item.id !== "—" ? (
+                          <button onClick={() => navigator.clipboard?.writeText(item.id)} title={t("payments.copyOrderTitle")} className="px-2 py-1 text-xs border rounded-lg hover:bg-gray-50">{t("payments.copyIdButton")}</button>
+                        ) : null}
+                      </div>
                     </td>
                   </tr>
                 ))

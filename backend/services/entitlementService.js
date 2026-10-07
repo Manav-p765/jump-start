@@ -19,6 +19,10 @@
 //     student's money and give nothing back. We log and proceed.
 //
 //  3. paymentMethod is "Razorpay", not the hardcoded "Online".
+//
+//  4. The write is one conditional updateOne, not user.save(), so two
+//     concurrent callers for the same payment cannot both grant (see below).
+import User from "../models/User.js";
 
 /**
  * @param {object}  args
@@ -54,7 +58,10 @@ export async function grantPackageEntitlement({
     throw new Error("grantPackageEntitlement: razorpayPaymentId is required");
   }
 
-  // --- Idempotency gate --------------------------------------------------
+  // --- Fast path ---------------------------------------------------------
+  // Cheap in-memory check for the common sequential repeat (a resent
+  // webhook). NOT the guard: two callers can both load the user before
+  // either writes, so the real gate is the conditional update below.
   const history = Array.isArray(user.purchaseHistory) ? user.purchaseHistory : [];
   const already = history.some(
     (record) => record && record.razorpayPaymentId === razorpayPaymentId
@@ -63,9 +70,55 @@ export async function grantPackageEntitlement({
     return { alreadyGranted: true, couponBurned: false };
   }
 
+  // --- Entitlement write (atomic) ------------------------------------------
+  // One conditional updateOne: the filter only matches while no
+  // purchaseHistory entry carries this payment id, and the push happens in
+  // the same document write, so of two concurrent callers (verify + webhook,
+  // or two webhook deliveries) exactly one gets modifiedCount === 1.
+  //
+  // Written straight to the collection rather than via user.save(), which
+  // would replace the whole purchaseHistory array from a possibly stale
+  // in-memory copy. The `user` doc passed in is therefore NOT updated; no
+  // caller reads it afterwards.
+  const entry = {
+    packageId: pkg.id,
+    packageTitle: pkg.title,
+    // Post-discount value — what the student actually paid.
+    amount: finalAmount,
+    couponCode: appliedCouponCode,
+    discountAmount,
+    originalAmount,
+    purchasedAt: new Date(),
+    paymentMethod: "Razorpay",
+    razorpayOrderId,
+    razorpayPaymentId,
+    status: "paid",
+  };
+
+  const write = await User.updateOne(
+    {
+      _id: user._id,
+      "purchaseHistory.razorpayPaymentId": { $ne: razorpayPaymentId },
+    },
+    {
+      $push: { purchaseHistory: entry },
+      $addToSet: { purchasedPackages: pkg.id },
+      $set: { selectedPackageId: pkg.id },
+    }
+  );
+  // NOTE: testsInProgress and testProgress are intentionally untouched.
+
+  if (write.modifiedCount !== 1) {
+    // The other caller won (or the user vanished — matchedCount 0 either
+    // way). Nothing was written, so nothing else may be either.
+    return { alreadyGranted: true, couponBurned: false };
+  }
+
   // --- Coupon burn -------------------------------------------------------
-  // Same atomic, maxUses-guarded increment as purchasePackage, but a lost
-  // race is a warning here rather than a 409 (see note 2 above).
+  // Only the caller whose write landed burns the slot, so a payment
+  // consumes exactly one use however many times it is processed. Same
+  // atomic, maxUses-guarded increment as purchasePackage, but a lost race
+  // for the last slot is a warning here rather than a 409 (see note 2).
   let couponBurned = false;
   if (couponDoc && CouponModel) {
     const filter = { _id: couponDoc._id, isActive: true };
@@ -84,33 +137,6 @@ export async function grantPackageEntitlement({
       });
     }
   }
-
-  // --- Entitlement write -------------------------------------------------
-  user.selectedPackageId = pkg.id;
-  user.purchasedPackages = [
-    ...new Set([...(user.purchasedPackages || []), pkg.id]),
-  ];
-  user.purchaseHistory = [
-    ...history,
-    {
-      packageId: pkg.id,
-      packageTitle: pkg.title,
-      // Post-discount value — what the student actually paid.
-      amount: finalAmount,
-      couponCode: appliedCouponCode,
-      discountAmount,
-      originalAmount,
-      purchasedAt: new Date(),
-      paymentMethod: "Razorpay",
-      razorpayOrderId,
-      razorpayPaymentId,
-      status: "paid",
-    },
-  ];
-
-  // NOTE: testsInProgress and testProgress are intentionally untouched.
-
-  await user.save();
 
   return { alreadyGranted: false, couponBurned };
 }

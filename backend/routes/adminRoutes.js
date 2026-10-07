@@ -23,6 +23,7 @@ import {
   toggleCoupon,
   deleteCoupon,
 } from "../controllers/adminController.js";
+import { getAdminPaymentReceipt } from "../controllers/paymentController.js";
 
 const router = express.Router();
 
@@ -34,6 +35,8 @@ router.get("/users", getAdminUsers);
 router.patch("/users/:userId", patchAdminUser);
 router.delete("/users/:userId", deleteAdminUser);
 router.get("/payments", getAdminPayments);
+// PDF receipt for any captured payment (:id = Payment._id, from the row).
+router.get("/payments/:id/receipt", getAdminPaymentReceipt);
 router.get("/submissions", getAdminSubmissions);
 router.get("/submissions/:reportId", getAdminSubmissionDetail);
 router.get("/results", getAdminResults);

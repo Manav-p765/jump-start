@@ -2,7 +2,7 @@ import User, {
   STUDENT_PROFILE_REQUIRED_FIELDS,
 } from "../models/User.js";
 import AssessmentConfig from "../models/AssessmentConfig.js";
-import Coupon from "../models/Coupon.js";
+import Coupon, { FULL_DISCOUNT_MSG } from "../models/Coupon.js";
 import { computeAssessmentResult } from "../utils/scoring/index.js";
 import { DEMO_PACKAGE_ID } from "../utils/scoring/configs/career500qDemo.config.js";
 import {
@@ -886,6 +886,12 @@ export const validateCoupon = async (req, res) => {
       return res.status(404).json({ success: false, msg: "Package not found or inactive" });
     }
     const originalAmount = Number(pkg.amount || 0);
+    // Same rule as /payment/order: a paid package can't be discounted below
+    // Razorpay's ₹1 minimum. Refused here so the student is told before
+    // they reach the pay button.
+    if (coupon.makesFree(originalAmount)) {
+      return res.status(400).json({ success: false, msg: FULL_DISCOUNT_MSG });
+    }
     const { discount, finalPrice } = coupon.applyToAmount(originalAmount);
     return res.status(200).json({
       success: true,

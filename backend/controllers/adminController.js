@@ -1,6 +1,7 @@
 import User from "../models/User.js";
 import AssessmentConfig from "../models/AssessmentConfig.js";
-import Coupon from "../models/Coupon.js";
+import Coupon, { FULL_DISCOUNT_MSG } from "../models/Coupon.js";
+import Payment from "../models/Payment.js";
 import WebVital, { METRIC_NAMES } from "../models/WebVital.js";
 import {
   getResultPublicationState,
@@ -16,6 +17,7 @@ import { matchCareers } from "../utils/scoring/careerMatcher.js";
 import { DEMO_APTITUDE_BANDS } from "../utils/scoring/configs/career500qDemo.config.js";
 import {
   buildStudentReportDetail,
+  getActivePackages,
   getPackageLookup,
 } from "./userController.js";
 
@@ -73,7 +75,11 @@ const getConfigLookup = (cfg) => {
   return map;
 };
 
-const getUserPurchaseEntries = (user, packageMap) => {
+// `paymentIdByOrderId` (optional) maps razorpayOrderId -> Payment._id for
+// captured ledger rows. Only the admin Payments table passes it, to put the
+// real Payment id on each row for the receipt download; purchases with no
+// ledger row (free activations, legacy records) get paymentId null.
+const getUserPurchaseEntries = (user, packageMap, paymentIdByOrderId = new Map()) => {
   const explicitHistory = Array.isArray(user?.purchaseHistory)
     ? user.purchaseHistory.filter((item) => item?.packageId)
     : [];
@@ -101,9 +107,14 @@ const getUserPurchaseEntries = (user, packageMap) => {
         purchase.purchasedAt || user.updatedAt || user.createdAt || null;
 
       return {
-        id: `${String(user._id)}-purchase-${idx + 1}-${String(
+        // Internal unique key (contains the user's DB id). Used for
+        // notification ids only — stripped before rows reach the Payments
+        // table, which shows `id` below instead.
+        key: `${String(user._id)}-purchase-${idx + 1}-${String(
           purchase.packageId || "package"
         )}-${toTimestamp(purchasedAt)}`,
+        // Displayed / exported order id: the gateway's, never ours.
+        id: purchase.razorpayOrderId || purchase.razorpayPaymentId || "—",
         userId: String(user._id),
         name: user.name || "Unknown",
         email: user.email || "",
@@ -119,6 +130,10 @@ const getUserPurchaseEntries = (user, packageMap) => {
         discountAmountLabel: fmtCurrency(discountAmount),
         method: purchase.paymentMethod || "Online",
         date: purchasedAt,
+        paymentId:
+          (purchase.razorpayOrderId &&
+            paymentIdByOrderId.get(purchase.razorpayOrderId)) ||
+          null,
         fallback: false,
       };
     });
@@ -129,7 +144,8 @@ const getUserPurchaseEntries = (user, packageMap) => {
     const pkg = packageMap.get(pkgId);
     const amount = Number(pkg?.amount || 0);
     return {
-      id: `${String(user._id)}-purchase-fallback-${idx + 1}-${String(pkgId)}`,
+      key: `${String(user._id)}-purchase-fallback-${idx + 1}-${String(pkgId)}`,
+      id: "—",
       userId: String(user._id),
       name: user.name || "Unknown",
       email: user.email || "",
@@ -139,15 +155,16 @@ const getUserPurchaseEntries = (user, packageMap) => {
       amountLabel: fmtCurrency(amount),
       method: idx % 2 === 0 ? "UPI" : "Card",
       date: user.updatedAt || user.createdAt || null,
+      paymentId: null,
       fallback: true,
     };
   });
 };
 
-const buildPayments = (users, packageMap) => {
+const buildPayments = (users, packageMap, paymentIdByOrderId) => {
   const rows = [];
   for (const u of users) {
-    getUserPurchaseEntries(u, packageMap).forEach((purchase) => {
+    getUserPurchaseEntries(u, packageMap, paymentIdByOrderId).forEach((purchase) => {
       rows.push({
         ...purchase,
         status: "Completed",
@@ -600,7 +617,7 @@ const buildAdminNotifications = (users, cfg, limit = 12) => {
         .filter((purchase) => !purchase.fallback)
         .map((purchase) =>
           createAdminNotification({
-            id: `payment-${purchase.id}`,
+            id: `payment-${purchase.key}`,
             type: "payment",
             title: "Payment Received",
             message: `${purchase.name} purchased the ${purchase.package} package.`,
@@ -862,16 +879,22 @@ export const deleteAdminUser = async (req, res) => {
 // GET /api/v1/admin/payments
 export const getAdminPayments = async (req, res) => {
   try {
-    const [users, cfg] = await Promise.all([
+    const [users, cfg, ledger] = await Promise.all([
       User.find({ role: { $ne: "admin" } })
         .select(
           "name email purchasedPackages purchaseHistory updatedAt createdAt"
         )
         .lean(),
       AssessmentConfig.getOrCreateDefault(),
+      // Captured ledger rows, to attach the real Payment id (the receipt
+      // endpoint's key) to each purchaseHistory row via razorpayOrderId.
+      Payment.find({ status: "paid" }).select("_id razorpayOrderId").lean(),
     ]);
     const packageMap = getConfigLookup(cfg);
-    const payments = buildPayments(users, packageMap);
+    const paymentIdByOrderId = new Map(
+      ledger.map((p) => [p.razorpayOrderId, String(p._id)])
+    );
+    const payments = buildPayments(users, packageMap, paymentIdByOrderId);
     const totalRevenue = payments.reduce((sum, p) => sum + Number(p.amount || 0), 0);
     const startOfMonth = new Date();
     startOfMonth.setDate(1);
@@ -891,8 +914,11 @@ export const getAdminPayments = async (req, res) => {
           refundedAmount: 0,
           refundedAmountLabel: fmtCurrency(0),
         },
-        rows: payments.map((p) => ({
+        // `key` and `userId` carry the user's DB id and are dropped here;
+        // rowKey is an opaque per-response index for React.
+        rows: payments.map(({ key, userId, ...p }, idx) => ({
           ...p,
+          rowKey: `row-${idx}`,
           dateLabel: fmtDate(p.date),
         })),
       },
@@ -1722,6 +1748,22 @@ export const listCoupons = async (_req, res) => {
   }
 };
 
+// Active paid packages this coupon would price below Razorpay's ₹1 minimum.
+// Coupons are not tied to a package, so a code is refused if it would make
+// ANY purchasable paid package free; /coupon/validate and /payment/order
+// re-check at checkout in case prices change later.
+const paidPackagesMadeFreeBy = async (coupon) => {
+  const cfg = await AssessmentConfig.getOrCreateDefault();
+  return getActivePackages(cfg).filter((pkg) => coupon.makesFree(pkg.amount));
+};
+
+const fullDiscountAdminMsg = (packages) => {
+  const names = packages
+    .map((pkg) => `${pkg.title || pkg.id} (${fmtCurrency(Number(pkg.amount || 0))})`)
+    .join(", ");
+  return `${FULL_DISCOUNT_MSG}: it would make ${names} free. Paid packages must cost at least ₹1 after the discount.`;
+};
+
 // POST /api/v1/admin/coupons
 // Body: { code, discountType, discountValue, maxUses?, expiresAt? }
 // Validation rules:
@@ -1763,6 +1805,20 @@ export const createCoupon = async (req, res) => {
       return res
         .status(400)
         .json({ success: false, msg: "Percent discount cannot exceed 100." });
+    }
+    if (discountType === "percent" && numericValue >= 100) {
+      return res.status(400).json({
+        success: false,
+        msg: `${FULL_DISCOUNT_MSG}. Use a percentage below 100.`,
+      });
+    }
+    const madeFree = await paidPackagesMadeFreeBy(
+      new Coupon({ code: trimmedCode, discountType, discountValue: numericValue })
+    );
+    if (madeFree.length > 0) {
+      return res
+        .status(400)
+        .json({ success: false, msg: fullDiscountAdminMsg(madeFree) });
     }
 
     const parsedMaxUses =
@@ -1830,6 +1886,21 @@ export const toggleCoupon = async (req, res) => {
       return res
         .status(400)
         .json({ success: false, msg: "Body must include { isActive: boolean }" });
+    }
+    // Re-activating is the only way an old code goes live again, so it gets
+    // the same full-discount check as creation (package prices may also have
+    // changed since the coupon was made).
+    if (isActive) {
+      const existing = await Coupon.findById(id);
+      if (!existing) {
+        return res.status(404).json({ success: false, msg: "Coupon not found" });
+      }
+      const madeFree = await paidPackagesMadeFreeBy(existing);
+      if (madeFree.length > 0) {
+        return res
+          .status(400)
+          .json({ success: false, msg: fullDiscountAdminMsg(madeFree) });
+      }
     }
     const updated = await Coupon.findByIdAndUpdate(
       id,
