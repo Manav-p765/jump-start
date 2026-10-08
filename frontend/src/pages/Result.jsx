@@ -410,7 +410,11 @@ export default function Result() {
 
           {error ? <p className="mt-4 text-sm text-red-600">{error}</p> : null}
 
-          <div className="mt-8 grid gap-8 xl:grid-cols-[880px_424px]">
+          {/* Proportional, not fixed px: .report-print-root applies
+              zoom: 1.12, so fixed 880px + 424px tracks rendered ~1530px wide
+              and overflowed every window between 1280 and ~1536px. Same
+              880:424 split, but the columns shrink to fit. */}
+          <div className="mt-8 grid gap-8 xl:grid-cols-[minmax(0,880fr)_minmax(0,424fr)]">
             <div className="space-y-6">
               <section className={`${resultCardClass} report-print-card min-h-[360px] rounded-[16px] p-[25px]`}>
                 <div>

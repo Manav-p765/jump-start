@@ -8,23 +8,42 @@ import { TableSkeleton } from "../../components/admin/Skeletons";
 // Status comes back from the API as an English canonical string. We
 // map it to a translation key for display so the badge swaps to
 // Gujarati while the backend filter / API contract stays in English.
+// Paid / Refunded / Refund processing / Refund failed come from the Payment
+// ledger row; "Completed" is a legacy purchase with no ledger row.
 const STATUS_LABEL_KEYS = {
+  Paid: "payments.statusPaid",
+  Refunded: "payments.statusRefunded",
+  "Refund processing": "payments.statusRefundProcessing",
+  "Refund failed": "payments.statusRefundFailed",
   Completed: "payments.statusCompleted",
-  Pending: "payments.statusPending",
+};
+
+const STATUS_STYLES = {
+  Paid: "bg-emerald-50 text-emerald-700 border-emerald-100",
+  Completed: "bg-emerald-50 text-emerald-700 border-emerald-100",
+  Refunded: "bg-rose-50 text-rose-700 border-rose-100",
+  "Refund processing": "bg-amber-50 text-amber-700 border-amber-100",
+  "Refund failed": "bg-slate-100 text-slate-600 border-slate-200",
 };
 
 const PaymentStatusBadge = ({ status, t }) => {
-  const styles = {
-    Completed: "bg-emerald-50 text-emerald-600 border-emerald-100",
-    Pending: "bg-slate-50 text-slate-400 border-slate-100",
-  };
   const labelKey = STATUS_LABEL_KEYS[status];
   return (
-    <span className={`px-3 py-1 rounded-full text-[10px] font-bold border uppercase tracking-wide ${styles[status] || styles.Pending}`}>
+    <span className={`inline-block whitespace-nowrap px-2.5 py-0.5 rounded-full text-[11px] font-semibold border ${STATUS_STYLES[status] || STATUS_STYLES["Refund failed"]}`}>
       {labelKey ? t(labelKey) : status}
     </span>
   );
 };
+
+// "07 Oct 26" — the full timestamp stays in the cell's title and the CSV.
+const shortDate = (value) => {
+  const d = value ? new Date(value) : null;
+  if (!d || Number.isNaN(d.getTime())) return "—";
+  return d.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "2-digit" });
+};
+
+const TH = "px-3 py-4 text-[10.5px] font-bold text-gray-400 uppercase tracking-wider";
+const TD = "px-3 py-4 align-middle";
 
 const Payments = () => {
   const { t } = useTranslation();
@@ -79,9 +98,13 @@ const Payments = () => {
   };
 
   const exportCsv = () => {
-    const headers = ["order_id", "name", "email", "package", "amount", "method", "date", "status"];
+    const headers = ["order_id", "name", "email", "package", "amount", "method", "date", "status", "refunded_amount", "refunded_at"];
     const lines = filteredPayments.map((p) =>
-      [p.id, p.name, p.email, p.package, p.amountLabel, p.method, p.dateLabel, p.status]
+      [
+        p.id, p.name, p.email, p.package, p.amountLabel, p.method, p.dateLabel, p.status,
+        p.refundedAmount > 0 ? p.refundedAmountLabel : "",
+        p.refundedAtLabel || "",
+      ]
         .map((v) => `"${String(v).replace(/"/g, '""')}"`)
         .join(",")
     );
@@ -126,8 +149,11 @@ const Payments = () => {
           <div className="relative w-full md:w-40">
             <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="w-full appearance-none bg-white border border-gray-100 rounded-xl px-4 py-2.5 text-sm">
               <option value="All">{t("payments.filterStatus")}</option>
+              <option value="Paid">{t("payments.statusPaid")}</option>
+              <option value="Refunded">{t("payments.statusRefunded")}</option>
+              <option value="Refund processing">{t("payments.statusRefundProcessing")}</option>
+              <option value="Refund failed">{t("payments.statusRefundFailed")}</option>
               <option value="Completed">{t("payments.statusCompleted")}</option>
-              <option value="Pending">{t("payments.statusPending")}</option>
             </select>
             <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={16} />
           </div>
@@ -143,21 +169,23 @@ const Payments = () => {
       </div>
 
       <div className="bg-white rounded-2xl shadow-sm border border-gray-50 overflow-hidden">
+        {/* On narrow screens the TABLE scrolls inside this box; the page
+            never does. From ~1280px up every column fits without it. */}
         <div className="overflow-x-auto">
-          <table className="w-full text-left">
+          <table className="w-full min-w-[1080px] table-auto text-left">
             <thead>
               <tr className="border-b border-gray-50 bg-gray-50/20">
-                <th className="px-6 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest">{t("payments.tableOrderId")}</th>
-                <th className="px-6 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest">{t("payments.tableStudent")}</th>
-                <th className="px-6 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest text-center">{t("payments.tablePackage")}</th>
-                <th className="px-6 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest text-center">Coupon Used</th>
-                <th className="px-6 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest text-center">Original Price</th>
-                <th className="px-6 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest text-center">Discount Applied</th>
-                <th className="px-6 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest text-center">Final Paid</th>
-                <th className="px-6 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest text-center">{t("payments.tableMethod")}</th>
-                <th className="px-6 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest text-center">{t("payments.tableDate")}</th>
-                <th className="px-6 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest text-center">{t("payments.tableStatus")}</th>
-                <th className="px-6 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest text-right">{t("payments.tableActions")}</th>
+                <th className={TH}>{t("payments.tableOrderId")}</th>
+                <th className={TH}>{t("payments.tableStudent")}</th>
+                <th className={TH}>{t("payments.tablePackage")}</th>
+                <th className={`${TH} text-center`}>Coupon</th>
+                <th className={`${TH} text-right`}>Original</th>
+                <th className={`${TH} text-right`}>Discount</th>
+                <th className={`${TH} text-right`}>Final Paid</th>
+                <th className={TH}>{t("payments.tableMethod")}</th>
+                <th className={TH}>{t("payments.tableDate")}</th>
+                <th className={TH}>{t("payments.tableStatus")}</th>
+                <th className={`${TH} text-right`}>{t("payments.tableActions")}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-50">
@@ -166,27 +194,27 @@ const Payments = () => {
               ) : filteredPayments.length > 0 ? (
                 filteredPayments.map((item) => (
                   <tr key={item.rowKey} className="hover:bg-gray-50/50 transition-colors">
-                    <td className="px-6 py-5 text-xs font-bold text-gray-500 whitespace-nowrap">{item.id}</td>
-                    <td className="px-6 py-5">
+                    <td className={`${TD} text-[11px] font-bold text-gray-500 whitespace-nowrap`}>{item.id}</td>
+                    <td className={`${TD} min-w-[150px] max-w-[220px]`}>
                       <div className="flex flex-col">
-                        <span className="text-sm font-bold text-gray-900 whitespace-nowrap">{item.name}</span>
-                        <span className="text-[11px] text-gray-400 font-medium">{item.email}</span>
+                        <span className="text-[13px] font-bold leading-5 text-gray-900">{item.name}</span>
+                        <span className="text-[11px] leading-4 text-gray-400 font-medium break-all">{item.email}</span>
                       </div>
                     </td>
-                    <td className="px-6 py-5 text-center text-sm">{item.package}</td>
-                    <td className="px-6 py-5 text-center text-xs">
+                    <td className={`${TD} min-w-[160px] max-w-[240px] text-[13px] leading-5 text-gray-800`}>{item.package}</td>
+                    <td className={`${TD} text-center text-xs`}>
                       {item.couponCode ? (
-                        <span className="inline-flex items-center rounded-full border border-[#9BD9D6] bg-[#F0FBFB] px-2.5 py-0.5 font-mono font-semibold text-[#188B8B]">
+                        <span className="inline-flex items-center rounded-full border border-[#9BD9D6] bg-[#F0FBFB] px-2 py-0.5 font-mono font-semibold text-[#188B8B]">
                           {item.couponCode}
                         </span>
                       ) : (
                         <span className="text-gray-300">None</span>
                       )}
                     </td>
-                    <td className="px-6 py-5 text-center text-sm text-gray-700 whitespace-nowrap">
+                    <td className={`${TD} text-right text-[13px] text-gray-700 whitespace-nowrap`}>
                       {item.originalAmountLabel || item.amountLabel}
                     </td>
-                    <td className="px-6 py-5 text-center text-sm whitespace-nowrap">
+                    <td className={`${TD} text-right text-[13px] whitespace-nowrap`}>
                       {item.discountAmount > 0 ? (
                         <span className="font-semibold text-emerald-700">
                           − {item.discountAmountLabel}
@@ -195,17 +223,27 @@ const Payments = () => {
                         <span className="text-gray-300">—</span>
                       )}
                     </td>
-                    <td className="px-6 py-5 text-center text-sm font-bold text-gray-900 whitespace-nowrap">{item.amountLabel}</td>
-                    <td className="px-6 py-5">
-                      <div className="flex items-center justify-center gap-2 text-gray-600">
-                        {item.method === "Card" ? <CreditCard size={14} /> : <Smartphone size={14} />}
+                    <td className={`${TD} text-right text-[13px] font-bold text-gray-900 whitespace-nowrap`}>{item.amountLabel}</td>
+                    <td className={TD}>
+                      <div className="flex items-center gap-1.5 text-gray-600">
+                        {item.method === "Card" ? <CreditCard size={13} /> : <Smartphone size={13} />}
                         <span className="text-xs font-medium">{item.method}</span>
                       </div>
                     </td>
-                    <td className="px-6 py-5 text-center text-[13px] text-gray-400 font-medium whitespace-nowrap">{item.dateLabel}</td>
-                    <td className="px-6 py-5 text-center"><PaymentStatusBadge status={item.status} t={t} /></td>
-                    <td className="px-6 py-5 text-right">
-                      <div className="flex items-center justify-end gap-2">
+                    <td className={`${TD} text-[12px] text-gray-500 font-medium whitespace-nowrap`} title={item.dateLabel}>{shortDate(item.date)}</td>
+                    <td className={TD}>
+                      <PaymentStatusBadge status={item.status} t={t} />
+                      {item.refundedAmount > 0 ? (
+                        <div className="mt-1 whitespace-nowrap text-[11px] font-semibold text-rose-700" title={item.refundedAtLabel}>
+                          {t("payments.refundedLine", {
+                            amount: item.refundedAmountLabel,
+                            date: shortDate(item.refundedAt),
+                          })}
+                        </div>
+                      ) : null}
+                    </td>
+                    <td className={`${TD} text-right`}>
+                      <div className="flex flex-wrap items-center justify-end gap-1.5">
                         {/* Only rows backed by a captured Payment ledger row
                             have a receipt; free and legacy rows have none. */}
                         {item.paymentId ? (
@@ -229,7 +267,7 @@ const Payments = () => {
                   </tr>
                 ))
               ) : (
-                <tr><td colSpan={11} className="px-6 py-12 text-center text-gray-400 italic">{t("payments.noTransactions")}</td></tr>
+                <tr><td colSpan={11} className="px-3 py-12 text-center text-gray-400 italic">{t("payments.noTransactions")}</td></tr>
               )}
             </tbody>
           </table>

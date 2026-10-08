@@ -31,6 +31,11 @@ import {
   MIN_ORDER_PAISE,
   splitInclusiveGST,
 } from "../utils/money.js";
+import {
+  normalizeRefundStatus,
+  refundedPaise,
+  studentRefundStatus,
+} from "../utils/refunds.js";
 import Booking from "../models/Booking.js";
 import { COUNSELLING_NOTE_TYPE } from "../config/counselling.js";
 import {
@@ -561,6 +566,7 @@ export const handleWebhook = async (req, res) => {
 
       case "refund.created":
       case "refund.processed":
+      case "refund.failed":
         await onRefund(event, eventName);
         break;
 
@@ -758,10 +764,23 @@ async function onPaymentFailed(event) {
   await payment.save();
 }
 
+// The refund status to store when `incoming` arrives on a row holding
+// `current`. Delivery order is not guaranteed, so a late refund.created
+// (pending) must not drag a processed or failed refund back to pending.
+const nextRefundStatus = (current, incoming) => {
+  const cur = normalizeRefundStatus(current);
+  if ((cur === "processed" || cur === "failed") &&
+      normalizeRefundStatus(incoming) === "pending") {
+    return current;
+  }
+  return incoming;
+};
+
 async function onRefund(event, eventName) {
   const entity = event?.payload?.refund?.entity || {};
   const orderId =
     entity.order_id || event?.payload?.payment?.entity?.order_id || null;
+  const incomingStatus = entity.status || eventName;
 
   if (!orderId) {
     console.warn("[webhook] refund event missing order_id", eventName);
@@ -775,7 +794,10 @@ async function onRefund(event, eventName) {
   if (refundedBooking) {
     noteBookingEvent(refundedBooking, eventName);
     refundedBooking.refundId = entity.id || refundedBooking.refundId;
-    refundedBooking.refundStatus = entity.status || eventName;
+    refundedBooking.refundStatus = nextRefundStatus(
+      refundedBooking.refundStatus,
+      incomingStatus
+    );
     refundedBooking.refundedAt = new Date();
     await refundedBooking.save();
     console.log("[webhook] counselling refund recorded (slot retained)", {
@@ -796,8 +818,12 @@ async function onRefund(event, eventName) {
 
   noteEvent(payment, eventName);
   payment.refundId = entity.id || payment.refundId;
-  payment.refundStatus = entity.status || eventName;
+  payment.refundStatus = nextRefundStatus(payment.refundStatus, incomingStatus);
   payment.refundedAt = new Date();
+  // refund.entity.amount is PAISE, like Payment.amount.
+  if (Number.isFinite(Number(entity.amount)) && Number(entity.amount) > 0) {
+    payment.refundAmount = Math.round(Number(entity.amount));
+  }
   await payment.save();
 
   // Audit only. Entitlement is NOT revoked — that is a policy decision and
@@ -806,6 +832,7 @@ async function onRefund(event, eventName) {
     orderId,
     refundId: payment.refundId,
     refundStatus: payment.refundStatus,
+    refundAmount: payment.refundAmount,
   });
 }
 
@@ -885,6 +912,52 @@ const sendReceipt = async (req, res, { ownerOnly }) => {
 
 export const getMyPaymentReceipt = (req, res) =>
   sendReceipt(req, res, { ownerOnly: true });
+
+// --- Student payment history -------------------------------------------------
+//
+// GET /api/v1/user/payments   protect
+//
+// The logged-in student's own captured payments, newest first. Scoped by
+// userId from the session, never from the request. A refunded payment is
+// still status "paid" on the ledger, so this list includes it and carries
+// the refund state alongside.
+//
+// Deliberately narrow: no user id, billing snapshot, Razorpay ids or notes.
+// _id is the key for the existing receipt download. Amounts are PAISE.
+export const getMyPayments = async (req, res) => {
+  try {
+    const rows = await Payment.find({ userId: req.user._id, status: "paid" })
+      .select(
+        "_id packageTitle packageId amount paidAt createdAt receiptNumber paymentMethod refundStatus refundAmount refundedAt"
+      )
+      .sort({ paidAt: -1, createdAt: -1 })
+      .lean();
+
+    const data = rows.map((p) => {
+      const refundStatus = studentRefundStatus(p);
+      return {
+        _id: String(p._id),
+        packageTitle: p.packageTitle || p.packageId || "Assessment package",
+        amount: Math.round(Number(p.amount || 0)),
+        paidAt: p.paidAt || p.createdAt || null,
+        receiptNumber: p.receiptNumber || null,
+        paymentMethod: p.paymentMethod || null,
+        refundStatus,
+        // PAISE actually refunded; set only once the refund is processed
+        // (a legacy refund with no stored amount counts as full).
+        refundAmount: refundStatus === "processed" ? refundedPaise(p) : null,
+        refundedAt: refundStatus ? p.refundedAt || null : null,
+      };
+    });
+
+    return res.status(200).json({ success: true, data });
+  } catch (err) {
+    console.error("[payments] list failed", err);
+    return res
+      .status(500)
+      .json({ success: false, msg: "Failed to load your payments" });
+  }
+};
 
 export const getAdminPaymentReceipt = (req, res) =>
   sendReceipt(req, res, { ownerOnly: false });

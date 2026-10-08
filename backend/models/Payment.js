@@ -126,8 +126,13 @@ const paymentSchema = new mongoose.Schema(
     // Refunds are RECORDED here only. Entitlement is deliberately not
     // revoked: that is a policy decision, not a gateway one.
     refundId: { type: String, default: null },
+    // Razorpay's refund.entity.status: pending / processed / failed.
+    // Interpreted only by utils/refunds.js.
     refundStatus: { type: String, default: null },
     refundedAt: { type: Date, default: null },
+    // PAISE, from refund.entity.amount. Null on refunds recorded before this
+    // field existed; utils/refunds.js treats those as a full refund.
+    refundAmount: { type: Number, default: null },
 
     // Every distinct event.event that has hit this order, deduped. Exists to
     // make duplicate and out-of-order webhook delivery debuggable — Razorpay

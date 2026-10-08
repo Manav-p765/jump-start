@@ -663,12 +663,20 @@ export default function StudentReport() {
             </p>
           </div>
 
-          <div className="grid gap-8 px-6 py-7 sm:px-8 sm:py-9 md:grid-cols-[1.6fr_1fr]">
+          {/* minmax(0,1fr) below md + break-words on the name: a long
+              single-word surname at text-4xl (x1.12 report zoom) widened
+              the implicit auto column past a 375px screen. md+ and print
+              use md:grid-cols-[1.6fr_1fr] exactly as before. */}
+          <div className="grid grid-cols-[minmax(0,1fr)] gap-8 px-6 py-7 sm:px-8 sm:py-9 md:grid-cols-[1.6fr_1fr]">
             <div className="md:border-r md:border-[#EEF2F5] md:pr-8">
               <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#0d7a6f]">
                 Career Discovery &amp; Guidance Report{reportYear ? ` · ${reportYear}` : ""}
               </p>
-              <h1 className="mt-2 text-4xl font-bold leading-tight text-[#0F1729] sm:text-5xl">
+              {/* Smaller below md so a long surname wraps between words in
+                  the single-column cover (phones and 640-767px tablets);
+                  break-words stays as the fallback for anything longer.
+                  md+ (desktop and print) keeps text-5xl exactly as before. */}
+              <h1 className="mt-2 break-words text-xl font-bold leading-tight text-[#0F1729] sm:text-4xl md:text-5xl">
                 {studentName}
               </h1>
               {code || archetypeLine ? (
@@ -1145,9 +1153,13 @@ export default function StudentReport() {
                     ? "Manual review pending"
                     : s.careerImplication || s.interpretation || "";
                   return (
+                    // Below sm the guidance wraps onto its own line: beside a
+                    // w-40 name and w-14 score it had ~56px on a 375px phone
+                    // and long words pushed the page sideways. From sm up
+                    // (and in print) the CSS is exactly as before.
                     <div
                       key={key}
-                      className="flex items-start gap-4 py-3 first:pt-0"
+                      className="flex flex-wrap items-start gap-x-4 gap-y-1 py-3 first:pt-0 sm:flex-nowrap sm:gap-4"
                     >
                       <span className="w-40 shrink-0 text-[13px] font-semibold text-[#0F1729]">
                         {name}
@@ -1160,7 +1172,7 @@ export default function StudentReport() {
                         {scoreLabel}
                       </span>
                       <span
-                        className={`flex-1 text-[12px] leading-5 ${
+                        className={`w-full text-[12px] leading-5 sm:w-auto sm:flex-1 ${
                           pending ? "text-[#B4BEC9]" : "text-[#65758B]"
                         }`}
                       >
