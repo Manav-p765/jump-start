@@ -22,6 +22,7 @@ import PDFDocument from "pdfkit";
 
 import { company } from "../config/company.js";
 import { GST_RATE, splitInclusiveGST } from "./money.js";
+import { isPartialRefund, refundedPaise } from "./refunds.js";
 
 const ASSETS_DIR = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -40,6 +41,7 @@ const C = {
   brand: "#188B8B",
   tint: "#F0F9F9",
   discount: "#047857",
+  refund: "#B42318",
 };
 
 // A4 in points.
@@ -205,8 +207,16 @@ export const renderReceiptPdf = (payment, { fallbackCustomer = {} } = {}) =>
       const logoH = (LOGO_W * logo.height) / logo.width;
       doc.image(logo, X0, headerTop, { width: LOGO_W, height: logoH });
 
-      // "Payment Receipt" + "PAID" (~36pt tall) centred on the logo.
-      const titleTop = headerTop + logoH / 2 - 18;
+      // "Payment Receipt" + "PAID" (~36pt tall) centred on the logo. A
+      // processed refund replaces PAID with REFUNDED and adds the refund
+      // date underneath (~50pt), still centred.
+      const refunded = refundedPaise(payment);
+      const refundNote = refunded
+        ? isPartialRefund(payment)
+          ? `${formatPaise(refunded)} refunded on ${formatIstDateTime(payment.refundedAt)}`
+          : `Refunded on ${formatIstDateTime(payment.refundedAt)}`
+        : "";
+      const titleTop = headerTop + logoH / 2 - (refunded ? 25 : 18);
       doc
         .font("Bold")
         .fontSize(18)
@@ -219,13 +229,33 @@ export const renderReceiptPdf = (payment, { fallbackCustomer = {} } = {}) =>
       doc
         .font("Bold")
         .fontSize(9)
-        .fillColor(C.discount)
-        .text("PAID", X1 - 220, titleTop + 26, {
-          width: 220,
-          align: "right",
-          characterSpacing: 1,
-          lineBreak: false,
-        });
+        .fillColor(refunded ? C.refund : C.discount)
+        .text(
+          refunded
+            ? isPartialRefund(payment)
+              ? "PARTIALLY REFUNDED"
+              : "REFUNDED"
+            : "PAID",
+          X1 - 220,
+          titleTop + 26,
+          {
+            width: 220,
+            align: "right",
+            characterSpacing: 1,
+            lineBreak: false,
+          }
+        );
+      if (refundNote) {
+        doc
+          .font("Regular")
+          .fontSize(8.5)
+          .fillColor(C.muted)
+          .text(refundNote, X1 - 260, titleTop + 40, {
+            width: 260,
+            align: "right",
+            lineBreak: false,
+          });
+      }
 
       let y = headerTop + logoH + 14;
       rule(doc, y, C.brand, 1.5);

@@ -385,6 +385,22 @@ export default function StudentReport() {
   // ---- Cover / identity -------------------------------------------------
   const student = report.student || {};
   const studentName = String(student.name || "").trim() || "Student";
+  // Cover name size from md up, by the longest single word, so it wraps
+  // between words inside the name column (break-words is only the fallback).
+  // Sizes come from measuring where a 15- and an 18-letter word fit: the
+  // column is narrowest at md (768-1023px, where A4 print also lands) and
+  // widest from xl. Typical names keep md:text-5xl throughout, so their
+  // cover is unchanged on screen and in print.
+  const longestNameWord = Math.max(
+    0,
+    ...studentName.split(/\s+/).map((word) => word.length)
+  );
+  const coverNameMdSize =
+    longestNameWord >= 18
+      ? "md:text-2xl lg:text-4xl"
+      : longestNameWord >= 14
+        ? "md:text-3xl lg:text-4xl xl:text-5xl"
+        : "md:text-5xl";
   const reportDate = formatStudentDate(report.submittedAt || report.approvedAt);
   const reportDateValue = report.submittedAt || report.approvedAt;
   const parsedYear = reportDateValue
@@ -663,12 +679,22 @@ export default function StudentReport() {
             </p>
           </div>
 
-          <div className="grid gap-8 px-6 py-7 sm:px-8 sm:py-9 md:grid-cols-[1.6fr_1fr]">
+          {/* minmax(0, …) tracks: a plain 1.6fr track cannot shrink below
+              its longest word, so a long single-word surname widened the
+              name column and pushed "Assessment Scores" off the card (print
+              page 1, and on screen from md up). The 1.6 : 1 split is
+              unchanged whenever the name fits, which is every normal name. */}
+          <div className="grid grid-cols-[minmax(0,1fr)] gap-8 px-6 py-7 sm:px-8 sm:py-9 md:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
             <div className="md:border-r md:border-[#EEF2F5] md:pr-8">
               <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#0d7a6f]">
                 Career Discovery &amp; Guidance Report{reportYear ? ` · ${reportYear}` : ""}
               </p>
-              <h1 className="mt-2 text-4xl font-bold leading-tight text-[#0F1729] sm:text-5xl">
+              {/* Smaller below md so a long surname wraps between words in
+                  the single-column cover (phones and 640-767px tablets).
+                  From md up the size steps down only for a name with a
+                  very long single word, so it wraps between words inside
+                  the narrower column; break-words stays as the fallback. */}
+              <h1 className={`mt-2 break-words text-xl font-bold leading-tight text-[#0F1729] sm:text-4xl ${coverNameMdSize}`}>
                 {studentName}
               </h1>
               {code || archetypeLine ? (
@@ -1145,9 +1171,13 @@ export default function StudentReport() {
                     ? "Manual review pending"
                     : s.careerImplication || s.interpretation || "";
                   return (
+                    // Below sm the guidance wraps onto its own line: beside a
+                    // w-40 name and w-14 score it had ~56px on a 375px phone
+                    // and long words pushed the page sideways. From sm up
+                    // (and in print) the CSS is exactly as before.
                     <div
                       key={key}
-                      className="flex items-start gap-4 py-3 first:pt-0"
+                      className="flex flex-wrap items-start gap-x-4 gap-y-1 py-3 first:pt-0 sm:flex-nowrap sm:gap-4"
                     >
                       <span className="w-40 shrink-0 text-[13px] font-semibold text-[#0F1729]">
                         {name}
@@ -1160,7 +1190,7 @@ export default function StudentReport() {
                         {scoreLabel}
                       </span>
                       <span
-                        className={`flex-1 text-[12px] leading-5 ${
+                        className={`w-full text-[12px] leading-5 sm:w-auto sm:flex-1 ${
                           pending ? "text-[#B4BEC9]" : "text-[#65758B]"
                         }`}
                       >

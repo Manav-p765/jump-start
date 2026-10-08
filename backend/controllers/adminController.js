@@ -3,6 +3,7 @@ import AssessmentConfig from "../models/AssessmentConfig.js";
 import Coupon, { FULL_DISCOUNT_MSG } from "../models/Coupon.js";
 import Payment from "../models/Payment.js";
 import WebVital, { METRIC_NAMES } from "../models/WebVital.js";
+import { adminPaymentStatus, refundedPaise } from "../utils/refunds.js";
 import {
   getResultPublicationState,
   RESULT_PUBLICATION_STATUS,
@@ -75,11 +76,12 @@ const getConfigLookup = (cfg) => {
   return map;
 };
 
-// `paymentIdByOrderId` (optional) maps razorpayOrderId -> Payment._id for
-// captured ledger rows. Only the admin Payments table passes it, to put the
-// real Payment id on each row for the receipt download; purchases with no
-// ledger row (free activations, legacy records) get paymentId null.
-const getUserPurchaseEntries = (user, packageMap, paymentIdByOrderId = new Map()) => {
+// `ledgerByOrderId` (optional) maps razorpayOrderId -> the captured Payment
+// ledger row. Only the admin Payments table passes it, to put the real
+// Payment id (the receipt download key) and the refund state on each row;
+// purchases with no ledger row (free activations, legacy records) get
+// paymentId null and no ledger status.
+const getUserPurchaseEntries = (user, packageMap, ledgerByOrderId = new Map()) => {
   const explicitHistory = Array.isArray(user?.purchaseHistory)
     ? user.purchaseHistory.filter((item) => item?.packageId)
     : [];
@@ -105,6 +107,12 @@ const getUserPurchaseEntries = (user, packageMap, paymentIdByOrderId = new Map()
       const couponCode = purchase.couponCode || null;
       const purchasedAt =
         purchase.purchasedAt || user.updatedAt || user.createdAt || null;
+      const ledger =
+        (purchase.razorpayOrderId &&
+          ledgerByOrderId.get(purchase.razorpayOrderId)) ||
+        null;
+      // Ledger amounts are paise; this table works in rupees.
+      const refundedAmount = ledger ? refundedPaise(ledger) / 100 : 0;
 
       return {
         // Internal unique key (contains the user's DB id). Used for
@@ -130,10 +138,12 @@ const getUserPurchaseEntries = (user, packageMap, paymentIdByOrderId = new Map()
         discountAmountLabel: fmtCurrency(discountAmount),
         method: purchase.paymentMethod || "Online",
         date: purchasedAt,
-        paymentId:
-          (purchase.razorpayOrderId &&
-            paymentIdByOrderId.get(purchase.razorpayOrderId)) ||
-          null,
+        paymentId: ledger ? String(ledger._id) : null,
+        // Paid / Refunded / Refund processing / Refund failed, or null when
+        // there is no ledger row (shown as "Completed").
+        ledgerStatus: ledger ? adminPaymentStatus(ledger) : null,
+        refundedAmount,
+        refundedAt: refundedAmount > 0 ? ledger.refundedAt || null : null,
         fallback: false,
       };
     });
@@ -156,20 +166,40 @@ const getUserPurchaseEntries = (user, packageMap, paymentIdByOrderId = new Map()
       method: idx % 2 === 0 ? "UPI" : "Card",
       date: user.updatedAt || user.createdAt || null,
       paymentId: null,
+      ledgerStatus: null,
+      refundedAmount: 0,
+      refundedAt: null,
       fallback: true,
     };
   });
 };
 
-const buildPayments = (users, packageMap, paymentIdByOrderId) => {
+// Captured Payment ledger rows keyed by razorpayOrderId. Passed to
+// buildPayments so every row carries its refund state (utils/refunds.js),
+// which is what makes each admin revenue figure net of refunds. A refunded
+// payment stays status "paid" on the ledger.
+const loadLedgerByOrderId = async () => {
+  const ledger = await Payment.find({ status: "paid" })
+    .select("_id razorpayOrderId amount refundStatus refundAmount refundedAt")
+    .lean();
+  return new Map(ledger.map((p) => [p.razorpayOrderId, p]));
+};
+
+// Rupees kept from one purchase row: what was paid less any processed
+// refund. The single definition of "revenue" for the admin pages.
+const netRevenue = (p) => Number(p.amount || 0) - Number(p.refundedAmount || 0);
+
+const buildPayments = (users, packageMap, ledgerByOrderId) => {
   const rows = [];
   for (const u of users) {
-    getUserPurchaseEntries(u, packageMap, paymentIdByOrderId).forEach((purchase) => {
-      rows.push({
-        ...purchase,
-        status: "Completed",
-      });
-    });
+    getUserPurchaseEntries(u, packageMap, ledgerByOrderId).forEach(
+      ({ ledgerStatus, ...purchase }) => {
+        rows.push({
+          ...purchase,
+          status: ledgerStatus || "Completed",
+        });
+      }
+    );
   }
   return rows.sort((a, b) => toTimestamp(b.date) - toTimestamp(a.date));
 };
@@ -678,11 +708,16 @@ const buildAdminNotifications = (users, cfg, limit = 12) => {
 // GET /api/v1/admin/dashboard
 export const getAdminDashboard = async (req, res) => {
   try {
-    const [users, cfg] = await Promise.all([User.find({ role: { $ne: "admin" } }).lean(), AssessmentConfig.getOrCreateDefault()]);
+    const [users, cfg, ledgerByOrderId] = await Promise.all([
+      User.find({ role: { $ne: "admin" } }).lean(),
+      AssessmentConfig.getOrCreateDefault(),
+      loadLedgerByOrderId(),
+    ]);
     const packageMap = getConfigLookup(cfg);
-    const payments = buildPayments(users, packageMap);
+    const payments = buildPayments(users, packageMap, ledgerByOrderId);
     const completedTests = users.reduce((sum, u) => sum + Number(u.testsCompleted || 0), 0);
-    const revenue = payments.reduce((sum, p) => sum + Number(p.amount || 0), 0);
+    // Net of processed refunds, same as the Payments page.
+    const revenue = payments.reduce((sum, p) => sum + netRevenue(p), 0);
 
     const now = new Date();
     const growthData = [];
@@ -692,9 +727,11 @@ export const getAdminDashboard = async (req, res) => {
       const key = monthKey(dt);
       const label = dt.toLocaleString("en-IN", { month: "short" });
       const registered = users.filter((u) => monthKey(u.createdAt || now) === key).length;
+      // By payment date, net of refunds — the current month equals the
+      // Payments page "This month" card.
       const monthRevenue = payments
         .filter((p) => monthKey(p.date || now) === key)
-        .reduce((sum, p) => sum + Number(p.amount || 0), 0);
+        .reduce((sum, p) => sum + netRevenue(p), 0);
       growthData.push({ name: label, value: registered });
       revenueData.push({ name: label, value: monthRevenue });
     }
@@ -879,27 +916,34 @@ export const deleteAdminUser = async (req, res) => {
 // GET /api/v1/admin/payments
 export const getAdminPayments = async (req, res) => {
   try {
-    const [users, cfg, ledger] = await Promise.all([
+    const [users, cfg, ledgerByOrderId] = await Promise.all([
       User.find({ role: { $ne: "admin" } })
         .select(
           "name email purchasedPackages purchaseHistory updatedAt createdAt"
         )
         .lean(),
       AssessmentConfig.getOrCreateDefault(),
-      // Captured ledger rows, to attach the real Payment id (the receipt
-      // endpoint's key) to each purchaseHistory row via razorpayOrderId.
-      Payment.find({ status: "paid" }).select("_id razorpayOrderId").lean(),
+      // Matched to each purchaseHistory row via razorpayOrderId: the real
+      // Payment id (the receipt endpoint's key) and the refund state.
+      loadLedgerByOrderId(),
     ]);
     const packageMap = getConfigLookup(cfg);
-    const paymentIdByOrderId = new Map(
-      ledger.map((p) => [p.razorpayOrderId, String(p._id)])
+    const payments = buildPayments(users, packageMap, ledgerByOrderId);
+
+    // Net of processed refunds. "This month" is by payment date: payments
+    // made this month, less whatever of those has been refunded.
+    const sumNet = (rows) => rows.reduce((sum, p) => sum + netRevenue(p), 0);
+    const refundedAmount = payments.reduce(
+      (sum, p) => sum + Number(p.refundedAmount || 0),
+      0
     );
-    const payments = buildPayments(users, packageMap, paymentIdByOrderId);
-    const totalRevenue = payments.reduce((sum, p) => sum + Number(p.amount || 0), 0);
+    const totalRevenue = sumNet(payments);
     const startOfMonth = new Date();
     startOfMonth.setDate(1);
     startOfMonth.setHours(0, 0, 0, 0);
-    const thisMonth = payments.filter((p) => new Date(p.date) >= startOfMonth).reduce((sum, p) => sum + Number(p.amount || 0), 0);
+    const thisMonth = sumNet(
+      payments.filter((p) => new Date(p.date) >= startOfMonth)
+    );
 
     return res.status(200).json({
       success: true,
@@ -911,8 +955,8 @@ export const getAdminPayments = async (req, res) => {
           thisMonthLabel: fmtCurrency(thisMonth),
           pendingAmount: 0,
           pendingAmountLabel: fmtCurrency(0),
-          refundedAmount: 0,
-          refundedAmountLabel: fmtCurrency(0),
+          refundedAmount,
+          refundedAmountLabel: fmtCurrency(refundedAmount),
         },
         // `key` and `userId` carry the user's DB id and are dropped here;
         // rowKey is an opaque per-response index for React.
@@ -920,6 +964,8 @@ export const getAdminPayments = async (req, res) => {
           ...p,
           rowKey: `row-${idx}`,
           dateLabel: fmtDate(p.date),
+          refundedAmountLabel: fmtCurrency(p.refundedAmount || 0),
+          refundedAtLabel: p.refundedAt ? fmtDate(p.refundedAt) : "",
         })),
       },
     });
@@ -1577,9 +1623,13 @@ export const finalizeManualReview = async (req, res) => {
 // GET /api/v1/admin/analytics
 export const getAdminAnalytics = async (req, res) => {
   try {
-    const [users, cfg] = await Promise.all([User.find({ role: { $ne: "admin" } }).lean(), AssessmentConfig.getOrCreateDefault()]);
+    const [users, cfg, ledgerByOrderId] = await Promise.all([
+      User.find({ role: { $ne: "admin" } }).lean(),
+      AssessmentConfig.getOrCreateDefault(),
+      loadLedgerByOrderId(),
+    ]);
     const packageMap = getConfigLookup(cfg);
-    const payments = buildPayments(users, packageMap);
+    const payments = buildPayments(users, packageMap, ledgerByOrderId);
 
     const registered = users.length;
     const started = users.filter((u) => Object.keys(u.testProgress?.answers || {}).length > 0).length;
@@ -1592,9 +1642,10 @@ export const getAdminAnalytics = async (req, res) => {
       const done = buyers.filter((u) => Number(u.testsCompleted || 0) > 0).length;
       return { name: p.title, started: buyers.length, completed: done };
     });
-    const totalRevenue = payments.reduce((sum, p) => sum + Number(p.amount || 0), 0);
+    // Shares of revenue net of refunds, same definition as the Payments page.
+    const totalRevenue = payments.reduce((sum, p) => sum + netRevenue(p), 0);
     const revenueByPackage = (cfg.packages || []).map((p) => {
-      const amount = payments.filter((pm) => pm.package === p.title).reduce((s, pm) => s + Number(pm.amount || 0), 0);
+      const amount = payments.filter((pm) => pm.package === p.title).reduce((s, pm) => s + netRevenue(pm), 0);
       const value = totalRevenue > 0 ? Math.round((amount / totalRevenue) * 100) : 0;
       return { name: p.title, value };
     });

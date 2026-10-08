@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import api from "../api/api";
 import { AuthContext } from "../context/AuthContext";
+import MyPayments from "../components/profile/MyPayments";
 
 const formatDateOfBirth = (value) => {
   if (!value) return "-";
@@ -346,6 +347,8 @@ export default function Profile() {
             )}
           </div>
         </div>
+
+        <MyPayments />
       </div>
     </div>
   );

@@ -17,6 +17,7 @@ import {
   updateStudentProfile,
   validateCoupon,
 } from "../controllers/userController.js";
+import { getMyPayments } from "../controllers/paymentController.js";
 
 const router = express.Router();
 
@@ -27,6 +28,7 @@ router.get("/profile/student", protect, getStudentProfile);
 router.put("/profile/student", protect, updateStudentProfile);
 router.get("/package/current", protect, getCurrentPackage);
 router.post("/package/purchase", protect, purchasePackage);
+router.get("/payments", protect, getMyPayments);
 router.patch("/package/select", protect, selectPackage);
 router.get("/results", protect, getResults);
 router.get("/results/:reportId", protect, getResultDetail);

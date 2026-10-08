@@ -410,7 +410,9 @@ export default function Dashboard() {
 
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
-            <h1 className="text-4xl font-bold text-[#0F1729]">
+            {/* break-words: a long single-word surname at text-4xl is wider
+                than a phone screen and pushed the whole page sideways. */}
+            <h1 className="break-words text-4xl font-bold text-[#0F1729]">
               {t("dashboardExtra.welcomeName", { name: displayName })}
             </h1>
             <p className="mt-2 text-base text-[#65758B]">
@@ -580,7 +582,9 @@ export default function Dashboard() {
           </section>
         ) : null}
 
-        <div className="mt-8 grid gap-6 xl:grid-cols-[minmax(0,1.8fr)_minmax(280px,0.9fr)]">
+        {/* minmax(0,1fr) below xl: an implicit auto column grows to its
+            widest unbreakable content and overflowed 375px screens. */}
+        <div className="mt-8 grid grid-cols-[minmax(0,1fr)] gap-6 xl:grid-cols-[minmax(0,1.8fr)_minmax(280px,0.9fr)]">
           <section className="surface-card rounded-[30px] p-7">
             <div className="flex items-start justify-between gap-4">
               <div>
