@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ArrowRight, CheckCircle2, Clock3, FileText, PlayCircle } from "lucide-react";
 import api from "../api/api";
+import { isAccessRevokedError } from "../utils/accessRevoked";
 
 const getAnsweredForSection = (sectionId, answers = {}) =>
   Object.keys(answers).filter((key) => key.startsWith(`${sectionId}-`)).length;
@@ -69,7 +70,11 @@ export default function PretestSections() {
         );
       })
       .catch((err) => {
-        setError(err?.response?.data?.msg || t("pretestSections.loadFailed"));
+        setError(
+          isAccessRevokedError(err)
+            ? t("accessRevoked.test")
+            : err?.response?.data?.msg || t("pretestSections.loadFailed")
+        );
       })
       .finally(() => setLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -109,7 +114,11 @@ export default function PretestSections() {
         })
       )
       .catch((err) =>
-        setError(err?.response?.data?.msg || t("pretestSections.submitFailed"))
+        setError(
+          isAccessRevokedError(err)
+            ? t("accessRevoked.test")
+            : err?.response?.data?.msg || t("pretestSections.submitFailed")
+        )
       )
       .finally(() => setSubmitting(false));
   };

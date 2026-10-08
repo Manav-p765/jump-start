@@ -4,6 +4,12 @@ import User, {
 import AssessmentConfig from "../models/AssessmentConfig.js";
 import Coupon, { FULL_DISCOUNT_MSG } from "../models/Coupon.js";
 import { computeAssessmentResult } from "../utils/scoring/index.js";
+import {
+  ACCESS_REVOKED_REFUND,
+  ACCESS_REVOKED_REFUND_MSG,
+  getRevokedPackageIds,
+  isPackageRevoked,
+} from "../services/entitlementService.js";
 import { DEMO_PACKAGE_ID } from "../utils/scoring/configs/career500qDemo.config.js";
 import {
   getResultPublicationState,
@@ -32,6 +38,55 @@ const hasPackageEntitlement = (user, packageId) => {
   return Array.isArray(user?.purchasedPackages)
     ? user.purchasedPackages.includes(packageId)
     : false;
+};
+
+// The 403 for a failed hasPackageEntitlement. A package lost to a full
+// refund gets ACCESS_REVOKED_REFUND, which the test pages turn into their
+// own message; anything else keeps the plain "purchase first" reply. Loads
+// purchaseHistory itself, only on this failure path, so the hot autosave
+// route does not have to select it.
+const sendEntitlementDenied = async (res, userId, packageId) => {
+  const owner = await User.findById(userId)
+    .select("purchasedPackages purchaseHistory.packageId purchaseHistory.status")
+    .lean();
+  if (isPackageRevoked(owner, packageId)) {
+    return res.status(403).json({
+      success: false,
+      error: ACCESS_REVOKED_REFUND,
+      msg: ACCESS_REVOKED_REFUND_MSG,
+    });
+  }
+  return res.status(403).json({
+    success: false,
+    msg: "Purchase this package before continuing.",
+  });
+};
+
+// Student-facing copy of `user` without the reports of packages lost to a
+// full refund. The stored reports are untouched (admins still see them) and
+// come back by themselves if the package is bought again, since
+// getRevokedPackageIds stops listing it.
+//
+// When nothing is left, the legacy single-report fields are blanked too:
+// getStoredAssessmentReports falls back to them on an empty list, and they
+// still describe the hidden report.
+const hideRevokedReports = (user) => {
+  const revoked = getRevokedPackageIds(user);
+  if (!user || !revoked.size) return user;
+  const reports = Array.isArray(user.assessmentReports) ? user.assessmentReports : [];
+  const kept = reports.filter(
+    (report) => !revoked.has(String(report?.packageId || ""))
+  );
+  const legacyOnRevoked =
+    !reports.length && revoked.has(String(user.selectedPackageId || ""));
+  if (kept.length === reports.length && !legacyOnRevoked) return user;
+  return {
+    ...user,
+    assessmentReports: kept,
+    ...(kept.length === 0
+      ? { resultProfile: null, resultPublication: null, topCareers: [] }
+      : {}),
+  };
 };
 
 const STUDENT_PROFILE_GENDER_VALUES = [
@@ -190,7 +245,10 @@ const getOwnedPackageIds = (user, packageLookup) => {
     ownedIds.add(String(user.selectedPackageId));
   }
 
-  return [...ownedIds].filter(Boolean);
+  // A package lost to a full refund is not owned, however it got in above
+  // (a stored report, or the selectedPackageId fallback).
+  const revoked = getRevokedPackageIds(user);
+  return [...ownedIds].filter((id) => id && !revoked.has(id));
 };
 
 const getOwnedPackages = (cfg, user) => {
@@ -706,6 +764,13 @@ export const selectPackage = async (req, res) => {
     // The demo package is free for every logged-in user and bypasses the
     // purchase gate; all other packages still require purchase first.
     if (!alreadyPurchased && !isDemo) {
+      if (isPackageRevoked(user, pkg.id)) {
+        return res.status(403).json({
+          success: false,
+          error: ACCESS_REVOKED_REFUND,
+          msg: ACCESS_REVOKED_REFUND_MSG,
+        });
+      }
       return res.status(403).json({ success: false, msg: "Purchase this package before starting it" });
     }
 
@@ -917,6 +982,15 @@ export const getCurrentPackage = async (req, res) => {
   try {
     const [cfg, user] = await Promise.all([AssessmentConfig.getOrCreateDefault(), User.findById(req.user.id).lean()]);
     if (!user) return res.status(404).json({ success: false, msg: "User not found" });
+    // Selected package lost to a full refund: say so, rather than quietly
+    // falling back to another owned package mid-test.
+    if (isPackageRevoked(user, user.selectedPackageId)) {
+      return res.status(403).json({
+        success: false,
+        error: ACCESS_REVOKED_REFUND,
+        msg: ACCESS_REVOKED_REFUND_MSG,
+      });
+    }
     const pkg = getSelectedPackage(cfg, user);
     if (!pkg) return res.status(404).json({ success: false, msg: "No purchased package found" });
     const sections = getEnabledSections(pkg);
@@ -1150,13 +1224,15 @@ export const updateProfile = async (req, res) => {
 // GET /api/v1/user/init
 export const init = async (req, res) => {
   try {
-    const [user, cfg] = await Promise.all([
+    const [storedUser, cfg] = await Promise.all([
       User.findById(req.user.id)
-        .select("name email testsCompleted testsInProgress reportsReady counsellingSessions topCareers resultProfile resultPublication assessmentReports selectedPackageId purchasedPackages testProgress studentProfile")
+        .select("name email testsCompleted testsInProgress reportsReady counsellingSessions topCareers resultProfile resultPublication assessmentReports selectedPackageId purchasedPackages purchaseHistory.packageId purchaseHistory.status testProgress studentProfile")
         .lean(),
       AssessmentConfig.getOrCreateDefault(),
     ]);
-    if (!user) return res.status(404).json({ success: false, msg: "User not found" });
+    if (!storedUser) return res.status(404).json({ success: false, msg: "User not found" });
+    const user = hideRevokedReports(storedUser);
+    const selectedRevoked = isPackageRevoked(user, user.selectedPackageId);
     const packageLookup = getPackageLookup(cfg);
     const pkg = getSelectedPackage(cfg, user);
     const studentProfileSerialized = serializeStudentProfile(user.studentProfile);
@@ -1273,7 +1349,9 @@ export const init = async (req, res) => {
         test_in_progress: (() => {
           const progress = user.testProgress || {};
           const activePackageId = String(user.selectedPackageId || "");
-          if (!activePackageId || !pkg) return null;
+          // testProgress belongs to the selected package; once that is
+          // lost to a refund there is nothing to continue.
+          if (!activePackageId || !pkg || selectedRevoked) return null;
           const sections = getEnabledSections(pkg);
           if (!sections.length) return null;
           const completedSet = new Set(
@@ -1326,15 +1404,16 @@ export const init = async (req, res) => {
 // GET /api/v1/user/results
 export const getResults = async (req, res) => {
   try {
-    const [user, cfg] = await Promise.all([
+    const [storedUser, cfg] = await Promise.all([
       User.findById(req.user.id)
         .select(
-          "name email selectedPackageId purchasedPackages testProgress testsInProgress testsCompleted resultProfile resultPublication assessmentReports"
+          "name email selectedPackageId purchasedPackages purchaseHistory.packageId purchaseHistory.status testProgress testsInProgress testsCompleted resultProfile resultPublication assessmentReports"
         )
         .lean(),
       AssessmentConfig.getOrCreateDefault(),
     ]);
-    if (!user) return res.status(404).json({ success: false, msg: "User not found" });
+    if (!storedUser) return res.status(404).json({ success: false, msg: "User not found" });
+    const user = hideRevokedReports(storedUser);
     const packageLookup = getPackageLookup(cfg);
     const ownedPackages = getOwnedPackages(cfg, user);
     const storedReports = getStoredAssessmentReports(user, packageLookup);
@@ -1411,7 +1490,7 @@ export const getResultDetail = async (req, res) => {
     const [user, cfg] = await Promise.all([
       User.findById(req.user.id)
         .select(
-          "_id name email jumpstartId mobile city studentProfile selectedPackageId resultProfile resultPublication assessmentReports testsCompleted updatedAt createdAt"
+          "_id name email jumpstartId mobile city studentProfile selectedPackageId purchasedPackages purchaseHistory.packageId purchaseHistory.status resultProfile resultPublication assessmentReports testsCompleted updatedAt createdAt"
         )
         .lean(),
       AssessmentConfig.getOrCreateDefault(),
@@ -1426,6 +1505,16 @@ export const getResultDetail = async (req, res) => {
 
     if (!report) {
       return res.status(404).json({ success: false, msg: "Result report not found" });
+    }
+
+    // Hidden, not deleted: the report is still stored and admins can open
+    // it. It comes back if the student buys the package again.
+    if (isPackageRevoked(user, report.packageId)) {
+      return res.status(403).json({
+        success: false,
+        error: ACCESS_REVOKED_REFUND,
+        msg: "This report is no longer available because its payment was refunded.",
+      });
     }
 
     const hasAccess =
@@ -1524,10 +1613,7 @@ export const getTestProgress = async (req, res) => {
     // package the student picked; it does not prove they paid for it, so a
     // checkout abandoned after selection must not reach test data.
     if (!hasPackageEntitlement(user, user.selectedPackageId)) {
-      return res.status(403).json({
-        success: false,
-        msg: "Purchase this package before continuing.",
-      });
+      return sendEntitlementDenied(res, req.user.id, user.selectedPackageId);
     }
     const p = user.testProgress || {};
     return res.status(200).json({
@@ -1566,10 +1652,7 @@ export const patchTestProgress = async (req, res) => {
     // package the student picked; it does not prove they paid for it, so a
     // checkout abandoned after selection must not reach test data.
     if (!hasPackageEntitlement(user, user.selectedPackageId)) {
-      return res.status(403).json({
-        success: false,
-        msg: "Purchase this package before continuing.",
-      });
+      return sendEntitlementDenied(res, req.user.id, user.selectedPackageId);
     }
 
     if (sectionId !== undefined) user.testProgress.sectionId = sectionId;
@@ -1655,10 +1738,7 @@ export const postTestSubmit = async (req, res) => {
     // package the student picked; it does not prove they paid for it, so a
     // checkout abandoned after selection must not reach test data.
     if (!hasPackageEntitlement(user, user.selectedPackageId)) {
-      return res.status(403).json({
-        success: false,
-        msg: "Purchase this package before continuing.",
-      });
+      return sendEntitlementDenied(res, req.user.id, user.selectedPackageId);
     }
     const pkg = getSelectedPackage(cfg, user);
     if (!pkg) return res.status(400).json({ success: false, msg: "No purchased package selected" });

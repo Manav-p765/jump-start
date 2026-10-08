@@ -596,7 +596,12 @@
     "statusRefunded": "Refunded",
     "statusRefundProcessing": "Refund processing",
     "refundedOn": "Refunded on {{date}}",
-    "partialRefundOn": "{{amount}} refunded on {{date}}"
+    "partialRefundOn": "{{amount}} refunded on {{date}}",
+    "refundContact": "For refund requests, contact <email>{{email}}</email> or call <phone>{{phone}}</phone>."
+  },
+  "accessRevoked": {
+    "test": "Access to this test was removed because its payment was refunded.",
+    "report": "This report is no longer available because its payment was refunded."
   },
   "adminPages": {
     "dashboardTitle": "Admin Dashboard",
@@ -732,6 +737,7 @@
     "statusPending": "Pending",
     "statusPaid": "Paid",
     "statusRefunded": "Refunded",
+    "statusRefundedAccessRemoved": "Refunded – access removed",
     "statusRefundProcessing": "Refund processing",
     "statusRefundFailed": "Refund failed",
     "refundedLine": "−{{amount}} refunded {{date}}",

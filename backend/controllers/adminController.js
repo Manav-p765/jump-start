@@ -5,6 +5,11 @@ import Payment from "../models/Payment.js";
 import WebVital, { METRIC_NAMES } from "../models/WebVital.js";
 import { adminPaymentStatus, refundedPaise } from "../utils/refunds.js";
 import {
+  ACCESS_REVOKED_REFUND,
+  getRevokedPackageIds,
+  isPackageRevoked,
+} from "../services/entitlementService.js";
+import {
   getResultPublicationState,
   RESULT_PUBLICATION_STATUS,
 } from "../utils/resultApproval.js";
@@ -76,6 +81,17 @@ const getConfigLookup = (cfg) => {
   return map;
 };
 
+// Payments-table status for a purchase revoked by a full refund. Also the
+// filter value the admin UI sends back, so keep it in step with Payments.jsx.
+const REFUNDED_ACCESS_REMOVED = "Refunded – access removed";
+
+// Pending reports for a package lost to a full refund leave the review
+// queue: nobody should spend time reviewing a refunded test. They stay
+// stored, and return to the queue if the student buys the package again.
+const isHiddenFromReviewQueue = (report, revokedPackageIds) =>
+  report.publication.status === RESULT_PUBLICATION_STATUS.PENDING_APPROVAL &&
+  revokedPackageIds.has(String(report.packageId || ""));
+
 // `ledgerByOrderId` (optional) maps razorpayOrderId -> the captured Payment
 // ledger row. Only the admin Payments table passes it, to put the real
 // Payment id (the receipt download key) and the refund state on each row;
@@ -140,8 +156,14 @@ const getUserPurchaseEntries = (user, packageMap, ledgerByOrderId = new Map()) =
         date: purchasedAt,
         paymentId: ledger ? String(ledger._id) : null,
         // Paid / Refunded / Refund processing / Refund failed, or null when
-        // there is no ledger row (shown as "Completed").
-        ledgerStatus: ledger ? adminPaymentStatus(ledger) : null,
+        // there is no ledger row (shown as "Completed"). A purchase revoked
+        // by a full refund says so explicitly.
+        ledgerStatus:
+          purchase.status === "refunded"
+            ? REFUNDED_ACCESS_REMOVED
+            : ledger
+              ? adminPaymentStatus(ledger)
+              : null,
         refundedAmount,
         refundedAt: refundedAmount > 0 ? ledger.refundedAt || null : null,
         fallback: false,
@@ -342,6 +364,7 @@ const buildAdminReviewPayload = (user, cfg, reportOverride = null) => {
       publication: getResultPublicationState(user),
     };
   const publication = report.publication || getResultPublicationState(user);
+  const accessRevoked = isPackageRevoked(user, report.packageId);
   const profile = report.profile || user.resultProfile || {};
   const pkg = packageMap.get(report.packageId || user.selectedPackageId || "");
   const storedBreakdown =
@@ -554,14 +577,20 @@ const buildAdminReviewPayload = (user, cfg, reportOverride = null) => {
       personalityType: profile.personalityType || null,
       testResults: Array.isArray(profile.testResults) ? profile.testResults : [],
     },
+    // True when the student lost this package to a full refund (needs
+    // purchaseHistory + purchasedPackages on `user`; false without them).
+    // approveAdminResult refuses these.
+    accessRevoked,
     actions: {
       canApprove:
         publication.status === RESULT_PUBLICATION_STATUS.PENDING_APPROVAL &&
-        !report.hasUnreviewedItems,
+        !report.hasUnreviewedItems &&
+        !accessRevoked,
       canDelete: publication.status !== RESULT_PUBLICATION_STATUS.NOT_SUBMITTED,
       canPublish:
         publication.status === RESULT_PUBLICATION_STATUS.PENDING_APPROVAL &&
-        !report.hasUnreviewedItems,
+        !report.hasUnreviewedItems &&
+        !accessRevoked,
     },
     manualReview: {
       hasUnreviewedItems: Boolean(report.hasUnreviewedItems),
@@ -656,13 +685,15 @@ const buildAdminNotifications = (users, cfg, limit = 12) => {
           })
         )
     ),
-    ...users.flatMap((user) =>
-      getStoredAssessmentReports(user, packageMap)
+    ...users.flatMap((user) => {
+      const revoked = getRevokedPackageIds(user);
+      return getStoredAssessmentReports(user, packageMap)
         .filter(
           (report) =>
             report.publication.status ===
               RESULT_PUBLICATION_STATUS.PENDING_APPROVAL &&
-            report.publication.submittedAt
+            report.publication.submittedAt &&
+            !isHiddenFromReviewQueue(report, revoked)
         )
         .map((report) =>
           createAdminNotification({
@@ -675,8 +706,8 @@ const buildAdminNotifications = (users, cfg, limit = 12) => {
             eventAt: report.publication.submittedAt,
             link: `/admin/testsubmissions/${String(report._id)}`,
           })
-        )
-    ),
+        );
+    }),
     ...users.flatMap((user) =>
       getStoredAssessmentReports(user, packageMap)
         .filter(
@@ -986,7 +1017,7 @@ export const getAdminSubmissions = async (req, res) => {
     const [users, cfg] = await Promise.all([
       User.find(userFilter)
         .select(
-          "name email subscription selectedPackageId resultProfile resultPublication assessmentReports testsCompleted updatedAt createdAt jumpstartId"
+          "name email subscription selectedPackageId purchasedPackages purchaseHistory.packageId purchaseHistory.status resultProfile resultPublication assessmentReports testsCompleted updatedAt createdAt jumpstartId"
         )
         .lean(),
       AssessmentConfig.getOrCreateDefault(),
@@ -994,8 +1025,11 @@ export const getAdminSubmissions = async (req, res) => {
     const packageMap = getConfigLookup(cfg);
 
     const rows = users
-      .flatMap((user) =>
-        getStoredAssessmentReports(user, packageMap).map((report) => {
+      .flatMap((user) => {
+        const revoked = getRevokedPackageIds(user);
+        return getStoredAssessmentReports(user, packageMap)
+          .filter((report) => !isHiddenFromReviewQueue(report, revoked))
+          .map((report) => {
           // Prompt-6 fix: surface the scorer's completion + isDemo
           // fields on each list row so the badges render without a
           // second API call.
@@ -1052,9 +1086,12 @@ export const getAdminSubmissions = async (req, res) => {
             overallScore: Number.isFinite(Number(reportProfile.overallScore))
               ? Number(reportProfile.overallScore)
               : null,
+            // Student lost this package to a full refund; the report is
+            // hidden from them but kept here.
+            accessRevoked: revoked.has(String(report.packageId || "")),
           };
-        })
-      )
+        });
+      })
       .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0))
       .map((row) => ({
         ...row,
@@ -1122,7 +1159,7 @@ export const getAdminSubmissionDetail = async (req, res) => {
     const { user } = await getUserByReportId({
       reportId,
       select:
-        "name email mobile subscription selectedPackageId testsCompleted reportsReady resultProfile resultPublication assessmentReports studentProfile updatedAt createdAt",
+        "name email mobile subscription selectedPackageId purchasedPackages purchaseHistory.packageId purchaseHistory.status testsCompleted reportsReady resultProfile resultPublication assessmentReports studentProfile updatedAt createdAt",
       lean: true,
     });
 
@@ -1156,7 +1193,7 @@ export const approveAdminResult = async (req, res) => {
     const { user, isLegacyFallback } = await getUserByReportId({
       reportId,
       select:
-        "role testsCompleted reportsReady topCareers resultProfile resultPublication assessmentReports",
+        "role testsCompleted reportsReady topCareers resultProfile resultPublication assessmentReports selectedPackageId purchasedPackages purchaseHistory",
       lean: false,
     });
     if (!user) {
@@ -1193,6 +1230,17 @@ export const approveAdminResult = async (req, res) => {
         error: "MANUAL_REVIEW_PENDING",
         message:
           "Complete manual review of flagged questions before approving this report.",
+      });
+    }
+
+    // The package was fully refunded, so the report is out of the review
+    // queue and hidden from the student. Publishing it would be pointless;
+    // it becomes approvable again if they buy the package back.
+    if (isPackageRevoked(user, normalizedReport.packageId)) {
+      return res.status(409).json({
+        success: false,
+        error: ACCESS_REVOKED_REFUND,
+        msg: "This student's payment for the package was refunded, so the report can't be published.",
       });
     }
 

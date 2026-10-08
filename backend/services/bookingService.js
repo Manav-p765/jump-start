@@ -106,6 +106,30 @@ export const confirmBookingPaid = async ({
   return { ok: true, alreadyBooked: false, booking };
 };
 
+/**
+ * Cancel a booking after a FULL refund and free its slot. Idempotent: the
+ * write only matches a booking that is not cancelled yet, so a resent or
+ * late refund event changes nothing. A cancelled booking also stays
+ * cancelled when a late payment.captured arrives (confirmBookingPaid
+ * refuses "cancelled").
+ *
+ * @returns {Promise<boolean>} true when this call cancelled it
+ */
+export const cancelBookingForRefund = async (bookingId, now = new Date()) => {
+  const res = await Booking.updateOne(
+    { _id: bookingId, status: { $ne: "cancelled" } },
+    {
+      $set: {
+        status: "cancelled",
+        activeSlotKey: null,
+        cancelledAt: now,
+        cancelReason: "refunded",
+      },
+    }
+  );
+  return res.modifiedCount === 1;
+};
+
 /** Record a webhook event against a booking, deduped. Mirrors Payment. */
 export const noteBookingEvent = (booking, eventName) => {
   if (!Array.isArray(booking.webhookEventsSeen)) {

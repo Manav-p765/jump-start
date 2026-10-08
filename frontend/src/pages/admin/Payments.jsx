@@ -10,9 +10,14 @@ import { TableSkeleton } from "../../components/admin/Skeletons";
 // Gujarati while the backend filter / API contract stays in English.
 // Paid / Refunded / Refund processing / Refund failed come from the Payment
 // ledger row; "Completed" is a legacy purchase with no ledger row.
+// "Refunded – access removed" is a full refund that took the package away
+// (REFUNDED_ACCESS_REMOVED in adminController.js).
+const REFUNDED_ACCESS_REMOVED = "Refunded – access removed";
+
 const STATUS_LABEL_KEYS = {
   Paid: "payments.statusPaid",
   Refunded: "payments.statusRefunded",
+  [REFUNDED_ACCESS_REMOVED]: "payments.statusRefundedAccessRemoved",
   "Refund processing": "payments.statusRefundProcessing",
   "Refund failed": "payments.statusRefundFailed",
   Completed: "payments.statusCompleted",
@@ -22,6 +27,7 @@ const STATUS_STYLES = {
   Paid: "bg-emerald-50 text-emerald-700 border-emerald-100",
   Completed: "bg-emerald-50 text-emerald-700 border-emerald-100",
   Refunded: "bg-rose-50 text-rose-700 border-rose-100",
+  [REFUNDED_ACCESS_REMOVED]: "bg-rose-50 text-rose-700 border-rose-100",
   "Refund processing": "bg-amber-50 text-amber-700 border-amber-100",
   "Refund failed": "bg-slate-100 text-slate-600 border-slate-200",
 };
@@ -151,6 +157,7 @@ const Payments = () => {
               <option value="All">{t("payments.filterStatus")}</option>
               <option value="Paid">{t("payments.statusPaid")}</option>
               <option value="Refunded">{t("payments.statusRefunded")}</option>
+              <option value={REFUNDED_ACCESS_REMOVED}>{t("payments.statusRefundedAccessRemoved")}</option>
               <option value="Refund processing">{t("payments.statusRefundProcessing")}</option>
               <option value="Refund failed">{t("payments.statusRefundFailed")}</option>
               <option value="Completed">{t("payments.statusCompleted")}</option>

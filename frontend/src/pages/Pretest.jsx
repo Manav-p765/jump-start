@@ -9,6 +9,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import api from "../api/api";
+import { isAccessRevokedError } from "../utils/accessRevoked";
 
 const TIMING_KEYS = ["pretest.timing1", "pretest.timing2", "pretest.timing3", "pretest.timing4"];
 const TECH_KEYS = ["pretest.tech1", "pretest.tech2", "pretest.tech3", "pretest.tech4"];
@@ -33,7 +34,11 @@ export default function Pretest() {
         setSections(pkgRes?.data?.data?.sections || []);
       })
       .catch((err) => {
-        setError(err?.response?.data?.msg || t("pretest.loadFailed"));
+        setError(
+          isAccessRevokedError(err)
+            ? t("accessRevoked.test")
+            : err?.response?.data?.msg || t("pretest.loadFailed")
+        );
       })
       .finally(() => setLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps

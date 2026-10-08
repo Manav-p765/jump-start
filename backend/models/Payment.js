@@ -123,16 +123,21 @@ const paymentSchema = new mongoose.Schema(
     notes: { type: mongoose.Schema.Types.Mixed, default: {} },
 
     // --- Webhook audit trail ---------------------------------------------
-    // Refunds are RECORDED here only. Entitlement is deliberately not
-    // revoked: that is a policy decision, not a gateway one.
+    // A FULL processed refund revokes the package (see
+    // entitlementService.revokePackageEntitlement); a partial one is
+    // recorded only.
     refundId: { type: String, default: null },
     // Razorpay's refund.entity.status: pending / processed / failed.
     // Interpreted only by utils/refunds.js.
     refundStatus: { type: String, default: null },
     refundedAt: { type: Date, default: null },
-    // PAISE, from refund.entity.amount. Null on refunds recorded before this
-    // field existed; utils/refunds.js treats those as a full refund.
+    // PAISE: running total of processed refunds (utils/refunds.js
+    // addProcessedRefund). Null on refunds recorded before an amount was
+    // stored; utils/refunds.js treats those as a full refund.
     refundAmount: { type: Number, default: null },
+    // Refund ids already added into refundAmount, so a resent event is not
+    // counted twice.
+    processedRefundIds: { type: [String], default: [] },
 
     // Every distinct event.event that has hit this order, deduped. Exists to
     // make duplicate and out-of-order webhook delivery debuggable — Razorpay

@@ -20,7 +20,11 @@ import Coupon, { FULL_DISCOUNT_MSG } from "../models/Coupon.js";
 import Payment from "../models/Payment.js";
 import { getActivePackages } from "./userController.js";
 import { getRazorpayClient, getRazorpayKeyId } from "../config/razorpay.js";
-import { grantPackageEntitlement } from "../services/entitlementService.js";
+import {
+  ACCESS_REVOKED_REFUND,
+  grantPackageEntitlement,
+  revokePackageEntitlement,
+} from "../services/entitlementService.js";
 import {
   hasFinalReceiptNumber,
   stampReceiptFields,
@@ -32,6 +36,8 @@ import {
   splitInclusiveGST,
 } from "../utils/money.js";
 import {
+  addProcessedRefund,
+  isFullRefund,
   normalizeRefundStatus,
   refundedPaise,
   studentRefundStatus,
@@ -39,6 +45,7 @@ import {
 import Booking from "../models/Booking.js";
 import { COUNSELLING_NOTE_TYPE } from "../config/counselling.js";
 import {
+  cancelBookingForRefund,
   confirmBookingPaid,
   noteBookingEvent,
 } from "../services/bookingService.js";
@@ -380,6 +387,15 @@ export const verifyPayment = async (req, res) => {
     }
 
     // --- Grant -------------------------------------------------------------
+    // Never grant on an order that has since been fully refunded.
+    if (isFullRefund(payment)) {
+      return res.status(409).json({
+        success: false,
+        error: ACCESS_REVOKED_REFUND,
+        msg: "This payment was refunded, so the package is not available.",
+      });
+    }
+
     const [cfg, user] = await Promise.all([
       AssessmentConfig.getOrCreateDefault(),
       User.findById(req.user.id),
@@ -675,18 +691,23 @@ async function onPaymentCaptured(event) {
     ? await Coupon.findOne({ code: payment.couponCode })
     : null;
 
-  const result = await grantPackageEntitlement({
-    user,
-    pkg,
-    razorpayOrderId: orderId,
-    razorpayPaymentId: paymentId,
-    originalAmount: Number(payment.originalAmount ?? pkg.amount ?? 0),
-    finalAmount: Number(payment.amount || 0) / 100,
-    appliedCouponCode: payment.couponCode || null,
-    discountAmount: payment.discountAmount ?? null,
-    couponDoc,
-    CouponModel: Coupon,
-  });
+  // A capture delivered after the payment was fully refunded must not
+  // grant. (If the grant did land first, the revoke kept its
+  // purchaseHistory entry, so grantPackageEntitlement is a no-op anyway.)
+  const result = isFullRefund(payment)
+    ? { alreadyGranted: false, skippedRefunded: true }
+    : await grantPackageEntitlement({
+        user,
+        pkg,
+        razorpayOrderId: orderId,
+        razorpayPaymentId: paymentId,
+        originalAmount: Number(payment.originalAmount ?? pkg.amount ?? 0),
+        finalAmount: Number(payment.amount || 0) / 100,
+        appliedCouponCode: payment.couponCode || null,
+        discountAmount: payment.discountAmount ?? null,
+        couponDoc,
+        CouponModel: Coupon,
+      });
 
   // Guard the ledger flip so a replay cannot clobber an existing paid row.
   if (payment.status !== "paid") {
@@ -710,6 +731,7 @@ async function onPaymentCaptured(event) {
     orderId,
     paymentId,
     alreadyGranted: result.alreadyGranted,
+    skippedRefunded: Boolean(result.skippedRefunded),
   });
 }
 
@@ -776,35 +798,57 @@ const nextRefundStatus = (current, incoming) => {
   return incoming;
 };
 
+// Record one refund event on a Payment or Booking row (mutates; caller
+// saves). Only a PROCESSED refund moves the running total: a pending one has
+// not returned money yet, and leaving the total alone means a late
+// refund.created can neither shrink it nor overwrite it.
+//
+// Amounts are PAISE:
+//   payload.refund.entity.amount            this refund alone
+//   payload.payment.entity.amount_refunded  Razorpay's cumulative total for
+//                                           the payment (preferred)
+const applyRefundEvent = (row, event, eventName) => {
+  const entity = event?.payload?.refund?.entity || {};
+  const incomingStatus = entity.status || eventName;
+  row.refundId = entity.id || row.refundId;
+  row.refundStatus = nextRefundStatus(row.refundStatus, incomingStatus);
+  row.refundedAt = new Date();
+  if (normalizeRefundStatus(incomingStatus) === "processed") {
+    addProcessedRefund(row, {
+      refundId: entity.id || null,
+      refundAmount: entity.amount,
+      gatewayTotal: event?.payload?.payment?.entity?.amount_refunded,
+    });
+  }
+};
+
 async function onRefund(event, eventName) {
   const entity = event?.payload?.refund?.entity || {};
   const orderId =
     entity.order_id || event?.payload?.payment?.entity?.order_id || null;
-  const incomingStatus = entity.status || eventName;
 
   if (!orderId) {
     console.warn("[webhook] refund event missing order_id", eventName);
     return;
   }
-  // Counselling booking? Record the refund and stop. The booking is NOT
-  // cancelled and the slot is NOT released — mirroring the package path,
-  // where a refund is audit only and revoking access is a policy decision
-  // that has not been made. Phase 3 gives the admin an explicit cancel.
+  // Counselling booking? A full refund cancels it and frees the slot; a
+  // partial one is recorded only.
   const refundedBooking = await Booking.findOne({ razorpayOrderId: orderId });
   if (refundedBooking) {
     noteBookingEvent(refundedBooking, eventName);
-    refundedBooking.refundId = entity.id || refundedBooking.refundId;
-    refundedBooking.refundStatus = nextRefundStatus(
-      refundedBooking.refundStatus,
-      incomingStatus
-    );
-    refundedBooking.refundedAt = new Date();
+    applyRefundEvent(refundedBooking, event, eventName);
     await refundedBooking.save();
-    console.log("[webhook] counselling refund recorded (slot retained)", {
+
+    const cancelled = isFullRefund(refundedBooking)
+      ? await cancelBookingForRefund(refundedBooking._id)
+      : false;
+    console.log("[webhook] counselling refund recorded", {
       orderId,
       bookingId: String(refundedBooking._id),
       refundId: refundedBooking.refundId,
       refundStatus: refundedBooking.refundStatus,
+      refundAmount: refundedBooking.refundAmount,
+      cancelled,
     });
     return;
   }
@@ -817,22 +861,28 @@ async function onRefund(event, eventName) {
   }
 
   noteEvent(payment, eventName);
-  payment.refundId = entity.id || payment.refundId;
-  payment.refundStatus = nextRefundStatus(payment.refundStatus, incomingStatus);
-  payment.refundedAt = new Date();
-  // refund.entity.amount is PAISE, like Payment.amount.
-  if (Number.isFinite(Number(entity.amount)) && Number(entity.amount) > 0) {
-    payment.refundAmount = Math.round(Number(entity.amount));
-  }
+  applyRefundEvent(payment, event, eventName);
   await payment.save();
 
-  // Audit only. Entitlement is NOT revoked — that is a policy decision and
-  // is out of scope here.
-  console.log("[webhook] refund recorded (entitlement retained)", {
+  // A full refund takes the package away; a partial one leaves it. Runs on
+  // every event for a fully refunded row, not just the first: the revoke is
+  // idempotent, so retries are no-ops and an earlier run that stopped
+  // part-way gets finished.
+  let revoke = null;
+  if (isFullRefund(payment) && payment.userId) {
+    revoke = await revokePackageEntitlement({
+      userId: payment.userId,
+      razorpayOrderId: orderId,
+    });
+  }
+
+  console.log("[webhook] refund recorded", {
     orderId,
     refundId: payment.refundId,
     refundStatus: payment.refundStatus,
     refundAmount: payment.refundAmount,
+    fullRefund: isFullRefund(payment),
+    revoke,
   });
 }
 
