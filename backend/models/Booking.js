@@ -97,11 +97,19 @@ const bookingSchema = new mongoose.Schema(
     durationMinutes: { type: Number, required: true },
 
     // --- Webhook audit trail -------------------------------------------
-    // Mirrors Payment. Refunds are RECORDED only: a refund does not cancel
-    // the booking, because that is a policy decision and is still TBD.
+    // Mirrors Payment. A FULL processed refund cancels the booking and
+    // frees the slot (bookingService.cancelBookingForRefund); a partial
+    // one is recorded only.
     refundId: { type: String, default: null },
     refundStatus: { type: String, default: null },
     refundedAt: { type: Date, default: null },
+    // PAISE, running total of processed refunds. Same rules as Payment.
+    refundAmount: { type: Number, default: null },
+    processedRefundIds: { type: [String], default: [] },
+    // Set when the booking is cancelled. cancelReason "refunded" marks a
+    // cancellation caused by a full refund.
+    cancelledAt: { type: Date, default: null },
+    cancelReason: { type: String, default: null },
     webhookEventsSeen: { type: [String], default: [] },
     failureReason: { type: String, default: null },
 

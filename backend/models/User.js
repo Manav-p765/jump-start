@@ -349,8 +349,13 @@ const purchaseHistorySchema = new mongoose.Schema(
     // for the same payment without double-writing.
     razorpayPaymentId: { type: String, default: null },
     // Only paid purchases are ever pushed onto purchaseHistory; failed
-    // and unpaid orders live in the Payment ledger instead.
-    status: { type: String, enum: ["paid"], default: "paid" },
+    // and unpaid orders live in the Payment ledger instead. A full refund
+    // flips the entry to "refunded" (revokePackageEntitlement) rather than
+    // deleting it: the entry is the receipt trail, and its payment id is
+    // what stops a late webhook from granting the package again.
+    status: { type: String, enum: ["paid", "refunded"], default: "paid" },
+    revokedAt: { type: Date, default: null },
+    revokeReason: { type: String, default: null },
   },
   { _id: false }
 );

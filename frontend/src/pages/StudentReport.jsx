@@ -3,6 +3,7 @@ import { Link, useParams, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ArrowLeft, Download, Sparkles } from "lucide-react";
 import api from "../api/api";
+import { ACCESS_REVOKED_REFUND, isAccessRevokedError } from "../utils/accessRevoked";
 import jumpstartLogo from "../assets/jumpstart-logo.png";
 import { company } from "../config/company";
 import { StudentReportSkeleton } from "../components/Skeletons";
@@ -322,7 +323,13 @@ export default function StudentReport() {
         setPayload(normalizeStudentReportPayload(res?.data?.data || {}));
       })
       .catch((err) => {
-        setError(err?.response?.data?.msg || "Failed to load this report.");
+        // The code itself is stored and translated at render, so the
+        // effect does not depend on `t`.
+        setError(
+          isAccessRevokedError(err)
+            ? ACCESS_REVOKED_REFUND
+            : err?.response?.data?.msg || "Failed to load this report."
+        );
       })
       .finally(() => setLoading(false));
   }, [reportId, adminView]);
@@ -336,7 +343,9 @@ export default function StudentReport() {
           <h1 className="text-3xl font-bold text-[#0F1729]">
             {t("report.unavailableHeading")}
           </h1>
-          <p className="mt-3 text-[#65758B]">{error}</p>
+          <p className="mt-3 text-[#65758B]">
+            {error === ACCESS_REVOKED_REFUND ? t("accessRevoked.report") : error}
+          </p>
           <Link to="/result" className="primary-btn mt-6">
             {t("report.backToResults")}
           </Link>

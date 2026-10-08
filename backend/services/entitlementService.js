@@ -141,4 +141,128 @@ export async function grantPackageEntitlement({
   return { alreadyGranted: false, couponBurned };
 }
 
+// --- Revocation (full refund) ------------------------------------------------
+//
+// The 403 error code every gate returns for a package whose payment was fully
+// refunded. The frontend keys its message off this, not the text.
+export const ACCESS_REVOKED_REFUND = "ACCESS_REVOKED_REFUND";
+
+export const ACCESS_REVOKED_REFUND_MSG =
+  "Access to this test was removed because its payment was refunded.";
+
+// Packages this user had and lost to a full refund: a "refunded"
+// purchaseHistory entry, and the package no longer in purchasedPackages.
+// Buying again puts it back in purchasedPackages, which clears it from this
+// set, so everything hidden on revoke returns without further work.
+//
+// Needs purchaseHistory (packageId, status) and purchasedPackages on `user`;
+// without them it returns an empty set, i.e. nothing is treated as revoked.
+export const getRevokedPackageIds = (user) => {
+  const owned = new Set(
+    Array.isArray(user?.purchasedPackages) ? user.purchasedPackages.map(String) : []
+  );
+  const revoked = new Set();
+  (Array.isArray(user?.purchaseHistory) ? user.purchaseHistory : []).forEach((entry) => {
+    const packageId = String(entry?.packageId || "");
+    if (entry?.status === "refunded" && packageId && !owned.has(packageId)) {
+      revoked.add(packageId);
+    }
+  });
+  return revoked;
+};
+
+export const isPackageRevoked = (user, packageId) =>
+  Boolean(packageId) && getRevokedPackageIds(user).has(String(packageId));
+
+/**
+ * Take a package away after a FULL refund. Safe to run any number of times,
+ * in any order relative to the webhooks that granted it.
+ *
+ *  1. The purchaseHistory entry for this order is marked "refunded", never
+ *     deleted. Its razorpayPaymentId stays, so a late payment.captured or
+ *     /verify still finds it and grantPackageEntitlement stays a no-op.
+ *  2. The package leaves purchasedPackages only if no other paid entry for
+ *     it remains, so refunding an old order cannot take away a package the
+ *     student bought again since.
+ *  3. testsInProgress drops to 0 if the package was the selected one.
+ *     testProgress itself is kept: it is unusable without access, and is
+ *     there again if the student buys the package back.
+ *
+ * Every step is a conditional single-document write, and step 2 runs even
+ * when step 1 finds nothing to do, so a retry finishes a run that stopped
+ * part-way.
+ *
+ * Keyed on razorpayOrderId: one Payment row per order, and every gateway
+ * entry carries it.
+ *
+ * @returns {Promise<{found: boolean, packageId?: string, marked: boolean, removed: boolean}>}
+ */
+export async function revokePackageEntitlement({
+  userId,
+  razorpayOrderId,
+  reason = "full_refund",
+  now = new Date(),
+}) {
+  if (!userId || !razorpayOrderId) {
+    throw new Error("revokePackageEntitlement: userId and razorpayOrderId are required");
+  }
+
+  const mark = await User.updateOne(
+    {
+      _id: userId,
+      purchaseHistory: {
+        $elemMatch: { razorpayOrderId, status: { $ne: "refunded" } },
+      },
+    },
+    {
+      $set: {
+        "purchaseHistory.$[e].status": "refunded",
+        "purchaseHistory.$[e].revokedAt": now,
+        "purchaseHistory.$[e].revokeReason": reason,
+      },
+    },
+    {
+      arrayFilters: [{ "e.razorpayOrderId": razorpayOrderId, "e.status": { $ne: "refunded" } }],
+    }
+  );
+
+  const user = await User.findById(userId)
+    .select("purchaseHistory.razorpayOrderId purchaseHistory.packageId selectedPackageId")
+    .lean();
+  const entry = (user?.purchaseHistory || []).find(
+    (item) => item?.razorpayOrderId === razorpayOrderId
+  );
+  if (!entry?.packageId) {
+    // Refunded before any grant landed. Nothing to take away, and the
+    // callers' isFullRefund checks stop a late grant.
+    return { found: false, marked: false, removed: false };
+  }
+  const packageId = entry.packageId;
+
+  const pull = await User.updateOne(
+    {
+      _id: userId,
+      purchasedPackages: packageId,
+      purchaseHistory: {
+        $not: { $elemMatch: { packageId, status: { $ne: "refunded" } } },
+      },
+    },
+    { $pull: { purchasedPackages: packageId } }
+  );
+
+  if (pull.modifiedCount === 1) {
+    await User.updateOne(
+      { _id: userId, selectedPackageId: packageId },
+      { $set: { testsInProgress: 0 } }
+    );
+  }
+
+  return {
+    found: true,
+    packageId,
+    marked: mark.modifiedCount === 1,
+    removed: pull.modifiedCount === 1,
+  };
+}
+
 export default grantPackageEntitlement;

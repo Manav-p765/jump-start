@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import { AlertCircle, CheckCircle2, Clock3, Pause, Save, X } from "lucide-react";
 import api from "../api/api";
 import { getApiV1Url } from "../config/env";
+import { isAccessRevokedError } from "../utils/accessRevoked";
 import {
   getClericalQuestionOptions,
   isClericalQuestionId,
@@ -454,6 +455,18 @@ export default function Livetest() {
     [sectionId]
   );
 
+  // The package was taken away mid-test (full refund): stop the test and go
+  // to the sections page, whose own load gets the same 403 and shows the
+  // reason. Returns true when it navigated.
+  const leaveIfAccessRevoked = useCallback(
+    (err) => {
+      if (!isAccessRevokedError(err)) return false;
+      navigate("/pretest/sections", { replace: true });
+      return true;
+    },
+    [navigate]
+  );
+
   const persistProgress = useCallback(
     async (nextProgress, override = {}) => {
       setSaveState("saving");
@@ -484,10 +497,11 @@ export default function Livetest() {
     pendingDebouncedSaveRef.current = null;
     if (!pending) return;
     persistProgress(pending).catch((err) => {
+      if (leaveIfAccessRevoked(err)) return;
       console.error("Failed to save answer", err);
       setSaveState("error");
     });
-  }, [persistProgress]);
+  }, [leaveIfAccessRevoked, persistProgress]);
 
   const persistProgressDebounced = useCallback(
     (nextProgress) => {
@@ -588,6 +602,7 @@ export default function Livetest() {
           navigate("/pretest/sections", { replace: true });
         })
         .catch((err) => {
+          if (leaveIfAccessRevoked(err)) return;
           console.error("Failed to complete section", err);
           setQuestionError(
             err?.response?.data?.msg ||
@@ -598,7 +613,7 @@ export default function Livetest() {
           setSaving(false);
         });
     },
-    [navigate, nextSection, orderedSections, progress, saving, section, sectionId]
+    [leaveIfAccessRevoked, navigate, nextSection, orderedSections, progress, saving, section, sectionId]
   );
 
   useEffect(() => {
@@ -634,13 +649,14 @@ export default function Livetest() {
       persistProgress(latestProgressRef.current, {
         timeRemainingSeconds: Number(latestTimeRef.current) || 0,
       }).catch((err) => {
+        if (leaveIfAccessRevoked(err)) return;
         console.error("Autosave failed", err);
         setSaveState("error");
       });
     }, 15000);
 
     return () => window.clearInterval(autosave);
-  }, [loading, persistProgress, section]);
+  }, [leaveIfAccessRevoked, loading, persistProgress, section]);
 
   useEffect(() => {
     if (loading || !section) return undefined;
@@ -750,6 +766,7 @@ export default function Livetest() {
         },
       });
     } catch (err) {
+      if (leaveIfAccessRevoked(err)) return;
       console.error("Failed to pause test", err);
       setSaveState("error");
       setQuestionError(

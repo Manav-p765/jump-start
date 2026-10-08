@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { Download, ReceiptText } from "lucide-react";
 import api from "../../api/api";
+import { company, mailtoHref, telHref } from "../../config/company";
 import downloadReceipt from "../../utils/downloadReceipt";
 import { formatPaise } from "../../utils/money";
 
@@ -126,7 +127,7 @@ export default function MyPayments() {
                   className="flex min-w-0 flex-col rounded-2xl border border-[#E1E7EF] bg-white p-5 shadow-sm"
                 >
                   <div className="flex flex-wrap items-start justify-between gap-2">
-                    <p className="min-w-0 flex-1 break-words text-base font-semibold leading-6 text-[#0F1729]">
+                    <p className="min-w-0 flex-1 wrap-break-word text-base font-semibold leading-6 text-[#0F1729]">
                       {p.packageTitle}
                     </p>
                     <span
@@ -178,6 +179,19 @@ export default function MyPayments() {
           </ul>
         )}
       </div>
+
+      {/* Contact details come from config/company.js, the same source as
+          the footer, so this line cannot drift from it. */}
+      <p className="mt-5 text-sm text-[#65758B]">
+        <Trans
+          i18nKey="myPayments.refundContact"
+          values={{ email: company.email, phone: company.phoneDisplay }}
+          components={{
+            email: <a href={mailtoHref} className="font-medium text-[#188B8B] hover:underline" />,
+            phone: <a href={telHref} className="whitespace-nowrap font-medium text-[#188B8B] hover:underline" />,
+          }}
+        />
+      </p>
     </div>
   );
 }
