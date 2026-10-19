@@ -369,6 +369,11 @@ export const normalizeAssessmentReport = (report = {}, packageLookup) => {
         : {},
     normVersion: report?.normVersion || "",
     scoringVersion: report?.scoringVersion || "",
+    rescoredAt: report?.rescoredAt || null,
+    rescoredFrom:
+      report?.rescoredFrom && typeof report.rescoredFrom === "object"
+        ? report.rescoredFrom
+        : null,
     createdAt: report?.createdAt || state.submittedAt || null,
     updatedAt: report?.updatedAt || state.approvedAt || state.submittedAt || null,
     isLegacyFallback: report?.isLegacyFallback === true,

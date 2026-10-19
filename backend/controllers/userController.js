@@ -1571,7 +1571,7 @@ export const updateResults = async (req, res) => {
     }
 
     const user = await User.findById(req.user.id).select(
-      "resultProfile resultPublication assessmentReports topCareers reportsReady updatedAt createdAt"
+      "jumpstartId resultProfile resultPublication assessmentReports topCareers reportsReady updatedAt createdAt"
     );
     if (!user) return res.status(404).json({ success: false, msg: "User not found" });
     user.resultProfile = {
@@ -1643,7 +1643,9 @@ export const patchTestProgress = async (req, res) => {
     // section), so we fetch the user first instead of using a blind
     // $set. The hot path (typing an answer, ticking a timer) still
     // resolves in a single round-trip.
-    const user = await User.findById(req.user.id).select("testProgress testsInProgress selectedPackageId purchasedPackages");
+    // jumpstartId is selected so the save below never looks like a user
+    // without an ID (the User pre-save hook also guards against that).
+    const user = await User.findById(req.user.id).select("jumpstartId testProgress testsInProgress selectedPackageId purchasedPackages");
     if (!user) {
       return res.status(404).json({ success: false, msg: "User not found" });
     }

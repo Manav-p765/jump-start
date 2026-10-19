@@ -68,6 +68,21 @@ h6 {
   font-family: "Noto Sans Gujarati", "Poppins", "Poppins Fallback", sans-serif;
 }
 
+/* A Gujarati-language report (StudentReport for a Gujarati-package test)
+   keeps the exact typography of the English report: Inter for text and
+   Poppins for headings. Neither face has Gujarati glyphs, so Gujarati
+   characters fall through to Noto Sans Gujarati per glyph while names,
+   numbers and codes render exactly as in the English report. Selectors are
+   more specific than the :lang(gu) rules above, which put Noto first. */
+.report-print-page.report-lang-gu,
+.report-print-page.report-lang-gu * {
+  font-family: "Inter", "Inter Fallback", "Noto Sans Gujarati", sans-serif;
+}
+
+.report-print-page.report-lang-gu :is(h1, h2, h3, h4, h5, h6) {
+  font-family: "Poppins", "Poppins Fallback", "Noto Sans Gujarati", sans-serif;
+}
+
 a,
 button,
 input,
@@ -277,6 +292,14 @@ textarea {
        page width, so no horizontal overflow. */
     padding: calc(14mm / var(--report-scale)) calc(12mm / var(--report-scale))
     !important;
+    /* Repeat that padding on EVERY printed page, not just the first and
+       last. Without it, content that starts a new sheet (a forced break
+       with no offset of its own, like the career-profiles heading, or a
+       block that flows across a page boundary) sat ~1.5mm from the edge,
+       which printers clip. `clone` gives each page fragment its own
+       top/bottom padding; print-only, so the screen layout is untouched. */
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
   }
 
   .surface-card,

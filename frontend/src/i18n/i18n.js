@@ -1,10 +1,8 @@
 // Frontend i18n bootstrap.
 //
-// Current scope: site UI is English-only. The Gujarati locale resources
-// and the SUPPORTED_LANGUAGES list are kept in place so the language
-// toggle can be reinstated without re-instrumenting the pages — but the
-// active language is hard-locked to `en` here, and `setLanguage()` is
-// a no-op. The header toggle has been removed.
+// Site UI languages: English (default) and Gujarati. The header renders an
+// EN / ગુજ toggle that calls setLanguage(); the choice is persisted in
+// localStorage and restored on the next visit.
 //
 // Gujarati assessment content (the 500-question bank) is delivered as
 // a separate test package whose `text` / `options` fields already carry
@@ -16,22 +14,17 @@ import { initReactI18next } from "react-i18next";
 import { company } from "../config/company.js";
 
 import enCommon from "./locales/en/common.json";
-// gu/common.json is NOT imported statically. It is 105 KB of JSON that,
-// with the language hard-locked to `en` below, can never be read at
-// runtime — but a static import still parks all 105 KB in the entry
-// chunk, parsed on every page load before React renders. It is loaded on
-// demand by setLanguage() instead, which keeps the toggle a one-line
-// change to re-enable while costing the default path nothing.
+// gu/common.json is NOT imported statically. It is ~105 KB of JSON; a
+// static import would park it in the entry chunk, parsed on every page
+// load before React renders. setLanguage() loads it on demand instead, so
+// it ships as its own chunk that only Gujarati visitors download.
 
 export const SUPPORTED_LANGUAGES = ["en", "gu"];
 export const DEFAULT_LANGUAGE = "en";
-// Storage key retained so a prior `gu` preference doesn't keep
-// resurfacing — we clear it on bootstrap below.
 const STORAGE_KEY = "jumpstart.lang";
 
 // Reflect the active language on the <html> element so CSS selectors
-// like `:lang(en)` and screen readers pick up the locale. Locked to
-// English now that the toggle is gone.
+// like `:lang(gu)` (font stack) and screen readers pick up the locale.
 const syncHtmlLang = (lang) => {
   if (typeof document === "undefined") return;
   try {
@@ -41,16 +34,23 @@ const syncHtmlLang = (lang) => {
   }
 };
 
-// Clear any persisted preference from when the toggle existed — keeps
-// returning users from being stuck in a locale the UI can no longer
-// surface.
-try {
-  if (typeof window !== "undefined" && window.localStorage) {
-    window.localStorage.removeItem(STORAGE_KEY);
+const readStoredLanguage = () => {
+  try {
+    const stored = window.localStorage.getItem(STORAGE_KEY);
+    return SUPPORTED_LANGUAGES.includes(stored) ? stored : null;
+  } catch {
+    // Storage may be unavailable (private mode, blocked); non-fatal.
+    return null;
   }
-} catch {
-  // Storage may be unavailable; non-fatal.
-}
+};
+
+const storeLanguage = (lang) => {
+  try {
+    window.localStorage.setItem(STORAGE_KEY, lang);
+  } catch {
+    // Non-fatal: the choice just won't survive a reload.
+  }
+};
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -81,23 +81,34 @@ const loaders = {
 
 const loaded = new Set([DEFAULT_LANGUAGE]);
 
-// Switching is async now because the bundle has to arrive first. The
-// site is still English-only in the UI (no toggle is rendered), but this
-// is a working implementation rather than a no-op: wiring the header
-// switcher back on is the only remaining step.
+// Load a locale bundle without switching the site language. Used where one
+// piece of content has its own language (a Gujarati-package report renders
+// in Gujarati via i18n.getFixedT("gu") even when the site is in English).
+export const ensureLanguageBundle = async (lang) => {
+  if (!SUPPORTED_LANGUAGES.includes(lang)) return false;
+  if (loaded.has(lang)) return true;
+  const mod = await loaders[lang]?.();
+  if (!mod) return false;
+  // `default` because JSON modules expose the object as the default.
+  i18n.addResourceBundle(lang, "common", mod.default, true, true);
+  loaded.add(lang);
+  return true;
+};
+
 export const setLanguage = async (lang) => {
   if (!SUPPORTED_LANGUAGES.includes(lang)) return;
-
-  if (!loaded.has(lang)) {
-    const mod = await loaders[lang]?.();
-    if (!mod) return;
-    // `default` because JSON modules expose the object as the default.
-    i18n.addResourceBundle(lang, "common", mod.default, true, true);
-    loaded.add(lang);
-  }
+  if (!(await ensureLanguageBundle(lang))) return;
 
   await i18n.changeLanguage(lang);
   syncHtmlLang(lang);
+  storeLanguage(lang);
 };
+
+// Restore a returning visitor's choice. English renders immediately; a
+// stored Gujarati preference swaps in as soon as its chunk arrives.
+const storedLanguage = readStoredLanguage();
+if (storedLanguage && storedLanguage !== DEFAULT_LANGUAGE) {
+  setLanguage(storedLanguage).catch(() => {});
+}
 
 export default i18n;

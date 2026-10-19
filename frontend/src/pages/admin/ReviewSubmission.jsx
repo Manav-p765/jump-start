@@ -11,6 +11,7 @@ import {
   ImageOff,
   Lightbulb,
   Loader2,
+  RefreshCw,
   Sparkles,
   Target,
   X,
@@ -675,6 +676,17 @@ export default function ReviewSubmission() {
       </div>
 
       <div className="mt-8">
+        {detail?.rescore ? (
+          <div className="mb-3 flex items-start gap-2 rounded-2xl border border-[#C9D7F2] bg-[#EEF3FD] px-4 py-3 text-xs font-semibold leading-5 text-[#2F5BB7]">
+            <RefreshCw className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+            {t("reviewSubmission.rescoredBanner", {
+              date: new Date(detail.rescore.rescoredAt).toLocaleDateString(),
+              from: detail.rescore.previousScoringVersion || "—",
+              before: detail.rescore.previousOverallScore ?? "—",
+              after: detail.rescore.currentOverallScore ?? "—",
+            })}
+          </div>
+        ) : null}
         {manualReview.hasUnreviewedItems ? (
           <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#F4DCA8] bg-[#FFF1D3] px-3 py-1.5 text-xs font-semibold text-[#B86D00]">
             <AlertTriangle className="h-3.5 w-3.5" />

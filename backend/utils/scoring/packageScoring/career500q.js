@@ -2101,7 +2101,11 @@ const buildNamedProfileObjects = ({ sectionBreakdown = [], flattenedSignals = {}
   };
 };
 
-export const scoreCareer500QPackage = (answers = {}, sections = []) => {
+export const scoreCareer500QPackage = (
+  answers = {},
+  sections = [],
+  { packageId = "" } = {}
+) => {
   if (!answers || typeof answers !== "object") return null;
   const questionMap = buildQuestionContextMap(sections, answers);
   if (!questionMap.size) return null;
@@ -2267,7 +2271,11 @@ export const scoreCareer500QPackage = (answers = {}, sections = []) => {
     metadata: {
       algorithmKey: CAREER_500Q_CONFIG.algorithmKey,
       overallMaxScore: 100,
-      packageId: CAREER_500Q_CONFIG.packageIds[0],
+      // The package actually scored (English or Gujarati edition); falls
+      // back to the canonical id for direct callers that don't pass one.
+      packageId: CAREER_500Q_CONFIG.packageIds.includes(packageId)
+        ? packageId
+        : CAREER_500Q_CONFIG.packageIds[0],
       scoringGuideSources: CAREER_500Q_CONFIG.scoringGuideSources,
       ambiguityNotes: CAREER_500Q_CONFIG.ambiguityNotes,
     },

@@ -605,6 +605,17 @@ const buildAdminReviewPayload = (user, cfg, reportOverride = null) => {
           ).length
         : 0,
     },
+    // Present when the report was re-scored after submission (see
+    // scripts/rescoreGujaratiReports.mjs) so the reviewer knows the
+    // numbers differ from what the student may already have seen.
+    rescore: report.rescoredAt
+      ? {
+          rescoredAt: report.rescoredAt,
+          previousScoringVersion: report.rescoredFrom?.scoringVersion || "",
+          previousOverallScore: report.rescoredFrom?.overallScore ?? null,
+          currentOverallScore: profile.overallScore ?? null,
+        }
+      : null,
   };
 };
 
@@ -1072,6 +1083,7 @@ export const getAdminSubmissions = async (req, res) => {
                 RESULT_PUBLICATION_STATUS.PENDING_APPROVAL &&
               !report.hasUnreviewedItems,
             hasUnreviewedItems: Boolean(report.hasUnreviewedItems),
+            rescoredAt: report.rescoredAt || null,
             isDemo: Boolean(report.isDemo),
             completionStatus:
               reportProfile.completionStatus ||
