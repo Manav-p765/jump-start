@@ -67,6 +67,11 @@ const sanitizeAssessmentReports = (reports = []) =>
               : {},
           normVersion: rawReport.normVersion || "",
           scoringVersion: rawReport.scoringVersion || "",
+          rescoredAt: rawReport.rescoredAt || null,
+          rescoredFrom:
+            rawReport.rescoredFrom && typeof rawReport.rescoredFrom === "object"
+              ? rawReport.rescoredFrom
+              : null,
         };
       })
     : [];
@@ -495,6 +500,14 @@ const assessmentReportSchema = new mongoose.Schema({
   // produced under which rules without re-deriving it from createdAt.
   normVersion: { type: String, default: "" },
   scoringVersion: { type: String, default: "" },
+  // Set when an already-submitted report was re-scored from rawAnswers by a
+  // maintenance script (e.g. scripts/rescoreGujaratiReports.mjs), so admins
+  // can see the numbers changed after submission. `rescoredFrom` keeps the
+  // pre-rescore provenance and scores:
+  //   { scoringVersion, overallScore, sectionScores: [{ sectionId, score }] }
+  // Publication status is never touched by a re-score.
+  rescoredAt: { type: Date, default: null },
+  rescoredFrom: { type: mongoose.Schema.Types.Mixed, default: null },
   // Wall-clock duration of the attempt. `totalDurationMinutes` is the
   // delta between the test's `startedAt` and the submission timestamp;
   // `sectionDurations` is the per-section breakdown. Both stay null on
@@ -695,11 +708,24 @@ userSchema.pre("save", async function (next) {
 // signup grabs the same counter, we retry once with a freshly-counted
 // suffix. Beyond two retries we give up and let the unique-index
 // violation surface as a save error rather than spinning forever.
+//
+// An empty in-memory value is NOT proof the user has no ID: a document
+// loaded with a .select() that omits jumpstartId also reads as empty, and
+// assigning here used to re-issue a fresh ID on every such save (each test
+// autosave, admin approval, ...). For an existing document we therefore
+// ask the database, and only assign when the stored field is truly absent.
 userSchema.pre("save", async function (next) {
   if (this.jumpstartId) return next();
   const Model = this.constructor;
   const year = new Date().getFullYear();
   try {
+    if (!this.isNew) {
+      const stored = await Model.findById(this._id)
+        .select("jumpstartId")
+        .lean();
+      if (stored?.jumpstartId) return next();
+    }
+
     for (let attempt = 0; attempt < 3; attempt += 1) {
       const count = await Model.countDocuments();
       const candidate = `JS-${year}-${String(count + 1 + attempt).padStart(5, "0")}`;

@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { LogOut, Menu, UserRound, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { AuthContext } from "../context/AuthContext";
+import { setLanguage, SUPPORTED_LANGUAGES } from "../i18n/i18n";
 import ConfirmDialog from "./ConfirmDialog";
 import AssetImage from "./AssetImage";
 import { company } from "../config/company";
@@ -48,10 +49,13 @@ export default function Header() {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, logout } = useContext(AuthContext);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [showLogoutDialog, setShowLogoutDialog] = useState(false);
   const isAdmin = user?.role === "admin";
+  const currentLanguage = SUPPORTED_LANGUAGES.includes(i18n.language)
+    ? i18n.language
+    : "en";
 
   const firstName = useMemo(() => {
     const name = String(user?.name || "").trim();
@@ -140,6 +144,37 @@ export default function Header() {
     </>
   );
 
+  // EN / ગુજ toggle. Switches the site UI locale; the choice persists in
+  // localStorage (see setLanguage in i18n.js).
+  const renderLanguageToggle = (extraClass = "") => (
+    <div
+      role="group"
+      aria-label={t("language.label")}
+      className={`inline-flex items-center gap-1 rounded-full border border-[#D9E5EC] bg-white p-0.5 ${extraClass}`}
+    >
+      {SUPPORTED_LANGUAGES.map((lang) => {
+        const isActive = currentLanguage === lang;
+        return (
+          <button
+            key={lang}
+            type="button"
+            lang={lang}
+            onClick={() => setLanguage(lang)}
+            aria-pressed={isActive}
+            data-lang-toggle={lang}
+            className={`rounded-full px-2.5 py-1 text-xs font-semibold transition ${
+              isActive
+                ? "bg-[#188B8B] text-white"
+                : "text-[#0F1729] hover:bg-[#F0FBFB]"
+            }`}
+          >
+            {lang === "gu" ? t("language.gujarati") : t("language.english")}
+          </button>
+        );
+      })}
+    </div>
+  );
+
   return (
     <>
       <header className="sticky top-0 z-40 border-b border-[#E8EDF3] bg-white/95 backdrop-blur">
@@ -155,10 +190,10 @@ export default function Header() {
                   whole header row re-lays-out on load — a shift at the very
                   top of the page that pushes every section below it. */}
               <AssetImage
-                name="jumpstart-logo"
+                name="jumpstride-logo"
                 alt={company.brandName}
-                width={333}
-                height={235}
+                width={711}
+                height={443}
                 priority
                 className="hidden h-11 w-auto sm:block"
               />
@@ -176,6 +211,7 @@ export default function Header() {
           </div>
 
           <div className="hidden items-center gap-3 lg:flex">
+            {renderLanguageToggle()}
             {user ? (
               <>
                 <Link
@@ -242,10 +278,10 @@ export default function Header() {
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <AssetImage
-                name="jumpstart-logo"
+                name="jumpstride-logo"
                 alt={company.brandName}
-                width={333}
-                height={235}
+                width={711}
+                height={443}
                 className="h-10 w-auto"
               />
             </div>
@@ -260,6 +296,8 @@ export default function Header() {
           </div>
 
           <nav className="mt-8 flex flex-col gap-2">{mobileNavLinks}</nav>
+
+          <div className="mt-6 flex justify-center">{renderLanguageToggle()}</div>
 
           <div className="mt-auto flex flex-col gap-3 pt-8">
             {user ? (

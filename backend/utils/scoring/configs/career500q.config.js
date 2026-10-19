@@ -97,7 +97,11 @@ const objectiveBands = (bands) => bands;
 
 export const CAREER_500Q_CONFIG = {
   algorithmKey: "career-500q-v1",
-  packageIds: ["complete-aptitude-500q"],
+  // Every package that carries the 500Q question bank and must be scored
+  // by this config. The first entry is the canonical English package; the
+  // Gujarati edition (config/gujaratiPackage.generated.js) is the same bank
+  // with translated text and identical keys, so it scores identically.
+  packageIds: ["complete-aptitude-500q", "complete-aptitude-500q-gujarati"],
   title: "Complete Aptitude Test (500Q)",
   scoringGuideSources: [
     "backend/reference/complete-answer-key-500q.pdf",

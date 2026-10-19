@@ -6,6 +6,7 @@ import {
   CheckCircle2,
   ChevronDown,
   ExternalLink,
+  RefreshCw,
   Search,
   Trash2,
 } from "lucide-react";
@@ -256,6 +257,15 @@ export default function TestSubmissions() {
                             >
                               <AlertTriangle className="h-3 w-3" />
                               {t("adminPages.reviewRequiredChip")}
+                            </span>
+                          ) : null}
+                          {row.rescoredAt ? (
+                            <span
+                              className="inline-flex items-center gap-1 rounded-full border border-[#C9D7F2] bg-[#EEF3FD] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.06em] text-[#2F5BB7]"
+                              title={`Scores were recalculated on ${new Date(row.rescoredAt).toLocaleDateString()}`}
+                            >
+                              <RefreshCw className="h-3 w-3" />
+                              {t("adminPages.rescoredChip")}
                             </span>
                           ) : null}
                         </div>
