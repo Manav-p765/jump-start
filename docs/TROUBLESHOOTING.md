@@ -384,27 +384,22 @@ Expected emails are not being sent.
 
 ### Cause
 
-Important current state:
+Email is sent through Resend by `backend/services/emailService.js`, using the
+branded Resend template `jumpstride-base` (logo, name, company footer).
+Sends are fire-and-forget, so a failure shows up only in the server log
+(lines starting `[email]`), never in the API response. Usual causes:
 
-- there is **no fully implemented email sending service in the current codebase**
-
-So if email delivery is expected in development or production, the likely cause is:
-
-- the feature has not been implemented yet
-- SMTP/provider environment variables were never wired into code
+- `RESEND_API_KEY` not set (startup warns; sends are skipped)
+- `EMAIL_FROM` unset or not on a domain verified in Resend — the
+  `onboarding@resend.dev` fallback only delivers to the Resend account owner
+- the `jumpstride-base` template was unpublished or renamed in Resend
+- logo missing in the email: `frontend/public/email/jumpstride-logo.png` not deployed
 
 ### Solution
 
-1. Confirm whether the feature exists in code before debugging infrastructure.
-2. If you are adding email support, verify:
-
-- SMTP host
-- SMTP port
-- SMTP username/password
-- sender address
-
-3. Add structured logging around the mail-send call.
-4. Test with a real provider sandbox account before production rollout.
+1. Check the server log for `[email]` lines.
+2. Run `npm run email:test -- you@example.com` in `backend/`.
+3. Check the Resend dashboard → Emails / Logs for the delivery status.
 
 ## 13. Payment Failures
 

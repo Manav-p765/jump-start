@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import { OAuth2Client } from "google-auth-library";
 import User from "../models/User.js";
+import { sendWelcomeEmail } from "../services/emailService.js";
 
 const googleClientIds = (process.env.GOOGLE_CLIENT_ID || "")
   .split(",")
@@ -56,6 +57,9 @@ export const register = async (req, res) => {
       password,
       mobile: (mobile || "").toString().trim(),
     });
+
+    // Fire-and-forget: a mail failure must never fail the signup.
+    sendWelcomeEmail(user);
 
     // Prompt-9 Fix 1: surface the freshly-assigned Jumpstart ID in the
     // signup response so the frontend can show it on a welcome screen
