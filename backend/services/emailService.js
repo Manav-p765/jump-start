@@ -144,19 +144,23 @@ export const sendEmailInBackground = (opts) => {
 // Ready-made messages
 // ---------------------------------------------------------------------------
 
+// Builders return sendEmail() options, so scripts can preview the exact
+// email a real user gets (scripts/sendEmailPreview.mjs).
+export const welcomeEmail = (user) => ({
+  to: user.email,
+  subject: `Welcome to ${company.brandName}!`,
+  name: user.name,
+  heading: `Welcome to ${company.brandName}`,
+  messageHtml:
+    `<p style="margin:0 0 12px 0;">Your account is ready.` +
+    (user.jumpstartId
+      ? ` Your ${company.brandName} ID is <strong>${escapeHtml(user.jumpstartId)}</strong>.`
+      : "") +
+    `</p><p style="margin:0;">Take your career aptitude assessment to discover the paths that suit you best.</p>`,
+  ctaText: "Go to my dashboard",
+  ctaUrl: "/dashboard",
+  idempotencyKey: `welcome-${user._id}`,
+});
+
 export const sendWelcomeEmail = (user) =>
-  sendEmailInBackground({
-    to: user.email,
-    subject: `Welcome to ${company.brandName}!`,
-    name: user.name,
-    heading: `Welcome to ${company.brandName}`,
-    messageHtml:
-      `<p style="margin:0 0 12px 0;">Your account is ready.` +
-      (user.jumpstartId
-        ? ` Your ${company.brandName} ID is <strong>${escapeHtml(user.jumpstartId)}</strong>.`
-        : "") +
-      `</p><p style="margin:0;">Take your career aptitude assessment to discover the paths that suit you best.</p>`,
-    ctaText: "Go to my dashboard",
-    ctaUrl: "/dashboard",
-    idempotencyKey: `welcome-${user._id}`,
-  });
+  sendEmailInBackground(welcomeEmail(user));
