@@ -6,6 +6,7 @@ import connectDB from "./config/db.js";
 import { ensureRequiredEnv } from "./config/env.js";
 import { ensureAdminAccount } from "./utils/adminBootstrap.js";
 import { isRazorpayConfigured } from "./config/razorpay.js";
+import { isEmailConfigured } from "./services/emailService.js";
 import { seedGujaratiPackage } from "./scripts/seedGujaratiPackage.mjs";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
@@ -154,6 +155,12 @@ const startServer = async () => {
     console.warn(
       "[payments] RAZORPAY_WEBHOOK_SECRET is not set — Razorpay webhooks " +
         "will be rejected. It differs from RAZORPAY_KEY_SECRET."
+    );
+  }
+  if (!isEmailConfigured()) {
+    console.warn(
+      "[email] RESEND_API_KEY is not set — transactional emails (welcome " +
+        "etc.) will be skipped."
     );
   }
   const adminStatus = await ensureAdminAccount();

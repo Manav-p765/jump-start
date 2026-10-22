@@ -24,7 +24,8 @@
     "patch:math-operators": "node scripts/patchMathOperators.mjs",
     "translate:questions:gu": "node scripts/translateQuestionsToGujarati.mjs",
     "export:answer-key": "node scripts/exportSection4AnswerKey.mjs",
-    "export:answer-keys": "node scripts/exportFullAnswerKey.mjs"
+    "export:answer-keys": "node scripts/exportFullAnswerKey.mjs",
+    "email:test": "node scripts/sendTestEmail.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.32.1",
