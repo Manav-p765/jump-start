@@ -205,6 +205,9 @@ export const socialLogin = async (req, res) => {
         avatar,
         password: null,
       });
+
+      // First Google sign-in is this user's signup.
+      sendWelcomeEmail(user);
     }
 
     user.lastLoginAt = new Date();
