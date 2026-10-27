@@ -15,6 +15,7 @@
     "repair:section4": "node scripts/repairSection4QuestionBank.mjs",
     "enrich:personality-csv": "node scripts/enrichPersonalityCsv.mjs",
     "smoke:career-500q": "node scripts/smokeCareer500qScoring.mjs",
+    "smoke:gujarati": "node scripts/smokeGujaratiScoring.mjs",
     "seed:assessment": "node scripts/seedAssessmentFromJson.mjs",
     "seed:admin": "node scripts/seedAdmin.mjs",
     "seed:demo-package": "node scripts/seedDemoPackage.mjs",
