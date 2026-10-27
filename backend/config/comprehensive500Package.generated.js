@@ -1,6 +1,6 @@
 // AUTO-GENERATED — comprehensive 500-question package with Gujarati translations.
 // Regenerate via:  npm run translate:questions:gu  OR  node scripts/applyGujaratiTranslations.mjs
-// Last updated: 2026-09-04T13:51:02.885Z
+// Last updated: 2026-10-27T17:48:35.801Z
 
 const PACKAGE = {
   "id": "complete-aptitude-500q",
@@ -127,7 +127,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "emotionalStability",
           "notes": "",
-          "text_gu": "હું તનાવપૂર્ણ પરિસ્થિતિઓમાં શાંત રહું છું.",
+          "text_gu": "હું તણાવપૂર્ણ પરિસ્થિતિઓમાં શાંત રહું છું.",
           "options_gu": []
         },
         {
@@ -205,7 +205,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "openness",
           "notes": "",
-          "text_gu": "મારી કલ્પનાશક્તિ નો ઉપયોગ કરી ને છે અને હું સર્જનાત્મક રીતે વિચારું છું.",
+          "text_gu": "મારી કલ્પના શક્તિનો ઉપયોગ કરીને હું સર્જનાત્મક રીતે વિચારું છું.",
           "options_gu": []
         },
         {
@@ -348,7 +348,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "agreeableness",
           "notes": "",
-          "text_gu": "મારી સ્વભાવમાં માફ કરવાનું છે અને ભૂલોને અવગણું છું .",
+          "text_gu": "હું લોકો ને માફ કરું છું અને તેમની ભૂલો ને અવગણું છું.",
           "options_gu": []
         },
         {
@@ -569,7 +569,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "extraversion",
           "notes": "",
-          "text_gu": "મને જૂથ કરતા એકલામાં કામ કરવું વધારે પસંદ કરું છું.",
+          "text_gu": "હું જૂથ કરતા એકલામાં કામ કરવું વધારે પસંદ કરું છું.",
           "options_gu": []
         },
         {
@@ -976,9 +976,9 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું પસંદ કરું છું:",
+          "text_gu": "હું કામ કરવું પસંદ કરું છું:",
           "options_gu": [
-            "એકલ પંડે , સ્વતંત્ર પ્રોજેક્ટ પર",
+            "એકલ પંડે, સ્વતંત્ર પ્રોજેક્ટ પર",
             "નાની ટીમમાં (2-4 લોકોની)",
             "મોટી ટીમ અથવા જૂથમાં"
           ]
@@ -4139,13 +4139,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "BOOK : READING જે રીતે છે, તે જ રીતે FORK : ?",
+          "text_gu": "જેમ 'પુસ્તક' નો સંબંધ 'વાચક' સાથે છે, તેમ 'અખબાર' નો સંબંધ કોની સાથે છે?",
           "options_gu": [
-            "KITCHEN",
-            "EATING",
-            "METAL",
-            "COOKING"
-          ]
+            "વાચક",
+            "લેખક",
+            "તંત્રી",
+            "વિતરક"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "292",
@@ -4160,13 +4161,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "જો બધા ગુલાબ ફૂલો છે, અને કેટલાક ફૂલો લાલ છે, તો:",
+          "text_gu": "જેમ 'હોસ્પિટલ' નો સંબંધ 'ડૉક્ટર' સાથે છે, તેમ 'શાળા' નો સંબંધ કોની સાથે છે?",
           "options_gu": [
-            "All roses are red",
-            "Some roses might be red",
-            "No roses are red",
-            "All red things are flowers"
-          ]
+            "શિક્ષક",
+            "આચાર્ય",
+            "વર્ગખંડ",
+            "વિદ્યાર્થી"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "293",
@@ -4181,13 +4183,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "\"GENEROUS\" નો સૌથી વિરુદ્ધાર્થી શબ્દ શોધો:",
+          "text_gu": "રમેશ બીમાર હતો, ________ તે આજે ઓફિસે આવ્યો નથી.",
           "options_gu": [
-            "KIND",
-            "STINGY",
-            "WEALTHY",
-            "GIVING"
-          ]
+            "પરંતુ",
+            "તેથી",
+            "જો કે",
+            "અથવા"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "294",
@@ -4202,13 +4205,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "સામ્યતા પૂરી કરો: TEACHER : STUDENT જે રીતે છે, તે જ રીતે DOCTOR : ?",
+          "text_gu": "જો તમે નિયમિત મહેનત કરશો, ________ સફળતા જરૂર મળશે.",
           "options_gu": [
-            "HOSPITAL",
-            "PATIENT",
-            "MEDICINE",
-            "NURSE"
-          ]
+            "કારણ કે",
+            "તો",
+            "પણ",
+            "નહીંતર"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "295",
@@ -4223,13 +4227,14 @@ const PACKAGE = {
           "correctOption": "D",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "આ જૂથમાં કયો શબ્દ બંધબેસતો નથી?",
+          "text_gu": "નીચેનામાંથી કયો શબ્દ બાકીના ત્રણ કરતાં જુદો પડે છે?",
           "options_gu": [
-            "VIOLIN",
-            "TRUMPET",
-            "PIANO",
-            "PAINTING"
-          ]
+            "સફરજન",
+            "કેરી",
+            "બટાકા",
+            "ચીકુ"
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "296",
@@ -4244,13 +4249,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "જો \"કેટલીક બિલાડીઓ કાળી છે\" અને \"બધી કાળી વસ્તુઓ ગરમી શોષે છે,\" તો:",
+          "text_gu": "જેમ 'હોડી' નો સંબંધ 'પાણી' સાથે છે, તેમ 'વિમાન' નો સંબંધ કોની સાથે છે?",
           "options_gu": [
-            "All cats absorb heat",
-            "Some cats absorb heat",
-            "No cats absorb heat",
-            "Only black cats exist"
-          ]
+            "ડ્રાઈવર",
+            "પાટા",
+            "રસ્તો",
+            "આકાશ"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "297",
@@ -4265,13 +4271,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "\"METICULOUS\" ને સૌથી મળતો આવતો શબ્દ પસંદ કરો:",
+          "text_gu": "જેમ 'પુસ્તક' નો સંબંધ 'પાના' સાથે છે, તેમ 'ઘર' નો સંબંધ કોની સાથે છે?",
           "options_gu": [
-            "CARELESS",
-            "DETAILED",
-            "QUICK",
-            "LOUD"
-          ]
+            "રસ્તો",
+            "ગામ",
+            "દીવાલ",
+            "સોસાયટી"
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "298",
@@ -4286,13 +4293,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "WHEEL : CAR જે રીતે છે, તે જ રીતે PROPELLER : ?",
+          "text_gu": "બહાર ખૂબ જ વરસાદ પડી રહ્યો છે, ________ આપણે છત્રી લઈને જવું જોઈએ.",
           "options_gu": [
-            "ENGINE",
-            "AIRPLANE",
-            "WIND",
-            "ROTATION"
-          ]
+            "અથવા",
+            "છતાં",
+            "કેમ કે",
+            "માટે"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "299",
@@ -4307,13 +4315,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "આ પૂર્ણ કરે તેવો શબ્દ શોધો: \"HAPPY : JOY જે રીતે છે, તે જ રીતે ANGRY : ____\"",
+          "text_gu": "તેણે ખૂબ જ ઝડપથી દોડવાની કોશિશ કરી, ________ તે બસ પકડી શક્યો નહીં.",
           "options_gu": [
-            "MAD",
-            "FURY",
-            "UPSET",
-            "IRRITATED"
-          ]
+            "એટલે",
+            "તેથી",
+            "કારણ કે",
+            "છતાં પણ"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "300",
@@ -4328,13 +4337,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "કયું વાક્ય વ્યાકરણની દૃષ્ટિએ સાચું છે?",
+          "text_gu": "નીચેનામાંથી કયો શબ્દ બાકીના ત્રણ કરતાં જુદો પડે છે?",
           "options_gu": [
-            "Me and John went to the store",
-            "John and I went to the store",
-            "John and me went to the store",
-            "I and John went to the store"
-          ]
+            "વકીલ",
+            "ઇજનેર (એન્જિનિયર)",
+            "શિક્ષક",
+            "શાળા"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "301",
@@ -4349,13 +4359,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "જો કોઈ પક્ષી સસ્તન પ્રાણી નથી, અને બધા ગરુડ પક્ષીઓ છે, તો:",
+          "text_gu": "જેમ 'લેખક' નો સંબંધ 'પેન' સાથે છે, તેમ 'દરજી' નો સંબંધ કોની સાથે છે?",
           "options_gu": [
-            "Some eagles are mammals",
-            "No eagles are mammals",
-            "All eagles are mammals",
-            "Eagles might be mammals"
-          ]
+            "મશીન",
+            "કાપડ",
+            "દોરો",
+            "સોય"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "302",
@@ -4370,13 +4381,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "આ વાક્યમાં શ્રેષ્ઠ બંધબેસતો શબ્દ પસંદ કરો: \"The student's _____ attention to detail impressed the teacher.\"",
+          "text_gu": "જેમ 'સિંહ' નો સંબંધ 'ગર્જના' સાથે છે, તેમ 'કૂતરો' નો સંબંધ કોની સાથે છે?",
           "options_gu": [
-            "CARELESS",
-            "CAREFUL",
-            "METICULOUS",
-            "BASIC"
-          ]
+            "ગણગણ",
+            "ભસવું",
+            "ચીં-ચીં",
+            "મ્યાઉં"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "303",
@@ -4391,13 +4403,14 @@ const PACKAGE = {
           "correctOption": "D",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "AUTHOR : BOOK જે રીતે છે, તે જ રીતે COMPOSER : ?",
+          "text_gu": "આપણે પાણીનો બગાડ અટકાવવો જોઈએ, ________ ભવિષ્યમાં મોટી કટોકટી સર્જાશે.",
           "options_gu": [
-            "MUSIC",
-            "ORCHESTRA",
-            "PIANO",
-            "SYMPHONY"
-          ]
+            "નહીંતર",
+            "તેથી",
+            "જેમ કે",
+            "અને"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "304",
@@ -4412,13 +4425,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "\"CONFIDENT\" ને સમાનાર્થી કયો શબ્દ છે?",
+          "text_gu": "નીચેનામાંથી કયો શબ્દ બાકીના ત્રણ કરતાં જુદો પડે છે?",
           "options_gu": [
-            "WORRIED",
-            "ASSURED",
-            "AFRAID",
-            "UNCERTAIN"
-          ]
+            "સમુદ્ર",
+            "રણ",
+            "તળાવ",
+            "નદી"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "305",
@@ -4433,13 +4447,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "ક્રમ પૂરો કરો: \"જો વરસાદ પડે, તો જમીન ભીની થાય. વરસાદ પડ્યો. તેથી:\"",
+          "text_gu": "જેમ 'ગાય' નો સંબંધ 'વાછરડું' સાથે છે, તેમ 'ઘોડો' નો સંબંધ કોની સાથે છે?",
           "options_gu": [
-            "It might rain again",
-            "The ground is wet",
-            "The ground is dry",
-            "We can't determine anything"
-          ]
+            "વછેરો",
+            "બોતડું",
+            "લવારું",
+            "મીંદડું"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "306",
@@ -4454,13 +4469,14 @@ const PACKAGE = {
           "correctOption": "D",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "વિચિત્ર શબ્દ શોધો:",
+          "text_gu": "નીચે આપેલા શબ્દોને તાર્કિક અને અર્થપૂર્ણ ક્રમમાં ગોઠવો:\n1. વનસ્પતિ, 2. બીજ, 3. ફળ, 4. વૃક્ષ",
           "options_gu": [
-            "DEMOCRACY",
-            "MONARCHY",
-            "REPUBLIC",
-            "CITIZENSHIP"
-          ]
+            "1, 2, 3, 4",
+            "2, 1, 4, 3",
+            "4, 3, 2, 1",
+            "2, 4, 1, 3"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "307",
@@ -4475,13 +4491,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "LIBRARY : BOOKS જે રીતે છે, તે જ રીતે MUSEUM : ?",
+          "text_gu": "કોઈ એક ચોક્કસ કોડ ભાષામાં જો \"કામ\" ને \"મકા\" લખવામાં આવે, તો \"સાફ\" ને તે જ ભાષામાં કેવી રીતે લખાય?",
           "options_gu": [
-            "PEOPLE",
-            "ARTIFACTS",
-            "BUILDING",
-            "EDUCATION"
-          ]
+            "માસ",
+            "સફા",
+            "ફાબ",
+            "ફાસ"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "308",
@@ -4496,13 +4513,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "આ વાક્યમાં શ્રેષ્ઠ બંધબેસતો શબ્દ પસંદ કરો: \"Her _____ for mathematics was evident in her high scores.\"",
+          "text_gu": "નીચેનામાંથી કયો શબ્દ બાકીના ત્રણ કરતાં જુદો પડે છે?",
           "options_gu": [
-            "DISLIKE",
-            "APTITUDE",
-            "FEAR",
-            "CONFUSION"
-          ]
+            "માર્ચ",
+            "જાન્યુઆરી",
+            "રવિવાર",
+            "મે"
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "309",
@@ -4517,13 +4535,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "જો \"બધા વિદ્યાર્થીઓ અભ્યાસ કરે છે\" અને \"મેરી એક વિદ્યાર્થી છે,\" તો:",
+          "text_gu": "આપેલા ફકરાના આધારે કયો તાર્કિક નિષ્કર્ષ સૌથી સાચો છે?\n\"આજના સમયમાં ઓનલાઈન શિક્ષણ ખૂબ જ લોકપ્રિય બન્યું છે. વિદ્યાર્થીઓ ઘરે બેઠા કોઈપણ વિષય શીખી શકે છે. પરંતુ વર્ગખંડમાં મળતું સામાજિક વાતાવરણ અને મિત્રો સાથેનો સંવાદ ઓનલાઈન શિક્ષણમાં ખૂટે છે.\"",
           "options_gu": [
-            "Mary might study",
-            "Mary studies",
-            "Mary doesn't study",
-            "We need more information"
-          ]
+            "વિદ્યાર્થીઓને વર્ગખંડમાં જવું ગમતું નથી.",
+            "ઓનલાઈન શિક્ષણથી ભણતર અઘરું બને છે.",
+            "ઓનલાઈન શિક્ષણ સંપૂર્ણપણે નકામું છે.",
+            "ઓનલાઈન શિક્ષણમાં સામાજિક સંવાદની મર્યાદા છે."
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "310",
@@ -4538,13 +4557,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "સૌથી યોગ્ય શબ્દ પસંદ કરો: \"The scientist's _____ research led to important discoveries.\"",
+          "text_gu": "આપેલા ફકરાના આધારે કયો તાર્કિક નિષ્કર્ષ સૌથી સાચો છે?\n\"નિયમિત વ્યાયામ (કસરત) કરવાથી શરીર તંદુરસ્ત રહે છે અને રોગપ્રતિકારક શક્તિ વધે છે. જે લોકો રોજ ઓછામાં ઓછી ૩૦ મિનિટ કસરત કરે છે, તેઓ માનસિક રીતે પણ વધુ ખુશ રહે છે.\"",
           "options_gu": [
-            "LAZY",
-            "RUSHED",
-            "THOROUGH",
-            "CARELESS"
-          ]
+            "જે લોકો કસરત નથી કરતા તેઓ ક્યારેય ખુશ નથી રહેતા.",
+            "વ્યાયામ ફક્ત માનસિક સ્વાસ્થ્ય માટે જ સારો છે.",
+            "તંદુરસ્ત રહેવા માટે રોજ વ્યાયામ કરવો ફાયદાકારક છે.",
+            "દિવસમાં ૫ કલાક કસરત કરવી જ જોઈએ."
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "311",
@@ -4559,13 +4579,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "CAPTAIN : SHIP જે રીતે છે, તે જ રીતે PRINCIPAL : ?",
+          "text_gu": "નીચે આપેલા શબ્દોને અર્થપૂર્ણ ચડતા ક્રમમાં ગોઠવો:\n1. નાગરિક, 2. દેશ, 3. પરિવાર, 4. નગર",
           "options_gu": [
-            "TEACHER",
-            "STUDENT",
-            "SCHOOL",
-            "OFFICE"
-          ]
+            "1, 3, 4, 2",
+            "1, 4, 3, 2",
+            "2, 4, 3, 1",
+            "3, 1, 4, 2"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "312",
@@ -4580,13 +4601,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "કયું વાક્ય \"affect\" નો યોગ્ય ઉપયોગ કરે છે?",
+          "text_gu": "જો એક સંકેતમાં \"પાણી\" ને \"અગ્નિ\" કહેવાય, \"અગ્નિ\" ને \"હવા\" કહેવાય, અને \"હવા\" ને \"આકાશ\" કહેવાય, તો માછલી ક્યાં જીવશે?",
           "options_gu": [
-            "The rain will effect our picnic plans",
-            "The rain will affect our picnic plans",
-            "The rain will have an affect on our plans",
-            "The affect of rain on our plans is significant"
-          ]
+            "આકાશ",
+            "પાણી",
+            "અગ્નિ",
+            "હવા"
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "313",
@@ -4601,13 +4623,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "\"DILIGENT\" ને સૌથી મળતો આવતો શબ્દ શોધો:",
+          "text_gu": "આપેલા વિધાન અને પૂર્વધારણાઓ (Assumptions) ધ્યાનમાં લો. વિધાનના આધારે કઈ પૂર્વધારણા સાચી છે?\nવિધાન: \"જો તમારે કમ્પ્યુટર શીખવું હોય, તો જ્ઞાન કેન્દ્રમાં એડમિશન લો.\"\nપૂર્વધારણા I: જ્ઞાન કેન્દ્ર સારું કમ્પ્યુટર શિક્ષણ આપે છે.\nપૂર્વધારણા II: લોકો સામાન્ય રીતે આવી સલાહ માને છે.",
           "options_gu": [
-            "LAZY",
-            "HARDWORKING",
-            "SMART",
-            "FAST"
-          ]
+            "માત્ર પૂર્વધારણા I યોગ્ય છે.",
+            "માત્ર પૂર્વધારણા II યોગ્ય છે.",
+            "પૂર્વધારણા I અને II બંને યોગ્ય છે.",
+            "એક પણ પૂર્વધારણા યોગ્ય નથી."
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "314",
@@ -4622,13 +4645,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "જો \"કોઈ બિલાડી કૂતરા નથી\" અને \"કેટલાક પાળતુ પ્રાણીઓ બિલાડીઓ છે,\" તો:",
+          "text_gu": "નીચેનામાંથી કયો શબ્દ બાકીના ત્રણ કરતાં જુદો પડે છે?",
           "options_gu": [
-            "Some pets are dogs",
-            "Some pets are not dogs",
-            "All pets are cats",
-            "No pets are dogs"
-          ]
+            "કબાટ",
+            "ખુરશી",
+            "કાગળ",
+            "ટેબલ"
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "315",
@@ -4643,13 +4667,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "SURGEON : SCALPEL જે રીતે છે, તે જ રીતે CARPENTER : ?",
+          "text_gu": "આપેલા વિધાન અને પૂર્વધારણાઓ ધ્યાનમાં લો. વિધાનના આધારે કઈ પૂર્વધારણા સાચી છે?\nવિધાન: \"ધૂમ્રપાન સ્વાસ્થ્ય માટે હાનિકારક છે અને તેનાથી કેન્સર થઈ શકે છે.\"\nપૂર્વધારણા I: સિગારેટના પેકેટ પર આ ચેતવણી છાપવી જરૂરી છે.\nપૂર્વધારણા II: ધૂમ્રપાન ન કરવાથી કેન્સરનું જોખમ ઘટે છે.",
           "options_gu": [
-            "WOOD",
-            "HOUSE",
-            "HAMMER",
-            "BUILDING"
-          ]
+            "માત્ર પૂર્વધારણા I યોગ્ય છે.",
+            "માત્ર પૂર્વધારણા II યોગ્ય છે.",
+            "પૂર્વધારણા I અને II બંને યોગ્ય છે.",
+            "એક પણ પૂર્વધારણા યોગ્ય નથી."
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "316",
@@ -4664,13 +4689,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "જો 3x + 7 = 22, તો x ની કિંમત શું છે:",
+          "text_gu": "જો એક સંખ્યાના ૪૦% એ ૨૪૦ બરાબર હોય, તો તે સંખ્યાના ૬૦% કેટલા થાય?",
           "options_gu": [
-            "3",
-            "5",
-            "7",
-            "9"
-          ]
+            "૩૬૦",
+            "૪૨૦",
+            "૪૦૦",
+            "૪૮૦"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "317",
@@ -4685,13 +4711,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "25% ડિસ્કાઉન્ટ પછી શર્ટની કિંમત $45 છે. મૂળ કિંમત શું હતી?",
+          "text_gu": "નીચે આપેલી સંખ્યા શ્રેણીમાં પ્રશ્નચિહ્ન (?) ની જગ્યાએ કઈ સંખ્યા આવશે?\n૫, ૧૧, ૨૩, ૪૭, ૯૫, ?",
           "options_gu": [
-            "$56.25",
-            "$60",
-            "$67.50",
-            "$75"
-          ]
+            "૧૭૫",
+            "૧૬૫",
+            "૧૮૭",
+            "૧૯૧"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "318",
@@ -4706,13 +4733,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "240 ના 15% કેટલા થાય?",
+          "text_gu": "એક વસ્તુ ₹૧૨૦૦ માં ખરીદીને ૨૦% નફા સાથે વેચવામાં આવે, તો તેની વેચાણ કિંમત કેટલી હશે?",
           "options_gu": [
-            "36",
-            "42",
-            "48",
-            "54"
-          ]
+            "₹૧૪૪૦",
+            "₹૧૩૮૦",
+            "₹૧૪૦૦",
+            "₹૧૫૦૦"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "319",
@@ -4727,13 +4755,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "જો કોઈ સંખ્યાનો 2/3 ભાગ 48 છે, તો સંખ્યા શું છે?",
+          "text_gu": "૨૫, ૪૦ અને ૬૦ નો લઘુત્તમ સામાન્ય અવયવી (LCM) શોધો.",
           "options_gu": [
-            "32",
-            "64",
-            "72",
-            "96"
-          ]
+            "૩૦૦",
+            "૪૦૦",
+            "૫૦૦",
+            "૬૦૦"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "320",
@@ -4748,13 +4777,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "વર્ગમાં છોકરા-છોકરીઓનો ગુણોત્તર 3:4 છે. જો કુલ 28 વિદ્યાર્થીઓ હોય, તો છોકરા કેટલા?",
+          "text_gu": "જો A અને B ની વર્તમાન ઉંમરનો ગુણોત્તર ૪ : ૫ હોય અને તેમની ઉંમરનો સરવાળો ૫૪ વર્ષ હોય, તો A ની વર્તમાન ઉંમર કેટલી હશે?",
           "options_gu": [
-            "12",
-            "14",
-            "16",
-            "18"
-          ]
+            "૩૦ વર્ષ",
+            "૨૮ વર્ષ",
+            "૨૦ વર્ષ",
+            "૨૪ વર્ષ"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "321",
@@ -4769,13 +4799,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "ક્રમમાં આગળ શું આવશે: 2, 6, 18, 54, ?",
+          "text_gu": "એક મોટરસાયકલ ૬૦ કિમી/કલાકની ઝડપે ૩ કલાકમાં કેટલું અંતર કાપશે?",
           "options_gu": [
-            "108",
-            "162",
-            "216",
-            "324"
-          ]
+            "૧૮૦ કિમી",
+            "૧૨૦ કિમી",
+            "૧૫૦ કિમી",
+            "૨૦૦ કિમી"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "322",
@@ -4790,13 +4821,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "જો ટ્રેન 3 કલાકમાં 180 માઈલ મુસાફરી કરે, તો સરેરાશ ગતિ શું છે?",
+          "text_gu": "જો ૧૫ માણસો એક કામ ૨૦ દિવસમાં પૂરું કરી શકે, તો તે જ કામ ૧૨ દિવસમાં પૂરું કરવા કેટલા માણસોની જરૂર પડે?",
           "options_gu": [
-            "50 mph",
-            "55 mph",
-            "60 mph",
-            "65 mph"
-          ]
+            "૨૦",
+            "૨૫",
+            "૨૨",
+            "૩૦"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "323",
@@ -4811,13 +4843,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "7² - 3² + 2² કેટલા થાય?",
+          "text_gu": "₹૫૦૦૦ નું ૧૦% વાર્ષિક વ્યાજના દરે ૨ વર્ષનું સાદું વ્યાજ (Simple Interest) કેટલું થાય?",
           "options_gu": [
-            "44",
-            "45",
-            "46",
-            "47"
-          ]
+            "₹૧૨૦૦",
+            "₹૧૦૦૦",
+            "₹૫૦૦૦",
+            "₹૧૫૦૦"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "324",
@@ -4832,13 +4865,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "જો 4y - 3 = 2y + 11, તો y ની કિંમત શું છે:",
+          "text_gu": "૫ સંખ્યાઓની સરેરાશ (Average) ૪૦ છે. જો તેમાં એક નવી સંખ્યા ૭૦ ઉમેરવામાં આવે, તો નવી સરેરાશ કેટલી થશે?",
           "options_gu": [
-            "6",
-            "7",
-            "8",
-            "9"
-          ]
+            "૪૫",
+            "૪૮",
+            "૪૨",
+            "૫૦"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "325",
@@ -4853,13 +4887,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "લંબચોરસની લંબાઈ 12 અને પહોળાઈ 8 છે. તેનું ક્ષેત્રફળ શું છે?",
+          "text_gu": "એક ચોરસની બાજુની લંબાઈ ૧૨ સેમી છે, તો તેનું ક્ષેત્રફળ (Area) કેટલા ચોરસ સેમી થાય?",
           "options_gu": [
-            "20",
-            "40",
-            "96",
-            "192"
-          ]
+            "૧૨૦",
+            "૯૬",
+            "૪૮",
+            "૧૪૪"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "326",
@@ -4874,13 +4909,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "(3/4) × (2/5) કેટલા થાય?",
+          "text_gu": "સાદું રૂપ આપો: ૧૫૦ + (૨૫ × ૪) - (૮૦ ÷ ૨)",
           "options_gu": [
-            "3/10",
-            "6/20",
-            "3/10",
-            "6/9"
-          ]
+            "૨૧૦",
+            "૨૫૦",
+            "૧૯૦",
+            "૨૩૦"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "327",
@@ -4895,13 +4931,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "જો કોઈ સંખ્યાનો 20% 15 છે, તો તે સંખ્યાનો 80% શું છે?",
+          "text_gu": "એક વર્ગખંડમાં ૬૦ વિદ્યાર્થીઓ છે, જેમાંથી ૩૫% છોકરીઓ છે. તો વર્ગખંડમાં છોકરાઓની સંખ્યા કેટલી હશે?",
           "options_gu": [
-            "50",
-            "60",
-            "70",
-            "75"
-          ]
+            "૨૧",
+            "૩૫",
+            "૩૯",
+            "૪૦"
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "328",
@@ -4916,13 +4953,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "85, 92, 78, 96, અને 89 ની સરેરાશ શું છે?",
+          "text_gu": "જો કોઈ રકમનું ૨ વર્ષનું ૫% ના દરે ચક્રવૃદ્ધિ વ્યાજ (Compound Interest) અને સાદા વ્યાજનો તફાવત ₹૨૫ હોય, તો તે મૂળ રકમ (મુદ્દલ) શોધો.",
           "options_gu": [
-            "87",
-            "88",
-            "89",
-            "90"
-          ]
+            "₹૫,૦૦૦",
+            "₹૧૦,૦૦૦",
+            "₹૨૦,૦૦૦",
+            "₹૧૫,૦૦૦"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "329",
@@ -4937,13 +4975,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "જો 5x + 3 = 3x + 15, તો x ની કિંમત શું છે:",
+          "text_gu": "એક સ્ટેશનરીની દુકાનમાં ૬ પેનની કિંમત ₹૯૦ છે. તો આવી ૧૫ પેનની કિંમત કેટલી થશે?",
           "options_gu": [
-            "4",
-            "5",
-            "6",
-            "7"
-          ]
+            "₹૧૫૦",
+            "₹૨૦૦",
+            "₹૨૫૦",
+            "₹૨૨૫"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "330",
@@ -4958,13 +4997,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "વર્તુળની ત્રિજ્યા 5 છે. તેનું ક્ષેત્રફળ શું છે? (π = 3.14 લો)",
+          "text_gu": "૩૨૦ ના ૭૫% ના ૨૫% કેટલા થાય?",
           "options_gu": [
-            "78.5",
-            "79.5",
-            "31.4",
-            "15.7"
-          ]
+            "૮૦",
+            "૫૦",
+            "૪૦",
+            "૬૦"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "331",
@@ -4979,13 +5019,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "150 ના 40% કેટલા થાય?",
+          "text_gu": "અજય એક કામ ૧૦ દિવસમાં અને વિજય તે જ કામ ૧૫ દિવસમાં પૂરું કરી શકે છે. જો બંને ભેગા મળીને કામ કરે, તો કામ કેટલા દિવસમાં પૂરું થાય?",
           "options_gu": [
-            "50",
-            "55",
-            "60",
-            "65"
-          ]
+            "૬ દિવસ",
+            "૮ દિવસ",
+            "૫ દિવસ",
+            "૭ દિવસ"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "332",
@@ -5000,13 +5041,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "જો 3 પેન્સિલની કિંમત $2.40 છે, તો 8 પેન્સિલની કિંમત કેટલી?",
+          "text_gu": "૨૦૦ મીટર લાંબી એક ટ્રેન ૭૨ કિમી/કલાકની ઝડપે દોડે છે. આ ટ્રેન રસ્તામાં ઉભેલા એક થાંભલાને કેટલા સમયમાં (સેકન્ડમાં) પસાર કરશે?",
           "options_gu": [
-            "$6.00",
-            "$6.40",
-            "$6.80",
-            "$7.20"
-          ]
+            "૨૦ સેકન્ડ",
+            "૧૦ સેકન્ડ",
+            "૧૨ સેકન્ડ",
+            "૧૫ સેકન્ડ"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "333",
@@ -5021,13 +5063,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "આગળની સંખ્યા શું છે: 1, 4, 9, 16, 25, ?",
+          "text_gu": "એક લંબચોરસની લંબાઈ ૧૫ સેમી અને પહોળાઈ ૧૦ સેમી છે, તો તેની પરિમિતિ (Perimeter) કેટલી થશે?",
           "options_gu": [
-            "30",
-            "35",
-            "36",
-            "49"
-          ]
+            "૫૦ સેમી",
+            "૨૫ સેમી",
+            "૧૫૦ સેમી",
+            "૭૫ સેમી"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "334",
@@ -5042,13 +5085,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "જો a = 3 અને b = 4, તો a² + b² કેટલા થાય?",
+          "text_gu": "જો કોઈ વસ્તુ ₹૮૦૦ માં વેચવાથી ૨૦% ખોટ (નુકસાન) જતી હોય, તો તે વસ્તુની મૂળ કિંમત કેટલી હશે?",
           "options_gu": [
-            "24",
-            "25",
-            "49",
-            "144"
-          ]
+            "₹૧૧૦૦",
+            "₹૧૨૦૦",
+            "₹૯૦૦",
+            "₹૧૦૦૦"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "335",
@@ -5063,13 +5107,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "(2/3) + (1/4) કેટલા થાય?",
+          "text_gu": "નીચે આપેલી સંખ્યા શ્રેણીમાં પ્રશ્નચિહ્ન (?) ની જગ્યાએ કઈ સંખ્યા આવશે?\n૪, ૯, ૧૬, ૨૫, ૩૬, ?",
           "options_gu": [
-            "3/7",
-            "11/12",
-            "8/12",
-            "5/6"
-          ]
+            "૪૦",
+            "૬૪",
+            "૪૯",
+            "૪૫"
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "336",
@@ -5084,13 +5129,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "જો 6x - 4 = 2x + 12, તો x ની કિંમત શું છે:",
+          "text_gu": "બે સંખ્યાઓનો ગુણોત્તર ૩ : ૪ છે. જો તેમનો ગુરુત્તમ સામાન્ય અવયવ (HCF) ૫ હોય, તો તેમાંથી મોટી સંખ્યા કઈ હશે?",
           "options_gu": [
-            "3",
-            "4",
-            "5",
-            "6"
-          ]
+            "૨૦",
+            "૩૦",
+            "૨૫",
+            "૧૫"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "337",
@@ -5105,13 +5151,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "200 ના 35% કેટલા થાય?",
+          "text_gu": "એક રેડિયોની છાપેલી કિંમત ₹૧૫૦૦ છે. દુકાનદાર તેના પર ૧૦% વળતર (Discount) આપે છે, તો ગ્રાહકે રેડિયો ખરીદવા કેટલા રૂપિયા ચૂકવવા પડશે?",
           "options_gu": [
-            "65",
-            "70",
-            "75",
-            "80"
-          ]
+            "₹૧૩૫૦",
+            "₹૧૩૦૦",
+            "₹૧૪૫૦",
+            "₹૧૪૦૦"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "338",
@@ -5126,13 +5173,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "ત્રિકોણની બાજુઓ 3, 4 અને 5 છે. તેની પરિમિતિ શું છે?",
+          "text_gu": "પિતાની ઉંમર પુત્રની ઉંમર કરતાં ૪ ગણી છે. ૫ વર્ષ પહેલાં પિતાની ઉંમર પુત્રની ઉંમર કરતાં ૭ ગણી હતી. તો પુત્રની વર્તમાન ઉંમર કેટલી હશે?",
           "options_gu": [
-            "10",
-            "12",
-            "15",
-            "60"
-          ]
+            "૧૫ વર્ષ",
+            "૧૦ વર્ષ",
+            "૧૨ વર્ષ",
+            "૮ વર્ષ"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "339",
@@ -5147,13 +5195,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "જો 7y + 2 = 5y + 18, તો y ની કિંમત શું છે:",
+          "text_gu": "જો કોઈ રકમ સાદા વ્યાજે ૮ વર્ષમાં બમણી (Double) થતી હોય, તો વ્યાજનો વાર્ષિક દર કેટલો હશે?",
           "options_gu": [
-            "6",
-            "7",
-            "8",
-            "9"
-          ]
+            "૧૦%",
+            "૧૨.૫%",
+            "૧૫%",
+            "૮%"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "340",
@@ -5168,13 +5217,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "144 નું વર્ગમૂળ શું છે?",
+          "text_gu": "એક ત્રિકોણના ત્રણેય ખૂણાઓનો ગુણોત્તર ૨ : ૩ : ૪ છે. તો ત્રિકોણના સૌથી મોટા ખૂણાનું માપ કેટલા અંશ (Degree) હશે?",
           "options_gu": [
-            "11",
-            "12",
-            "13",
-            "14"
-          ]
+            "૬૦°",
+            "૮૦°",
+            "૧૦૦°",
+            "૯૦°"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "341",
@@ -5714,13 +5764,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 0.1,
-          "text_gu": "જ્યારે એકસાથે મૂકવામાં આવે, ત્યારે તમને કયો 3-પરિમાણીય આકાર મળશે?",
+          "text_gu": "ભેગા કરવામાં આવે ત્યારે, તમને કયો ત્રિ-પરિમાણીય આકાર મળશે?",
           "options_gu": [
             "Pattern A",
             "Pattern B",
             "Pattern C",
             "Pattern D"
-          ]
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "367",
@@ -5735,13 +5786,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 0.1,
-          "text_gu": "ગડી કરવામાં આવે ત્યારે કયો પેટર્ન શક્ય છે?",
+          "text_gu": "જ્યારે ફોલ્ડ કરવામાં આવે છે, ત્યારે કયો પેટર્ન શક્ય છે?",
           "options_gu": [
             "A",
             "B",
             "C",
             "D"
-          ]
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "368",
@@ -5756,13 +5808,14 @@ const PACKAGE = {
           "correctOption": "D",
           "reverseScored": false,
           "weight": 0.1,
-          "text_gu": "નીચેના ટુકડાઓના જોડાણને કયો આકાર રજૂ કરે છે?",
+          "text_gu": "કઈ આકૃતિ નીચેના ટુકડાઓના સમૂહનું પ્રતિનિધિત્વ કરે છે?",
           "options_gu": [
             "A",
             "B",
             "C",
             "D"
-          ]
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "369",
@@ -5777,13 +5830,14 @@ const PACKAGE = {
           "correctOption": "D",
           "reverseScored": false,
           "weight": 0.1,
-          "text_gu": "નીચેના આકારને ગડી કરવાથી કયો ઘન મળે છે?",
+          "text_gu": "નીચેના આકારને ફોલ્ડ કરીને કયો ઘન મેળવવામાં આવે છે?",
           "options_gu": [
             "6",
             "7",
             "8",
             "9"
-          ]
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "370",
@@ -5798,13 +5852,14 @@ const PACKAGE = {
           "correctOption": "D",
           "reverseScored": false,
           "weight": 0.1,
-          "text_gu": "નીચેના આકારને ગડી કરવાથી કયો ઘન મળે છે?",
+          "text_gu": "નીચેના આકારને ફોલ્ડ કરીને કયો ઘન મેળવવામાં આવે છે?",
           "options_gu": [
             "Piece A",
             "Piece B",
             "Piece C",
             "Piece D"
-          ]
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "371",
@@ -5819,13 +5874,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 0.1,
-          "text_gu": "ઉઘાડેલા ઘનના આધારે કયો ઘન બની શકતો નથી?",
+          "text_gu": "ખુલેલા ઘનના આધારે કયો ઘન બનાવી શકાતો નથી?",
           "options_gu": [
             "P",
             "q",
             "b",
             "d"
-          ]
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "372",
@@ -5840,13 +5896,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 0.1,
-          "text_gu": "ઉઘાડેલા ઘનના આધારે કયો ઘન બની શકતો નથી?",
+          "text_gu": "ખુલેલા ઘનના આધારે કયો ઘન બનાવી શકાતો નથી?",
           "options_gu": [
             "Shadow A",
             "Shadow B",
             "Shadow C",
             "Shadow D"
-          ]
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "373",
@@ -5861,13 +5918,14 @@ const PACKAGE = {
           "correctOption": "D",
           "reverseScored": false,
           "weight": 0.1,
-          "text_gu": "આપેલા આકારના પરિભ્રમણ સાથે કયો આકાર મળે છે?",
+          "text_gu": "કઈ આકૃતિ વસ્તુનું પરિભ્રમણ છે?",
           "options_gu": [
             "12",
             "13",
             "14",
             "15"
-          ]
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "374",
@@ -5882,13 +5940,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 0.1,
-          "text_gu": "આપેલા આકારના પરિભ્રમણ સાથે કયો આકાર મળે છે?",
+          "text_gu": "કઈ આકૃતિ વસ્તુનું પરિભ્રમણ છે?",
           "options_gu": [
             "Figure A",
             "Figure B",
             "Figure C",
             "Figure D"
-          ]
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "375",
@@ -5903,13 +5962,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 0.1,
-          "text_gu": "આપેલા આકારના પરિભ્રમણ સાથે કયો આકાર મળે છે?",
+          "text_gu": "કઈ આકૃતિ આપેલ વસ્તુનું પરિભ્રમણ છે?",
           "options_gu": [
             "Net A",
             "Net B",
             "Net C",
             "Net D"
-          ]
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "376",
@@ -5924,13 +5984,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 0.1,
-          "text_gu": "આપેલા આકારનું ઉપરથી દૃશ્ય કયો આકાર છે?",
+          "text_gu": "આપેલ આકારનું ઉપરથી નીચે સુધીનું દૃશ્ય કઈ આકૃતિ દર્શાવે છે?",
           "options_gu": [
             "Piece A",
             "Piece B",
             "Piece C",
             "Piece D"
-          ]
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "377",
@@ -5945,13 +6006,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 0.1,
-          "text_gu": "ઘન બનાવવા માટે આપેલા આકાર સાથે કયો આકાર બંધબેસે છે?",
+          "text_gu": "સમઘન બનાવવા માટે કઈ આકૃતિ આપેલ વસ્તુને બંધબેસે છે?",
           "options_gu": [
             "Front",
             "Back",
             "Left",
             "Right"
-          ]
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "378",
@@ -5966,13 +6028,14 @@ const PACKAGE = {
           "correctOption": "D",
           "reverseScored": false,
           "weight": 0.1,
-          "text_gu": "ચોરસ બનાવવા માટે માત્ર પરિભ્રમણથી આપેલા આકાર સાથે કયો આકાર બંધબેસે છે?",
+          "text_gu": "ચોરસ બનાવવા માટે ફક્ત પરિભ્રમણનો ઉપયોગ કરીને કઈ આકૃતિ આપેલ વસ્તુને બંધબેસે છે?",
           "options_gu": [
             "5",
             "6",
             "7",
             "8"
-          ]
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "379",
@@ -5987,13 +6050,14 @@ const PACKAGE = {
           "correctOption": "D",
           "reverseScored": false,
           "weight": 0.1,
-          "text_gu": "ઉઘાડેલા ઘનના આધારે કયો ઘન બની શકતો નથી?",
+          "text_gu": "ખુલેલા ઘનના આધારે કયો ઘન બનાવી શકાતો નથી?",
           "options_gu": [
             "Shape A",
             "Shape B",
             "Shape C",
             "Shape D"
-          ]
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "380",
@@ -6008,13 +6072,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 0.1,
-          "text_gu": "આપેલા ઘનને કયો ટુકડો અનુરૂપ છે?",
+          "text_gu": "આપેલ ઘન પદાર્થ સાથે કયો ટુકડો મેળ ખાય છે?",
           "options_gu": [
             "►",
             "▲",
             "▼",
             "◄"
-          ]
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "381",
@@ -6029,13 +6094,14 @@ const PACKAGE = {
           "correctOption": "D",
           "reverseScored": false,
           "weight": 0.1,
-          "text_gu": "આપેલા આકારના પરિભ્રમણ સાથે કયો આકાર મળે છે?",
+          "text_gu": "આપેલ આકારને ફોલ્ડ કરીને કયો ઘન બનાવી શકાય?",
           "options_gu": [
             "Circle",
             "Square",
             "Triangle",
             "Rectangle"
-          ]
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "382",
@@ -6050,13 +6116,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 0.1,
-          "text_gu": "પ્રથમ આકારના પરિભ્રમણ સાથે રજૂ કરેલા 4 આકારોમાંથી (A, B, C, D) કયો છે?",
+          "text_gu": "કઈ આકૃતિ પદાર્થનું પરિભ્રમણ દર્શાવે છે?",
           "options_gu": [
             "6",
             "8",
             "10",
             "12"
-          ]
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "383",
@@ -6071,13 +6138,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 0.1,
-          "text_gu": "આપેલા ઘનને કયો ટુકડો અનુરૂપ છે?",
+          "text_gu": "પ્રસ્તુત 4 આકૃતિઓ (A, B, C, D) માંથી કઈ આકૃતિ પહેલાનું પરિભ્રમણ છે?",
           "options_gu": [
             "View A",
             "View B",
             "View C",
             "View D"
-          ]
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "384",
@@ -6092,13 +6160,14 @@ const PACKAGE = {
           "correctOption": "D",
           "reverseScored": false,
           "weight": 0.1,
-          "text_gu": "આપેલા ઘનને કયો ટુકડો અનુરૂપ છે?",
+          "text_gu": "આપેલ ઘન પદાર્થ સાથે કયો ટુકડો મેળ ખાય છે?",
           "options_gu": [
             "Result A",
             "Result B",
             "Result C",
             "Result D"
-          ]
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "385",
@@ -6113,13 +6182,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 0.1,
-          "text_gu": "આપેલા આકારને ગડી કરીને કયો પદાર્થ બનાવી શકાય?",
+          "text_gu": "આપેલ ઘન પદાર્થ સાથે કયો ટુકડો મેળ ખાય છે?",
           "options_gu": [
             "Turn left 90°",
             "Turn right 90°",
             "Turn 180°",
             "Don't turn"
-          ]
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "386",
@@ -6134,13 +6204,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 0.1,
-          "text_gu": "2D પરિભ્રમણથી કયો આકાર બનાવી શકાય?",
+          "text_gu": "આપેલ આકારને ફોલ્ડ કરીને કઈ વસ્તુ બનાવી શકાય છે?",
           "options_gu": [
             "6",
             "8",
             "10",
             "12"
-          ]
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "387",
@@ -6155,13 +6226,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 0.1,
-          "text_gu": "આપેલા ટુકડાઓથી કયો આકાર બનાવી શકાય?",
+          "text_gu": "2D પરિભ્રમણનો ઉપયોગ કરીને કઈ આકૃતિ બનાવી શકાય છે?",
           "options_gu": [
             "Pattern A",
             "Pattern B",
             "Pattern C",
             "Pattern D"
-          ]
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "388",
@@ -6176,13 +6248,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 0.1,
-          "text_gu": "આપેલું ઉપરનું દૃશ્ય કયો પદાર્થ સાથે મેળ ખાય છે?",
+          "text_gu": "આપેલા ટુકડાઓ વડે કઈ આકૃતિ બનાવી શકાય?",
           "options_gu": [
             "Position A",
             "Position B",
             "Position C",
             "Position D"
-          ]
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "389",
@@ -6197,13 +6270,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 0.1,
-          "text_gu": "x ધરી પર ઊભા પ્રતિબિંબ માટે કયો આકાર છે?",
+          "text_gu": "આપેલ ટોચનું દૃશ્ય કયા પદાર્થને અનુરૂપ છે?",
           "options_gu": [
             "Cone",
             "Cylinder",
             "Pyramid",
             "Prism"
-          ]
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "390",
@@ -6218,13 +6292,14 @@ const PACKAGE = {
           "correctOption": "D",
           "reverseScored": false,
           "weight": 0.1,
-          "text_gu": "આપેલા આકારને ગડી કરીને કયો ઘન બનાવી શકાય?",
+          "text_gu": "કઈ આકૃતિ x અક્ષ પર ઊભી પ્રતિબિંબ છે?",
           "options_gu": [
             "1",
             "2",
             "3",
             "6"
-          ]
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "411",
@@ -6239,13 +6314,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "કઈ જોડીઓ સમાન છે તે તપાસો. 1. 7849362 / 7849362 2. 4726193 / 4726139 3. 9384751 / 9384751 4. 5627384 / 5627348",
+          "text_gu": "મૂળ માહિતી અને વિકલ્પો ધ્યાનપૂર્વક ચકાસો. કયો વિકલ્પ મૂળ વિગત સાથે સંપૂર્ણ અક્ષરશઃ (Exact Match) મેળ ખાય છે તે શોધો.\nમૂળ વિગત:\nકુમાર હર્ષવર્ધન વ્યાસ, પ્લોટ નં. ૪૮-બી, 'શ્રીજી નિવાસ', ગોકુલધામ સોસાયટી, રાજકોટ - ૩૬૦૦૦૫",
           "options_gu": [
-            "Pairs 1 and 3 are identical.",
-            "Pairs 1, 3, and 4 are identical.",
-            "Pairs 1, 2, 3, and 4 are identical.",
-            "Pairs 2 and 4 are identical."
-          ]
+            "કુમાર હર્ષવર્ધન વ્યાસ, પ્લોટ નં. ૪૮-ડી, 'શ્રીજી નિવાસ', ગોકુલધામ સોસાયટી, રાજકોટ - ૩૬૦૦૦૫",
+            "કુમાર હર્ષવર્ધન વ્યાસ, પ્લોટ નં. ૪૮-બી, 'શ્રીજી નિવાસ', ગોકુલધામ સોસાયટી, રાજકોટ - ૩૬૦૦૦૫",
+            "કુમાર હર્ષવર્ધન વ્યાસ, પ્લોટ નં. ૪૮-બી, 'શ્રીજી નિવાસ', ગોકુલધામ સોસાયટી, રાજકોટ - ૩૬૦૦૦૪",
+            "કુમાર હર્ષવર્ધન વ્યાસ, પ્લોટ નં. ૪૮-બી, 'શ્રીજી નિવાસ', ગોકુલધામ સોસાયટી, રાજકોટ - ૩૬૦૦૫૦"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "412",
@@ -6260,13 +6336,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "કઈ જોડીઓ સમાન છે તે તપાસો. 1. MARTINEZ / MARTINEZ 2. JOHNSON / JONHSON 3. WILLIAMS / WILLIAMS 4. ANDERSON / ANDERSON",
+          "text_gu": "મૂળ માહિતી અને વિકલ્પો ધ્યાનપૂર્વક ચકાસો. કયો વિકલ્પ મૂળ વિગત સાથે સંપૂર્ણ અક્ષરશઃ (Exact Match) મેળ ખાય છે તે શોધો.\nમૂળ વિગત:\nDr. Nilay K. Majmudar, Dept. of Micro-Biology, Block-C/104, Navrangpura, Ahmedabad-380009",
           "options_gu": [
-            "Pairs 1 and 3 are identical.",
-            "Pairs 1, 3, and 4 are identical.",
-            "Pairs 1, 2, 3, and 4 are identical.",
-            "Pairs 2 and 4 are identical."
-          ]
+            "Dr. Nilay K. Majmudar, Dept. of Micro-Biology, Block-C/140, Navrangpura, Ahmedabad-380009",
+            "Dr. Malay K. Majmudar, Dept. of Micro-Biology, Block-C/104, Navrangpura, Ahmedabad-380009",
+            "Dr. Nilay K. Majmudar, Dept. of Macro-Biology, Block-C/104, Navrangpura, Ahmedabad-380009",
+            "Dr. Nilay K. Majmudar, Dept. of Micro-Biology, Block-C/104, Navrangpura, Ahmedabad-380009"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "413",
@@ -6281,13 +6358,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "કઈ જોડીઓ સમાન છે તે તપાસો. 1. 392.847 / 392.847 2. 156.329 / 156.392 3. 748.516 / 748.516 4. 283.674 / 283.674",
+          "text_gu": "મૂળ માહિતી અને વિકલ્પો ધ્યાનપૂર્વક ચકાસો. કયો વિકલ્પ મૂળ વિગત સાથે સંપૂર્ણ અક્ષરશઃ (Exact Match) મેળ ખાય છે તે શોધો.\nમૂળ વિગત:\nGSTIN: 24AAACG1234F1Z8 | PAN: AACPG9821K | Ref: STC/2026-27/089",
           "options_gu": [
-            "Pairs 1 and 3 are identical.",
-            "Pairs 1, 2, 3, and 4 are identical.",
-            "Pairs 1, 3, and 4 are identical.",
-            "Pairs 2 and 4 are identical."
-          ]
+            "GSTIN: 24AAACG1234F1Z3 | PAN: AACPG9821K | Ref: STC/2026-27/089",
+            "GSTIN: 24AAACG1234F1Z8 | PAN: AACPG9812K | Ref: STC/2026-27/089",
+            "GSTIN: 24AAACG1234F1Z8 | PAN: AACPG9821K | Ref: STC/2026-27/098",
+            "GSTIN: 24AAACG1234F1Z8 | PAN: AACPG9821K | Ref: STC/2026-27/089"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "414",
@@ -6302,13 +6380,12 @@ const PACKAGE = {
           "correctOption": "D",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "કયા સરનામા સમાન છે તે તપાસો. 1. 123 Oak Street / 123 Oak Street 2. 456 Pine Avenue / 456 Pine Avenue 3. 789 Elm Drive / 789 Elm Drive 4. 321 Main Road / 321 Maine Road",
+          "text_gu": "સૂચના: આપેલ બે સંખ્યાઓ/કોડ સરખા છે કે અલગ તે ચકાસો.\n૮૯૫૪૨૧૬૩૦૫૭ — ૮૯૫૪૨૧૬૩૦૫૭",
           "options_gu": [
-            "Pairs 1 and 3 are identical.",
-            "Pairs 1, 3, and 4 are identical.",
-            "Pairs 1, 2, 3, and 4 are identical.",
-            "Pairs 1, 2, and 3 are identical."
-          ]
+            "સમાન (S)",
+            "અલગ (D)"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "415",
@@ -6323,13 +6400,12 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "સમાન ફોન નંબર ચિહ્નિત કરો. 1. 555 123 4567 / 555 123 4567 2. 555 987 6543 / 555 987 6534 3. 555 246 8135 / 555 246 8135 4. 555 369 7428 / 555 369 7428",
+          "text_gu": "સૂચના: આપેલ બે સંખ્યાઓ/કોડ સરખા છે કે અલગ તે ચકાસો.\n૭૩૪૯૧૨૫૮૬૦૪ — ૭૩૪૯૧૨૫૬૮૦૪",
           "options_gu": [
-            "Pairs 1, 3, and 4 are identical.",
-            "Pairs 1 and 3 are identical.",
-            "Pairs 1, 2, 3, and 4 are identical.",
-            "Pairs 2 and 4 are identical."
-          ]
+            "સમાન (S)",
+            "અલગ (D)"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "416",
@@ -6344,13 +6420,12 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "મેળ ખાતા કોડ ઓળખો. 1. ABC123XYZ / ABC123XYZ 2. DEF456UVW / DEF456UVW 3. GHI789RST / GHI789RST 4. JKL012MNO / JKL021MNO",
+          "text_gu": "સૂચના: આપેલ બે સંખ્યાઓ/કોડ સરખા છે કે અલગ તે ચકાસો.\nGJ-11-AK-9842 — GJ-11-AK-9842",
           "options_gu": [
-            "Pairs 1 and 3 are identical.",
-            "Pairs 1, 2, and 3 are identical.",
-            "Pairs 1, 3, and 4 are identical.",
-            "Pairs 1, 2, 3, and 4 are identical."
-          ]
+            "સમાન (S)",
+            "અલગ (D)"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "417",
@@ -6365,13 +6440,12 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "સમાન તારીખો તપાસો. 1. 03/15/2023 / 03/15/2023 2. 07/22/2024 / 07/22/2024 3. 11/08/2025 / 11/08/2025 4. 09/14/2026 / 09/41/2026",
+          "text_gu": "સૂચના: આપેલ બે સંખ્યાઓ/કોડ સરખા છે કે અલગ તે ચકાસો.\nTRN-9082736145 — TRN-9082736415",
           "options_gu": [
-            "Pairs 1 and 3 are identical.",
-            "Pairs 1, 3, and 4 are identical.",
-            "Pairs 1, 2, and 3 are identical.",
-            "Pairs 1, 2, 3, and 4 are identical."
-          ]
+            "સમાન (S)",
+            "અલગ (D)"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "418",
@@ -6386,13 +6460,12 @@ const PACKAGE = {
           "correctOption": "D",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "મેળ ખાતી રકમ ચિહ્નિત કરો. 1. $1,247.83 / $1,247.83 2. $3,569.47 / $3,569.74 3. $2,834.59 / $2,834.59 4. $4,751.26 / $4,751.26",
+          "text_gu": "સૂચના: આપેલ બે સંખ્યાઓ/કોડ સરખા છે કે અલગ તે ચકાસો.\nPXQ-849-VTLM-92 — PXQ-849-VTLM-92",
           "options_gu": [
-            "Pairs 1 and 3 are identical.",
-            "Pairs 1, 2, 3, and 4 are identical.",
-            "Pairs 2 and 4 are identical.",
-            "Pairs 1, 3, and 4 are identical."
-          ]
+            "સમાન (S)",
+            "અલગ (D)"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "419",
@@ -6407,13 +6480,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "સમાન ક્રમ શોધો. 1. QWERTY123 / QWERTY123 2. ASDFGH456 / ASDFGH456 3. ZXCVBN789 / ZXCVBN798 4. POIUYT321 / POIUYT321",
+          "text_gu": "ગુજરાતી કક્કાવારી મુજબ સૌથી પહેલો કયો શબ્દ આવશે?",
           "options_gu": [
-            "Pairs 1, 2, and 4 are identical.",
-            "Pairs 1 and 3 are identical.",
-            "Pairs 1, 3, and 4 are identical.",
-            "Pairs 1, 2, 3, and 4 are identical."
-          ]
+            "ગિરીશ",
+            "ગોપાલ",
+            "ગૌતમ",
+            "ગણેશ"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "420",
@@ -6428,13 +6502,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "મેળ ખાતા નામો તપાસો. 1. MacDonald / MacDonald 2. O'Connor / O'Conner 3. Van Der Berg / Van Der Berg 4. De La Cruz / De La Cruz",
+          "text_gu": "ગુજરાતી શબ્દકોશ મુજબ સાચો ક્રમ કયો છે?\n૧. કમળ\n૨. કાજલ\n૩. કિરણ\n૪. કોમલ",
           "options_gu": [
-            "Pairs 1 and 3 are identical.",
-            "Pairs 1, 3, and 4 are identical.",
-            "Pairs 1, 2, 3, and 4 are identical.",
-            "Pairs 2 and 4 are identical."
-          ]
+            "૧, ૨, ૩, ૪",
+            "૨, ૧, ૩, ૪",
+            "૧, ૩, ૨, ૪",
+            "૩, ૨, ૧, ૪"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "421",
@@ -6449,13 +6524,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "સમાન સમય ચિહ્નિત કરો. 1. 10:45AM / 10:45AM 2. 02:30PM / 02:30PM 3. 08:15AM / 08:51AM 4. 11:20PM / 11:20PM",
+          "text_gu": "અંગ્રેજી ડિક્શનરી (Dictionary Filing) મુજબ આપેલા શબ્દોનો સાચો ક્રમ પસંદ કરો:\n1. Record\n2. Receive\n3. Receipt\n4. Recover",
           "options_gu": [
-            "Pairs 1 and 3 are identical.",
-            "Pairs 1, 3, and 4 are identical.",
-            "Pairs 1, 2, and 4 are identical.",
-            "Pairs 1, 2, 3, and 4 are identical."
-          ]
+            "2, 3, 1, 4",
+            "3, 2, 4, 1",
+            "2, 1, 3, 4",
+            "3, 2, 1, 4"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "422",
@@ -6470,13 +6546,14 @@ const PACKAGE = {
           "correctOption": "D",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "મેળ ખાતા ID નંબરો શોધો. 1. EMP001234 / EMP001234 2. STU567890 / STU567890 3. CUS098765 / CUS098756 4. VEN432109 / VEN432109",
+          "text_gu": "નીચેનામાંથી ફાઈલિંગ કેબિનેટમાં સૌથી છેલ્લે કયું નામ આવશે?",
           "options_gu": [
-            "Pairs 1 and 3 are identical.",
-            "Pairs 1, 3, and 4 are identical.",
-            "Pairs 1, 2, 3, and 4 are identical.",
-            "Pairs 1, 2, and 4 are identical."
-          ]
+            "Shah, Rohan",
+            "Sharma, Rohit",
+            "Sheth, Ronak",
+            "Shukla, Ramesh"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "423",
@@ -6491,13 +6568,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "સમાન ટકાવારી તપાસો. 1. 47.8% / 47.8% 2. 23.5% / 23.5% 3. 91.2% / 91.2% 4. 68.7% / 68.9%",
+          "text_gu": "'B K R M P' શબ્દનો સાચો અંક કોડ કયો થશે?\nસૂચના: નીચેના કોડ ટેબલના આધારે પ્રશ્નોના ઉત્તર આપો:\nM = 4, K = 7, T = 2, R = 9, B = 1, P = 5, W = 8, D = 3",
           "options_gu": [
-            "Pairs 1, 2, and 3 are identical.",
-            "Pairs 1 and 3 are identical.",
-            "Pairs 1, 3, and 4 are identical.",
-            "Pairs 1, 2, 3, and 4 are identical."
-          ]
+            "૧ ૪ ૭ ૯ ૫",
+            "૧ ૭ ૪ ૯ ૫",
+            "૧ ૭ ૯ ૫ ૪",
+            "૧ ૭ ૯ ૪ ૫"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "424",
@@ -6512,13 +6590,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "મેળ ખાતા ઈમેલ સરનામા ચિહ્નિત કરો. 1. john@email.com / john@email.com 2. mary@company.org / mary@company.org 3. bob@service.net / bob@service.net 4. lisa@business.edu / lisa@buisness.edu",
+          "text_gu": "કોડ '૮ ૨ ૫ ૩ ૭' કયા શબ્દનું પ્રતિનિધિત્વ કરે છે?\nસૂચના: નીચેના કોડ ટેબલના આધારે પ્રશ્નોના ઉત્તર આપો:\nM = 4, K = 7, T = 2, R = 9, B = 1, P = 5, W = 8, D = 3",
           "options_gu": [
-            "Pairs 1 and 3 are identical.",
-            "Pairs 1, 2, and 3 are identical.",
-            "Pairs 1, 3, and 4 are identical.",
-            "Pairs 1, 2, 3, and 4 are identical."
-          ]
+            "W T B D K",
+            "W T P M K",
+            "W T P D K",
+            "W R P D K"
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "425",
@@ -6533,13 +6612,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "સમાન માપ શોધો. 1. 15.75 inches / 15.75 inches 2. 23.40 feet / 23.04 feet 3. 8.625 yards / 8.625 yards 4. 12.33 meters / 12.33 meters",
+          "text_gu": "જો M = ૪ અને D = ૩ હોય, તો 'D B T M' માટેનો કોડ શોધો:\nસૂચના: નીચેના કોડ ટેબલના આધારે પ્રશ્નોના ઉત્તર આપો:\nM = 4, K = 7, T = 2, R = 9, B = 1, P = 5, W = 8, D = 3",
           "options_gu": [
-            "Pairs 1 and 3 are identical.",
-            "Pairs 1, 2, 3, and 4 are identical.",
-            "Pairs 1, 3, and 4 are identical.",
-            "Pairs 2 and 4 are identical."
-          ]
+            "૩ ૧ ૨ ૪",
+            "૪ ૧ ૨ ૩",
+            "૩ ૧ ૪ ૨",
+            "૩ ૨ ૧ ૪"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "426",
@@ -6554,13 +6634,14 @@ const PACKAGE = {
           "correctOption": "D",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "મેળ ખાતા પ્રોડક્ટ કોડ તપાસો. 1. PRD 4587 A / PRD 4587 A 2. ITM 9321 B / ITM 9321 B 3. SKU 7654 C / SKU 7645 C 4. REF 2468 D / REF 2468 D",
+          "text_gu": "એક સ્ટેશનરી બિલમાં નીચે મુજબ વસ્તુઓ ઉમેરેલી છે:\n• ૨ નોટબુક: ₹૮૦\n• ૫ પેન: ₹૫૦\n• ૧ ફાઈલ: ₹૪૫\n• ૧ સ્ટેપલર: ₹૭૫\nબિલનો સાચો કુલ સરવાળો કેટલો થાય?",
           "options_gu": [
-            "Pairs 1 and 3 are identical.",
-            "Pairs 1, 3, and 4 are identical.",
-            "Pairs 1, 2, 3, and 4 are identical.",
-            "Pairs 1, 2, and 4 are identical."
-          ]
+            "₹૨૫૫",
+            "₹૨૪૦",
+            "₹૨૫૦",
+            "₹૨૬૦"
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "427",
@@ -6575,13 +6656,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "સમાન સોશિયલ સિક્યુરિટી નંબરો ચિહ્નિત કરો. 1. 123 45 6789 / 123 45 6789 2. 987 65 4321 / 987 65 4321 3. 456 78 9123 / 456 78 9132 4. 789 12 3456 / 789 12 3456",
+          "text_gu": "ઝડપી સરવાળો કરો: ૩૪૫ + ૨૧૮ + ૧૩૭ = ?",
           "options_gu": [
-            "Pairs 1, 2, and 4 are identical.",
-            "Pairs 1 and 3 are identical.",
-            "Pairs 1, 3, and 4 are identical.",
-            "Pairs 1, 2, 3, and 4 are identical."
-          ]
+            "૬૮૦",
+            "૭૧૦",
+            "૭૦૦",
+            "૬૯૦"
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "428",
@@ -6596,13 +6678,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "મેળ ખાતા ઝિપ કોડ શોધો. 1. 90210 1234 / 90210 1234 2. 10001 5678 / 10001 5678 3. 60601 9012 / 60601 9012 4. 30301 3456 / 30301 3465",
+          "text_gu": "ઝડપી બાદબાકી કરો: ૫,૦૦૦ - ૨,૩૪૮ = ?",
           "options_gu": [
-            "Pairs 1 and 3 are identical.",
-            "Pairs 1, 2, and 3 are identical.",
-            "Pairs 1, 3, and 4 are identical.",
-            "Pairs 1, 2, 3, and 4 are identical."
-          ]
+            "૨,૬૫૨",
+            "૨,૬૬૨",
+            "૩,૬૫૨",
+            "૨,૭૫૨"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "429",
@@ -6617,13 +6700,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "સમાન લાયસન્સ પ્લેટ તપાસો. 1. ABC 1234 / ABC 1234 2. XYZ 5678 / XYZ 5678 3. DEF 9012 / DEF 9021 4. GHI 3456 / GHI 3456",
+          "text_gu": "નીચે આપેલી ચાર વિગતોમાંથી કયા વિકલ્પમાં સંખ્યાની જોડણીમાં ભૂલ (Mismatched figures) છે?",
           "options_gu": [
-            "Pairs 1 and 3 are identical.",
-            "Pairs 1, 3, and 4 are identical.",
-            "Pairs 1, 2, and 4 are identical.",
-            "Pairs 1, 2, 3, and 4 are identical."
-          ]
+            "₹૧,૨૫૦ — રૂપિયા એક હજાર બસો પચાસ પૂરા",
+            "₹૧૫,૦૪૦ — રૂપિયા પંદર હજાર ચારસો પૂરા",
+            "₹૭,૮૦૦ — રૂપિયા સાત હજાર આઠસો પૂરા",
+            "₹૨,૫૦૦ — રૂપિયા બે હજાર પાંચસો પૂરા"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "430",
@@ -6638,13 +6722,14 @@ const PACKAGE = {
           "correctOption": "D",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "મેળ ખાતા એકાઉન્ટ નંબરો ચિહ્નિત કરો. 1. 4532 1678 9012 3456 / 4532 1678 9012 3456 2. 9876 5432 1098 7654 / 9876 5432 1098 7654 3. 1357 2468 9024 6810 / 1357 2468 9024 6801 4. 2468 1357 8024 9135 / 2468 1357 8024 9135",
+          "text_gu": "નીચેનામાંથી કઈ જોડીમાં જન્મતારીખ અને અંક સરખા નથી?",
           "options_gu": [
-            "Pairs 1 and 3 are identical.",
-            "Pairs 1, 3, and 4 are identical.",
-            "Pairs 1, 2, 3, and 4 are identical.",
-            "Pairs 1, 2, and 4 are identical."
-          ]
+            "૨૬ જાન્યુઆરી ૧૯૫૦ — 26/01/1950",
+            "૧૫ ઓગસ્ટ ૧૯૪૭ — 15/08/1947",
+            "૧૨ ડિસેમ્બર ૧૯૯૫ — 12/10/1995",
+            "૦૫ નવેમ્બર ૨૦૦૮ — 05/11/2008"
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "391",
@@ -6658,12 +6743,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "ઝરણાં (springs) વિશે કયું વિધાન ખોટું છે?",
+          "text_gu": "સી-સો (ચીંચવો) પર એક છેડે ૪૦ કિગ્રા વજન ધરાવતો વિદ્યાર્થી આધારબિંદુ (Fulcrum) થી ૨ મીટર દૂર બેઠો છે. તેને સંતુલિત કરવા માટે ૨૦ કિગ્રા વજન ધરાવતા બીજા વિદ્યાર્થીએ આધારબિંદુથી કેટલા મીટર દૂર બેસવું પડે?",
           "options_gu": [
-            "ઝરણાં એ એક પ્રકારના સાદા યંત્રો છે",
-            "ઝરણાંનો ઉપયોગ ઊર્જા સંગ્રહ તરીકે થઈ શકે છે",
-            "ઝરણાંનો અચળાંક તે જે સામગ્રીમાંથી બને છે તેના ગુણધર્મો પર આધાર રાખે છે"
-          ]
+            "૩ મીટર",
+            "૧ મીટર",
+            "૪ મીટર",
+            "૨ મીટર"
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "392",
@@ -6677,12 +6764,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "પરિપથમાં ઈલેક્ટ્રોન જ્યાં __?__ ઈલેક્ટ્રોન હોય ત્યાંથી __?__ ઈલેક્ટ્રોન હોય ત્યાં વહે છે.",
+          "text_gu": "નીચેનામાંથી કયું સાધન 'પ્રથમ પ્રકારના ઉચ્ચાલન' (First-Class Lever) નું ઉદાહરણ છે, જેમાં આધારબિંદુ (Fulcrum) વજન અને બળની વચ્ચે હોય છે?",
           "options_gu": [
-            "ઓછા, વધારે",
-            "ઘણા, કોઈ નહીં",
-            "વધારે, ઓછા"
-          ]
+            "હાથલારી (Wheelbarrow)",
+            "બોટલ ઓપનર",
+            "કાતર",
+            "ચીપિયો"
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "393",
@@ -6696,12 +6785,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "ચોક્કસ ગેસનું દબાણ માપવા માટે આપણે __?__ નો ઉપયોગ કરીએ છીએ.",
+          "text_gu": "ભારે પથ્થરને લોખંડના સળિયા (Crowbar) વડે ઊંચકતી વખતે, સળિયા પર હાથ આધારબિંદુથી જેટલો વધારે દૂર રાખવામાં આવે તેટલું:",
           "options_gu": [
-            "બેરોમીટર",
-            "થર્મોમીટર",
-            "મેનોમીટર"
-          ]
+            "પથ્થરનું વજન વધી જાય છે",
+            "ઓછું બળ લગાવવું પડે",
+            "વધારે બળ લગાવવું પડે",
+            "બળમાં કોઈ ફેર પડતો નથી"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "394",
@@ -6715,12 +6806,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "કઈ વસ્તુ ગિયર્સ સાથે સંબંધિત નથી?",
+          "text_gu": "ગિયર A અને ગિયર B એકબીજા સાથે દાંતાથી જોડાયેલા છે. જો ગિયર A ઘડિયાળના કાંટાની દિશામાં (Clockwise) ફરે, તો ગિયર B કઈ દિશામાં ફરશે?",
           "options_gu": [
-            "કોગવ્હીલ",
-            "પિનિયન",
-            "રેક"
-          ]
+            "ગિયર B બિલકુલ ફરશે નહીં",
+            "ઘડિયાળના કાંટાની દિશામાં (Clockwise)",
+            "બંને દિશામાં વારાફરતી ફરશે",
+            "ઘડિયાળના કાંટાની વિરુદ્ધ દિશામાં (Anti-clockwise)"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "395",
@@ -6734,12 +6827,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "નીચેનામાંથી કઈ સામગ્રી ચુંબક બની શકે છે?",
+          "text_gu": "ગિયર X માં ૨૦ દાંતા છે અને તેની સાથે જોડાયેલા મોટા ગિયર Y માં ૪૦ દાંતા છે. જો ગિયર X પ્રતિ મિનિટે ૧૦ આંટા (RPM) ફરે, તો ગિયર Y ની ઝડપ કેટલી હશે?",
           "options_gu": [
-            "એલ્યુમિનિયમ",
-            "તાંબુ",
-            "જસત"
-          ]
+            "૨૦ RPM",
+            "૪૦ RPM",
+            "૧૦ RPM",
+            "૫ RPM"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "396",
@@ -6753,12 +6848,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "નીચેનામાંથી કયું ચાલવા માટે ચુંબકત્વનો ઉપયોગ નથી કરતું?",
+          "text_gu": "કૂવામાંથી પાણી ખેંચવા માટે વપરાતી એક નિશ્ચિત (Fixed Single Pulley) ગગડી વડે ૧૦ કિગ્રા પાણીની ડોલ ઊંચકવા માટે કેટલા બળની જરૂર પડે? (ઘર્ષણ અવગણતાં)",
           "options_gu": [
-            "હોકાયંત્ર",
-            "NMR ઉપકરણ",
-            "વાહન"
-          ]
+            "૧૦ કિગ્રા જેટલું",
+            "૨.૫ કિગ્રા જેટલું",
+            "૨૦ કિગ્રા જેટલું",
+            "૫ કિગ્રા જેટલું"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "397",
@@ -6772,12 +6869,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "પટ્ટા સામાન્ય રીતે એવી સામગ્રીઓથી બને છે જે ઘર્ષણને __?__.",
+          "text_gu": "બે ગગડીઓ ધરાવતી ગતિશીલ ગગડી પ્રણાલી (Movable Pulley System) માં ૬૦ કિગ્રાનો ભાર ઊંચકવા માટે સૈદ્ધાંતિક રીતે કેટલા પ્રયત્ન બળ (Effort) ની જરૂર પડશે?",
           "options_gu": [
-            "વધારે છે",
-            "ઘટાડે છે",
-            "બદલતી નથી"
-          ]
+            "૬૦ કિગ્રા",
+            "૧૨૦ કિગ્રા",
+            "૩૦ કિગ્રા",
+            "૧૫ કિગ્રા"
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "398",
@@ -6791,12 +6890,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "લિવર વિશે કયું વિધાન સાચું છે?",
+          "text_gu": "હાઇડ્રોલિક જેક કે હાઇડ્રોલિક બ્રેક નીચેનામાંથી કયા વૈજ્ઞાનિક નિયમ પર કાર્ય કરે છે?",
           "options_gu": [
-            "બધી લિવરનો યાંત્રિક લાભ સમાન મૂલ્યનો હોય છે",
-            "લિવર એ એક પ્રકારનું સાદું યંત્ર છે",
-            "ક્રોબાર એ ત્રીજા વર્ગની લિવરનું ઉદાહરણ છે"
-          ]
+            "ન્યૂટનનો ગતિનો ત્રીજો નિયમ",
+            "પાસ્કલનો નિયમ",
+            "આર્કિમિડીઝનો સિદ્ધાંત",
+            "બર્નુલીનું પ્રમેય"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "399",
@@ -6810,12 +6911,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "જો ગુરુત્વાકર્ષણ બળમાં કોઈ ફેરફાર વગર એક વર્ષ 400 દિવસનું થઈ જાય, તો પૃથ્વી-સૂર્ય વચ્ચેના અંતરનું શું થશે?",
+          "text_gu": "ઊંચી એડીવાળા સેન્ડલ પહેરેલી વ્યક્તિ અને સપાટ સોલવાળા બૂટ પહેરેલી વ્યક્તિ જમીન પર ઊભી હોય, ત્યારે કયા કિસ્સામાં જમીન પર વધુ દબાણ (Pressure) લાગશે?",
           "options_gu": [
-            "અંતર વધશે",
-            "અંતર ઘટશે",
-            "અંતર સમાન રહેશે"
-          ]
+            "ઊંચી એડીવાળા સેન્ડલથી વધુ દબાણ લાગશે",
+            "દબાણ ક્ષેત્રફળ પર આધાર રાખતું નથી",
+            "સપાટ સોલવાળા બૂટથી વધુ દબાણ લાગશે",
+            "બંને કિસ્સામાં સમાન દબાણ લાગશે"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "400",
@@ -6829,12 +6932,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "કેન્દ્રગામી બળ આના સમપ્રમાણ છે...",
+          "text_gu": "બંધ નળીમાં વહેતા પાણીમાં જ્યારે નળીનો વ્યાસ સાંકડો થાય છે, ત્યારે પાણીના વહેણની ઝડપ અને દબાણ પર શું અસર થાય છે?",
           "options_gu": [
-            "વક્રતાની ત્રિજ્યા",
-            "ફરતા પદાર્થનું દળ",
-            "પરિભ્રમણની ઝડપ"
-          ]
+            "ઝડપ અને દબાણ બંને ઘટે છે",
+            "ઝડપ વધે છે અને દબાણ ઘટે છે",
+            "ઝડપ ઘટે છે અને દબાણ વધે છે",
+            "ઝડપ અને દબાણ બંને વધે છે"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "401",
@@ -6848,12 +6953,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "ઝરણાં વિશે નીચેનું કયું વિધાન ખોટું છે?",
+          "text_gu": "ભારે સામાનને ટ્રકમાં ચડાવવા માટે લાકડાના પાટિયાનો ઢાળ (Inclined Plane) વાપરવામાં આવે છે. જો ઢાળની લંબાઈ વધારવામાં આવે (ઢાળ ધીમો કરવામાં આવે), તો સામાન ચડાવવા જરૂરી બળ પર શું અસર થાય?",
           "options_gu": [
-            "ઝરણાં સાદા યંત્રો છે કારણ કે તે પદાર્થને ગતિ કરાવે છે",
-            "ઝરણાંનું ખેંચાણ કે સંકોચન હંમેશા લાગુ પડેલા બળની દિશામાં થાય છે",
-            "ઝરણાંની પ્રણાલીની સ્થિતિસ્થાપકતા વધારવા માટે, આપણે તેમને શ્રેણીમાં જોડવા જોઈએ"
-          ]
+            "ઓછું બળ લગાવવું પડશે",
+            "સામાન આપમેળે ઉપર ચડી જશે",
+            "બળમાં કોઈ ફેર નહીં પડે",
+            "વધારે બળ લગાવવું પડશે"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "402",
@@ -6867,12 +6974,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "ઊંચાઈ h પર હવાના દબાણની ગણતરી માટે P = ρ × g × h સમીકરણનો ઉપયોગ વાતાવરણના ઉપરના ભાગને સંદર્ભ સ્તર તરીકે લઈને કેમ થઈ શકતો નથી?",
+          "text_gu": "સ્ક્રૂ (Screw) એ મૂળભૂત રીતે નીચેનામાંથી કયા સરળ યંત્રનું વિંટાળેલું સ્વરૂપ છે?",
           "options_gu": [
-            "કારણ કે વાતાવરણ ખૂબ જાડું છે",
-            "કારણ કે વાતાવરણની ઘનતા એકસમાન નથી",
-            "કારણ કે વાતાવરણ પ્રવાહી નથી"
-          ]
+            "ઉચ્ચાલન (Lever)",
+            "ગગડી (Pulley)",
+            "ઢાળ (Inclined Plane)",
+            "પૈડું અને ધરી (Wheel and Axle)"
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "403",
@@ -6886,12 +6995,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "ચુંબક અંગે કયું વિધાન સાચું છે?",
+          "text_gu": "મશીનોમાં ફરતા ભાગો વચ્ચે 'બોલ બેરિંગ' (Ball Bearings) નો ઉપયોગ શા માટે કરવામાં આવે છે?",
           "options_gu": [
-            "જ્યારે ચુંબકને બે ટુકડામાં વહેંચવામાં આવે, ત્યારે દરેકમાં એક જ ધ્રુવ ધરાવતા બે ચુંબક બને છે",
-            "ચુંબકીય ક્ષેત્રની રેખાઓ બંધ રેખાઓ છે",
-            "ચુંબક તેની આસપાસની બધી સામગ્રીને આકર્ષી કે અપાકર્ષી શકે છે"
-          ]
+            "સરકતા ઘર્ષણને ગબડતા (રોલિંગ) ઘર્ષણમાં ફેરવી ઘર્ષણ ઘટાડવા",
+            "મશીનનું વજન વધારવા",
+            "તાપમાન ઘટાડવા માટે પ્રવાહી પૂરું પાડવા",
+            "ઘર્ષણ વધારીને ગતિ નિયંત્રિત કરવા"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "404",
@@ -6905,12 +7016,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "સમાંતર પરિપથની સરખામણીમાં શ્રેણી પરિપથનો ફાયદો/ફાયદાઓ એ છે કે...",
+          "text_gu": "એક સ્પ્રિંગ સાથે ૨ કિગ્રાનું વજન લટકાવતાં તેની લંબાઈ ૩ સેમી વધે છે. જો હુકના નિયમ (Hooke's Law) નું પાલન થતું હોય, તો તે જ સ્પ્રિંગ સાથે ૬ કિગ્રાનું વજન લટકાવતાં લંબાઈમાં કેટલો વધારો થશે?",
           "options_gu": [
-            "તેને બનાવવું સરળ છે",
-            "બધા પરિપથ ઘટકો સંપૂર્ણ ક્ષમતાએ કાર્ય કરે છે",
-            "A અને B બંને"
-          ]
+            "૬ સેમી",
+            "૧૫ સેમી",
+            "૯ સેમી",
+            "૧૨ સેમી"
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "405",
@@ -6924,12 +7037,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "જો કોઈ પ્રવાહી બમણું ઘટ્ટ બને અને તે પ્રવાહીમાં ડૂબેલા પદાર્થની ઊંડાઈ અડધી થાય, તો પ્રવાહીનું દબાણ:",
+          "text_gu": "બે એકસમાન સ્પ્રિંગોને એકબીજા સાથે શ્રેણીબદ્ધ (Series - એકની નીચે બીજી) જોડીને વજન લટકાવવામાં આવે, ત્યારે સમાંતર (Parallel) જોડાણની સરખામણીમાં સ્પ્રિંગનું ખેંચાણ:",
           "options_gu": [
-            "ચાર ગણું થાય છે",
-            "4 ગણાથી ઘટે છે",
-            "બદલાતું નથી"
-          ]
+            "ઓછું થશે",
+            "સમાન રહેશે",
+            "વધુ થશે",
+            "શૂન્ય થઈ જશે"
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "406",
@@ -6943,13 +7058,15 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "ઇલેક્ટ્રિક ઇસ્ત્રી વધુ ગરમ થાય છે પણ ઇસ્ત્રી સુધી પ્રવાહ વહન કરતો કેબલ ઠંડો રહે છે. આનું કારણ:",
+          "text_gu": "કોઈ વાહનની સ્થિરતા (Stability) વધારવા અને પલટી ન ખાય તે માટે એન્જિનિયરો તેના ગુરુત્વમધ્યકેન્દ્ર (Center of Gravity) ને કેવું રાખવાનો પ્રયત્ન કરે છે?",
           "options_gu": [
-            "કેબલમાં અંદર કૂલર હોય છે",
-            "ઇલેક્ટ્રિક ઇસ્ત્રી વીજળીને ગરમીમાં રૂપાંતરિત કરે છે",
-            "ઇસ્ત્રી ચાલુ હોય ત્યારે કેબલ કોઈ વીજળી વહન કરતા નથી"
+            "શક્ય તેટલું ઊંચું",
+            "છતની નજીક",
+            "વાહનની એક તરફ બહારની બાજુ",
+            "શક્ય તેટલું નીચું"
           ],
-          "notes": "FLAG: source PDF Mechanical #24 — quoted answer 'C' is physically dubious (textbook answer likely 'B'); kept to match client source PDF, review later."
+          "notes": "FLAG: source PDF Mechanical #24 — quoted answer 'C' is physically dubious (textbook answer likely 'B'); kept to match client source PDF, review later.",
+          "correctOption_gu": "D"
         },
         {
           "questionId": "407",
@@ -6963,12 +7080,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "સેલ અને કેપેસિટર વચ્ચેનો મુખ્ય તફાવત શું છે?",
+          "text_gu": "સાયકલ સવાર જ્યારે પેડલ મારવાનું બંધ કરે છે, ત્યારે સાયકલ થોડા અંતર પછી ધીમે-ધીમે અટકી જાય છે. આ માટે મુખ્યત્વે કયું બળ જવાબદાર છે?",
           "options_gu": [
-            "સેલ પરિપથમાં ચાર્જને વહેવા માટે જરૂરી બળ પૂરું પાડે છે, જ્યારે કેપેસિટર તેની પ્લેટો પર ચાર્જ સંગ્રહે છે",
-            "સેલ વીજળી ઉત્પન્ન કરે છે જ્યારે કેપેસિટર તેને સંગ્રહે છે",
-            "સેલ વીજળીને રાસાયણિક ઊર્જાના સ્વરૂપમાં સંગ્રહે છે જ્યારે કેપેસિટર આ વીજળીનો વપરાશ કરે છે"
-          ]
+            "રસ્તા અને ટાયર વચ્ચેનું ઘર્ષણ બળ તેમજ હવાનો અવરોધ",
+            "ગુરુત્વાકર્ષણ બળ",
+            "કેન્દ્રગામી બળ",
+            "ચુંબકીય બળ"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "408",
@@ -6982,12 +7101,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "હવાના દબાણ વિશે કયું વિધાન સાચું છે?",
+          "text_gu": "સાયકલમાં આગળનું મોટું પેડલ ચક્ર (Chainring) અને પાછળના વ્હીલનું નાનું ચક્ર (Cog) સાંકળ (Chain) વડે જોડાયેલા હોય છે. જ્યારે સાંકળ સીધી રીતે જોડાયેલી હોય, ત્યારે આગળનું ચક્ર ઘડિયાળના કાંટાની દિશામાં ફરશે તો પાછળનું ચક્ર કઈ દિશામાં ફરશે?",
           "options_gu": [
-            "જમીનથી 100 કિમી ઉપર, હવાનું દબાણ આશરે 1 atm હોય છે",
-            "જમીનથી 100 કિમી ઉપર, હવાનું દબાણ 1 atm કરતાં ઓછું હોય છે",
-            "જમીનથી 100 કિમી ઉપર, હવાનું દબાણ 1 atm કરતાં વધારે હોય છે"
-          ]
+            "પાછળનું ચક્ર ફરશે જ નહીં",
+            "ઘડિયાળના કાંટાની દિશામાં (Clockwise)",
+            "ઘડિયાળના કાંટાની વિરુદ્ધ દિશામાં (Anti-clockwise)",
+            "બંને ચક્રો વિરુદ્ધ દિશામાં ફરશે"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "409",
@@ -7001,12 +7122,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "વર્તુળાકાર ગતિ વિશે કયું વિધાન ખોટું છે?",
+          "text_gu": "રોલર કોસ્ટર જ્યારે ટ્રેકના સૌથી ઊંચા શિખર પર સ્થિર ઊભું હોય, ત્યારે તેમાં કયા પ્રકારની ઊર્જા મહત્તમ હોય છે?",
           "options_gu": [
-            "વર્તુળાકાર ગતિ એ રેખીય ગતિનો વિશેષ કિસ્સો છે",
-            "રેખીય ગતિ એ વર્તુળાકાર ગતિનો વિશેષ કિસ્સો છે",
-            "રેખીય અને વર્તુળાકાર ગતિ વચ્ચે કોઈ સંબંધ જ નથી"
-          ]
+            "ગતિ ઊર્જા (Kinetic Energy)",
+            "વિદ્યુત ઊર્જા (Electrical Energy)",
+            "ઉષ્મા ઊર્જા (Thermal Energy)",
+            "સ્થિતિ ઊર્જા (Potential Energy)"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "410",
@@ -7020,12 +7143,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "ખર્ચાળ પરિપથ ઘટકને વધુ પડતા પ્રવાહથી બળી જતો અટકાવવા માટે આપણે તેની આગળ __?__ મૂકવું જોઈએ.",
+          "text_gu": "દરવાજાને સરળતાથી ખોલવા માટે તેનો હેન્ડલ (હથો) મિજાગરા (Hinges) થી શક્ય તેટલો દૂર શા માટે રાખવામાં આવે છે?",
           "options_gu": [
-            "રેઝિસ્ટર",
-            "ફ્યુઝ",
-            "બલ્બ"
-          ]
+            "જેથી દરવાજો મજબૂત દેખાય",
+            "લંબઅંતર વધારીને ઓછા બળે વધુ ટોર્ક (ભ્રમણ બળ) મેળવવા",
+            "દરવાજાનું વજન સંતુલિત કરવા માટે",
+            "ઘર્ષણ વધારવા માટે"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "431",
@@ -7040,13 +7165,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "એક અભ્યાસ દર્શાવે છે કે જે વિદ્યાર્થીઓ નાસ્તો કરે છે તેઓ પરીક્ષામાં વધુ સ્કોર કરે છે. કયું તારણ સૌથી માન્ય છે?",
+          "text_gu": "એક કંપનીમાં માત્ર એવા કર્મચારીઓને જ પ્રમોશન મળે છે જેઓ સમયના પાબંદ છે. રમેશને પ્રમોશન મળ્યું છે. નીચેનામાંથી કયું તારણ ચોક્કસપણે સાચું છે?",
           "options_gu": [
-            "Eating breakfast causes better test scores",
-            "There may be a correlation between breakfast and test scores",
-            "Students who don't eat breakfast are less intelligent",
-            "All students should be required to eat breakfast"
-          ]
+            "રમેશ કંપનીમાં સૌથી જૂનો કર્મચારી છે.",
+            "જે સમયના પાબંદ નથી તેમને નોકરીમાંથી કાઢી મૂકવામાં આવે છે.",
+            "રમેશ સમયનો પાબંદ છે.",
+            "રમેશ સૌથી મહેનતુ કર્મચારી છે."
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "432",
@@ -7061,13 +7187,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "\"બધા પક્ષીઓ ઊડી શકે છે. પેંગ્વિન પક્ષીઓ છે. તેથી, પેંગ્વિન ઊડી શકે છે.\" આ વિચારણામાં શું ખોટું છે?",
+          "text_gu": "\"જો વરસાદ પડશે, તો રસ્તો ભીનો થશે.\" જો રસ્તો ભીનો છે, તો નીચેનામાંથી કયું વિધાન તાર્કિક રીતે સાચું હોવું જરૂરી છે?",
           "options_gu": [
-            "The conclusion doesn't follow from the premises",
-            "The first statement is false",
-            "The second statement is false",
-            "Nothing is wrong with the reasoning"
-          ]
+            "વરસાદ સિવાય રસ્તો ક્યારેય ભીનો ન થઈ શકે.",
+            "રસ્તો ભીનો થવાના અન્ય કારણો પણ હોઈ શકે છે.",
+            "ચોક્કસપણે વરસાદ પડ્યો જ છે.",
+            "વરસાદ પડ્યો નથી."
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "433",
@@ -7082,13 +7209,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "જો સ્ટોર A ની કિંમતો સ્ટોર B કરતાં ઓછી છે, અને સ્ટોર B ની કિંમતો સ્ટોર C કરતાં ઓછી છે, તો:",
+          "text_gu": "તમે એક નિર્ણય લેતી વખતે કઈ બાબતને સૌથી વધુ પ્રાથમિકતા આપશો?",
           "options_gu": [
-            "Store A definitely has the lowest prices overall",
-            "Store C has the highest prices of the three",
-            "Store B has average prices",
-            "We need more information to compare all stores"
-          ]
+            "ઉપલબ્ધ પુરાવા અને તાર્કિક તથ્યો",
+            "તમારી અંગત ભાવનાઓ",
+            "પરંપરાગત રીતભાત",
+            "બહુમતી લોકોનો અભિપ્રાય"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "434",
@@ -7103,13 +7231,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "આ દલીલનું શ્રેષ્ઠ મૂલ્યાંકન કયું વિધાન કરે છે: \"મોટાભાગના સફળ લોકો વહેલા ઊઠે છે. તેથી, જો તમે સફળ થવા માંગો છો, તો તમારે વહેલા ઊઠવું જોઈએ.\"",
+          "text_gu": "વિધાન: \"બધા ગુલાબ ફૂલ છે. કેટલાક ફૂલો ઝડપથી કરમાઈ જાય છે.\"\nતારણ:",
           "options_gu": [
-            "The argument is logically sound",
-            "The argument assumes correlation implies causation",
-            "The argument is based on false premises",
-            "The argument is supported by sufficient evidence"
-          ]
+            "કોઈ પણ ગુલાબ કરમાતું નથી.",
+            "કેટલાક ગુલાબ ઝડપથી કરમાઈ શકે છે.",
+            "ગુલાબ સિવાય કોઈ ફૂલ કરમાતું નથી.",
+            "બધા ગુલાબ ઝડપથી કરમાઈ જાય છે."
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "435",
@@ -7124,13 +7253,14 @@ const PACKAGE = {
           "correctOption": "D",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "એક સર્વેમાં જાણવા મળ્યું કે 80% લોકો ચોકલેટ આઈસક્રીમ પસંદ કરે છે. કયું પરિબળ આ તારણની માન્યતા પર સૌથી વધુ અસર કરશે?",
+          "text_gu": "એક મીડિયા અહેવાલ દાવો કરે છે કે \"આઈસ્ક્રીમનું વેચાણ વધવાથી ડૂબવાની ઘટનાઓ વધે છે.\" આ વિધાનમાં કઈ તાર્કિક ભૂલ (Fallacy) છે?",
           "options_gu": [
-            "The survey method used",
-            "The sample size and selection",
-            "The time of year the survey was conducted",
-            "All of the above"
-          ]
+            "ડૂબવાની ઘટનાઓ આઈસ્ક્રીમના વપરાશ પર નિર્ભર છે.",
+            "બંને ઘટનાઓ વચ્ચે કોઈ સંબંધ નથી અને આ માત્ર અફવા છે.",
+            "ગરમી/ઉનાળો (ત્રીજું પરિબળ) બંને ઘટનાઓ વધવાનું મુખ્ય કારણ હોઈ શકે છે.",
+            "આઈસ્ક્રીમ પાણીમાં તરવાની ક્ષમતા ઘટાડે છે."
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "436",
@@ -7145,13 +7275,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "\"જો વરસાદ પડે, તો પિકનિક રદ થશે. પિકનિક રદ થઈ. તેથી, વરસાદ પડ્યો.\" આ વિચારણા છે:",
+          "text_gu": "જો એક તબીબી પરીક્ષણ (Medical Test) 99% સચોટ હોય અને વ્યક્તિનો રિપોર્ટ પોઝિટિવ આવે, તો પણ તેને રોગ ન હોવાની સંભાવના ક્યારે વધારે હોઈ શકે?",
           "options_gu": [
-            "Valid and sound",
-            "Valid but not sound",
-            "Invalid",
-            "Cannot be determined"
-          ]
+            "જો ટેસ્ટ માત્ર એક જ વાર કરવામાં આવ્યો હોય.",
+            "જો તે રોગ વસ્તીમાં અત્યંત દુર્લભ (Rare) હોય.",
+            "જો લેબ પ્રમાણિત ન હોય.",
+            "જો તે રોગ અત્યંત સામાન્ય હોય."
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "437",
@@ -7166,13 +7297,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "આબોહવા પરિવર્તન વિશેની માહિતી માટે કયો સ્રોત સૌથી વિશ્વસનીય હશે?",
+          "text_gu": "પાંચ મિત્રો A, B, C, D અને E માંથી, A માત્ર B કરતાં ઊંચો છે, પણ C કરતાં નીચો છે. D સૌથી ઊંચો નથી પરંતુ E કરતાં ઊંચો છે. સૌથી નીચું કોણ છે?",
           "options_gu": [
-            "A blog post by someone who experienced unusual weather",
-            "A peer-reviewed scientific journal article",
-            "A social media post with lots of shares",
-            "A news article quoting various opinions"
-          ]
+            "A",
+            "B",
+            "C",
+            "E"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "438",
@@ -7187,13 +7319,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "આ દાવાનું પરીક્ષણ કરો: \"વિડિયો ગેમ્સ હિંસાનું કારણ બને છે કારણ કે ઘણા હિંસક ગુનેગારો વિડિયો ગેમ્સ રમે છે.\" આ વિચારણામાં મુખ્ય ખામી શું છે?",
+          "text_gu": "એક ઓફિસમાં નવા સોફ્ટવેરના અમલ પછી ઉત્પાદકતા ઘટી ગઈ. મેનેજરે તાત્કાલિક સોફ્ટવેર બંધ કરવાનો નિર્ણય લીધો. આ નિર્ણયમાં કઈ વિવેચનાત્મક ખામી છે?",
           "options_gu": [
-            "It's based on insufficient data",
-            "It confuses correlation with causation",
-            "It uses emotional rather than logical appeals",
-            "It makes an unfair generalization"
-          ]
+            "સોફ્ટવેર બદલવાથી ખર્ચ વધે છે.",
+            "જૂનું સોફ્ટવેર હંમેશાં શ્રેષ્ઠ હોય છે.",
+            "નવી સિસ્ટમ શીખવા માટે લાગતા સમય (Learning Curve) ની અવગણના કરવામાં આવી.",
+            "તેમણે કર્મચારીઓનો અભિપ્રાય પૂછ્યો નથી."
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "439",
@@ -7208,13 +7341,14 @@ const PACKAGE = {
           "correctOption": "D",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "જો કોઈ દવા 85% દર્દીઓ માટે અસરકારક હોય, અને એક દર્દીને દવા લીધા પછી પણ સુધારો ન થાય, તો આપણે શું તારણ કાઢી શકીએ?",
+          "text_gu": "\"બધા વૈજ્ઞાનિકો ઉત્સુક હોય છે. રાહુલ ઉત્સુક છે.\" નીચેનામાંથી કયું તારણ સાચું છે?",
           "options_gu": [
-            "The medication doesn't work",
-            "The patient is in the 15% for whom it's not effective",
-            "The patient didn't take it correctly",
-            "More information is needed to draw any conclusion"
-          ]
+            "રાહુલ વૈજ્ઞાનિક હોઈ પણ શકે અને ન પણ હોઈ શકે.",
+            "રાહુલ એક વૈજ્ઞાનિક છે.",
+            "રાહુલ ભવિષ્યમાં વૈજ્ઞાનિક બનશે.",
+            "માત્ર વૈજ્ઞાનિકો જ ઉત્સુક હોઈ શકે."
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "440",
@@ -7229,13 +7363,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "સમાચાર લેખની વિશ્વસનીયતાનું મૂલ્યાંકન કરવામાં કયો પ્રશ્ન શ્રેષ્ઠ મદદ કરશે?",
+          "text_gu": "કોઈ માહિતી વિશ્વસનીય છે કે નહીં તે ચકાસવા માટે સૌથી પહેલું પગલું કયું હોવું જોઈએ?",
           "options_gu": [
-            "Is the headline attention-grabbing?",
-            "Are multiple credible sources cited?",
-            "Does it confirm what I already believe?",
-            "Is it shared by many people on social media?"
-          ]
+            "માહિતી આપનાર સ્ત્રોત (Source) અને તેના તથ્યોની સત્યાર્થતા તપાસવી.",
+            "માહિતી સોશિયલ મીડિયા પર કેટલી વાયરલ થઈ છે તે જોવું.",
+            "તમારા મિત્રોનો અભિપ્રાય લેવો.",
+            "માહિતી સુંદર રીતે રજૂ થયેલી છે કે નહીં તે ચકાસવું."
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "441",
@@ -7250,13 +7385,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "તમારી પાસે 7-લિટરનો જગ અને 3-લિટરનો જગ છે. તમે બરાબર 5 લિટર કેવી રીતે માપી શકો?",
+          "text_gu": "તમારી પાસે 3 લિટર અને 5 લિટરના બે માપિયાં છે અને પાણીનો અનંત સ્ત્રોત છે. તમારે બરાબર 4 લિટર પાણી માપવું હોય, તો સૌથી યોગ્ય રીત કઈ હશે?",
           "options_gu": [
-            "Fill 7L, pour into 3L, empty 3L, pour remaining 4L into 3L, fill 7L again, pour from 7L to fill 3L 5L remains",
-            "Fill 3L twice into 7L jug 6L , add 1L more",
-            "Fill 7L, pour out 2L somehow",
-            "It's impossible with these jugs"
-          ]
+            "3 લિટર વાળાને બે વાર ભરીને અંદાજે 2 લિટર કાઢી નાખવું",
+            "5 લિટર ભરીને તેમાંથી 3 લિટર વાળામાં પાણી રેડવું, પછી 3 લિટર ખાલી કરી બાકીનું 2 લિટર તેમાં નાખવું અને ફરી 5 લિટર ભરીને 3 લિટર પૂરું કરવું",
+            "આ બે માપિયાંથી ક્યારેય 4 લિટર પાણી ન માપી શકાય",
+            "બંને માપિયાંને અડધા-અડધા ભરવા"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "442",
@@ -7271,13 +7407,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "એક ખેડૂતને શિયાળ, મરઘી અને મકાઈની થેલી સાથે નદી પાર કરવી છે. તેની હોડી માત્ર તેને અને એક વસ્તુ લઈ જઈ શકે છે. શિયાળ મરઘીને ખાશે, અને જો એકલા છોડી દેવામાં આવે તો મરઘી મકાઈ ખાશે. તે બધાને કેવી રીતે પાર કરાવે?",
+          "text_gu": "એક ફેક્ટરીમાં ઉત્પાદન લાઇન અચાનક બંધ થઈ ગઈ છે. સમસ્યા ઉકેલવા માટે મેનેજર તરીકે તમારું પહેલું પગલું શું હોવું જોઈએ?",
           "options_gu": [
-            "Take chicken first, return alone, take fox, bring chicken back, take corn, return alone, take chicken",
-            "Take corn first, return alone, take chicken, return with corn, take fox, return alone, take corn",
-            "Take fox first, return with chicken, take corn, return alone, take chicken",
-            "Take everything at once somehow"
-          ]
+            "નવી મશીનરીનો ઓર્ડર આપવો",
+            "તાત્કાલિક ઓપરેટરને સસ્પેન્ડ કરવો",
+            "લાઇન બંધ થવાનું મૂળ કારણ (Root Cause) શોધવા તપાસ કરવી",
+            "ઉપલા અધિકારીઓને ફરિયાદ કરવી"
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "443",
@@ -7292,13 +7429,14 @@ const PACKAGE = {
           "correctOption": "D",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "તમે 200 લોકો માટે શાળાનો કાર્યક્રમ આયોજિત કરી રહ્યા છો. સ્થળની કિંમત $500 છે, દરેક વ્યક્તિ માટે ખોરાકની કિંમત $8 છે, અને સજાવટની કિંમત $200 છે. જો ટિકિટ $12 દરેક હોય, તો સંતુલન સાધવા માટે કેટલી ટિકિટ વેચવી પડે?",
+          "text_gu": "તમારી ટીમ પાસે એક પ્રોજેક્ટ પૂરો કરવા માટે માત્ર 2 દિવસ બાકી છે અને કામ 4 દિવસ જેટલું બાકી છે. શ્રેષ્ઠ ઉકેલ કયો ગણાય?",
           "options_gu": [
-            "125 tickets",
-            "142 tickets",
-            "150 tickets",
-            "175 tickets"
-          ]
+            "ટીમના બધા સભ્યોને દોષ આપવો",
+            "ગુણવત્તા સાથે સમાધાન કર્યા વિના અગત્યના કાર્યોનું વિભાજન (Prioritize & Delegate) કરવું",
+            "ક્લાયન્ટને કોઈ પણ જાણ કર્યા વિના ડેડલાઇન ચૂકી જવી",
+            "પ્રોજેક્ટ અધૂરો છોડી દેવો"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "444",
@@ -7313,13 +7451,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "બપોરે ઘડિયાળ સાચો સમય બતાવે છે. જો તે દર કલાકે 2 મિનિટ આગળ ચાલે, તો જ્યારે વાસ્તવિક સમય 6:00PM હોય ત્યારે તે કયો સમય બતાવશે?",
+          "text_gu": "એક નદી પાર કરવા માટે એક ખેડૂત પાસે એક વરુ, એક બકરી અને ઘાસનો ભારો છે. નાની હોડીમાં ખેડૂત સાથે માત્ર એક જ વસ્તુ લઈ જઈ શકાય છે. જો ખેડૂત ન હોય તો વરુ બકરીને ખાઈ જાય અને બકરી ઘાસ ખાઈ જાય. ખેડૂતે સૌપ્રથમ કોને નદી પાર લઈ જવી જોઈએ?",
           "options_gu": [
-            "6:10PM",
-            "6:12PM",
-            "6:14PM",
-            "6:16PM"
-          ]
+            "કોઈને પણ લઈ જઈ શકાય",
+            "વરુને",
+            "બકરીને",
+            "ઘાસના ભારાને"
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "445",
@@ -7334,13 +7473,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "તમે 16 ટીમો સાથે ટુર્નામેન્ટ આયોજિત કરી રહ્યા છો. દરેક ટીમ બીજી દરેક ટીમ સામે એક વાર રમે છે. કુલ કેટલી રમતો રમાશે?",
+          "text_gu": "એક ઓનલાઈન સ્ટોરમાં ગ્રાહકો કાર્ટમાં વસ્તુઓ ઉમેરે છે પરંતુ પેમેન્ટ પેજ પર પહોંચ્યા પછી ઓર્ડર કેન્સલ કરી રહ્યા છે. આ સમસ્યાનું નિરાકરણ લાવવા સૌથી પહેલાં શું કરવું જોઈએ?",
           "options_gu": [
-            "120 games",
-            "240 games",
-            "16 games",
-            "32 games"
-          ]
+            "ચેકઆઉટ પ્રક્રિયા, પેમેન્ટ ગેટવેની ખામીઓ અને વધારાના છૂપા ચાર્જીસનું વિશ્લેષણ કરવું",
+            "જાહેરાતો પાછળ વધુ બજેટ ફાળવવું",
+            "વેબસાઇટનું નામ બદલી નાખવું",
+            "ઉત્પાદનની કિંમતમાં 50% ઘટાડો કરવો"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "446",
@@ -7355,13 +7495,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "પુસ્તકાલય મુદત વટાવેલા પુસ્તકો માટે દિવસ દીઠ $0.25 લે છે. જો કોઈ વ્યક્તિ પુસ્તક 12 દિવસ મોડું પાછું આપે અને દંડ તરીકે $4.50 ચૂકવે, તો કેટલા પુસ્તકો મુદત વટાવેલા હતા?",
+          "text_gu": "એક કંપનીમાં બે મહત્વપૂર્ણ વિભાગો વચ્ચે સંચાર (Communication) ના અભાવે કામમાં વિલંબ થાય છે. કાયમી ઉકેલ માટે શું કરવું જોઈએ?",
           "options_gu": [
-            "1 book",
-            "2 books",
-            "1.5 books",
-            "Cannot be determined"
-          ]
+            "બંને વિભાગોને એકબીજાથી સંપૂર્ણ અલગ કરી દેવા",
+            "માત્ર ઇમેઇલ દ્વારા જ વાતચીત ફરજિયાત બનાવવી",
+            "દૈનિક/સાપ્તાહિક સંયુક્ત મીટિંગ અને સહિયારા વર્કફ્લો મેનેજમેન્ટ ટૂલનો અમલ કરવો",
+            "બંને વિભાગના વડાઓને બદલી નાખવા"
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "447",
@@ -7376,13 +7517,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "તમારે ફોટો માટે 6 લોકોને એક હારમાં ગોઠવવાના છે. બે ચોક્કસ લોકોએ એકબીજાની બાજુમાં ઊભા રહેવું જ જોઈએ. કેટલી જુદી જુદી ગોઠવણીઓ શક્ય છે?",
+          "text_gu": "એક અંધારા રૂમમાં ટેબલ પર 10 કાળા અને 10 સફેદ મોજાં મિશ્ર થયેલાં પડ્યાં છે. જોયા વિના એક જ રંગની ઓછામાં ઓછી એક જોડી (Pair) મેળવવા તમારે ઓછામાં ઓછા કેટલા મોજાં બહાર કાઢવા પડે?",
           "options_gu": [
-            "240",
-            "720",
-            "120",
-            "48"
-          ]
+            "20",
+            "3",
+            "11",
+            "2"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "448",
@@ -7397,13 +7539,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "એક રેસીપી 4 લોકોને પીરસે છે અને 2 કપ લોટ માંગે છે. તમારે 14 લોકોને પીરસવાનું છે. તમને કેટલા લોટની જરૂર છે?",
+          "text_gu": "તમારી વેબસાઇટ પર અચાનક ટ્રાફિક વધી જવાને કારણે સર્વર ધીમું પડી ગયું છે. ત્વરિત તકનીકી ઉકેલ કયો હોઈ શકે?",
           "options_gu": [
-            "6 cups",
-            "7 cups",
-            "8 cups",
-            "5 cups"
-          ]
+            "સર્વર કોડ ફરીથી નવેસરથી લખવો",
+            "વેબસાઇટને થોડા કલાકો માટે બંધ કરી દેવી",
+            "તમામ વપરાશકર્તાઓને બ્લોક કરવા",
+            "અસ્થાયી રૂપે ક્લાઉડ સર્વર સંસાધનો વધારવા (Scale up resources) અને કેશિંગ (Caching) સક્ષમ કરવું"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "449",
@@ -7418,13 +7561,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "જો તમે કાગળને અડધો 4 વખત ગડી કરો અને પછી તેમાં એક છિદ્ર કાપો, તો જ્યારે તમે ઉઘાડો ત્યારે કેટલા છિદ્રો હશે?",
+          "text_gu": "એક ઉત્પાદનમાં વારંવાર એક જ ખામી (Defect) સામે આવી રહી છે. આ સમસ્યાને કાયમ માટે રોકવા કઈ પદ્ધતિ સૌથી અસરકારક સાબિત થશે?",
           "options_gu": [
-            "4 holes",
-            "8 holes",
-            "16 holes",
-            "1 hole"
-          ]
+            "ગ્રાહકોને રિફંડ આપવાનું ચાલુ રાખવું",
+            "'5-Why' પદ્ધતિ વાપરીને મૂળ કારણ સુધી પહોંચવું અને પ્રક્રિયામાં સુધારો કરવો",
+            "ક્વોલિટી ચેકર્સની સંખ્યા બમણી કરી દેવી",
+            "ખામીવાળા ઉત્પાદનો કચરાપેટીમાં ફેંકી દેવા"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "450",
@@ -7439,13 +7583,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "એક ટ્રેન ન્યૂયોર્કથી 3:00PM વાગ્યે 60 mph ની ઝડપે નીકળે છે. બીજી ટ્રેન બોસ્ટનથી 4:00PM વાગ્યે 80 mph ની ઝડપે ન્યૂયોર્ક તરફ નીકળે છે. જો શહેરો 200 માઈલ દૂર છે, તો ટ્રેનો ક્યારે મળશે?",
+          "text_gu": "તમારા બજેટમાં 15% નો અણધાર્યો ઘટાડો થયો છે પરંતુ તમારે લક્ષ્યાંક પૂરો કરવાનો છે. વ્યવહારુ નિર્ણય કયો રહેશે?",
           "options_gu": [
-            "5:00PM",
-            "5:30PM",
-            "6:00PM",
-            "6:30PM"
-          ]
+            "પ્રોજેક્ટ તાત્કાલિક રદ કરવો",
+            "કર્મચારીઓનો પગાર અડધો કરી દેવો",
+            "ખર્ચનું ઓડિટ કરી બિનજરૂરી ખર્ચ ઘટાડવો અને આવશ્યક સંસાધનોનો મહત્તમ ઉપયોગ કરવો",
+            "બાકીનું કામ ઉતાવળમાં પૂરું કરી દેવું"
+          ],
+          "correctOption_gu": "C"
         }
       ]
     },
@@ -7467,7 +7612,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું મારા લાગણીઓને જેમજ એમ થાય છે તેમ જ જાણી શકું છું.",
+          "text_gu": "જ્યારે મને કોઈ લાગણી થાય છે, ત્યારે જ હું તેને તરત ઓળખી શકું છું.",
           "options_gu": []
         },
         {
@@ -7480,7 +7625,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "જ્યારે હું ગુસ્સામાં હોઉં, ત્યારે મને સામાન્ય રીતે ખબર પડે છે કે કેમ.",
+          "text_gu": "જ્યારે હું ગુસ્સે હોઉં છું, ત્યારે મને સામાન્ય રીતે તેનું કારણ ખબર હોય છે.",
           "options_gu": []
         },
         {
@@ -7493,7 +7638,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું દિવસ દરમિયાન અનુભવી રહેલી વિવિધ લાગણીઓને ઓળખી શકું છું.",
+          "text_gu": "હું દિવસ દરમિયાન અનુભવાતી વિવિધ લાગણીઓને ઓળખી શકું છું.",
           "options_gu": []
         },
         {
@@ -7506,7 +7651,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું સમજું છું કે મારી લાગણીઓ મારા વર્તનને કેવી રીતે અસર કરે છે.",
+          "text_gu": "મારી લાગણીઓ મારા વર્તન પર કેવી અસર કરે છે તે હું સમજું છું.",
           "options_gu": []
         },
         {
@@ -7519,7 +7664,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું મારી લાગણીઓના પેટર્ન અને ટ્રિગર્સને ઓળખું છું.",
+          "text_gu": "હું મારી લાગણીઓની રીત અને તેના કારણો (ટ્રિગર્સ) ને ઓળખું છું.",
           "options_gu": []
         },
         {
@@ -7532,7 +7677,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું સમાન લાગણીઓ વચ્ચેનો તફાવત ઓળખી શકું છું (જેમ કે ઝાડપોતી અને ગુસ્સો).",
+          "text_gu": "હું સરખી લાગતી લાગણીઓ વચ્ચેનો તફાવત ઓળખી શકું છું (જેમ કે હતાશા અને ગુસ્સો).",
           "options_gu": []
         },
         {
@@ -7545,7 +7690,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું જાણું છું કે моей લાગણીઓ વિવિધ પરિસ્થિતિઓમાં કેવી રીતે બદલાય છે.",
+          "text_gu": "હું જાણું છું કે અલગ-અલગ પરિસ્થિતિઓમાં મારી લાગણીઓ કેવી રીતે બદલાય છે.",
           "options_gu": []
         },
         {
@@ -7558,7 +7703,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું મારી લાગણીઓની શારીરિક લક્ષણોને નોંધું છું.",
+          "text_gu": "હું મારી લાગણીઓની શારીરિક અસરો કે લક્ષણોને ધ્યાનમાં લઉં છું.",
           "options_gu": []
         },
         {
@@ -7571,7 +7716,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું આગાહી કરી શકું છું કે કેટલીક પરિસ્થિતિઓમાં મને કેવી લાગણીઓ થતી હોય.",
+          "text_gu": "અમુક પરિસ્થિતિઓમાં મને કેવી લાગણી થશે તેનો હું અગાઉથી અંદાજ લગાવી શકું છું.",
           "options_gu": []
         },
         {
@@ -7584,7 +7729,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું મારા વિચારો અને લાગણીઓ વચ્ચેના કનેક્શનને સમજું છું.",
+          "text_gu": "હું મારા વિચારો અને લાગણીઓ વચ્ચેનો સંબંધ સમજું છું.",
           "options_gu": []
         },
         {
@@ -7597,7 +7742,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "જ્યારે હું ગુસ્સામાં હોઉં ત્યારે હું મારી ક્રોધ નિયંત્રિત કરી શકું છું.",
+          "text_gu": "જ્યારે હું ગુસ્સે હોઉં, ત્યારે હું મારા ગુસ્સાને કાબૂમાં રાખી શકું છું.",
           "options_gu": []
         },
         {
@@ -7610,7 +7755,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું કાર્ય કરવાથી પહેલા વિચારું છું, ભલે હું ઉત્સાહિત હોઉં.",
+          "text_gu": "ભલે હું ગમે તેટલો ઉત્સાહિત હોઉં, કોઈપણ કામ કરતા પહેલાં હું વિચારું છું.",
           "options_gu": []
         },
         {
@@ -7623,7 +7768,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "જ્યારે હું અસંતોષમાં હોઉં, ત્યારે હું પોતાને શાંત કરી શકું છું.",
+          "text_gu": "જ્યારે હું અશાંત કે અસંતુષ્ટ હોઉં, ત્યારે હું મારી જાતને શાંત કરી શકું છું.",
           "options_gu": []
         },
         {
@@ -7636,7 +7781,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું એવા પ્રેરણાઓનો વિરોધ કરી શકું છું જે હાનિકારક અથવા અયોગ્ય હોઈ શકે.",
+          "text_gu": "હું નુકસાનકારક કે અયોગ્ય ઇચ્છાઓને રોકી શકું છું.",
           "options_gu": []
         },
         {
@@ -7649,7 +7794,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "જ્યારે હું ભાવનાત્મક હોઉં, ત્યારે હું ધ્યાન કેન્દ્રિત રાખી શકું છું.",
+          "text_gu": "જ્યારે હું ભાવનાત્મક રીતે અસ્વસ્થ હોઉં, ત્યારે પણ હું મારું ધ્યાન કેન્દ્રિત રાખી શકું છું.",
           "options_gu": []
         },
         {
@@ -7662,7 +7807,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું મારી લાગણીઓને વિવિધ પરિસ્થિતિઓમાં અનુકૂળ બનાવી શકું છું.",
+          "text_gu": "હું અલગ-અલગ પરિસ્થિતિઓ મુજબ મારી લાગણીઓને ઢાળી શકું છું.",
           "options_gu": []
         },
         {
@@ -7675,7 +7820,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "નિરાશાઓમાંથી હું ઝડપથી ફરીથી ઊભો થઈ શકું છું.",
+          "text_gu": "હું નિરાશામાંથી ઝડપથી બહાર આવી શકું છું.",
           "options_gu": []
         },
         {
@@ -7688,7 +7833,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું મારા તણાવના સ્તરને અસરકારક રીતે મેનેજ કરી શકું છું.",
+          "text_gu": "હું મારા તણાવ (સ્ટ્રેસ) ને સારી રીતે સંભાળી શકું છું.",
           "options_gu": []
         },
         {
@@ -7701,7 +7846,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "સંઘર્ષ દરમિયાન હું મારી પ્રતિક્રિયાઓ નિયંત્રિત કરી શકું છું.",
+          "text_gu": "વિવાદ કે સંઘર્ષ વખતે હું મારા પ્રતિભાવોને કાબૂમાં રાખી શકું છું.",
           "options_gu": []
         },
         {
@@ -7714,7 +7859,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "દબાણ હેઠળ હું મારી શાંતિ જાળવી શકું છું.",
+          "text_gu": "દબાણ (પ્રેશર) માં પણ હું મારી શાંતિ જાળવી શકું છું.",
           "options_gu": []
         },
         {
@@ -7727,7 +7872,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "કાર્ય મુશ્કેલ બને ત્યારે પણ હું સતત પ્રયત્ન કરું છું.",
+          "text_gu": "કામ મુશ્કેલ હોય તો પણ હું સતત પ્રયત્ન કરતો રહું છું.",
           "options_gu": []
         },
         {
@@ -7740,7 +7885,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું મારી માટે ચેલેન્જિંગ લક્ષ્યાંકો નક્કી કરું છું.",
+          "text_gu": "હું મારી જાત માટે પડકારજનક લક્ષ્યો નક્કી કરું છું.",
           "options_gu": []
         },
         {
@@ -7753,7 +7898,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું મારી સફળતા માટેની ક્ષમતા પર આશાવાદી છું.",
+          "text_gu": "હું મારી સફળ થવાની ક્ષમતા પ્રત્યે આશાવાદી છું.",
           "options_gu": []
         },
         {
@@ -7766,7 +7911,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું લાંબા ગાળાના લક્ષ્યાંકો તરફ કામ કરવું પસંદ કરું છું.",
+          "text_gu": "મને લાંબા ગાળાના લક્ષ્યો માટે કામ કરવું ગમે છે.",
           "options_gu": []
         },
         {
@@ -7779,7 +7924,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું જે મેળવવું છું તે માટે કઠોર મહેનત કરવા તૈયાર છું.",
+          "text_gu": "મારે જે મેળવવું છે, તેના માટે હું સખત મહેનત કરવા તૈયાર છું.",
           "options_gu": []
         },
         {
@@ -7792,7 +7937,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "પ્રગતિ ધીમી હોવા છતાં, હું મારી મહેનત જાળવી રાખું છું.",
+          "text_gu": "પ્રગતિ ધીમી હોય તો પણ, હું મારી મહેનત ચાલુ રાખું છું.",
           "options_gu": []
         },
         {
@@ -7805,7 +7950,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું મારી કાર્યક્ષમતા સુધારવા માટે રસ્તા શોધું છું.",
+          "text_gu": "હું મારી કાર્યક્ષમતા સુધારવાના રસ્તાઓ શોધતો રહું છું.",
           "options_gu": []
         },
         {
@@ -7818,7 +7963,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું નવા પ્રોજેક્ટ્સ અથવા પ્રવૃત્તિઓ શરૂ કરવા માટે પહેલ કરું છું.",
+          "text_gu": "હું નવા પ્રોજેક્ટ કે પ્રવૃત્તિઓ શરૂ કરવામાં પહેલ કરું છું.",
           "options_gu": []
         },
         {
@@ -7831,7 +7976,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું માત્ર બાહ્ય ઇનામથી નહિ, પણ આંતરિક સંતોષથી પ્રેરિત છું.",
+          "text_gu": "હું માત્ર બહારના ઇનામોથી જ નહીં, પણ આંતરિક સંતોષથી પ્રેરણા મેળવું છું.",
           "options_gu": []
         },
         {
@@ -7844,7 +7989,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "મુશ્કેલીઓનો સામનો કરતાં પણ, હું મારા લક્ષ્યો માટે પ્રતિબદ્ધ રહી શકું છું.",
+          "text_gu": "મુશ્કેલીઓનો સામનો કરતી વખતે પણ, હું મારા લક્ષ્યો પ્રત્યે મક્કમ રહું છું.",
           "options_gu": []
         },
         {
@@ -7857,7 +8002,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું ઓળખી શકું છું કે અન્ય લોકો શું અનુભવ કરી રહ્યા છે તેમની ચહેરાના અભિવ્યક્તિઓ પરથી.",
+          "text_gu": "લોકોના ચહેરાના હાવભાવ પરથી તેઓ શું અનુભવી રહ્યા છે તે હું સમજી શકું છું.",
           "options_gu": []
         },
         {
@@ -7870,7 +8015,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું અન્ય લોકોના દૃષ્ટિકોણને સમજીને જજ કરવા પહેલાં પ્રયત્ન કરું છું.",
+          "text_gu": "કોઈના વિશે અભિપ્રાય બાંધતા પહેલા હું તેમનો દૃષ્ટિકોણ સમજવાનો પ્રયાસ કરું છું.",
           "options_gu": []
         },
         {
@@ -7883,7 +8028,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું ધ્યાન આપું છું જ્યારે કોઈ દુખી હોય, ભલે તે તેને છુપાવવાનો પ્રયાસ કરે.",
+          "text_gu": "જ્યારે કોઈ દુઃખી હોય અને તે છુપાવવાનો પ્રયાસ કરે, ત્યારે પણ હું તેને સમજી જાઉં છું.",
           "options_gu": []
         },
         {
@@ -7896,7 +8041,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "જ્યારે હું કોઈ જૂથ અથવા રૂમમાં પ્રવેશું છું ત્યારે હું તેની માહોલનો અંદાજ લગાવી શકું છું.",
+          "text_gu": "જ્યારે હું કોઈ ગ્રુપમાં કે રૂમમાં પ્રવેશું છું, ત્યારે ત્યાંના માહોલનો અંદાજ લગાવી શકું છું.",
           "options_gu": []
         },
         {
@@ -7909,7 +8054,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "જ્યારે અન્ય લોકો દુખી અથવા પીડિત હોય ત્યારે હું ચિંતિત અનુભવું છું.",
+          "text_gu": "જ્યારે અન્ય લોકો દુઃખી કે પરેશાન હોય, ત્યારે મને પણ ચિંતા થાય છે.",
           "options_gu": []
         },
         {
@@ -7922,7 +8067,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું સમજી શકું છું કે લોકો એ રીતે પ્રતિક્રિયા કેમ આપે છે.",
+          "text_gu": "હું સમજી શકું છું કે લોકો શા માટે અમુક રીતે વર્તન કે પ્રતિક્રિયા આપે છે.",
           "options_gu": []
         },
         {
@@ -7935,7 +8080,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું સંવાદમાં છુપાયેલા અર્થને વાંચવામાં સારો છું.",
+          "text_gu": "હું વાતચીતમાં રહેલા છુપાયેલા અર્થને સમજવામાં સારો છું.",
           "options_gu": []
         },
         {
@@ -7948,7 +8093,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું સરળતાથી અન્ય કોઈના પદમાં જાતને મૂકીને વિચારી શકું છું.",
+          "text_gu": "હું મારી જાતને બીજાની જગ્યાએ મૂકીને સરળતાથી વિચારી શકું છું.",
           "options_gu": []
         },
         {
@@ -7961,7 +8106,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું બોડી લેંગ્વેજ અને અવાજના સ્વર જેવા અવ્યક્ત સંકેતોનો ધ્યાન રાખું છું.",
+          "text_gu": "હું શારીરિક હાવભાવ (બોડી લેંગ્વેજ) અને અવાજના ટોન જેવા સંકેતોને ધ્યાનમાં લઉં છું.",
           "options_gu": []
         },
         {
@@ -7987,7 +8132,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "મને લોકો વચ્ચેના સંઘર્ષોને સરળતાથી ઉકેલવું સરળ લાગે છે.",
+          "text_gu": "લોકો વચ્ચેના સંઘર્ષો (મતભેદો) ઉકેલવા મને સરળ લાગે છે.",
           "options_gu": []
         },
         {
@@ -8000,7 +8145,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું અન્ય લોકોને સામાન્ય લક્ષ્યો તરફ કામ કરવા પ્રભાવિત કરી શકું છું.",
+          "text_gu": "હું અન્ય લોકોને સમાન લક્ષ્યો માટે કામ કરવા પ્રેરિત કે પ્રભાવિત કરી શકું છું.",
           "options_gu": []
         },
         {
@@ -8013,7 +8158,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું નવા લોકો સાથે સંબંધ બનાવવા માં સારો છું.",
+          "text_gu": "હું નવા લોકો સાથે સંબંધો બાંધવામાં સારો છું.",
           "options_gu": []
         },
         {
@@ -8026,7 +8171,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું મારા વિચારો અન્ય લોકોને સ્પષ્ટ રીતે વ્યક્ત કરી શકું છું.",
+          "text_gu": "હું મારા વિચારો અન્ય લોકોને સ્પષ્ટ રીતે જણાવી શકું છું.",
           "options_gu": []
         },
         {
@@ -8039,7 +8184,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું ટીમ પરિસ્થિતિમાં સારી રીતે કામ કરું છું.",
+          "text_gu": "હું ટીમ વર્કમાં (સમૂહમાં) સારી રીતે કામ કરી શકું છું.",
           "options_gu": []
         },
         {
@@ -8052,7 +8197,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું ફીડબેક એવી રીતે આપી શકું છું કે અન્ય લોકો તેને સારી રીતે સ્વીકારે.",
+          "text_gu": "હું એ રીતે પ્રતિભાવ (ફીડબેક) આપી શકું છું કે જેથી અન્ય લોકો તેને સકારાત્મક રીતે સ્વીકારે.",
           "options_gu": []
         },
         {
@@ -8065,7 +8210,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું નેટવર્કિંગ અને સંબંધો જાળવવામાં સારો છું.",
+          "text_gu": "હું નેટવર્કિંગ કરવામાં અને સંબંધો જાળવી રાખવામાં સારો છું.",
           "options_gu": []
         },
         {
@@ -8078,7 +8223,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું જૂથ ચર્ચાઓનું નેતૃત્વ અસરકારક રીતે કરી શકું છું.",
+          "text_gu": "હું જૂથ ચર્ચાઓ (ગ્રુપ ડિસ્કશન) નું નેતૃત્વ સારી રીતે કરી શકું છું.",
           "options_gu": []
         },
         {
@@ -8091,7 +8236,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું એ રીતે ચર્ચા અને સમજૂતી કરી શકું છું કે દરેક માટે કામ કરે.",
+          "text_gu": "હું એવી રીતે ચર્ચા અને સમાધાન કરી શકું છું જે બધા માટે ફાયદાકારક હોય.",
           "options_gu": []
         },
         {
@@ -8104,7 +8249,7 @@ const PACKAGE = {
           "weight": 1,
           "subscale": "",
           "notes": "",
-          "text_gu": "હું તે જૂથોમાં એક સકારાત્મક વાતાવરણ બનાવવા મદદ કરું છું જેમાં હું ભાગીદાર હોઉં છું.",
+          "text_gu": "હું જે ગ્રુપનો હિસ્સો હોઉં, ત્યાં સકારાત્મક વાતાવરણ બનાવવામાં મદદ કરું છું.",
           "options_gu": []
         }
       ]

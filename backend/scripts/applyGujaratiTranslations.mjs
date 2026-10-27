@@ -9,6 +9,9 @@
 //       (used for Section 4 aptitude items where the options are numbers,
 //        symbols, or English-vocabulary tokens that must not be translated)
 //   o omitted     → options_gu stays [] (Likert items render section-level scale)
+//   a = answer letter for a question rewritten natively in Gujarati (not a
+//       translation of the English item) → question.correctOption_gu. The
+//       Gujarati package scores against it; omitted → the English key applies.
 
 import fs from "node:fs";
 import path from "node:path";
@@ -68,6 +71,11 @@ async function main() {
         question.options_gu = entry.o;
       } else {
         question.options_gu = [];
+      }
+      if (entry.a) {
+        question.correctOption_gu = String(entry.a).trim().toUpperCase();
+      } else {
+        delete question.correctOption_gu;
       }
       applied++;
     });

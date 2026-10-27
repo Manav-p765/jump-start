@@ -62,7 +62,12 @@ const GU_ID = flag("id") || "complete-aptitude-500q-gujarati";
 
 const EXPECTED_TOTAL = 500;
 const EXPECTED_SHAPE = [120, 80, 90, 160, 50];
-const EXPECTED_MIRROR_COUNT = 140;
+// Section 4 except 4.3 Abstract (341-365) was rewritten natively in Gujarati
+// by the client, with its own answer key ("a" in the gu source): 135 items.
+// MIRROR (English option labels) = 4.3 Abstract + 4.4 Spatial, whose options
+// are the A-D labels printed in the figures.
+const EXPECTED_MIRROR_COUNT = 50;
+const EXPECTED_NATIVE_COUNT = 135;
 const GUJARATI_RE = /[\u0A80-\u0AFF]/; // Gujarati Unicode block
 
 const fail = (msg) => {
@@ -163,6 +168,8 @@ const readMirrorIds = () => {
     fail(`gu source directory not found: ${GU_SOURCE_DIR}`);
   }
   const ids = new Set();
+  // Native Gujarati items ("a" in the gu source) carry their own answer key.
+  const nativeAnswers = new Map();
   let seen = 0;
   for (let i = 1; i <= 5; i += 1) {
     const f = path.join(GU_SOURCE_DIR, `section${i}.json`);
@@ -171,9 +178,10 @@ const readMirrorIds = () => {
     for (const [key, value] of Object.entries(entries)) {
       seen += 1;
       if (value && value.o === "MIRROR") ids.add(String(key));
+      if (value && value.a) nativeAnswers.set(String(key), String(value.a).trim().toUpperCase());
     }
   }
-  return { ids, seen };
+  return { ids, seen, nativeAnswers };
 };
 
 // ---------------------------------------------------------------------------
@@ -263,7 +271,7 @@ try {
   check("question ids unique", new Set(ids).size === ids.length, `${new Set(ids).size} unique of ${ids.length}`);
 
   // 4. MIRROR ids keep English options, keyed off the gu source markers.
-  const { ids: mirrorIds, seen: guSeen } = readMirrorIds();
+  const { ids: mirrorIds, seen: guSeen, nativeAnswers } = readMirrorIds();
   check(
     `gu source parsed (${EXPECTED_MIRROR_COUNT} MIRROR markers)`,
     mirrorIds.size === EXPECTED_MIRROR_COUNT,
@@ -297,17 +305,34 @@ try {
       : "SKIPPED (English package not found)"
   );
 
-  // 5. Answer keys must survive a text-only refresh.
+  // 5. Answer keys: native Gujarati items use the gu source key ("a");
+  //    every other item must keep the English bank's key.
+  check(
+    `gu source parsed (${EXPECTED_NATIVE_COUNT} native answer keys)`,
+    nativeAnswers.size === EXPECTED_NATIVE_COUNT,
+    `found ${nativeAnswers.size}`
+  );
+  const nativeDrift = [];
+  for (const [qid, letter] of nativeAnswers) {
+    const q = questionById(next, qid);
+    if (!q || String(q.correctOption ?? "") !== letter) nativeDrift.push(qid);
+  }
+  check(
+    "native items use the Gujarati answer key",
+    nativeDrift.length === 0,
+    nativeDrift.length ? `drift: ${nativeDrift.slice(0, 10).join(",")}` : `${nativeAnswers.size} checked`
+  );
   if (ENGLISH_PACKAGE) {
     const keyDrift = [];
     for (const q of questionsOf(next)) {
+      if (nativeAnswers.has(String(q.questionId))) continue;
       const en = questionById(ENGLISH_PACKAGE, q.questionId);
       if (en && String(en.correctOption ?? "") !== String(q.correctOption ?? "")) {
         keyDrift.push(String(q.questionId));
       }
     }
     check(
-      "correctOption matches English bank for all 500",
+      `correctOption matches English bank for the other ${500 - nativeAnswers.size}`,
       keyDrift.length === 0,
       keyDrift.length ? `drift: ${keyDrift.slice(0, 10).join(",")}` : "no drift"
     );

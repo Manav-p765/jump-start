@@ -30,6 +30,11 @@ import {
   getSpatialStimulusSrc,
   isSpatialQuestionId,
 } from "../data/spatialQuestionMedia";
+import { GUJARATI_REPORT_PACKAGE_IDS } from "../data/reportLocale";
+import {
+  GUJARATI_INTEREST_INSTRUCTIONS,
+  GUJARATI_SCALE_OPTIONS,
+} from "../data/gujaratiTestScales";
 
 // Likert + Interest scale labels are computed inside the component
 // from i18n keys so they re-render when the student toggles language.
@@ -215,6 +220,7 @@ export default function Livetest() {
   const [section, setSection] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [allSections, setAllSections] = useState([]);
+  const [packageId, setPackageId] = useState("");
   const [timeLeft, setTimeLeft] = useState(0);
   const [questionError, setQuestionError] = useState("");
   const [saveState, setSaveState] = useState("saved");
@@ -276,6 +282,12 @@ export default function Livetest() {
       : null;
   const totalQuestions = questions.length;
   const showInterestInstructionHeading = sectionId === 3 && totalQuestions > 0;
+  // The Gujarati package shows its own per-section scales and Section 3
+  // instructions in Gujarati, whatever the site UI language is.
+  const isGujaratiPackage = GUJARATI_REPORT_PACKAGE_IDS.includes(packageId);
+  const gujaratiScaleOptions = isGujaratiPackage
+    ? GUJARATI_SCALE_OPTIONS[sectionId] || null
+    : null;
 
   const answeredCount = useMemo(
     () =>
@@ -360,6 +372,7 @@ export default function Livetest() {
       .then(([pkgRes, sectionRes, progressRes]) => {
         const sections = pkgRes?.data?.data?.sections || [];
         setAllSections(sections);
+        setPackageId(String(pkgRes?.data?.data?.package?.id || ""));
 
         const loadedSection = sectionRes?.data?.data?.section;
         const loadedQuestions = sectionRes?.data?.data?.questions || [];
@@ -955,10 +968,14 @@ export default function Livetest() {
           {showInterestInstructionHeading ? (
             <section className="rounded-[26px] border border-[#B7DDE3] bg-[#F1FDFF] p-5 shadow-sm sm:p-6">
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#188B8B]">
-                {t("livetest.instructionInterestHeading")}
+                {isGujaratiPackage
+                  ? GUJARATI_INTEREST_INSTRUCTIONS.heading
+                  : t("livetest.instructionInterestHeading")}
               </p>
               <h2 className="mt-3 text-lg font-semibold leading-8 text-[#0F1729] sm:text-[22px]">
-                {t("livetest.instructionInterest1")}
+                {isGujaratiPackage
+                  ? GUJARATI_INTEREST_INSTRUCTIONS.rate
+                  : t("livetest.instructionInterest1")}
               </h2>
             </section>
           ) : null}
@@ -980,9 +997,12 @@ export default function Livetest() {
               ? getAbstractPromptSrc(numericQuestionId)
               : null;
 
-            // Mechanical Reasoning (Q391-Q410) — some have stimulus diagrams
+            // Mechanical Reasoning (Q391-Q410) — some have stimulus diagrams.
+            // The Gujarati package has its own text-only mechanical items.
             const isMechanicalImageQuestion =
-              sectionId === 4 && isMechanicalQuestionId(numericQuestionId);
+              sectionId === 4 &&
+              !isGujaratiPackage &&
+              isMechanicalQuestionId(numericQuestionId);
             const mechanicalStimulusSrc = isMechanicalImageQuestion
               ? getMechanicalStimulusSrc(numericQuestionId)
               : null;
@@ -1014,8 +1034,11 @@ export default function Livetest() {
               sectionId === 3 && index < 54 && question.type !== "single";
             const showInterestGroupInstructionHeading =
               sectionId === 3 && index === 54;
+            // The Gujarati package's clerical items (Q411-Q430) are plain
+            // multiple choice, not the English "check which pairs" layout.
             const isClericalPairsQuestion =
               sectionId === 4 &&
+              !isGujaratiPackage &&
               question.type === "single" &&
               isClericalQuestionId(numericQuestionId);
             const clericalPrompt = isClericalPairsQuestion
@@ -1029,9 +1052,11 @@ export default function Livetest() {
                       question.options || []
                     )
                   : question.options || []
-                : useInterestAssessmentOptions
-                  ? INTEREST_ASSESSMENT_OPTIONS
-                  : LIKERT_OPTIONS;
+                : gujaratiScaleOptions
+                  ? gujaratiScaleOptions
+                  : useInterestAssessmentOptions
+                    ? INTEREST_ASSESSMENT_OPTIONS
+                    : LIKERT_OPTIONS;
             const useTwoColumns =
               question.type === "single" &&
               options.length >= 4 &&
@@ -1042,10 +1067,14 @@ export default function Livetest() {
                 {showInterestGroupInstructionHeading ? (
                   <section className="rounded-[26px] border border-[#B7DDE3] bg-[#F1FDFF] p-5 shadow-sm sm:p-6">
                     <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#188B8B]">
-                      Interest Assessment Instruction
+                      {isGujaratiPackage
+                        ? GUJARATI_INTEREST_INSTRUCTIONS.heading
+                        : "Interest Assessment Instruction"}
                     </p>
                     <h2 className="mt-3 text-lg font-semibold leading-8 text-[#0F1729] sm:text-[22px]">
-                      Instructions: Choose the activity you would most prefer in each group
+                      {isGujaratiPackage
+                        ? GUJARATI_INTEREST_INSTRUCTIONS.group
+                        : "Instructions: Choose the activity you would most prefer in each group"}
                     </h2>
                   </section>
                 ) : null}
