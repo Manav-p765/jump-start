@@ -153,7 +153,9 @@ export default function Test() {
   const hasSinglePlan = plans.length === 1;
   const planContainerClassName = hasSinglePlan
     ? "mx-auto mt-12 max-w-xl"
-    : "mt-12 grid gap-6 lg:grid-cols-3";
+    : plans.length === 2
+      ? "mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-2"
+      : "mt-12 grid gap-6 lg:grid-cols-3";
 
   useEffect(() => {
     const userId = cacheUserKey(user);

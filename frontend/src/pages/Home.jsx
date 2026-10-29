@@ -142,17 +142,17 @@ export default function Home() {
                   <div className="rounded-3xl border border-[#E6EFF5] bg-[#F8FAFC] p-5">
                     <Star className="h-5 w-5 text-[#F59F0A]" />
                     <p className="mt-4 text-sm font-semibold text-[#0F1729]">{t("home.aptitude")}</p>
-                    <p className="mt-1 text-sm leading-6 text-[#65758B]">{t("home.aptitudeBody")}</p>
+                    <p className="mt-1 text-sm leading-6 text-[#5B6B80]">{t("home.aptitudeBody")}</p>
                   </div>
                   <div className="rounded-3xl border border-[#E6EFF5] bg-[#F8FAFC] p-5">
                     <Star className="h-5 w-5 text-[#157A7A]" />
                     <p className="mt-4 text-sm font-semibold text-[#0F1729]">{t("home.interests")}</p>
-                    <p className="mt-1 text-sm leading-6 text-[#65758B]">{t("home.interestsBody")}</p>
+                    <p className="mt-1 text-sm leading-6 text-[#5B6B80]">{t("home.interestsBody")}</p>
                   </div>
                   <div className="rounded-3xl border border-[#E6EFF5] bg-[#F8FAFC] p-5">
                     <Star className="h-5 w-5 text-[#0F1729]" />
                     <p className="mt-4 text-sm font-semibold text-[#0F1729]">{t("home.guidance")}</p>
-                    <p className="mt-1 text-sm leading-6 text-[#65758B]">{t("home.guidanceBody")}</p>
+                    <p className="mt-1 text-sm leading-6 text-[#5B6B80]">{t("home.guidanceBody")}</p>
                   </div>
                 </div>
           </div>
@@ -202,12 +202,12 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#188B8B]">
+      <section className="bg-[#157A7A]">
         <div className="mx-auto grid max-w-7xl gap-6 px-4 py-10 text-white sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
           {stats.map((item) => (
             <div key={item.label} className="text-center">
               <p className="text-3xl font-bold">{item.value}</p>
-              <p className="mt-2 text-sm text-white/75">{item.label}</p>
+              <p className="mt-2 text-sm text-white">{item.label}</p>
             </div>
           ))}
         </div>
