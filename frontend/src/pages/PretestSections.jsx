@@ -201,11 +201,11 @@ export default function PretestSections() {
                     </h2>
                     <div className="mt-4 flex flex-wrap gap-4 text-sm text-[#65758B]">
                       <span className="inline-flex items-center gap-2">
-                        <Clock3 className="h-4 w-4 text-[#188B8B]" />
+                        <Clock3 className="h-4 w-4 text-[#157A7A]" />
                         {section.durationMinutes || 20} {t("pretestSections.minutesLong")}
                       </span>
                       <span className="inline-flex items-center gap-2">
-                        <FileText className="h-4 w-4 text-[#188B8B]" />
+                        <FileText className="h-4 w-4 text-[#157A7A]" />
                         {section.totalQuestions || 0} {t("pretestSections.questionsLong")}
                       </span>
                     </div>

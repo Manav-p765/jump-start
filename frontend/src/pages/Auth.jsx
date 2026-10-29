@@ -206,12 +206,12 @@ export default function Auth() {
       <div className="mx-auto grid max-w-7xl gap-6 px-5 py-6 sm:px-6 sm:py-12 lg:grid-cols-2 lg:items-start lg:gap-8 lg:px-8">
         {/* ─────── LEFT: Form Panel ─────── */}
         <div
-          className={`surface-card rounded-[24px] p-5 sm:rounded-[32px] sm:p-10 transition-all duration-500 ease-in-out ${
+          className={`surface-card min-w-0 rounded-[24px] p-5 sm:rounded-[32px] sm:p-10 transition-all duration-500 ease-in-out ${
             isLogin ? "lg:order-1" : "lg:order-2"
           }`}
         >
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#E8F9F8] px-4 py-2 text-sm font-semibold text-[#188B8B]">
+          <div className="inline-flex items-center gap-2 rounded-full bg-[#E8F9F8] px-4 py-2 text-sm font-semibold text-[#157A7A]">
             {isLogin ? (
               <>
                 <ShieldCheck className="h-4 w-4" />
@@ -318,7 +318,7 @@ export default function Auth() {
                   <button
                     type="button"
                     onClick={switchMode}
-                    className="font-semibold text-[#188B8B] hover:underline"
+                    className="font-semibold text-[#157A7A] hover:underline"
                   >
                     {t("auth.createOneNow")}
                   </button>
@@ -460,7 +460,7 @@ export default function Auth() {
                   <button
                     type="button"
                     onClick={switchMode}
-                    className="font-semibold text-[#188B8B] hover:underline"
+                    className="font-semibold text-[#157A7A] hover:underline"
                   >
                     {t("auth.loginShort")}
                   </button>
@@ -485,7 +485,7 @@ export default function Auth() {
             }`}
           >
             <div className="max-w-xl">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#188B8B]">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#157A7A]">
                 {t("auth.accountSidePillow")}
               </p>
               <h2 className="mt-5 text-3xl font-bold text-[#0F1729] sm:text-4xl">
@@ -503,7 +503,7 @@ export default function Auth() {
                   className="surface-card rounded-[24px] bg-white/90 px-5 py-4"
                 >
                   <div className="flex items-start gap-3">
-                    <div className="rounded-full bg-[#E8F9F8] p-2 text-[#188B8B]">
+                    <div className="rounded-full bg-[#E8F9F8] p-2 text-[#157A7A]">
                       <CheckCircle2 className="h-4 w-4" />
                     </div>
                     <p className="text-sm leading-7 text-[#0F1729]">{t(key)}</p>
@@ -522,7 +522,7 @@ export default function Auth() {
             }`}
           >
             <div className="max-w-xl">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#188B8B]">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#157A7A]">
                 {t("auth.signupTitle")}
               </p>
               <h2 className="mt-5 text-3xl font-bold text-[#0F1729] sm:text-4xl">
@@ -540,7 +540,7 @@ export default function Auth() {
                   className="surface-card rounded-[24px] bg-white/90 px-5 py-4"
                 >
                   <div className="flex items-start gap-3">
-                    <div className="rounded-full bg-[#E8F9F8] p-2 text-[#188B8B]">
+                    <div className="rounded-full bg-[#E8F9F8] p-2 text-[#157A7A]">
                       <BadgeCheck className="h-4 w-4" />
                     </div>
                     <p className="text-sm leading-7 text-[#0F1729]">{t(key)}</p>

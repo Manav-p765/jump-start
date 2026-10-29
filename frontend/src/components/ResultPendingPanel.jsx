@@ -10,11 +10,11 @@ export default function ResultPendingPanel({
     <div className="bg-white">
       <div className="mx-auto flex min-h-[70vh] max-w-5xl items-center justify-center px-4 py-14 sm:px-6 lg:px-8">
         <div className="w-full max-w-3xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#188B8B]">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#157A7A]">
             Test Submitted
           </p>
 
-          <div className="mx-auto mt-6 flex h-20 w-20 items-center justify-center rounded-full bg-[#E8F9F8] text-[#188B8B]">
+          <div className="mx-auto mt-6 flex h-20 w-20 items-center justify-center rounded-full bg-[#E8F9F8] text-[#157A7A]">
             <Clock3 className="h-9 w-9" />
           </div>
 
@@ -26,13 +26,13 @@ export default function ResultPendingPanel({
           </p>
 
           <div className="surface-card mx-auto mt-8 max-w-xl rounded-[30px] border border-[#B9E5E5] p-8">
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#E8F9F8] text-[#188B8B]">
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#E8F9F8] text-[#157A7A]">
               <FileText className="h-7 w-7" />
             </div>
             <h2 className="mt-5 text-2xl font-bold text-[#0F1729]">
               Your Results Will Be Ready In
             </h2>
-            <p className="mt-3 text-4xl font-bold text-[#188B8B]">48 Hours</p>
+            <p className="mt-3 text-4xl font-bold text-[#157A7A]">48 Hours</p>
             <p className="mt-4 text-sm leading-7 text-[#65758B]">
               Our team is carefully reviewing your responses and will publish your
               career report on the dashboard as soon as it is approved.

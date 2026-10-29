@@ -872,14 +872,14 @@ export default function Livetest() {
 
               <div className="grid w-full grid-cols-2 gap-1.5 sm:w-auto sm:flex sm:items-center sm:gap-3">
                 <div className="inline-flex items-center justify-center gap-1.5 rounded-full border border-[#E1E7EF] px-2.5 py-1.5 text-[11px] font-semibold text-[#0F1729] sm:px-4 sm:py-2 sm:text-sm">
-                  <Clock3 className="h-3.5 w-3.5 text-[#188B8B] sm:h-4 sm:w-4" />
+                  <Clock3 className="h-3.5 w-3.5 text-[#157A7A] sm:h-4 sm:w-4" />
                   {timerLabel}
                 </div>
                 <button
                   type="button"
                   onClick={handlePauseTest}
                   disabled={saving || pauseSaving}
-                  className="inline-flex items-center justify-center gap-1.5 rounded-full border border-[#188B8B] px-2.5 py-1.5 text-[11px] font-semibold text-[#188B8B] transition hover:bg-teal-50 disabled:cursor-not-allowed disabled:opacity-70 sm:gap-2 sm:px-4 sm:py-2 sm:text-sm"
+                  className="inline-flex items-center justify-center gap-1.5 rounded-full border border-[#188B8B] px-2.5 py-1.5 text-[11px] font-semibold text-[#157A7A] transition hover:bg-teal-50 disabled:cursor-not-allowed disabled:opacity-70 sm:gap-2 sm:px-4 sm:py-2 sm:text-sm"
                 >
                   <Pause className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   {pauseSaving ? t("livetest.pausing") : t("livetest.pauseTest")}
@@ -967,7 +967,7 @@ export default function Livetest() {
         <div className="space-y-4">
           {showInterestInstructionHeading ? (
             <section className="rounded-[26px] border border-[#B7DDE3] bg-[#F1FDFF] p-5 shadow-sm sm:p-6">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#188B8B]">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#157A7A]">
                 {isGujaratiPackage
                   ? GUJARATI_INTEREST_INSTRUCTIONS.heading
                   : t("livetest.instructionInterestHeading")}
@@ -1066,7 +1066,7 @@ export default function Livetest() {
               <React.Fragment key={question.questionId || index}>
                 {showInterestGroupInstructionHeading ? (
                   <section className="rounded-[26px] border border-[#B7DDE3] bg-[#F1FDFF] p-5 shadow-sm sm:p-6">
-                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#188B8B]">
+                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#157A7A]">
                       {isGujaratiPackage
                         ? GUJARATI_INTEREST_INSTRUCTIONS.heading
                         : "Interest Assessment Instruction"}
@@ -1102,7 +1102,7 @@ export default function Livetest() {
                             key={`${numericQuestionId}-${pair.number}`}
                             className="grid grid-cols-[auto_minmax(0,1fr)] gap-3 font-mono text-sm leading-6 text-[#0F1729] sm:text-[15px]"
                           >
-                            <span className="font-semibold tabular-nums text-[#188B8B]">
+                            <span className="font-semibold tabular-nums text-[#157A7A]">
                               {pair.number}.
                             </span>
                             <span className="break-words">{pair.text}</span>
@@ -1272,7 +1272,7 @@ export default function Livetest() {
         <div className="mt-8 rounded-[26px] border border-[#E1E7EF] bg-white p-5 shadow-sm sm:p-6">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <div className="inline-flex items-center gap-2 text-sm font-semibold text-[#188B8B]">
+              <div className="inline-flex items-center gap-2 text-sm font-semibold text-[#157A7A]">
                 <CheckCircle2 className="h-4 w-4" />
                 {t("livetest.sectionProgressSaved")}
               </div>
@@ -1365,7 +1365,7 @@ export default function Livetest() {
           aria-labelledby="section-complete-modal-title"
         >
           <div className="w-full max-w-md rounded-[20px] bg-white p-6 text-center shadow-xl sm:p-7">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#E8F9F8] text-[#188B8B]">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#E8F9F8] text-[#157A7A]">
               <CheckCircle2 className="h-7 w-7" />
             </div>
             <h3

@@ -28,7 +28,7 @@ export default function SectionBreakdownCard({
         }}
         className="grid w-full grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-2.5 px-3 py-3 text-left sm:gap-4 sm:px-5 sm:py-5"
       >
-        <div className="rounded-[14px] bg-[#EAFBFB] p-2 text-[#188B8B] sm:rounded-2xl sm:p-3">
+        <div className="rounded-[14px] bg-[#EAFBFB] p-2 text-[#157A7A] sm:rounded-2xl sm:p-3">
           <ClipboardList className="h-4 w-4 sm:h-5 sm:w-5" />
         </div>
         <div className="min-w-0">
@@ -38,7 +38,7 @@ export default function SectionBreakdownCard({
           <p className="mt-1 text-[13px] font-medium leading-5 text-[#4E5D72] sm:mt-1.5 sm:text-sm sm:leading-6">
             {getSectionScoreLine(section)}
             {section.durationMinutes != null ? (
-              <span className="ml-2 text-[#188B8B]">
+              <span className="ml-2 text-[#157A7A]">
                 · Completed in {section.durationMinutes} min
               </span>
             ) : null}

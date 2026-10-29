@@ -63,7 +63,7 @@ export default function SectionBreak() {
 
       <div className="mx-auto flex max-w-6xl justify-center px-4 py-12 sm:px-6 lg:px-8">
         <div className="w-full max-w-3xl text-center">
-          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#E8F9F8] text-[#188B8B] shadow-sm">
+          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#E8F9F8] text-[#157A7A] shadow-sm">
             <CheckCircle2 className="h-10 w-10" />
           </div>
 
@@ -106,7 +106,7 @@ export default function SectionBreak() {
 
           <div className="mt-5 rounded-[24px] border border-[#C8ECEA] bg-[#EAFBFB] p-5 text-left sm:p-6">
             <div className="flex items-start gap-3">
-              <div className="rounded-full bg-white p-2 text-[#188B8B]">
+              <div className="rounded-full bg-white p-2 text-[#157A7A]">
                 <Coffee className="h-4 w-4" />
               </div>
               <div>
@@ -129,7 +129,7 @@ export default function SectionBreak() {
           </button>
 
           <div className="mt-4 flex items-center justify-center gap-2 text-sm text-[#65758B]">
-            <TimerReset className="h-4 w-4 text-[#188B8B]" />
+            <TimerReset className="h-4 w-4 text-[#157A7A]" />
             <span>{t("sectionBreak.estimatedNext", { minutes: estimatedNextMinutes })}</span>
           </div>
 
@@ -166,7 +166,7 @@ export default function SectionBreak() {
               }
             }}
             disabled={savingReturn}
-            className="mt-6 inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-[14px] border-2 border-[#188B8B] bg-white px-6 py-3.5 text-sm font-semibold text-[#188B8B] transition hover:bg-[#F6FDFC] disabled:cursor-not-allowed disabled:opacity-60"
+            className="mt-6 inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-[14px] border-2 border-[#188B8B] bg-white px-6 py-3.5 text-sm font-semibold text-[#157A7A] transition hover:bg-[#F6FDFC] disabled:cursor-not-allowed disabled:opacity-60"
           >
             <Save className="h-4 w-4" />
             {savingReturn

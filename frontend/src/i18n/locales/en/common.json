@@ -775,7 +775,7 @@
     "loading": "Loading packages...",
     "badge": "Assessment Packages",
     "heading": "Career Aptitude Tests",
-    "subheading": "Start with the quick dummy test for a fast dry run, or take the comprehensive 500-question assessment for full career-fit analysis.",
+    "subheading": "Take the comprehensive 500-question assessment for a full career-fit analysis, available in English and Gujarati.",
     "loadFailedHeading": "Unable to Load Packages",
     "loadFailedBody": "This is different from having no packages configured. Once the backend config loads correctly, your packages will appear here.",
     "loadFailedDefault": "Failed to load available packages.",
@@ -822,7 +822,7 @@
           "500 total questions",
           "Full 5-section assessment",
           "Detailed section and subsection reporting",
-          "Admin review compatible scoring structure"
+          "Expert-reviewed report before release"
         ]
       },
       "demo-aptitude-50q": {
@@ -847,6 +847,9 @@
           "1 question per section",
           "Fast end-to-end result testing"
         ]
+      },
+      "complete-aptitude-500q-gujarati": {
+        "description": "The full 500-question career aptitude assessment in Gujarati, with a detailed Gujarati report and career matching."
       }
     }
   },
@@ -1238,5 +1241,14 @@
     "report": "Loading your report...",
     "results": "Loading your results...",
     "section": "Loading section..."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "The page you are looking for doesn't exist or has moved.",
+    "home": "Go to Home",
+    "tests": "View tests",
+    "reload": "Reload page",
+    "errorTitle": "Something went wrong",
+    "errorBody": "Please reload the page. If it keeps happening, contact connect@jumpstride.in."
   }
 }

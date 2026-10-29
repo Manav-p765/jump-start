@@ -70,7 +70,7 @@ export default function ResultHistoryCard({
       <div className="mt-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div className="flex flex-wrap gap-3 text-sm text-[#65758B]">
           <span className="inline-flex items-center gap-2">
-            <FileText className="h-4 w-4 text-[#188B8B]" />
+            <FileText className="h-4 w-4 text-[#157A7A]" />
             {helperText}
           </span>
           {test.resultState === "pending_approval" ? (

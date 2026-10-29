@@ -37,7 +37,7 @@ const summaryItems = (summary = {}) => {
         maxScore
       )}${overallScoreSuffix}`,
       icon: Trophy,
-      accent: "bg-[#EAFBFB] text-[#188B8B]",
+      accent: "bg-[#EAFBFB] text-[#157A7A]",
     },
     {
       key: "percentage",
@@ -72,7 +72,7 @@ export default function OverallScoreSummaryCard({ summary }) {
     <section className="surface-card rounded-[28px] p-6">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#188B8B]">
+          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#157A7A]">
             Overall Result Summary
           </p>
           <h2 className="mt-3 text-2xl font-bold text-[#0F1729]">Review Snapshot</h2>

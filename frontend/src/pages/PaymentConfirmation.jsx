@@ -214,7 +214,7 @@ export default function PaymentConfirmation() {
           <div className="space-y-4">
             <div className="rounded-2xl border border-[#E1E7EF] bg-white p-6 shadow-sm">
               <div className="flex items-start gap-4">
-                <div className="rounded-2xl bg-teal-50 p-3 text-[#188B8B]">
+                <div className="rounded-2xl bg-teal-50 p-3 text-[#157A7A]">
                   <Mail className="h-5 w-5" />
                 </div>
                 <div>
@@ -285,7 +285,7 @@ export default function PaymentConfirmation() {
               <button
                 type="button"
                 onClick={() => navigate("/pretest")}
-                className="inline-flex items-center justify-center rounded-xl border-2 border-[#188B8B] px-6 py-3 font-semibold text-[#188B8B] transition hover:bg-teal-50"
+                className="inline-flex items-center justify-center rounded-xl border-2 border-[#188B8B] px-6 py-3 font-semibold text-[#157A7A] transition hover:bg-teal-50"
               >
                 Start Test Now
               </button>

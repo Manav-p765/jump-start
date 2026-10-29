@@ -13,6 +13,8 @@ const AdminLayout = lazy(() => import("./layout/AdminLayout"));
 import ProtectedRoute from "./components/ProtectedRoute";
 import RequireStudent from "./components/RequireStudent";
 import PageLoader from "./components/PageLoader";
+// Eager (tiny): the error screen must render even when a lazy chunk fails.
+import NotFound, { RouteError } from "./pages/NotFound";
 
 const Home = lazy(() => import("./pages/Home"));
 const Auth = lazy(() => import("./pages/Auth"));
@@ -67,6 +69,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <RouteError />,
     children: [
       { path: "/", element: studentPage(<Home />) },
       { path: "/login", element: withSuspense(<Auth />) },
@@ -114,10 +117,12 @@ const router = createBrowserRouter([
       { path: "/profile", element: protectedPage(<Profile />) },
       { path: "/profile/edit", element: protectedPage(<EditProfile />) },
       { path: "/profile/student", element: protectedPage(<StudentProfileForm />) },
+      { path: "*", element: <NotFound /> },
     ],
   },
   {
     path: "/admin",
+    errorElement: <RouteError />,
     element: withSuspense(
       <ProtectedRoute requiredRole="admin" unauthorizedTo="/dashboard">
         <AdminLayout />
@@ -174,6 +179,7 @@ const router = createBrowserRouter([
   },
   {
     element: <BlankLayout />,
+    errorElement: <RouteError />,
     children: [
       { path: "/sectionbreak", element: protectedPage(<SectionBreak />) },
       { path: "/SectionBreak", element: protectedPage(<SectionBreak />) },

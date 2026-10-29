@@ -253,7 +253,7 @@ export default function StudentProfileForm() {
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <Link
           to={returnTo}
-          className="inline-flex items-center gap-2 text-sm font-semibold text-[#4E5D72] hover:text-[#188B8B]"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-[#4E5D72] hover:text-[#157A7A]"
         >
           <ArrowLeft className="h-4 w-4" />
           {t("studentProfile.back")}
@@ -261,7 +261,7 @@ export default function StudentProfileForm() {
 
         <div className="surface-card mt-4 rounded-[28px] p-7 sm:p-9">
           <div className="flex items-start gap-3">
-            <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#EAFBFB] text-[#188B8B]">
+            <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#EAFBFB] text-[#157A7A]">
               <GraduationCap className="h-5 w-5" />
             </span>
             <div>

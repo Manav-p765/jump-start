@@ -20,8 +20,8 @@ const router = express.Router();
 
 router.get("/public/config", getPublicConfig);
 router.get("/public/support-pages", getPublicSupportPages);
-router.get("/public/packages/:packageId/sections", getPublicPackageSections);
-router.get("/public/packages/:packageId/sections/:sectionId/questions", getPublicSectionQuestions);
+router.get("/public/packages/:packageId/sections", protect, getPublicPackageSections);
+router.get("/public/packages/:packageId/sections/:sectionId/questions", protect, getPublicSectionQuestions);
 
 router.use("/admin", protect, adminOnly);
 router.get("/admin/config", getAdminConfig);

@@ -95,6 +95,16 @@ const BookCounselling = () => {
     }
   };
 
+  // Slots earlier than now on today's date cannot be booked (the server
+  // rejects them too), so do not offer them.
+  const isPastSlot = (time) => {
+    const [, hh, mm, ap] = time.match(/(\d+):(\d+)\s*(AM|PM)/i) || [];
+    if (!hh) return false;
+    const slot = new Date(selectedDate);
+    slot.setHours((Number(hh) % 12) + (ap.toUpperCase() === "PM" ? 12 : 0), Number(mm), 0, 0);
+    return slot <= new Date();
+  };
+
   const isPastDate = (day) => {
     const d = new Date(currentYear, currentMonth, day);
     d.setHours(0, 0, 0, 0);
@@ -242,7 +252,8 @@ const BookCounselling = () => {
                   <button
                     key={time}
                     onClick={() => setSelectedTime(time)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-[14px] border-2 text-sm transition font-inter ${
+                    disabled={isPastSlot(time)}
+                    className={`flex items-center gap-2 px-4 py-2 rounded-[14px] border-2 text-sm transition font-inter disabled:cursor-not-allowed disabled:opacity-40 ${
                       selectedTime === time
                         ? "bg-teal-600 text-white border-teal-600"
                         : "border-teal-600 text-teal-700 hover:bg-teal-50"
@@ -319,14 +330,14 @@ const BookCounselling = () => {
 
             <div className="flex justify-between mt-4 font-inter">
               <span className="text-base text-[#0F1729] font-semibold">{t("bookCounselling.total")}</span>
-              <span className="text-2xl text-[#188B8B] font-bold">₹999</span>
+              <span className="text-2xl text-[#157A7A] font-bold">₹999</span>
             </div>
             <p className="text-xs text-[#65758B] mt-1 font-inter">
               {t("bookCounselling.inclTaxes")}
             </p>
 
             <button
-              disabled={!selectedTime}
+              disabled={!selectedTime || isPastSlot(selectedTime)}
               className={`w-full mt-6 font-semibold text-sm  py-3 font-inter rounded-[14px] transition ${
                 selectedTime
                   ? "bg-[#F59F0A] hover:bg-amber-500 text-[#0F1729]"

@@ -203,14 +203,14 @@ export default function TestSubmissions() {
                     <tr key={row.id} className="hover:bg-[#FBFCFD]">
                       <td className="px-6 py-5">
                         <div className="flex items-center gap-3">
-                          <div className="flex h-11 w-11 items-center justify-center rounded-full border border-[#CFEDED] bg-[#EAFBFB] text-xs font-bold text-[#188B8B]">
+                          <div className="flex h-11 w-11 items-center justify-center rounded-full border border-[#CFEDED] bg-[#EAFBFB] text-xs font-bold text-[#157A7A]">
                             {row.initials}
                           </div>
                           <div>
                             <div className="flex flex-wrap items-center gap-2">
                               <p className="text-sm font-bold text-[#0F1729]">{row.name}</p>
                               {row.jumpstartId ? (
-                                <span className="inline-flex items-center rounded-full border border-[#D4EEED] bg-[#EAFBFB] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.06em] text-[#188B8B]">
+                                <span className="inline-flex items-center rounded-full border border-[#D4EEED] bg-[#EAFBFB] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.06em] text-[#157A7A]">
                                   {row.jumpstartId}
                                 </span>
                               ) : null}

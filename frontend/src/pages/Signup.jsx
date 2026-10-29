@@ -127,7 +127,7 @@ export default function Signup() {
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:px-8">
         <div className="relative overflow-hidden rounded-[36px] bg-[radial-gradient(circle_at_top_left,_rgba(52,211,203,0.28),_transparent_35%),linear-gradient(180deg,#F4FEFE_0%,#EAFBFB_100%)] p-8 sm:p-10">
           <div className="max-w-xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#188B8B]">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#157A7A]">
               {t("auth.signupTitle")}
             </p>
             <h2 className="mt-5 text-4xl font-bold text-[#0F1729]">
@@ -145,7 +145,7 @@ export default function Signup() {
                 className="surface-card rounded-[24px] bg-white/90 px-5 py-4"
               >
                 <div className="flex items-start gap-3">
-                  <div className="rounded-full bg-[#E8F9F8] p-2 text-[#188B8B]">
+                  <div className="rounded-full bg-[#E8F9F8] p-2 text-[#157A7A]">
                     <BadgeCheck className="h-4 w-4" />
                   </div>
                   <p className="text-sm leading-7 text-[#0F1729]">{t(key)}</p>
@@ -164,7 +164,7 @@ export default function Signup() {
             fetchPriority="high"
             className="mb-6 h-12 w-auto"
           />
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#E8F9F8] px-4 py-2 text-sm font-semibold text-[#188B8B]">
+          <div className="inline-flex items-center gap-2 rounded-full bg-[#E8F9F8] px-4 py-2 text-sm font-semibold text-[#157A7A]">
             <Sparkles className="h-4 w-4" />
             {t("auth.getStartedBadge")}
           </div>
@@ -302,7 +302,7 @@ export default function Signup() {
 
           <p className="mt-6 text-sm text-[#65758B]">
             {t("auth.alreadyHaveAccount")}{" "}
-            <Link to="/login" className="font-semibold text-[#188B8B] hover:underline">
+            <Link to="/login" className="font-semibold text-[#157A7A] hover:underline">
               {t("auth.loginShort")}
             </Link>
           </p>

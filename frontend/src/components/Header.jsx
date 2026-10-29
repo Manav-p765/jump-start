@@ -3,7 +3,7 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { LogOut, Menu, UserRound, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { AuthContext } from "../context/AuthContext";
-import { setLanguage, SUPPORTED_LANGUAGES } from "../i18n/i18n";
+import { ensureLanguageBundle, setLanguage, SUPPORTED_LANGUAGES } from "../i18n/i18n";
 import ConfirmDialog from "./ConfirmDialog";
 import AssetImage from "./AssetImage";
 import { company } from "../config/company";
@@ -35,14 +35,14 @@ const defaultNavItems = [
 
 const getLinkClassName = ({ isActive }) =>
   `text-sm font-semibold ${
-    isActive ? "text-[#188B8B]" : "text-[#0F1729] hover:text-[#188B8B]"
+    isActive ? "text-[#157A7A]" : "text-[#0F1729] hover:text-[#157A7A]"
   }`;
 
 const getMobileLinkClassName = ({ isActive }) =>
   `rounded-2xl px-4 py-3 text-[15px] font-semibold transition-colors ${
     isActive
-      ? "bg-[#EAFBFB] text-[#188B8B]"
-      : "text-[#0F1729] hover:bg-[#F8FAFC] hover:text-[#188B8B]"
+      ? "bg-[#EAFBFB] text-[#157A7A]"
+      : "text-[#0F1729] hover:bg-[#F8FAFC] hover:text-[#157A7A]"
   }`;
 
 export default function Header() {
@@ -160,11 +160,14 @@ export default function Header() {
             type="button"
             lang={lang}
             onClick={() => setLanguage(lang)}
+            // Fetch the locale chunk on intent so the click switches at once.
+            onPointerEnter={() => ensureLanguageBundle(lang)}
+            onFocus={() => ensureLanguageBundle(lang)}
             aria-pressed={isActive}
             data-lang-toggle={lang}
             className={`rounded-full px-2.5 py-1 text-xs font-semibold transition ${
               isActive
-                ? "bg-[#188B8B] text-white"
+                ? "bg-[#157A7A] text-white"
                 : "text-[#0F1729] hover:bg-[#F0FBFB]"
             }`}
           >
@@ -218,7 +221,7 @@ export default function Header() {
                   to="/profile"
                   className="inline-flex items-center gap-2 rounded-full border border-[#D9E5EC] px-4 py-2 text-sm font-semibold text-[#0F1729] hover:border-[#188B8B] hover:bg-[#F0FBFB]"
                 >
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#E8F9F8] text-[#188B8B]">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#E8F9F8] text-[#157A7A]">
                     <UserRound className="h-4 w-4" />
                   </span>
                   {firstName}
@@ -236,7 +239,7 @@ export default function Header() {
               <>
                 <Link
                   to="/login"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-[#0F1729] hover:text-[#188B8B]"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-[#0F1729] hover:text-[#157A7A]"
                 >
                   <UserRound className="h-4 w-4" />
                   {t("nav.signIn")}

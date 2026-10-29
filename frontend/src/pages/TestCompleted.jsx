@@ -97,7 +97,7 @@ export default function TestCompleted() {
       <div className="bg-white">
         <div className="mx-auto flex min-h-[70vh] max-w-5xl items-center justify-center px-4 py-14 sm:px-6 lg:px-8">
           <div className="w-full max-w-3xl text-center">
-            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#E8F9F8] text-[#188B8B]">
+            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#E8F9F8] text-[#157A7A]">
               <Clock3 className="h-9 w-9" />
             </div>
             <h1 className="mt-8 text-4xl font-bold text-[#0F1729] sm:text-5xl">
@@ -108,7 +108,7 @@ export default function TestCompleted() {
             </p>
 
             <div className="surface-card mx-auto mt-8 max-w-2xl rounded-[30px] border border-[#B9E5E5] p-8">
-              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#E8F9F8] text-[#188B8B]">
+              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#E8F9F8] text-[#157A7A]">
                 <FileText className="h-7 w-7" />
               </div>
               <h2 className="mt-5 text-3xl font-bold text-[#0F1729]">
@@ -160,7 +160,7 @@ export default function TestCompleted() {
                     })}
                   </p>
                 </div>
-                <span className="inline-flex items-center gap-2 rounded-full bg-[#E8F9F8] px-3 py-1 text-xs font-semibold text-[#188B8B]">
+                <span className="inline-flex items-center gap-2 rounded-full bg-[#E8F9F8] px-3 py-1 text-xs font-semibold text-[#157A7A]">
                   <BadgeCheck className="h-3 w-3" />
                   {t("testCompletedExtra.submittedBadge")}
                 </span>
