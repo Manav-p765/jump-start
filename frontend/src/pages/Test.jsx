@@ -36,7 +36,7 @@ const accentStyles = [
     button: "bg-[#157A7A] text-white hover:bg-[#126A6A]",
   },
   {
-    badge: "bg-[#FFF2D8] text-[#B86D00]",
+    badge: "bg-[#FFF2D8] text-[#8A5200]",
     border: "border-[#F6C465]",
     button: "bg-[#F59F0A] text-[#0F1729] hover:bg-[#E89206]",
   },
@@ -415,7 +415,7 @@ export default function Test() {
                     {openingPlanId === plan.id ? t("testCatalog.actionOpening") : action.actionLabel}
                   </button>
 
-                  <p className="mt-4 text-center text-xs text-[#98A2B3]">
+                  <p className="mt-4 text-center text-xs text-[#667085]">
                     {localisedPackageField(t, plan.id, "durationText", plan.durationText) ||
                       t("testCatalog.fallbackDuration")}
                   </p>
