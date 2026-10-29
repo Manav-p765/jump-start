@@ -124,7 +124,7 @@ export default function TestCompleted() {
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
               <Link
                 to="/dashboard"
-                className="inline-flex items-center justify-center rounded-[14px] bg-[#188B8B] px-6 py-3 text-sm font-semibold text-white hover:bg-[#147979]"
+                className="inline-flex items-center justify-center rounded-[14px] bg-[#157A7A] px-6 py-3 text-sm font-semibold text-white hover:bg-[#126A6A]"
               >
                 {t("testCompletedExtra.goToDashboard")}
               </Link>
@@ -192,7 +192,7 @@ export default function TestCompleted() {
               </Link>
               <Link
                 to="/result"
-                className="inline-flex items-center justify-center rounded-[14px] bg-[#188B8B] px-6 py-3 text-sm font-semibold text-white hover:bg-[#147979]"
+                className="inline-flex items-center justify-center rounded-[14px] bg-[#157A7A] px-6 py-3 text-sm font-semibold text-white hover:bg-[#126A6A]"
               >
                 {t("testCompletedExtra.openResultsHub")}
               </Link>
@@ -214,7 +214,7 @@ export default function TestCompleted() {
 
       {showCelebration ? (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0F1729]/28 px-4 py-8 backdrop-blur-sm">
-          <div className="relative w-full max-w-[460px] overflow-hidden rounded-[28px] bg-[#188B8B] text-white shadow-[0_28px_70px_rgba(15,23,41,0.28)]">
+          <div className="relative w-full max-w-[460px] overflow-hidden rounded-[28px] bg-[#157A7A] text-white shadow-[0_28px_70px_rgba(15,23,41,0.28)]">
             <button
               type="button"
               onClick={dismissCelebration}

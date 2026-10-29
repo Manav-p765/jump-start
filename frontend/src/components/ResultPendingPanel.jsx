@@ -59,7 +59,7 @@ export default function ResultPendingPanel({
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <Link
               to="/dashboard"
-              className="inline-flex items-center justify-center rounded-[14px] bg-[#188B8B] px-6 py-3 text-sm font-semibold text-white hover:bg-[#147979]"
+              className="inline-flex items-center justify-center rounded-[14px] bg-[#157A7A] px-6 py-3 text-sm font-semibold text-white hover:bg-[#126A6A]"
             >
               Go to Dashboard
             </Link>

@@ -259,10 +259,10 @@ export default function Auth() {
               <div className="w-full shrink-0">
                 <form className="space-y-4 sm:space-y-5" onSubmit={handleLoginSubmit}>
                   <div>
-                    <label className="mb-2 block text-sm font-semibold text-[#344054]">
+                    <label htmlFor="login-email" className="mb-2 block text-sm font-semibold text-[#344054]">
                       {t("auth.emailLabel")}
                     </label>
-                    <input
+                    <input id="login-email"
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -271,11 +271,11 @@ export default function Auth() {
                     />
                   </div>
                   <div>
-                    <label className="mb-2 block text-sm font-semibold text-[#344054]">
+                    <label htmlFor="login-password" className="mb-2 block text-sm font-semibold text-[#344054]">
                       {t("auth.passwordLabel")}
                     </label>
                     <div className="relative">
-                      <input
+                      <input id="login-password"
                         type={showPassword ? "text" : "password"}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
@@ -329,10 +329,10 @@ export default function Auth() {
               <div className="w-full shrink-0">
                 <form className="space-y-3 sm:space-y-5" onSubmit={handleSignupSubmit}>
                   <div>
-                    <label className="mb-2 block text-sm font-semibold text-[#344054]">
+                    <label htmlFor="signup-name" className="mb-2 block text-sm font-semibold text-[#344054]">
                       {t("auth.nameLabelShort")}
                     </label>
-                    <input
+                    <input id="signup-name"
                       type="text"
                       value={signupForm.name}
                       onChange={(e) => handleSignupChange("name", e.target.value)}
@@ -341,10 +341,10 @@ export default function Auth() {
                     />
                   </div>
                   <div>
-                    <label className="mb-2 block text-sm font-semibold text-[#344054]">
+                    <label htmlFor="signup-mobile" className="mb-2 block text-sm font-semibold text-[#344054]">
                       {t("auth.mobileLabel")}
                     </label>
-                    <input
+                    <input id="signup-mobile"
                       type="tel"
                       value={signupForm.mobile}
                       onChange={(e) => handleSignupChange("mobile", e.target.value)}
@@ -353,10 +353,10 @@ export default function Auth() {
                     />
                   </div>
                   <div>
-                    <label className="mb-2 block text-sm font-semibold text-[#344054]">
+                    <label htmlFor="signup-email" className="mb-2 block text-sm font-semibold text-[#344054]">
                       {t("auth.emailLabel")}
                     </label>
-                    <input
+                    <input id="signup-email"
                       type="email"
                       value={signupForm.email}
                       onChange={(e) => handleSignupChange("email", e.target.value)}
@@ -365,11 +365,11 @@ export default function Auth() {
                     />
                   </div>
                   <div>
-                    <label className="mb-2 block text-sm font-semibold text-[#344054]">
+                    <label htmlFor="signup-password" className="mb-2 block text-sm font-semibold text-[#344054]">
                       {t("auth.passwordLabel")}
                     </label>
                     <div className="relative">
-                      <input
+                      <input id="signup-password"
                         type={showPassword ? "text" : "password"}
                         value={signupForm.password}
                         onChange={(e) =>
@@ -393,11 +393,11 @@ export default function Auth() {
                     </div>
                   </div>
                   <div>
-                    <label className="mb-2 block text-sm font-semibold text-[#344054]">
+                    <label htmlFor="signup-confirm-password" className="mb-2 block text-sm font-semibold text-[#344054]">
                       {t("auth.confirmPasswordLabel")}
                     </label>
                     <div className="relative">
-                      <input
+                      <input id="signup-confirm-password"
                         type={showConfirmPassword ? "text" : "password"}
                         value={signupForm.password_confirmation}
                         onChange={(e) =>

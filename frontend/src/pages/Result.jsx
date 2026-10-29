@@ -45,7 +45,7 @@ const NEXT_STEP_ITEMS = [
     description: "Discuss results with a psychologist",
     icon: BadgeCheck,
     itemClass: "bg-[#DFF7F7]",
-    iconClass: "bg-[#188B8B] text-white",
+    iconClass: "bg-[#157A7A] text-white",
   },
   {
     key: "career-paths",
@@ -518,7 +518,7 @@ export default function Result() {
                         </div>
                         <div className="mt-2 h-2 rounded-full bg-[#DCE9EE]">
                           <div
-                            className="h-2 rounded-full bg-[#188B8B]"
+                            className="h-2 rounded-full bg-[#157A7A]"
                             style={{ width: `${Math.min(100, item.value || 0)}%` }}
                           />
                         </div>
@@ -590,7 +590,7 @@ export default function Result() {
                             aria-hidden="true"
                           >
                             <div
-                              className="h-1.5 rounded-full bg-[#188B8B]"
+                              className="h-1.5 rounded-full bg-[#157A7A]"
                               style={{
                                 width: `${Math.min(100, Math.max(0, matchValue))}%`,
                               }}

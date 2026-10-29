@@ -184,7 +184,7 @@ export default function PaymentConfirmation() {
           </p>
           <Link
             to="/dashboard"
-            className="mt-6 inline-flex rounded-xl bg-[#188B8B] px-6 py-3 font-semibold text-white transition hover:bg-teal-700"
+            className="mt-6 inline-flex rounded-xl bg-[#157A7A] px-6 py-3 font-semibold text-white transition hover:bg-teal-700"
           >
             Go to Dashboard
           </Link>
@@ -277,7 +277,7 @@ export default function PaymentConfirmation() {
               <button
                 type="button"
                 onClick={() => navigate("/dashboard")}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#188B8B] px-6 py-3 font-semibold text-white transition hover:bg-teal-700"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#157A7A] px-6 py-3 font-semibold text-white transition hover:bg-teal-700"
               >
                 <LayoutDashboard className="h-4 w-4" />
                 Go to Dashboard

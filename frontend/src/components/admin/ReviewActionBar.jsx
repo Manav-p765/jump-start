@@ -69,7 +69,7 @@ export default function ReviewActionBar({
             type="button"
             onClick={onApprove}
             disabled={!canApprove || approving}
-            className="inline-flex items-center justify-center gap-2 rounded-[14px] bg-[#188B8B] px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(24,139,139,0.18)] hover:bg-[#147979] disabled:cursor-default disabled:opacity-60"
+            className="inline-flex items-center justify-center gap-2 rounded-[14px] bg-[#157A7A] px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(24,139,139,0.18)] hover:bg-[#126A6A] disabled:cursor-default disabled:opacity-60"
           >
             <CheckCircle2 className="h-4 w-4" />
             {canApprove

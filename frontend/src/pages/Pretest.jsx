@@ -82,7 +82,7 @@ export default function Pretest() {
           <button
             type="button"
             onClick={() => navigate("/dashboard", { replace: true })}
-            className="mt-6 rounded-xl bg-[#188B8B] px-6 py-3 font-semibold text-white transition hover:bg-teal-700"
+            className="mt-6 rounded-xl bg-[#157A7A] px-6 py-3 font-semibold text-white transition hover:bg-teal-700"
           >
             {t("pretest.backToDashboard")}
           </button>

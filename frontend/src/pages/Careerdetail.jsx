@@ -176,7 +176,7 @@ export default function Careerdetail() {
               <div className="mt-3 max-w-md">
                 <div className="h-2 w-full overflow-hidden rounded-full bg-[#E6EEF2]">
                   <div
-                    className="h-2 rounded-full bg-[#188B8B]"
+                    className="h-2 rounded-full bg-[#157A7A]"
                     style={{
                       width: `${Math.min(100, Math.max(0, detail.score))}%`,
                     }}
@@ -249,7 +249,7 @@ export default function Careerdetail() {
                 <ul className="mt-5 space-y-3 text-sm leading-7 text-[#4E5D72]">
                   {detail.matchReasons.holland ? (
                     <li className="flex gap-3">
-                      <span className="mt-1.5 inline-block h-2 w-2 shrink-0 rounded-full bg-[#188B8B]" />
+                      <span className="mt-1.5 inline-block h-2 w-2 shrink-0 rounded-full bg-[#157A7A]" />
                       <span>
                         <span className="font-semibold text-[#0F1729]">
                           {t("result.matchReasonInterests")}:
@@ -260,7 +260,7 @@ export default function Careerdetail() {
                   ) : null}
                   {detail.matchReasons.intelligence ? (
                     <li className="flex gap-3">
-                      <span className="mt-1.5 inline-block h-2 w-2 shrink-0 rounded-full bg-[#188B8B]" />
+                      <span className="mt-1.5 inline-block h-2 w-2 shrink-0 rounded-full bg-[#157A7A]" />
                       <span>
                         <span className="font-semibold text-[#0F1729]">
                           {t("result.matchReasonIntelligence")}:
@@ -271,7 +271,7 @@ export default function Careerdetail() {
                   ) : null}
                   {detail.matchReasons.aptitude ? (
                     <li className="flex gap-3">
-                      <span className="mt-1.5 inline-block h-2 w-2 shrink-0 rounded-full bg-[#188B8B]" />
+                      <span className="mt-1.5 inline-block h-2 w-2 shrink-0 rounded-full bg-[#157A7A]" />
                       <span>
                         <span className="font-semibold text-[#0F1729]">
                           {t("result.matchReasonAptitude")}:
@@ -282,7 +282,7 @@ export default function Careerdetail() {
                   ) : null}
                   {detail.matchReasons.eq ? (
                     <li className="flex gap-3">
-                      <span className="mt-1.5 inline-block h-2 w-2 shrink-0 rounded-full bg-[#188B8B]" />
+                      <span className="mt-1.5 inline-block h-2 w-2 shrink-0 rounded-full bg-[#157A7A]" />
                       <span>
                         <span className="font-semibold text-[#0F1729]">
                           {t("result.matchReasonEq")}:
@@ -418,7 +418,7 @@ export default function Careerdetail() {
               <div className="mt-5 space-y-4">
                 {detail.education.map((item) => (
                   <div key={item} className="flex gap-3">
-                    <div className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[#188B8B]" />
+                    <div className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[#157A7A]" />
                     <p className="text-sm leading-7 text-[#65758B]">{item}</p>
                   </div>
                 ))}
@@ -444,7 +444,7 @@ export default function Careerdetail() {
                     </div>
                     <div className="mt-3 h-2.5 rounded-full bg-[#DCE9EE]">
                       <div
-                        className="h-2.5 rounded-full bg-[#188B8B]"
+                        className="h-2.5 rounded-full bg-[#157A7A]"
                         style={{ width: `${Math.min(100, detail.outlook[item.key] || 0)}%` }}
                       />
                     </div>

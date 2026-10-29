@@ -272,7 +272,7 @@ export default function CouponsPanel() {
             <button
               type="submit"
               disabled={creating}
-              className="inline-flex items-center gap-2 rounded-lg bg-[#188B8B] px-5 py-2 text-sm font-semibold text-white hover:bg-[#147979] disabled:opacity-60"
+              className="inline-flex items-center gap-2 rounded-lg bg-[#157A7A] px-5 py-2 text-sm font-semibold text-white hover:bg-[#126A6A] disabled:opacity-60"
             >
               {creating ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
               Create

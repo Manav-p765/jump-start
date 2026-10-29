@@ -812,7 +812,7 @@ export default function Livetest() {
           <button
             type="button"
             onClick={() => navigate("/pretest/sections", { replace: true })}
-            className="mt-6 rounded-xl bg-[#188B8B] px-6 py-3 font-semibold text-white transition hover:bg-teal-700"
+            className="mt-6 rounded-xl bg-[#157A7A] px-6 py-3 font-semibold text-white transition hover:bg-teal-700"
           >
             {t("livetest.backToSections")}
           </button>
@@ -927,7 +927,7 @@ export default function Livetest() {
             <div className="px-3 pb-2.5 sm:px-5 sm:pb-4">
               <div className="h-1 rounded-full bg-[#E1E7EF] sm:h-2">
                 <div
-                  className="h-1 rounded-full bg-[#188B8B] transition-all duration-300 sm:h-2"
+                  className="h-1 rounded-full bg-[#157A7A] transition-all duration-300 sm:h-2"
                   style={{ width: `${progressPercent}%` }}
                 />
               </div>
@@ -1348,7 +1348,7 @@ export default function Livetest() {
               <button
                 type="button"
                 onClick={() => setShowUnansweredModal(false)}
-                className="inline-flex cursor-pointer items-center justify-center rounded-[12px] bg-[#188B8B] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#157A7A]"
+                className="inline-flex cursor-pointer items-center justify-center rounded-[12px] bg-[#157A7A] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#157A7A]"
               >
                 {t("livetest.unansweredModalCta")}
               </button>
@@ -1384,7 +1384,7 @@ export default function Livetest() {
               type="button"
               onClick={handleProceedNow}
               disabled={saving}
-              className="mt-5 inline-flex w-full cursor-pointer items-center justify-center rounded-[14px] bg-[#188B8B] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#157A7A] disabled:cursor-not-allowed disabled:opacity-70"
+              className="mt-5 inline-flex w-full cursor-pointer items-center justify-center rounded-[14px] bg-[#157A7A] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#157A7A] disabled:cursor-not-allowed disabled:opacity-70"
             >
               {saving ? t("common.save") + "…" : t("livetest.sectionCompleteContinue")}
             </button>

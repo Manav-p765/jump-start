@@ -435,7 +435,7 @@ export default function Settings() {
             onClick={() => setActiveTab(tab.value)}
             className={`rounded-t-lg px-4 py-2 text-sm font-semibold transition ${
               activeTab === tab.value
-                ? "bg-[#188B8B] text-white"
+                ? "bg-[#157A7A] text-white"
                 : "bg-white text-gray-600 hover:text-[#157A7A]"
             }`}
           >
@@ -460,7 +460,7 @@ export default function Settings() {
               key={p.id}
               onClick={() => pick(p.id)}
               className={`px-3 py-1.5 rounded-lg text-sm font-medium border ${
-                selectedId === p.id ? "bg-[#188B8B] text-white border-[#188B8B]" : "bg-white text-gray-700 border-gray-200"
+                selectedId === p.id ? "bg-[#157A7A] text-white border-[#188B8B]" : "bg-white text-gray-700 border-gray-200"
               }`}
             >
               {p.title}
@@ -582,7 +582,7 @@ export default function Settings() {
                 type="button"
                 onClick={saveSupportPages}
                 disabled={savingSupportPages}
-                className="px-4 py-2 rounded-lg bg-[#188B8B] text-white text-sm font-semibold disabled:opacity-60"
+                className="px-4 py-2 rounded-lg bg-[#157A7A] text-white text-sm font-semibold disabled:opacity-60"
               >
                 {savingSupportPages ? "Saving..." : "Save Support Pages"}
               </button>

@@ -79,7 +79,7 @@ export default function TestPaused() {
             <button
               type="button"
               onClick={() => navigate("/dashboard", { replace: true })}
-              className="inline-flex items-center justify-center gap-2 rounded-[14px] bg-[#188B8B] px-6 py-3 text-sm font-semibold text-white hover:bg-[#147979]"
+              className="inline-flex items-center justify-center gap-2 rounded-[14px] bg-[#157A7A] px-6 py-3 text-sm font-semibold text-white hover:bg-[#126A6A]"
             >
               <LayoutDashboard className="h-4 w-4" />
               {t("testPaused.returnToDashboard")}

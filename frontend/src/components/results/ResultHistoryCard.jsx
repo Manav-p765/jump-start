@@ -85,7 +85,7 @@ export default function ResultHistoryCard({
           type="button"
           onClick={() => onAction?.(test)}
           disabled={busy}
-          className="inline-flex items-center justify-center gap-2 rounded-[16px] bg-[#188B8B] px-5 py-3 text-sm font-semibold text-white shadow-[0_14px_28px_rgba(24,139,139,0.16)] hover:bg-[#147979] disabled:opacity-60"
+          className="inline-flex items-center justify-center gap-2 rounded-[16px] bg-[#157A7A] px-5 py-3 text-sm font-semibold text-white shadow-[0_14px_28px_rgba(24,139,139,0.16)] hover:bg-[#126A6A] disabled:opacity-60"
         >
           {busy ? "Opening..." : getPrimaryActionLabel(test.currentAction)}
           <ArrowRight className="h-4 w-4" />

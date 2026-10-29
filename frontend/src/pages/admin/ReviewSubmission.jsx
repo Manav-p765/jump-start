@@ -614,7 +614,7 @@ export default function ReviewSubmission() {
                           </div>
                           <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-[#E6EEF2]">
                             <div
-                              className="h-1.5 rounded-full bg-[#188B8B]"
+                              className="h-1.5 rounded-full bg-[#157A7A]"
                               style={{
                                 width: `${Math.min(100, Math.max(0, matchValue))}%`,
                               }}
@@ -1232,7 +1232,7 @@ function ManualReviewSection({
               type="button"
               onClick={onFinalize}
               disabled={pending.length > 0 || manualReview.finalizing}
-              className="inline-flex items-center justify-center gap-2 rounded-[12px] bg-[#188B8B] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_22px_rgba(24,139,139,0.18)] hover:bg-[#147070] disabled:cursor-not-allowed disabled:opacity-60"
+              className="inline-flex items-center justify-center gap-2 rounded-[12px] bg-[#157A7A] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_22px_rgba(24,139,139,0.18)] hover:bg-[#147070] disabled:cursor-not-allowed disabled:opacity-60"
             >
               {manualReview.finalizing ? (
                 <>

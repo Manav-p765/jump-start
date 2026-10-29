@@ -194,7 +194,7 @@ const BookCounselling = () => {
                   </button>
                 </div>
 
-                <div className="grid grid-cols-7 text-xs text-center text-slate-400 mb-2">
+                <div className="grid grid-cols-7 text-xs text-center text-slate-500 mb-2">
                   {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((d) => (
                     <div key={d}>{d}</div>
                   ))}

@@ -501,7 +501,7 @@ export default function Dashboard() {
                     `/livetest/${stats.test_in_progress.sectionId}`
                   )
                 }
-                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-2xl bg-[#188B8B] px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_28px_rgba(24,139,139,0.22)] hover:bg-[#147070]"
+                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-2xl bg-[#157A7A] px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_28px_rgba(24,139,139,0.22)] hover:bg-[#147070]"
               >
                 {t("dashboardExtra.resumeTest")}
                 <ArrowRight className="h-4 w-4" />
@@ -815,7 +815,7 @@ export default function Dashboard() {
 
             <section className="surface-card rounded-[30px] p-7">
               <div className="flex items-center gap-4">
-                <div className="flex h-16 w-16 items-center justify-center rounded-[22px] bg-[#188B8B] text-2xl font-bold text-white">
+                <div className="flex h-16 w-16 items-center justify-center rounded-[22px] bg-[#157A7A] text-2xl font-bold text-white">
                   {initial}
                 </div>
                 <div>

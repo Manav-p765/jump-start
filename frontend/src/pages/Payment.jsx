@@ -823,7 +823,7 @@ const Payment = () => {
                 type="checkbox"
                 checked={agree}
                 onChange={(e) => setAgree(e.target.checked)}
-                className="mt-1 h-4 w-4 appearance-none rounded-full border border-[#188B8B] checked:bg-[#188B8B] checked:border-[#188B8B] focus:outline-none relative"
+                className="mt-1 h-4 w-4 appearance-none rounded-full border border-[#188B8B] checked:bg-[#157A7A] checked:border-[#188B8B] focus:outline-none relative"
               />
               <span className="text-[#0F1729]">
                 I accept the{" "}

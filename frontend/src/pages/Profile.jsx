@@ -215,7 +215,7 @@ export default function Profile() {
         ) : null}
 
         <div className="mt-10 grid gap-8 lg:grid-cols-[120px_minmax(0,1fr)]">
-          <div className="flex h-[160px] w-[120px] items-center justify-center rounded-[24px] bg-[#188B8B] text-white shadow-[0_20px_36px_rgba(24,139,139,0.18)]">
+          <div className="flex h-[160px] w-[120px] items-center justify-center rounded-[24px] bg-[#157A7A] text-white shadow-[0_20px_36px_rgba(24,139,139,0.18)]">
             <div className="text-center">
               <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-white/50">
                 <UserRound className="h-7 w-7" />

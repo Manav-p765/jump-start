@@ -286,7 +286,7 @@ export default function TestSubmissions() {
                               type="button"
                               onClick={() => handleApprove(row)}
                               disabled={approvingId === row.id}
-                              className="inline-flex items-center gap-2 rounded-[12px] bg-[#188B8B] px-3 py-2 text-xs font-semibold text-white hover:bg-[#147979] disabled:opacity-60"
+                              className="inline-flex items-center gap-2 rounded-[12px] bg-[#157A7A] px-3 py-2 text-xs font-semibold text-white hover:bg-[#126A6A] disabled:opacity-60"
                             >
                               <CheckCircle2 className="h-3.5 w-3.5" />
                               {approvingId === row.id

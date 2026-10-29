@@ -33,7 +33,7 @@ const accentStyles = [
   {
     badge: "bg-[#E8F9F8] text-[#157A7A]",
     border: "border-[#D7ECEC]",
-    button: "bg-[#188B8B] text-white hover:bg-[#147979]",
+    button: "bg-[#157A7A] text-white hover:bg-[#126A6A]",
   },
   {
     badge: "bg-[#FFF2D8] text-[#B86D00]",
