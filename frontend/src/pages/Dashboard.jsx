@@ -423,7 +423,7 @@ export default function Dashboard() {
             to="/profile"
             className="inline-flex items-center gap-3 rounded-full border border-[#D9E5EC] bg-white px-5 py-3 text-sm font-semibold text-[#0F1729] shadow-sm hover:border-[#188B8B] hover:bg-[#F6FDFC]"
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#E8F9F8] text-[#188B8B]">
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#E8F9F8] text-[#157A7A]">
               <UserRound className="h-4 w-4" />
             </span>
             {t("dashboardExtra.manageProfile")}
@@ -463,10 +463,10 @@ export default function Dashboard() {
             <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
               <div className="max-w-2xl">
                 <div className="flex items-center gap-2">
-                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-white text-[#188B8B] shadow-sm">
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-white text-[#157A7A] shadow-sm">
                     <PlayCircle className="h-4 w-4" />
                   </span>
-                  <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-[#188B8B]">
+                  <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-[#157A7A]">
                     {t("dashboardExtra.testInProgressBadge")}
                   </span>
                 </div>
@@ -501,7 +501,7 @@ export default function Dashboard() {
                     `/livetest/${stats.test_in_progress.sectionId}`
                   )
                 }
-                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-2xl bg-[#188B8B] px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_28px_rgba(24,139,139,0.22)] hover:bg-[#147070]"
+                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-2xl bg-[#157A7A] px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_28px_rgba(24,139,139,0.22)] hover:bg-[#147070]"
               >
                 {t("dashboardExtra.resumeTest")}
                 <ArrowRight className="h-4 w-4" />
@@ -552,7 +552,7 @@ export default function Dashboard() {
                   })}
                 </p>
                 {stats.demo_test.attempted ? (
-                  <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1.5 text-xs font-semibold text-[#188B8B]">
+                  <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1.5 text-xs font-semibold text-[#157A7A]">
                     <CheckCircle2 className="h-4 w-4" />
                     {stats.demo_test.publicationStatus === "approved"
                       ? t("dashboardExtra.demoStatusApproved")
@@ -595,7 +595,7 @@ export default function Dashboard() {
                   {t("dashboardExtra.purchasedPackagesBody")}
                 </p>
               </div>
-              <div className="hidden rounded-full bg-[#F6FDFC] px-4 py-2 text-sm font-semibold text-[#188B8B] sm:block">
+              <div className="hidden rounded-full bg-[#F6FDFC] px-4 py-2 text-sm font-semibold text-[#157A7A] sm:block">
                 {stats.purchased_packages.length} {t("dashboardExtra.unlocked")}
               </div>
             </div>
@@ -670,13 +670,13 @@ export default function Dashboard() {
                       </div>
 
                       <div className="mt-6 flex items-center justify-between gap-4">
-                        <p className="text-sm font-semibold text-[#188B8B]">
+                        <p className="text-sm font-semibold text-[#157A7A]">
                           {openingPackageId === pkg.id
                             ? t("dashboardExtra.opening")
                             : actionMeta.label}
                         </p>
                         {statusMeta.clickable ? (
-                          <ArrowRight className="h-5 w-5 text-[#188B8B]" />
+                          <ArrowRight className="h-5 w-5 text-[#157A7A]" />
                         ) : null}
                       </div>
                     </button>
@@ -701,7 +701,7 @@ export default function Dashboard() {
             <PrefetchLink
               to="/test"
               prefetch={() => import("./Test")}
-              className="mt-6 inline-flex w-full items-center justify-center rounded-2xl border-2 border-[#188B8B] px-5 py-3 text-sm font-semibold text-[#188B8B] hover:bg-[#F6FDFC]"
+              className="mt-6 inline-flex w-full items-center justify-center rounded-2xl border-2 border-[#188B8B] px-5 py-3 text-sm font-semibold text-[#157A7A] hover:bg-[#F6FDFC]"
             >
               {t("dashboardExtra.browseMoreTests")}
             </PrefetchLink>
@@ -742,7 +742,7 @@ export default function Dashboard() {
                       className="rounded-2xl bg-[#EAFBFB] p-4"
                     >
                       <div className="flex items-start gap-3">
-                        <div className="rounded-2xl bg-white p-2 text-[#188B8B]">
+                        <div className="rounded-2xl bg-white p-2 text-[#157A7A]">
                           <Trophy className="h-4 w-4" />
                         </div>
                         <div>
@@ -765,7 +765,7 @@ export default function Dashboard() {
 
               <Link
                 to={stats.result_status === "pending_approval" ? "/test-completed" : "/result"}
-                className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#188B8B] hover:underline"
+                className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#157A7A] hover:underline"
               >
                 {stats.result_status === "pending_approval"
                   ? t("dashboardExtra.viewSubmissionStatus")
@@ -800,14 +800,14 @@ export default function Dashboard() {
                   to="/bookcounselling"
                   className="flex items-center gap-3 rounded-2xl border border-[#D9E5EC] px-4 py-3 text-sm font-semibold text-[#0F1729] hover:bg-[#F8FAFC]"
                 >
-                  <HelpCircle className="h-4 w-4 text-[#188B8B]" />
+                  <HelpCircle className="h-4 w-4 text-[#157A7A]" />
                   {t("dashboardExtra.helpCenter")}
                 </Link>
                 <Link
                   to="/profile"
                   className="flex items-center gap-3 rounded-2xl border border-[#D9E5EC] px-4 py-3 text-sm font-semibold text-[#0F1729] hover:bg-[#F8FAFC]"
                 >
-                  <UserRound className="h-4 w-4 text-[#188B8B]" />
+                  <UserRound className="h-4 w-4 text-[#157A7A]" />
                   {t("dashboardExtra.myProfile")}
                 </Link>
               </div>
@@ -815,7 +815,7 @@ export default function Dashboard() {
 
             <section className="surface-card rounded-[30px] p-7">
               <div className="flex items-center gap-4">
-                <div className="flex h-16 w-16 items-center justify-center rounded-[22px] bg-[#188B8B] text-2xl font-bold text-white">
+                <div className="flex h-16 w-16 items-center justify-center rounded-[22px] bg-[#157A7A] text-2xl font-bold text-white">
                   {initial}
                 </div>
                 <div>
@@ -829,7 +829,7 @@ export default function Dashboard() {
               </div>
               <Link
                 to="/profile"
-                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#188B8B] hover:underline"
+                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#157A7A] hover:underline"
               >
                 {t("dashboardExtra.viewProfile")}
                 <ArrowRight className="h-4 w-4" />

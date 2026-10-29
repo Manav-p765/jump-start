@@ -18,6 +18,7 @@ import {
   validateCoupon,
 } from "../controllers/userController.js";
 import { getMyPayments } from "../controllers/paymentController.js";
+import { couponLimiter } from "../middleware/rateLimit.js";
 
 const router = express.Router();
 
@@ -39,6 +40,6 @@ router.post("/test-submit", protect, postTestSubmit);
 // Read-only coupon validation — student checks a code at checkout without
 // committing it. The actual redemption happens inside purchasePackage,
 // which re-validates and atomically increments the usage counter.
-router.post("/coupon/validate", protect, validateCoupon);
+router.post("/coupon/validate", protect, couponLimiter, validateCoupon);
 
 export default router;

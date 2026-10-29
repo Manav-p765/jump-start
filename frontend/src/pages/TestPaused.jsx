@@ -37,7 +37,7 @@ export default function TestPaused() {
     <div className="min-h-screen bg-[#FAFAFA] px-4 py-10 sm:px-6">
       <div className="mx-auto max-w-3xl">
         <div className="rounded-[30px] border border-[#E1E7EF] bg-white p-8 text-center shadow-sm sm:p-10">
-          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#E8F9F8] text-[#188B8B]">
+          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#E8F9F8] text-[#157A7A]">
             <BookmarkCheck className="h-10 w-10" />
           </div>
 
@@ -68,7 +68,7 @@ export default function TestPaused() {
               <div className="flex items-center justify-between gap-4">
                 <span className="text-sm text-[#65758B]">{t("sectionBreak.timeElapsed")}</span>
                 <span className="inline-flex items-center gap-2 text-sm font-semibold text-[#0F1729]">
-                  <Clock3 className="h-4 w-4 text-[#188B8B]" />
+                  <Clock3 className="h-4 w-4 text-[#157A7A]" />
                   {timeLabel}
                 </span>
               </div>
@@ -79,7 +79,7 @@ export default function TestPaused() {
             <button
               type="button"
               onClick={() => navigate("/dashboard", { replace: true })}
-              className="inline-flex items-center justify-center gap-2 rounded-[14px] bg-[#188B8B] px-6 py-3 text-sm font-semibold text-white hover:bg-[#147979]"
+              className="inline-flex items-center justify-center gap-2 rounded-[14px] bg-[#157A7A] px-6 py-3 text-sm font-semibold text-white hover:bg-[#126A6A]"
             >
               <LayoutDashboard className="h-4 w-4" />
               {t("testPaused.returnToDashboard")}
@@ -87,7 +87,7 @@ export default function TestPaused() {
             <button
               type="button"
               onClick={() => navigate(`/livetest/${state.sectionId}`, { replace: true })}
-              className="inline-flex items-center justify-center gap-2 rounded-[14px] border-2 border-[#188B8B] px-6 py-3 text-sm font-semibold text-[#188B8B] hover:bg-[#F6FDFC]"
+              className="inline-flex items-center justify-center gap-2 rounded-[14px] border-2 border-[#188B8B] px-6 py-3 text-sm font-semibold text-[#157A7A] hover:bg-[#F6FDFC]"
             >
               <PlayCircle className="h-4 w-4" />
               {t("dashboard.continueTestCta")}

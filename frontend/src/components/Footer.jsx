@@ -22,7 +22,7 @@ const quickLinks = [
 ];
 
 const defaultSupportLinks = [
-  { label: "Help Center", to: "/bookcounselling" },
+  { label: "Career Counselling", to: "/bookcounselling" },
   ...Object.values(fallbackSupportPages)
     .filter((page) => page.enabled !== false)
     .map((page) => ({
@@ -92,7 +92,7 @@ export default function Footer() {
       return defaultSupportLinks;
     }
 
-    return [{ label: "Help Center", to: "/bookcounselling" }, ...dynamicLinks];
+    return [{ label: "Career Counselling", to: "/bookcounselling" }, ...dynamicLinks];
   }, [supportPages]);
 
   return (

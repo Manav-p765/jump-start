@@ -301,14 +301,29 @@ export const getPublicSupportPages = async (req, res) => {
   }
 };
 
+// The question bank is paid content: only admins, or a student who has the
+// package (purchased, or a free package they selected), may read it.
+const canReadPackageQuestions = (user, pkg) => {
+  if (!user || !pkg) return false;
+  if (user.role === "admin") return true;
+  if (pkg.active === false) return false;
+  const purchased = (user.purchasedPackages || []).map(String);
+  if (purchased.includes(String(pkg.id))) return true;
+  return Number(pkg.amount || 0) === 0 && String(user.selectedPackageId || "") === String(pkg.id);
+};
+
+const NO_PACKAGE_ACCESS = { success: false, msg: "You do not have access to this package" };
+
 // GET /api/v1/public/packages/:packageId/sections
 export const getPublicPackageSections = async (req, res) => {
   try {
     const cfg = await getCfg();
     const pkg = findPackage(cfg, req.params.packageId);
     if (!pkg) return res.status(404).json({ success: false, msg: "Package not found" });
+    if (!canReadPackageQuestions(req.user, pkg)) return res.status(403).json(NO_PACKAGE_ACCESS);
     const sections = (pkg.sections || []).filter((s) => s.enabled !== false).sort((a, b) => a.sectionId - b.sectionId);
-    res.set("Cache-Control", "public, max-age=3600, s-maxage=600");
+    // Per-user access check above, so never store in shared caches.
+    res.set("Cache-Control", "private, max-age=600");
     return res.status(200).json({ success: true, data: { package: toPublicPackage(pkg), sections: sections.map(toPublicSection) } });
   } catch (err) {
     return res.status(500).json({ success: false, msg: err.message || "Failed to load package sections" });
@@ -322,6 +337,7 @@ export const getPublicSectionQuestions = async (req, res) => {
     const cfg = await getCfg();
     const pkg = findPackage(cfg, req.params.packageId);
     if (!pkg) return res.status(404).json({ success: false, msg: "Package not found" });
+    if (!canReadPackageQuestions(req.user, pkg)) return res.status(403).json(NO_PACKAGE_ACCESS);
     const section = (pkg.sections || []).find((s) => s.sectionId === sectionId && s.enabled !== false);
     if (!section) return res.status(404).json({ success: false, msg: "Section not found" });
     const questions = (section.questions || []).map((q, index) => ({
@@ -337,10 +353,8 @@ export const getPublicSectionQuestions = async (req, res) => {
       options: q.options || [],
       options_gu: Array.isArray(q.options_gu) ? q.options_gu : [],
     }));
-    // Section questions only change on admin re-seed. Cache for an
-    // hour at the browser; CDN entries refresh within 10 min so a
-    // content patch + reseed propagates quickly.
-    res.set("Cache-Control", "public, max-age=3600, s-maxage=600");
+    // Per-user access check above, so never store in shared caches.
+    res.set("Cache-Control", "private, max-age=600");
     return res.status(200).json({ success: true, data: { section: toPublicSection(section), questions } });
   } catch (err) {
     return res.status(500).json({ success: false, msg: err.message || "Failed to load questions" });

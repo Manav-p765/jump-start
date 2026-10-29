@@ -154,7 +154,7 @@ export default function Careerdetail() {
                 {detail.title}
               </h1>
               <span
-                className="rounded-full bg-[#E2F8F7] px-4 py-2 text-sm font-semibold text-[#188B8B]"
+                className="rounded-full bg-[#E2F8F7] px-4 py-2 text-sm font-semibold text-[#157A7A]"
                 title={
                   detail.score != null
                     ? t("careerdetail.matchScore", { score: detail.score })
@@ -176,7 +176,7 @@ export default function Careerdetail() {
               <div className="mt-3 max-w-md">
                 <div className="h-2 w-full overflow-hidden rounded-full bg-[#E6EEF2]">
                   <div
-                    className="h-2 rounded-full bg-[#188B8B]"
+                    className="h-2 rounded-full bg-[#157A7A]"
                     style={{
                       width: `${Math.min(100, Math.max(0, detail.score))}%`,
                     }}
@@ -234,7 +234,7 @@ export default function Careerdetail() {
               detail.matchReasons.eq) ? (
               <section className="surface-card rounded-[26px] border border-[#D4EBEE] bg-[linear-gradient(180deg,#F7FDFD_0%,#FFFFFF_100%)] p-6">
                 <div className="flex items-center gap-3">
-                  <div className="rounded-2xl bg-[#EAFBFB] p-3 text-[#188B8B]">
+                  <div className="rounded-2xl bg-[#EAFBFB] p-3 text-[#157A7A]">
                     <Sparkles className="h-5 w-5" />
                   </div>
                   <div>
@@ -249,7 +249,7 @@ export default function Careerdetail() {
                 <ul className="mt-5 space-y-3 text-sm leading-7 text-[#4E5D72]">
                   {detail.matchReasons.holland ? (
                     <li className="flex gap-3">
-                      <span className="mt-1.5 inline-block h-2 w-2 shrink-0 rounded-full bg-[#188B8B]" />
+                      <span className="mt-1.5 inline-block h-2 w-2 shrink-0 rounded-full bg-[#157A7A]" />
                       <span>
                         <span className="font-semibold text-[#0F1729]">
                           {t("result.matchReasonInterests")}:
@@ -260,7 +260,7 @@ export default function Careerdetail() {
                   ) : null}
                   {detail.matchReasons.intelligence ? (
                     <li className="flex gap-3">
-                      <span className="mt-1.5 inline-block h-2 w-2 shrink-0 rounded-full bg-[#188B8B]" />
+                      <span className="mt-1.5 inline-block h-2 w-2 shrink-0 rounded-full bg-[#157A7A]" />
                       <span>
                         <span className="font-semibold text-[#0F1729]">
                           {t("result.matchReasonIntelligence")}:
@@ -271,7 +271,7 @@ export default function Careerdetail() {
                   ) : null}
                   {detail.matchReasons.aptitude ? (
                     <li className="flex gap-3">
-                      <span className="mt-1.5 inline-block h-2 w-2 shrink-0 rounded-full bg-[#188B8B]" />
+                      <span className="mt-1.5 inline-block h-2 w-2 shrink-0 rounded-full bg-[#157A7A]" />
                       <span>
                         <span className="font-semibold text-[#0F1729]">
                           {t("result.matchReasonAptitude")}:
@@ -282,7 +282,7 @@ export default function Careerdetail() {
                   ) : null}
                   {detail.matchReasons.eq ? (
                     <li className="flex gap-3">
-                      <span className="mt-1.5 inline-block h-2 w-2 shrink-0 rounded-full bg-[#188B8B]" />
+                      <span className="mt-1.5 inline-block h-2 w-2 shrink-0 rounded-full bg-[#157A7A]" />
                       <span>
                         <span className="font-semibold text-[#0F1729]">
                           {t("result.matchReasonEq")}:
@@ -316,7 +316,7 @@ export default function Careerdetail() {
                         <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#8A94A6]">
                           {item.label}
                         </p>
-                        <p className="mt-1 text-lg font-bold text-[#188B8B]">
+                        <p className="mt-1 text-lg font-bold text-[#157A7A]">
                           {item.value != null ? Math.round(item.value) : "--"}
                           {item.value != null ? "%" : ""}
                         </p>
@@ -329,7 +329,7 @@ export default function Careerdetail() {
 
             <section className="surface-card rounded-[26px] p-6">
               <div className="flex items-center gap-3">
-                <div className="rounded-2xl bg-[#EAFBFB] p-3 text-[#188B8B]">
+                <div className="rounded-2xl bg-[#EAFBFB] p-3 text-[#157A7A]">
                   <NotebookText className="h-5 w-5" />
                 </div>
                 <h2 className="text-2xl font-bold text-[#0F1729]">{t("careerdetail.careerOverview")}</h2>
@@ -345,7 +345,7 @@ export default function Careerdetail() {
 
             <section className="surface-card rounded-[26px] p-6">
               <div className="flex items-center gap-3">
-                <div className="rounded-2xl bg-[#EEF7FF] p-3 text-[#188B8B]">
+                <div className="rounded-2xl bg-[#EEF7FF] p-3 text-[#157A7A]">
                   <CheckCircle2 className="h-5 w-5" />
                 </div>
                 <h2 className="text-2xl font-bold text-[#0F1729]">{t("careerdetail.keyResponsibilitiesHeading")}</h2>
@@ -354,7 +354,7 @@ export default function Careerdetail() {
               <div className="mt-5 space-y-4">
                 {detail.responsibilities.map((item, index) => (
                   <div key={item} className="flex gap-3">
-                    <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#EAFBFB] text-xs font-bold text-[#188B8B]">
+                    <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#EAFBFB] text-xs font-bold text-[#157A7A]">
                       {index + 1}
                     </div>
                     <p className="text-sm leading-7 text-[#65758B]">{item}</p>
@@ -365,7 +365,7 @@ export default function Careerdetail() {
 
             <section className="surface-card rounded-[26px] p-6">
               <div className="flex items-center gap-3">
-                <div className="rounded-2xl bg-[#EAFBFB] p-3 text-[#188B8B]">
+                <div className="rounded-2xl bg-[#EAFBFB] p-3 text-[#157A7A]">
                   <Sparkles className="h-5 w-5" />
                 </div>
                 <h2 className="text-2xl font-bold text-[#0F1729]">
@@ -409,7 +409,7 @@ export default function Careerdetail() {
           <div className="space-y-6">
             <section className="surface-card rounded-[26px] p-6">
               <div className="flex items-center gap-3">
-                <div className="rounded-2xl bg-[#EAFBFB] p-3 text-[#188B8B]">
+                <div className="rounded-2xl bg-[#EAFBFB] p-3 text-[#157A7A]">
                   <GraduationCap className="h-5 w-5" />
                 </div>
                 <h2 className="text-2xl font-bold text-[#0F1729]">{t("careerdetail.educationHeading")}</h2>
@@ -418,7 +418,7 @@ export default function Careerdetail() {
               <div className="mt-5 space-y-4">
                 {detail.education.map((item) => (
                   <div key={item} className="flex gap-3">
-                    <div className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[#188B8B]" />
+                    <div className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[#157A7A]" />
                     <p className="text-sm leading-7 text-[#65758B]">{item}</p>
                   </div>
                 ))}
@@ -427,7 +427,7 @@ export default function Careerdetail() {
 
             <section className="surface-card rounded-[26px] p-6">
               <div className="flex items-center gap-3">
-                <div className="rounded-2xl bg-[#EAFBFB] p-3 text-[#188B8B]">
+                <div className="rounded-2xl bg-[#EAFBFB] p-3 text-[#157A7A]">
                   <LineChart className="h-5 w-5" />
                 </div>
                 <h2 className="text-2xl font-bold text-[#0F1729]">{t("careerdetail.careerOutlookHeading")}</h2>
@@ -438,13 +438,13 @@ export default function Careerdetail() {
                   <div key={item.key}>
                     <div className="flex items-center justify-between gap-3">
                       <p className="text-sm font-semibold text-[#0F1729]">{t(item.labelKey)}</p>
-                      <p className="text-sm font-semibold text-[#188B8B]">
+                      <p className="text-sm font-semibold text-[#157A7A]">
                         {detail.outlook[item.key]}%
                       </p>
                     </div>
                     <div className="mt-3 h-2.5 rounded-full bg-[#DCE9EE]">
                       <div
-                        className="h-2.5 rounded-full bg-[#188B8B]"
+                        className="h-2.5 rounded-full bg-[#157A7A]"
                         style={{ width: `${Math.min(100, detail.outlook[item.key] || 0)}%` }}
                       />
                     </div>

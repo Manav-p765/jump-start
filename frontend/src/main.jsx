@@ -9,6 +9,23 @@ import reportWebVitals from "./lib/reportWebVitals";
 // component calls useTranslation().
 import "./i18n/i18n";
 
+// A deploy replaces the hashed chunk files, so a tab opened before it fails
+// to load the next lazy page. Reload once to pick up the new build (test
+// progress is autosaved, so a student resumes where they were). The guard
+// stops a reload loop if the chunk is genuinely broken.
+const CHUNK_RELOAD_KEY = "jumpstart.chunkReloadAt";
+window.addEventListener("vite:preloadError", (event) => {
+  try {
+    const last = Number(sessionStorage.getItem(CHUNK_RELOAD_KEY) || 0);
+    if (Date.now() - last < 30_000) return;
+    sessionStorage.setItem(CHUNK_RELOAD_KEY, String(Date.now()));
+  } catch {
+    // Storage blocked: still reload once; the browser keeps the tab usable.
+  }
+  event.preventDefault();
+  window.location.reload();
+});
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>

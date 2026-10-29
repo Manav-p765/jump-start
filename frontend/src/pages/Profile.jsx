@@ -140,11 +140,11 @@ export default function Profile() {
         {profile?.jumpstartId || user?.jumpstartId ? (
           <div className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-[22px] border border-[#D4EEED] bg-[linear-gradient(180deg,#F6FDFC_0%,#FFFFFF_100%)] p-5">
             <div className="flex items-start gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#EAFBFB] text-[#188B8B]">
+              <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#EAFBFB] text-[#157A7A]">
                 <Hash className="h-5 w-5" />
               </span>
               <div>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#188B8B]">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#157A7A]">
                   {t("profileExtra.yourJumpstartId")}
                 </p>
                 <p className="mt-1 font-mono text-xl font-bold text-[#0F1729]">
@@ -178,7 +178,7 @@ export default function Profile() {
                   // still readable on screen.
                 }
               }}
-              className="inline-flex items-center gap-2 rounded-[12px] border border-[#188B8B] bg-white px-4 py-2 text-sm font-semibold text-[#188B8B] transition hover:bg-[#F6FDFC]"
+              className="inline-flex items-center gap-2 rounded-[12px] border border-[#188B8B] bg-white px-4 py-2 text-sm font-semibold text-[#157A7A] transition hover:bg-[#F6FDFC]"
               aria-label={t("profileExtra.copyAriaLabel")}
             >
               {copiedJumpstartId ? (
@@ -215,7 +215,7 @@ export default function Profile() {
         ) : null}
 
         <div className="mt-10 grid gap-8 lg:grid-cols-[120px_minmax(0,1fr)]">
-          <div className="flex h-[160px] w-[120px] items-center justify-center rounded-[24px] bg-[#188B8B] text-white shadow-[0_20px_36px_rgba(24,139,139,0.18)]">
+          <div className="flex h-[160px] w-[120px] items-center justify-center rounded-[24px] bg-[#157A7A] text-white shadow-[0_20px_36px_rgba(24,139,139,0.18)]">
             <div className="text-center">
               <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-white/50">
                 <UserRound className="h-7 w-7" />
@@ -234,7 +234,7 @@ export default function Profile() {
                   {field.label === t("profileExtra.fieldPhoneNumber") && field.value && field.value !== "-" ? (
                     <div className="flex w-full items-center justify-between gap-3">
                       <span>{field.value}</span>
-                      <span className="inline-flex items-center gap-1 rounded-full bg-[#E8F9F8] px-3 py-1 text-xs font-semibold text-[#188B8B]">
+                      <span className="inline-flex items-center gap-1 rounded-full bg-[#E8F9F8] px-3 py-1 text-xs font-semibold text-[#157A7A]">
                         <BadgeCheck className="h-3 w-3" />
                         {t("profileExtra.verified")}
                       </span>
@@ -251,7 +251,7 @@ export default function Profile() {
         <div className="mt-12 grid gap-5 md:grid-cols-3">
           <div className="surface-card rounded-[26px] p-6">
             <div className="flex items-center gap-3">
-              <Mail className="h-5 w-5 text-[#188B8B]" />
+              <Mail className="h-5 w-5 text-[#157A7A]" />
               <h2 className="text-lg font-semibold text-[#0F1729]">{t("profileExtra.emailContact")}</h2>
             </div>
             <p className="mt-4 text-sm leading-7 text-[#65758B]">
@@ -260,7 +260,7 @@ export default function Profile() {
           </div>
           <div className="surface-card rounded-[26px] p-6">
             <div className="flex items-center gap-3">
-              <Phone className="h-5 w-5 text-[#188B8B]" />
+              <Phone className="h-5 w-5 text-[#157A7A]" />
               <h2 className="text-lg font-semibold text-[#0F1729]">{t("profileExtra.phone")}</h2>
             </div>
             <p className="mt-4 text-sm leading-7 text-[#65758B]">
@@ -269,7 +269,7 @@ export default function Profile() {
           </div>
           <div className="surface-card rounded-[26px] p-6">
             <div className="flex items-center gap-3">
-              <MapPin className="h-5 w-5 text-[#188B8B]" />
+              <MapPin className="h-5 w-5 text-[#157A7A]" />
               <h2 className="text-lg font-semibold text-[#0F1729]">{t("profileExtra.location")}</h2>
             </div>
             <p className="mt-4 text-sm leading-7 text-[#65758B]">
@@ -299,7 +299,7 @@ export default function Profile() {
         <div className="mt-12">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div className="flex items-start gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#EAFBFB] text-[#188B8B]">
+              <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#EAFBFB] text-[#157A7A]">
                 <GraduationCap className="h-5 w-5" />
               </span>
               <div>
@@ -309,7 +309,7 @@ export default function Profile() {
                 <p className="mt-1 text-sm leading-6 text-[#65758B]">
                   {t("profileExtra.studentDetailsSubtitle")}
                   {profile?.studentProfile?.isComplete ? (
-                    <span className="ml-2 inline-flex items-center gap-1 rounded-full bg-[#E2F8F7] px-2.5 py-0.5 text-[11px] font-semibold text-[#188B8B]">
+                    <span className="ml-2 inline-flex items-center gap-1 rounded-full bg-[#E2F8F7] px-2.5 py-0.5 text-[11px] font-semibold text-[#157A7A]">
                       <BadgeCheck className="h-3 w-3" />
                       {t("profileExtra.complete")}
                     </span>

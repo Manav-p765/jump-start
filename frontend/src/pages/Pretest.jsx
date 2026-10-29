@@ -82,7 +82,7 @@ export default function Pretest() {
           <button
             type="button"
             onClick={() => navigate("/dashboard", { replace: true })}
-            className="mt-6 rounded-xl bg-[#188B8B] px-6 py-3 font-semibold text-white transition hover:bg-teal-700"
+            className="mt-6 rounded-xl bg-[#157A7A] px-6 py-3 font-semibold text-white transition hover:bg-teal-700"
           >
             {t("pretest.backToDashboard")}
           </button>
@@ -95,7 +95,7 @@ export default function Pretest() {
     <div className="min-h-screen bg-[#FAFAFA] px-4 py-10 sm:px-6">
       <div className="mx-auto max-w-4xl">
         <div className="mb-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#188B8B]">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#157A7A]">
             {t("pretest.preTestBadge")}
           </p>
           <h1 className="mt-3 text-3xl font-bold text-[#0F1729] sm:text-4xl">
@@ -156,7 +156,7 @@ export default function Pretest() {
 
           <section className="rounded-2xl border border-[#E1E7EF] bg-white p-6 shadow-sm">
             <div className="flex items-start gap-3">
-              <div className="rounded-xl bg-teal-50 p-3 text-[#188B8B]">
+              <div className="rounded-xl bg-teal-50 p-3 text-[#157A7A]">
                 <LaptopMinimal className="h-5 w-5" />
               </div>
               <div>
@@ -195,7 +195,7 @@ export default function Pretest() {
               onChange={(e) =>
                 setChecks((prev) => ({ ...prev, connection: e.target.checked }))
               }
-              className="mt-1 h-4 w-4 rounded border border-[#188B8B] text-[#188B8B] focus:ring-[#188B8B]"
+              className="mt-1 h-4 w-4 rounded border border-[#188B8B] text-[#157A7A] focus:ring-[#188B8B]"
             />
             <span className="text-sm text-[#0F1729]">
               {t("pretest.checkConnection")}
@@ -208,7 +208,7 @@ export default function Pretest() {
               onChange={(e) =>
                 setChecks((prev) => ({ ...prev, rules: e.target.checked }))
               }
-              className="mt-1 h-4 w-4 rounded border border-[#188B8B] text-[#188B8B] focus:ring-[#188B8B]"
+              className="mt-1 h-4 w-4 rounded border border-[#188B8B] text-[#157A7A] focus:ring-[#188B8B]"
             />
             <span className="text-sm text-[#0F1729]">
               {t("pretest.checkRules")}

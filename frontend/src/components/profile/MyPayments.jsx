@@ -86,7 +86,7 @@ export default function MyPayments() {
   return (
     <div className="mt-12">
       <div className="flex items-start gap-3">
-        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#EAFBFB] text-[#188B8B]">
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#EAFBFB] text-[#157A7A]">
           <ReceiptText className="h-5 w-5" />
         </span>
         <div className="min-w-0">
@@ -166,7 +166,7 @@ export default function MyPayments() {
                     type="button"
                     onClick={() => handleDownload(p._id)}
                     disabled={Boolean(downloadingId)}
-                    className="mt-5 inline-flex h-10 w-full items-center justify-center gap-2 rounded-xl border-2 border-[#188B8B] px-4 text-sm font-semibold text-[#188B8B] hover:bg-[#F6FDFC] disabled:cursor-wait disabled:opacity-60 sm:w-auto sm:self-start"
+                    className="mt-5 inline-flex h-10 w-full items-center justify-center gap-2 rounded-xl border-2 border-[#188B8B] px-4 text-sm font-semibold text-[#157A7A] hover:bg-[#F6FDFC] disabled:cursor-wait disabled:opacity-60 sm:w-auto sm:self-start"
                   >
                     <Download className="h-4 w-4" />
                     {downloadingId === p._id
@@ -187,8 +187,8 @@ export default function MyPayments() {
           i18nKey="myPayments.refundContact"
           values={{ email: company.email, phone: company.phoneDisplay }}
           components={{
-            email: <a href={mailtoHref} className="font-medium text-[#188B8B] hover:underline" />,
-            phone: <a href={telHref} className="whitespace-nowrap font-medium text-[#188B8B] hover:underline" />,
+            email: <a href={mailtoHref} className="font-medium text-[#157A7A] hover:underline" />,
+            phone: <a href={telHref} className="whitespace-nowrap font-medium text-[#157A7A] hover:underline" />,
           }}
         />
       </p>

@@ -446,7 +446,7 @@ export default function SubsectionBreakdownList({
                   </p>
                   <ResultStatusBadge status={getBreakdownStatusLabel(subsection.status)} />
                   {subsection.band && subsection.scoreType !== "profile_consistency" ? (
-                    <span className="rounded-full bg-[#EAFBFB] px-2.5 py-1 text-[10px] font-semibold text-[#188B8B] sm:px-3 sm:text-[11px]">
+                    <span className="rounded-full bg-[#EAFBFB] px-2.5 py-1 text-[10px] font-semibold text-[#157A7A] sm:px-3 sm:text-[11px]">
                       {subsection.band}
                     </span>
                   ) : null}
@@ -514,7 +514,7 @@ export default function SubsectionBreakdownList({
                   {scoreDisplay.value}
                 </p>
                 {scoreDisplay.meta ? (
-                  <p className="mt-1 text-[10px] font-semibold text-[#188B8B] sm:text-xs">
+                  <p className="mt-1 text-[10px] font-semibold text-[#157A7A] sm:text-xs">
                     {scoreDisplay.meta}
                   </p>
                 ) : null}

@@ -167,7 +167,7 @@ const UserManagement = () => {
                         <div className="flex flex-col gap-0.5">
                           <span className="text-sm font-bold text-gray-900 whitespace-nowrap">{user.name}</span>
                           {user.jumpstartId ? (
-                            <span className="inline-flex w-fit items-center rounded-full border border-[#D4EEED] bg-[#EAFBFB] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.06em] text-[#188B8B]">
+                            <span className="inline-flex w-fit items-center rounded-full border border-[#D4EEED] bg-[#EAFBFB] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.06em] text-[#157A7A]">
                               {user.jumpstartId}
                             </span>
                           ) : null}

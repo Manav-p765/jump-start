@@ -123,11 +123,11 @@ textarea {
   align-items: center;
   justify-content: center;
   border-radius: 14px;
-  border: 2px solid #188b8b;
+  border: 2px solid #157a7a;
   padding: 0.85rem 1.35rem;
   font-size: 0.95rem;
   font-weight: 700;
-  color: #188b8b;
+  color: #157a7a;
 }
 
 .secondary-btn:hover {

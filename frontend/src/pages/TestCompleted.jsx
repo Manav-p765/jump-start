@@ -97,7 +97,7 @@ export default function TestCompleted() {
       <div className="bg-white">
         <div className="mx-auto flex min-h-[70vh] max-w-5xl items-center justify-center px-4 py-14 sm:px-6 lg:px-8">
           <div className="w-full max-w-3xl text-center">
-            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#E8F9F8] text-[#188B8B]">
+            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#E8F9F8] text-[#157A7A]">
               <Clock3 className="h-9 w-9" />
             </div>
             <h1 className="mt-8 text-4xl font-bold text-[#0F1729] sm:text-5xl">
@@ -108,7 +108,7 @@ export default function TestCompleted() {
             </p>
 
             <div className="surface-card mx-auto mt-8 max-w-2xl rounded-[30px] border border-[#B9E5E5] p-8">
-              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#E8F9F8] text-[#188B8B]">
+              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#E8F9F8] text-[#157A7A]">
                 <FileText className="h-7 w-7" />
               </div>
               <h2 className="mt-5 text-3xl font-bold text-[#0F1729]">
@@ -124,7 +124,7 @@ export default function TestCompleted() {
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
               <Link
                 to="/dashboard"
-                className="inline-flex items-center justify-center rounded-[14px] bg-[#188B8B] px-6 py-3 text-sm font-semibold text-white hover:bg-[#147979]"
+                className="inline-flex items-center justify-center rounded-[14px] bg-[#157A7A] px-6 py-3 text-sm font-semibold text-white hover:bg-[#126A6A]"
               >
                 {t("testCompletedExtra.goToDashboard")}
               </Link>
@@ -160,7 +160,7 @@ export default function TestCompleted() {
                     })}
                   </p>
                 </div>
-                <span className="inline-flex items-center gap-2 rounded-full bg-[#E8F9F8] px-3 py-1 text-xs font-semibold text-[#188B8B]">
+                <span className="inline-flex items-center gap-2 rounded-full bg-[#E8F9F8] px-3 py-1 text-xs font-semibold text-[#157A7A]">
                   <BadgeCheck className="h-3 w-3" />
                   {t("testCompletedExtra.submittedBadge")}
                 </span>
@@ -192,7 +192,7 @@ export default function TestCompleted() {
               </Link>
               <Link
                 to="/result"
-                className="inline-flex items-center justify-center rounded-[14px] bg-[#188B8B] px-6 py-3 text-sm font-semibold text-white hover:bg-[#147979]"
+                className="inline-flex items-center justify-center rounded-[14px] bg-[#157A7A] px-6 py-3 text-sm font-semibold text-white hover:bg-[#126A6A]"
               >
                 {t("testCompletedExtra.openResultsHub")}
               </Link>
@@ -214,7 +214,7 @@ export default function TestCompleted() {
 
       {showCelebration ? (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0F1729]/28 px-4 py-8 backdrop-blur-sm">
-          <div className="relative w-full max-w-[460px] overflow-hidden rounded-[28px] bg-[#188B8B] text-white shadow-[0_28px_70px_rgba(15,23,41,0.28)]">
+          <div className="relative w-full max-w-[460px] overflow-hidden rounded-[28px] bg-[#157A7A] text-white shadow-[0_28px_70px_rgba(15,23,41,0.28)]">
             <button
               type="button"
               onClick={dismissCelebration}

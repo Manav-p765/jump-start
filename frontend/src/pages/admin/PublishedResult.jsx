@@ -137,7 +137,7 @@ export default function PublishedResults() {
                     <tr key={row.id} className="hover:bg-[#FBFCFD]">
                       <td className="px-6 py-5">
                         <div className="flex items-center gap-3">
-                          <div className="flex h-11 w-11 items-center justify-center rounded-full border border-[#CFEDED] bg-[#EAFBFB] text-xs font-bold text-[#188B8B]">
+                          <div className="flex h-11 w-11 items-center justify-center rounded-full border border-[#CFEDED] bg-[#EAFBFB] text-xs font-bold text-[#157A7A]">
                             {row.initials}
                           </div>
                           <div>

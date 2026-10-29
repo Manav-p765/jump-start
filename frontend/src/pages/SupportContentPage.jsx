@@ -143,7 +143,7 @@ export default function SupportContentPage({ pageKey }) {
       <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-sm font-semibold text-[#4E5D72] hover:text-[#188B8B]"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-[#4E5D72] hover:text-[#157A7A]"
         >
           <ArrowLeft className="h-4 w-4" />
           {t("support.backHome")}
@@ -151,7 +151,7 @@ export default function SupportContentPage({ pageKey }) {
 
         <section className="surface-card mt-6 rounded-[30px] overflow-hidden">
           <div className="bg-[radial-gradient(circle_at_15%_0%,rgba(24,139,139,0.16),transparent_38%),linear-gradient(180deg,#FFFFFF_0%,#FCFEFF_100%)] px-6 py-8 sm:px-8 sm:py-10">
-            <div className="inline-flex items-center gap-2 rounded-full bg-[#E8F9F8] px-4 py-2 text-sm font-semibold text-[#188B8B]">
+            <div className="inline-flex items-center gap-2 rounded-full bg-[#E8F9F8] px-4 py-2 text-sm font-semibold text-[#157A7A]">
               <ShieldCheck className="h-4 w-4" />
               {t("support.supportPageBadge")}
             </div>
@@ -225,7 +225,7 @@ export default function SupportContentPage({ pageKey }) {
                     className="rounded-[22px] border border-[#E2E8F0] bg-white px-5 py-5"
                   >
                     <div className="flex items-start gap-3">
-                      <div className="mt-1 rounded-full bg-[#EAFBFB] p-1.5 text-[#188B8B]">
+                      <div className="mt-1 rounded-full bg-[#EAFBFB] p-1.5 text-[#157A7A]">
                         <ChevronRight className="h-4 w-4" />
                       </div>
                       <p className="text-sm leading-7 text-[#4E5D72]">{item}</p>

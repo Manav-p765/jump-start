@@ -45,7 +45,7 @@ const NEXT_STEP_ITEMS = [
     description: "Discuss results with a psychologist",
     icon: BadgeCheck,
     itemClass: "bg-[#DFF7F7]",
-    iconClass: "bg-[#188B8B] text-white",
+    iconClass: "bg-[#157A7A] text-white",
   },
   {
     key: "career-paths",
@@ -319,7 +319,7 @@ export default function Result() {
                   type="button"
                   onClick={handleDownload}
                   disabled={!data.hasResults}
-                  className="inline-flex h-10 w-[166px] items-center justify-center gap-2 rounded-[14px] border-2 border-[#188B8B] bg-white px-4 text-[14px] font-medium text-[#188B8B] hover:bg-[#F6FDFC] disabled:cursor-not-allowed disabled:opacity-60"
+                  className="inline-flex h-10 w-[166px] items-center justify-center gap-2 rounded-[14px] border-2 border-[#188B8B] bg-white px-4 text-[14px] font-medium text-[#157A7A] hover:bg-[#F6FDFC] disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   <Download className="h-4 w-4" />
                   Download PDF
@@ -327,7 +327,7 @@ export default function Result() {
                 <button
                   type="button"
                   onClick={handleShare}
-                  className="inline-flex h-10 w-[107px] items-center justify-center gap-2 rounded-[14px] border-2 border-[#188B8B] bg-white px-4 text-[14px] font-medium text-[#188B8B] hover:bg-[#F6FDFC]"
+                  className="inline-flex h-10 w-[107px] items-center justify-center gap-2 rounded-[14px] border-2 border-[#188B8B] bg-white px-4 text-[14px] font-medium text-[#157A7A] hover:bg-[#F6FDFC]"
                 >
                   <Share2 className="h-4 w-4" />
                   Share
@@ -399,7 +399,7 @@ export default function Result() {
                 </div>
                 <Link
                   to="/test-completed"
-                  className="report-print-hidden inline-flex items-center gap-2 text-[14px] font-semibold text-[#188B8B] hover:underline"
+                  className="report-print-hidden inline-flex items-center gap-2 text-[14px] font-semibold text-[#157A7A] hover:underline"
                 >
                   View Submission Status
                   <ArrowRight className="h-4 w-4" />
@@ -462,7 +462,7 @@ export default function Result() {
                               type="button"
                               onClick={() => handleCardAction(test)}
                               disabled={openingTestId === test.id}
-                              className="report-print-hidden font-semibold text-[#188B8B] hover:underline disabled:opacity-60"
+                              className="report-print-hidden font-semibold text-[#157A7A] hover:underline disabled:opacity-60"
                             >
                               {actionLabel}
                             </button>
@@ -472,7 +472,7 @@ export default function Result() {
                     })
                   ) : (
                     <div className="rounded-[16px] border border-dashed border-[#D6E4EA] bg-[#FBFCFD] px-5 py-8 text-center">
-                      <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#EAFBFB] text-[#188B8B]">
+                      <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#EAFBFB] text-[#157A7A]">
                         <CheckCircle2 className="h-6 w-6" />
                       </div>
                       <h3 className="mt-4 text-2xl font-semibold text-[#0F1729]">
@@ -491,7 +491,7 @@ export default function Result() {
 
               <section className={`${resultCardClass} report-print-card min-h-[500px] rounded-[16px] p-[25px]`}>
                 <div className="flex items-center gap-2.5">
-                  <div className="flex h-5 w-5 items-center justify-center text-[#188B8B]">
+                  <div className="flex h-5 w-5 items-center justify-center text-[#157A7A]">
                     <Brain className="h-5 w-5" />
                   </div>
                   <div>
@@ -512,13 +512,13 @@ export default function Result() {
                           <p className="text-[15px] font-medium leading-5 text-[#0F1729]">
                             {item.name}
                           </p>
-                          <p className="text-[14px] font-semibold leading-5 text-[#188B8B]">
+                          <p className="text-[14px] font-semibold leading-5 text-[#157A7A]">
                             {item.value ?? 0}%
                           </p>
                         </div>
                         <div className="mt-2 h-2 rounded-full bg-[#DCE9EE]">
                           <div
-                            className="h-2 rounded-full bg-[#188B8B]"
+                            className="h-2 rounded-full bg-[#157A7A]"
                             style={{ width: `${Math.min(100, item.value || 0)}%` }}
                           />
                         </div>
@@ -574,7 +574,7 @@ export default function Result() {
                               {career.title}
                             </h3>
                             <span
-                              className="rounded-full bg-[#E2F8F7] px-[11px] py-[3px] text-[10px] font-semibold leading-[15px] text-[#188B8B]"
+                              className="rounded-full bg-[#E2F8F7] px-[11px] py-[3px] text-[10px] font-semibold leading-[15px] text-[#157A7A]"
                               title={`Compatibility score: ${matchValue}/100`}
                             >
                               {Math.round(matchValue)}% Match
@@ -590,7 +590,7 @@ export default function Result() {
                             aria-hidden="true"
                           >
                             <div
-                              className="h-1.5 rounded-full bg-[#188B8B]"
+                              className="h-1.5 rounded-full bg-[#157A7A]"
                               style={{
                                 width: `${Math.min(100, Math.max(0, matchValue))}%`,
                               }}
@@ -613,7 +613,7 @@ export default function Result() {
                           </div>
                           {hasReasons ? (
                             <details className="report-print-hidden mt-3 group">
-                              <summary className="cursor-pointer list-none text-[12px] font-semibold text-[#188B8B] hover:underline">
+                              <summary className="cursor-pointer list-none text-[12px] font-semibold text-[#157A7A] hover:underline">
                                 <span className="group-open:hidden">
                                   {t("result.whyMatched")} ▾
                                 </span>
@@ -664,7 +664,7 @@ export default function Result() {
                             <Link
                               to={`/careerdetail?career=${encodeURIComponent(career.title || "")}`}
                               state={{ career }}
-                              className="report-print-hidden inline-flex items-center gap-1.5 text-[13px] font-medium text-[#188B8B] hover:underline"
+                              className="report-print-hidden inline-flex items-center gap-1.5 text-[13px] font-medium text-[#157A7A] hover:underline"
                             >
                               {t("result.viewDetails")}
                               <ArrowRight className="h-4 w-4" />
@@ -682,7 +682,7 @@ export default function Result() {
 
                 <Link
                   to="/bookcounselling"
-                  className="report-print-hidden mt-4 inline-flex h-10 w-full items-center justify-center rounded-[14px] border-2 border-[#188B8B] px-5 text-[13px] font-medium text-[#188B8B] hover:bg-[#F6FDFC]"
+                  className="report-print-hidden mt-4 inline-flex h-10 w-full items-center justify-center rounded-[14px] border-2 border-[#188B8B] px-5 text-[13px] font-medium text-[#157A7A] hover:bg-[#F6FDFC]"
                 >
                   For more career advice, book a call!
                 </Link>

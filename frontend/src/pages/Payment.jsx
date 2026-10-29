@@ -796,7 +796,7 @@ const Payment = () => {
                       type="button"
                       onClick={handleApplyCoupon}
                       disabled={validatingCoupon || !couponInput.trim()}
-                      className="h-[42px] px-5 rounded-[14px] border-2 border-[#188B8B] text-[#188B8B] text-sm font-medium disabled:opacity-60"
+                      className="h-[42px] px-5 rounded-[14px] border-2 border-[#188B8B] text-[#157A7A] text-sm font-medium disabled:opacity-60"
                     >
                       {validatingCoupon ? "Applying..." : "Apply"}
                     </button>
@@ -812,7 +812,7 @@ const Payment = () => {
 
             <div className="flex justify-between items-center mb-1 font-inter">
               <span className="font-semibold text-[#0F1729]">Total Amount</span>
-              <span className="text-2xl font-bold text-[#188B8B]">{formatPaise(totalPaise)}</span>
+              <span className="text-2xl font-bold text-[#157A7A]">{formatPaise(totalPaise)}</span>
             </div>
             <p className="text-[11px] text-[#65758B] mb-6 font-inter">
               Inclusive of all taxes (GST included)
@@ -823,20 +823,20 @@ const Payment = () => {
                 type="checkbox"
                 checked={agree}
                 onChange={(e) => setAgree(e.target.checked)}
-                className="mt-1 h-4 w-4 appearance-none rounded-full border border-[#188B8B] checked:bg-[#188B8B] checked:border-[#188B8B] focus:outline-none relative"
+                className="mt-1 h-4 w-4 appearance-none rounded-full border border-[#188B8B] checked:bg-[#157A7A] checked:border-[#188B8B] focus:outline-none relative"
               />
               <span className="text-[#0F1729]">
                 I accept the{" "}
                 <Link
                   to="/terms-of-service"
-                  className="text-[#188B8B] hover:underline"
+                  className="text-[#157A7A] hover:underline"
                 >
                   Terms & Conditions
                 </Link>{" "}
                 and{" "}
                 <Link
                   to="/privacy-policy"
-                  className="text-[#188B8B] hover:underline"
+                  className="text-[#157A7A] hover:underline"
                 >
                   Privacy Policy
                 </Link>

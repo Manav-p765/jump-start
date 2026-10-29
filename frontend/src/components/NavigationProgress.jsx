@@ -65,7 +65,7 @@ export default function NavigationProgress() {
       className="pointer-events-none fixed left-0 right-0 top-0 z-[9999] h-[3px] bg-transparent"
     >
       <div
-        className="h-full bg-[#188B8B] shadow-[0_0_8px_rgba(24,139,139,0.6)] transition-[width,opacity] duration-200 ease-out"
+        className="h-full bg-[#157A7A] shadow-[0_0_8px_rgba(24,139,139,0.6)] transition-[width,opacity] duration-200 ease-out"
         style={{
           width: `${progress}%`,
           opacity: progress >= 100 ? 0 : 1,

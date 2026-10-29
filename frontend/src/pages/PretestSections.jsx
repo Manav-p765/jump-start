@@ -40,7 +40,7 @@ const getSectionState = (section, completedSet, progress) => {
     labelKey: "pretestSections.statusNotStarted",
     badgeClass: "bg-slate-100 text-slate-700",
     actionKey: "pretestSections.startSection",
-    actionClass: "bg-[#188B8B] text-white hover:bg-[#147979]",
+    actionClass: "bg-[#157A7A] text-white hover:bg-[#126A6A]",
   };
 };
 
@@ -145,7 +145,7 @@ export default function PretestSections() {
           <button
             type="button"
             onClick={() => navigate("/test", { replace: true })}
-            className="inline-flex items-center justify-center rounded-[14px] bg-[#188B8B] px-6 py-3 text-sm font-semibold text-white hover:bg-[#147979]"
+            className="inline-flex items-center justify-center rounded-[14px] bg-[#157A7A] px-6 py-3 text-sm font-semibold text-white hover:bg-[#126A6A]"
           >
             {t("pretestSections.backToPackages")}
           </button>
@@ -201,11 +201,11 @@ export default function PretestSections() {
                     </h2>
                     <div className="mt-4 flex flex-wrap gap-4 text-sm text-[#65758B]">
                       <span className="inline-flex items-center gap-2">
-                        <Clock3 className="h-4 w-4 text-[#188B8B]" />
+                        <Clock3 className="h-4 w-4 text-[#157A7A]" />
                         {section.durationMinutes || 20} {t("pretestSections.minutesLong")}
                       </span>
                       <span className="inline-flex items-center gap-2">
-                        <FileText className="h-4 w-4 text-[#188B8B]" />
+                        <FileText className="h-4 w-4 text-[#157A7A]" />
                         {section.totalQuestions || 0} {t("pretestSections.questionsLong")}
                       </span>
                     </div>

@@ -1,7 +1,7 @@
 import { useContext, useSyncExternalStore } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ArrowRight, CheckCircle2, Sparkles, Star } from "lucide-react";
+import { ArrowRight, BarChart3, CheckCircle2, ClipboardCheck, MessagesSquare, Sparkles, Star } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
 import AssetImage from "../components/AssetImage";
 
@@ -29,18 +29,21 @@ export default function Home() {
       title: t("home.takeTheTest"),
       description: t("home.takeTheTestBody"),
       image: "journey-test",
+      icon: ClipboardCheck,
       link: "/test",
     },
     {
       title: t("home.getResults"),
       description: t("home.getResultsBody"),
       image: "journey-results",
+      icon: BarChart3,
       link: "/result",
     },
     {
       title: t("home.expertCounselling"),
       description: t("home.expertCounsellingBody"),
       image: "journey-counselling",
+      icon: MessagesSquare,
       link: "/bookcounselling",
     },
   ];
@@ -56,25 +59,25 @@ export default function Home() {
     <div className="bg-white">
       <section className="relative isolate overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(52,211,203,0.24),_transparent_36%),linear-gradient(180deg,#F4FEFE_0%,#FFFFFF_54%)]">
         {showHeroImage && (
-          <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 hidden w-[68%] lg:block">
+          <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 hidden w-[56%] lg:block xl:w-[68%]">
             <AssetImage
               name="home-hero"
               alt=""
               width={1160}
               height={952}
-              sizes="68vw"
+              sizes="(min-width: 1280px) 68vw, 56vw"
               priority
               className="h-full w-full object-contain object-right opacity-90"
               style={{
-                maskImage: "linear-gradient(to right, transparent 0%, black 42%, black 100%)",
-                WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 42%, black 100%)",
+                maskImage: "linear-gradient(to right, transparent 0%, transparent 18%, black 55%, black 100%)",
+                WebkitMaskImage: "linear-gradient(to right, transparent 0%, transparent 18%, black 55%, black 100%)",
               }}
             />
           </div>
         )}
         <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#BAECEA] bg-white/80 px-4 py-2 text-sm font-semibold text-[#188B8B] shadow-sm">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#BAECEA] bg-white/80 px-4 py-2 text-sm font-semibold text-[#157A7A] shadow-sm">
               <Sparkles className="h-4 w-4" />
               {t("home.heroPillow")}
             </div>
@@ -82,7 +85,7 @@ export default function Home() {
             <h1 className="mt-6 max-w-xl text-4xl font-bold leading-tight text-[#0F1729] sm:text-5xl lg:text-6xl">
               {t("home.heroBigHeading")}
             </h1>
-            <p className="mt-5 max-w-xl text-lg leading-8 text-[#65758B]">
+            <p className="mt-5 max-w-[30rem] text-lg leading-8 text-[#65758B]">
               {t("home.heroBigBody")}
             </p>
 
@@ -98,11 +101,11 @@ export default function Home() {
 
             <div className="mt-8 flex flex-wrap gap-6 text-sm font-semibold text-[#4B5565]">
               <div className="inline-flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-[#188B8B]" />
+                <CheckCircle2 className="h-4 w-4 text-[#157A7A]" />
                 {t("home.scientificallyValidated")}
               </div>
               <div className="inline-flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-[#188B8B]" />
+                <CheckCircle2 className="h-4 w-4 text-[#157A7A]" />
                 {t("home.expertGuidance")}
               </div>
             </div>
@@ -115,7 +118,7 @@ export default function Home() {
           <div className="surface-card mx-auto max-w-5xl rounded-[32px] border border-[#DDECEF] bg-white p-5 sm:p-8">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="rounded-[28px] bg-[linear-gradient(180deg,#E8FBFA_0%,#F8FEFE_100%)] p-6">
-                    <p className="text-sm font-semibold text-[#188B8B]">
+                    <p className="text-sm font-semibold text-[#157A7A]">
                       {t("home.personalizedInsights")}
                     </p>
                     <p className="mt-2 text-3xl font-bold text-[#0F1729]">92%</p>
@@ -139,17 +142,17 @@ export default function Home() {
                   <div className="rounded-3xl border border-[#E6EFF5] bg-[#F8FAFC] p-5">
                     <Star className="h-5 w-5 text-[#F59F0A]" />
                     <p className="mt-4 text-sm font-semibold text-[#0F1729]">{t("home.aptitude")}</p>
-                    <p className="mt-1 text-sm leading-6 text-[#65758B]">{t("home.aptitudeBody")}</p>
+                    <p className="mt-1 text-sm leading-6 text-[#5B6B80]">{t("home.aptitudeBody")}</p>
                   </div>
                   <div className="rounded-3xl border border-[#E6EFF5] bg-[#F8FAFC] p-5">
-                    <Star className="h-5 w-5 text-[#188B8B]" />
+                    <Star className="h-5 w-5 text-[#157A7A]" />
                     <p className="mt-4 text-sm font-semibold text-[#0F1729]">{t("home.interests")}</p>
-                    <p className="mt-1 text-sm leading-6 text-[#65758B]">{t("home.interestsBody")}</p>
+                    <p className="mt-1 text-sm leading-6 text-[#5B6B80]">{t("home.interestsBody")}</p>
                   </div>
                   <div className="rounded-3xl border border-[#E6EFF5] bg-[#F8FAFC] p-5">
                     <Star className="h-5 w-5 text-[#0F1729]" />
                     <p className="mt-4 text-sm font-semibold text-[#0F1729]">{t("home.guidance")}</p>
-                    <p className="mt-1 text-sm leading-6 text-[#65758B]">{t("home.guidanceBody")}</p>
+                    <p className="mt-1 text-sm leading-6 text-[#5B6B80]">{t("home.guidanceBody")}</p>
                   </div>
                 </div>
           </div>
@@ -173,8 +176,8 @@ export default function Home() {
               to={card.link}
               className="surface-card group flex h-full flex-col rounded-[28px] p-5 transition-transform hover:-translate-y-1 motion-reduce:transform-none sm:p-6"
             >
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#E8F9F8] text-sm font-bold text-[#188B8B]">
-                {card.title.charAt(0)}
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#E8F9F8] text-[#157A7A]">
+                <card.icon className="h-5 w-5" aria-hidden="true" />
               </div>
               <h3 className="mt-5 text-2xl font-semibold text-[#0F1729]">
                 {card.title}
@@ -199,12 +202,12 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#188B8B]">
+      <section className="bg-[#157A7A]">
         <div className="mx-auto grid max-w-7xl gap-6 px-4 py-10 text-white sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
           {stats.map((item) => (
             <div key={item.label} className="text-center">
               <p className="text-3xl font-bold">{item.value}</p>
-              <p className="mt-2 text-sm text-white/75">{item.label}</p>
+              <p className="mt-2 text-sm text-white">{item.label}</p>
             </div>
           ))}
         </div>
@@ -212,7 +215,7 @@ export default function Home() {
 
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="surface-card rounded-[32px] bg-[radial-gradient(circle_at_top_right,_rgba(52,211,203,0.2),_transparent_36%),linear-gradient(180deg,#F4FEFE_0%,#FFFFFF_100%)] px-6 py-10 text-center sm:px-10">
-          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#E8F9F8] text-[#188B8B]">
+          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#E8F9F8] text-[#157A7A]">
             <Sparkles className="h-6 w-6" />
           </div>
           <h2 className="mt-5 text-3xl font-bold text-[#0F1729] sm:text-4xl">
@@ -223,7 +226,7 @@ export default function Home() {
           </p>
 
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <Link to={primaryDestination} className="primary-btn gap-2">
+            <Link to="/test" className="primary-btn gap-2">
               {t("home.explorePackages")}
               <ArrowRight className="h-4 w-4" />
             </Link>

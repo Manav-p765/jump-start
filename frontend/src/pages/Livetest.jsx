@@ -812,7 +812,7 @@ export default function Livetest() {
           <button
             type="button"
             onClick={() => navigate("/pretest/sections", { replace: true })}
-            className="mt-6 rounded-xl bg-[#188B8B] px-6 py-3 font-semibold text-white transition hover:bg-teal-700"
+            className="mt-6 rounded-xl bg-[#157A7A] px-6 py-3 font-semibold text-white transition hover:bg-teal-700"
           >
             {t("livetest.backToSections")}
           </button>
@@ -872,14 +872,14 @@ export default function Livetest() {
 
               <div className="grid w-full grid-cols-2 gap-1.5 sm:w-auto sm:flex sm:items-center sm:gap-3">
                 <div className="inline-flex items-center justify-center gap-1.5 rounded-full border border-[#E1E7EF] px-2.5 py-1.5 text-[11px] font-semibold text-[#0F1729] sm:px-4 sm:py-2 sm:text-sm">
-                  <Clock3 className="h-3.5 w-3.5 text-[#188B8B] sm:h-4 sm:w-4" />
+                  <Clock3 className="h-3.5 w-3.5 text-[#157A7A] sm:h-4 sm:w-4" />
                   {timerLabel}
                 </div>
                 <button
                   type="button"
                   onClick={handlePauseTest}
                   disabled={saving || pauseSaving}
-                  className="inline-flex items-center justify-center gap-1.5 rounded-full border border-[#188B8B] px-2.5 py-1.5 text-[11px] font-semibold text-[#188B8B] transition hover:bg-teal-50 disabled:cursor-not-allowed disabled:opacity-70 sm:gap-2 sm:px-4 sm:py-2 sm:text-sm"
+                  className="inline-flex items-center justify-center gap-1.5 rounded-full border border-[#188B8B] px-2.5 py-1.5 text-[11px] font-semibold text-[#157A7A] transition hover:bg-teal-50 disabled:cursor-not-allowed disabled:opacity-70 sm:gap-2 sm:px-4 sm:py-2 sm:text-sm"
                 >
                   <Pause className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   {pauseSaving ? t("livetest.pausing") : t("livetest.pauseTest")}
@@ -927,7 +927,7 @@ export default function Livetest() {
             <div className="px-3 pb-2.5 sm:px-5 sm:pb-4">
               <div className="h-1 rounded-full bg-[#E1E7EF] sm:h-2">
                 <div
-                  className="h-1 rounded-full bg-[#188B8B] transition-all duration-300 sm:h-2"
+                  className="h-1 rounded-full bg-[#157A7A] transition-all duration-300 sm:h-2"
                   style={{ width: `${progressPercent}%` }}
                 />
               </div>
@@ -967,7 +967,7 @@ export default function Livetest() {
         <div className="space-y-4">
           {showInterestInstructionHeading ? (
             <section className="rounded-[26px] border border-[#B7DDE3] bg-[#F1FDFF] p-5 shadow-sm sm:p-6">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#188B8B]">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#157A7A]">
                 {isGujaratiPackage
                   ? GUJARATI_INTEREST_INSTRUCTIONS.heading
                   : t("livetest.instructionInterestHeading")}
@@ -1066,7 +1066,7 @@ export default function Livetest() {
               <React.Fragment key={question.questionId || index}>
                 {showInterestGroupInstructionHeading ? (
                   <section className="rounded-[26px] border border-[#B7DDE3] bg-[#F1FDFF] p-5 shadow-sm sm:p-6">
-                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#188B8B]">
+                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#157A7A]">
                       {isGujaratiPackage
                         ? GUJARATI_INTEREST_INSTRUCTIONS.heading
                         : "Interest Assessment Instruction"}
@@ -1102,7 +1102,7 @@ export default function Livetest() {
                             key={`${numericQuestionId}-${pair.number}`}
                             className="grid grid-cols-[auto_minmax(0,1fr)] gap-3 font-mono text-sm leading-6 text-[#0F1729] sm:text-[15px]"
                           >
-                            <span className="font-semibold tabular-nums text-[#188B8B]">
+                            <span className="font-semibold tabular-nums text-[#157A7A]">
                               {pair.number}.
                             </span>
                             <span className="break-words">{pair.text}</span>
@@ -1272,7 +1272,7 @@ export default function Livetest() {
         <div className="mt-8 rounded-[26px] border border-[#E1E7EF] bg-white p-5 shadow-sm sm:p-6">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <div className="inline-flex items-center gap-2 text-sm font-semibold text-[#188B8B]">
+              <div className="inline-flex items-center gap-2 text-sm font-semibold text-[#157A7A]">
                 <CheckCircle2 className="h-4 w-4" />
                 {t("livetest.sectionProgressSaved")}
               </div>
@@ -1348,7 +1348,7 @@ export default function Livetest() {
               <button
                 type="button"
                 onClick={() => setShowUnansweredModal(false)}
-                className="inline-flex cursor-pointer items-center justify-center rounded-[12px] bg-[#188B8B] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#157A7A]"
+                className="inline-flex cursor-pointer items-center justify-center rounded-[12px] bg-[#157A7A] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#157A7A]"
               >
                 {t("livetest.unansweredModalCta")}
               </button>
@@ -1365,7 +1365,7 @@ export default function Livetest() {
           aria-labelledby="section-complete-modal-title"
         >
           <div className="w-full max-w-md rounded-[20px] bg-white p-6 text-center shadow-xl sm:p-7">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#E8F9F8] text-[#188B8B]">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#E8F9F8] text-[#157A7A]">
               <CheckCircle2 className="h-7 w-7" />
             </div>
             <h3
@@ -1384,7 +1384,7 @@ export default function Livetest() {
               type="button"
               onClick={handleProceedNow}
               disabled={saving}
-              className="mt-5 inline-flex w-full cursor-pointer items-center justify-center rounded-[14px] bg-[#188B8B] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#157A7A] disabled:cursor-not-allowed disabled:opacity-70"
+              className="mt-5 inline-flex w-full cursor-pointer items-center justify-center rounded-[14px] bg-[#157A7A] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#157A7A] disabled:cursor-not-allowed disabled:opacity-70"
             >
               {saving ? t("common.save") + "…" : t("livetest.sectionCompleteContinue")}
             </button>

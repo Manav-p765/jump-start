@@ -19,7 +19,7 @@ export default function ReviewActionBar({
     <section className="surface-card rounded-[28px] p-6">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#188B8B]">
+          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#157A7A]">
             Review Actions
           </p>
           <div className="mt-3 flex flex-wrap items-center gap-3">
@@ -46,7 +46,7 @@ export default function ReviewActionBar({
             <button
               type="button"
               onClick={onViewStudentReport}
-              className="inline-flex items-center justify-center gap-2 rounded-[14px] border border-[#9BD9D6] bg-white px-5 py-3 text-sm font-semibold text-[#188B8B] hover:bg-[#F0FBFB]"
+              className="inline-flex items-center justify-center gap-2 rounded-[14px] border border-[#9BD9D6] bg-white px-5 py-3 text-sm font-semibold text-[#157A7A] hover:bg-[#F0FBFB]"
             >
               <ExternalLink className="h-4 w-4" />
               View Student Report
@@ -69,7 +69,7 @@ export default function ReviewActionBar({
             type="button"
             onClick={onApprove}
             disabled={!canApprove || approving}
-            className="inline-flex items-center justify-center gap-2 rounded-[14px] bg-[#188B8B] px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(24,139,139,0.18)] hover:bg-[#147979] disabled:cursor-default disabled:opacity-60"
+            className="inline-flex items-center justify-center gap-2 rounded-[14px] bg-[#157A7A] px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(24,139,139,0.18)] hover:bg-[#126A6A] disabled:cursor-default disabled:opacity-60"
           >
             <CheckCircle2 className="h-4 w-4" />
             {canApprove

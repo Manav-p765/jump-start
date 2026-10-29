@@ -211,7 +211,7 @@ const Payments = () => {
                     <td className={`${TD} min-w-[160px] max-w-[240px] text-[13px] leading-5 text-gray-800`}>{item.package}</td>
                     <td className={`${TD} text-center text-xs`}>
                       {item.couponCode ? (
-                        <span className="inline-flex items-center rounded-full border border-[#9BD9D6] bg-[#F0FBFB] px-2 py-0.5 font-mono font-semibold text-[#188B8B]">
+                        <span className="inline-flex items-center rounded-full border border-[#9BD9D6] bg-[#F0FBFB] px-2 py-0.5 font-mono font-semibold text-[#157A7A]">
                           {item.couponCode}
                         </span>
                       ) : (

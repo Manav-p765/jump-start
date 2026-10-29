@@ -139,8 +139,8 @@ export default function TranslationsPanel() {
             onClick={() => setStatusFilter(filter.value)}
             className={`rounded-full px-3 py-1.5 text-xs font-semibold transition ${
               statusFilter === filter.value
-                ? "bg-[#188B8B] text-white"
-                : "border border-gray-200 bg-white text-gray-700 hover:border-[#188B8B] hover:text-[#188B8B]"
+                ? "bg-[#157A7A] text-white"
+                : "border border-gray-200 bg-white text-gray-700 hover:border-[#188B8B] hover:text-[#157A7A]"
             }`}
           >
             {filter.label}
@@ -195,7 +195,7 @@ export default function TranslationsPanel() {
                           type="button"
                           onClick={() => saveTranslation(row)}
                           disabled={saving}
-                          className="inline-flex items-center gap-1 rounded-lg bg-[#188B8B] px-3 py-1.5 text-xs font-semibold text-white disabled:opacity-60"
+                          className="inline-flex items-center gap-1 rounded-lg bg-[#157A7A] px-3 py-1.5 text-xs font-semibold text-white disabled:opacity-60"
                         >
                           <SaveIcon className="h-3.5 w-3.5" />
                           {saving ? "Saving…" : "Save"}
@@ -213,7 +213,7 @@ export default function TranslationsPanel() {
                       <button
                         type="button"
                         onClick={() => startEdit(row)}
-                        className="inline-flex items-center gap-1 rounded-lg border border-[#188B8B] px-3 py-1.5 text-xs font-semibold text-[#188B8B] hover:bg-[#F6FDFC]"
+                        className="inline-flex items-center gap-1 rounded-lg border border-[#188B8B] px-3 py-1.5 text-xs font-semibold text-[#157A7A] hover:bg-[#F6FDFC]"
                       >
                         <Pencil className="h-3.5 w-3.5" />
                         {row.translated ? "Edit" : "Translate"}

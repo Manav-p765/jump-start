@@ -31,21 +31,25 @@ const prefetchPretestChunks = () => {
 
 const accentStyles = [
   {
-    badge: "bg-[#E8F9F8] text-[#188B8B]",
+    badge: "bg-[#E8F9F8] text-[#157A7A]",
     border: "border-[#D7ECEC]",
-    button: "bg-[#188B8B] text-white hover:bg-[#147979]",
+    button: "bg-[#157A7A] text-white hover:bg-[#126A6A]",
   },
   {
-    badge: "bg-[#FFF2D8] text-[#B86D00]",
+    badge: "bg-[#FFF2D8] text-[#8A5200]",
     border: "border-[#F6C465]",
     button: "bg-[#F59F0A] text-[#0F1729] hover:bg-[#E89206]",
   },
   {
-    badge: "bg-[#E8F9F8] text-[#188B8B]",
+    badge: "bg-[#E8F9F8] text-[#157A7A]",
     border: "border-[#188B8B]",
     button: "bg-[#0F1729] text-white hover:bg-[#1E293B]",
   },
 ];
+
+// Packages used for client demos and pipeline QA. Hidden from the public
+// catalog; still shown to an account that already owns one.
+const INTERNAL_PACKAGE_IDS = new Set(["demo-aptitude-50q", "dummy-test"]);
 
 const formatPrice = (amount) => `₹ ${Number(amount || 0).toLocaleString("en-IN")}`;
 
@@ -86,7 +90,7 @@ const getPlanActionMeta = (plan, t) => {
   if (plan.owned) {
     return {
       badgeLabel: t("testCatalog.badgePurchased"),
-      badgeClass: "bg-[#E8F9F8] text-[#188B8B]",
+      badgeClass: "bg-[#E8F9F8] text-[#157A7A]",
       helperText: t("testCatalog.helperPurchasedReady"),
       actionLabel: t("testCatalog.actionStart"),
       mode: "open",
@@ -149,7 +153,9 @@ export default function Test() {
   const hasSinglePlan = plans.length === 1;
   const planContainerClassName = hasSinglePlan
     ? "mx-auto mt-12 max-w-xl"
-    : "mt-12 grid gap-6 lg:grid-cols-3";
+    : plans.length === 2
+      ? "mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-2"
+      : "mt-12 grid gap-6 lg:grid-cols-3";
 
   useEffect(() => {
     const userId = cacheUserKey(user);
@@ -159,7 +165,11 @@ export default function Test() {
       const purchasedMap = new Map(
         (purchasedPackages || []).map((pkg) => [pkg.id, pkg])
       );
-      return (publicPackages || []).map((plan) => {
+      return (publicPackages || [])
+        // Internal QA / client-demo packages stay usable for accounts that
+        // already have them but are not offered in the public catalog.
+        .filter((plan) => !INTERNAL_PACKAGE_IDS.has(plan.id) || purchasedMap.has(plan.id))
+        .map((plan) => {
         const ownedPackage = purchasedMap.get(plan.id);
         return {
           ...plan,
@@ -313,7 +323,7 @@ export default function Test() {
     <div className="bg-white">
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#E8F9F8] px-4 py-2 text-sm font-semibold text-[#188B8B]">
+          <div className="inline-flex items-center gap-2 rounded-full bg-[#E8F9F8] px-4 py-2 text-sm font-semibold text-[#157A7A]">
             <BadgeCheck className="h-4 w-4" />
             {t("testCatalog.badge")}
           </div>
@@ -386,7 +396,7 @@ export default function Test() {
                     {localisedPackageField(t, plan.id, "features", plan.features || []).map(
                       (feature, featureIndex) => (
                         <li key={`${plan.id}-feat-${featureIndex}`} className="flex items-start gap-3">
-                          <span className="mt-0.5 rounded-full bg-[#E8F9F8] p-1 text-[#188B8B]">
+                          <span className="mt-0.5 rounded-full bg-[#E8F9F8] p-1 text-[#157A7A]">
                             <Check className="h-3 w-3" />
                           </span>
                           <span>{feature}</span>
@@ -405,7 +415,7 @@ export default function Test() {
                     {openingPlanId === plan.id ? t("testCatalog.actionOpening") : action.actionLabel}
                   </button>
 
-                  <p className="mt-4 text-center text-xs text-[#98A2B3]">
+                  <p className="mt-4 text-center text-xs text-[#667085]">
                     {localisedPackageField(t, plan.id, "durationText", plan.durationText) ||
                       t("testCatalog.fallbackDuration")}
                   </p>
@@ -435,7 +445,7 @@ export default function Test() {
               const Icon = benefit.icon;
               return (
                 <div key={benefit.titleKey} className="text-center">
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#188B8B] shadow-sm">
+                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#157A7A] shadow-sm">
                     <Icon className="h-5 w-5" />
                   </div>
                   <h3 className="mt-4 text-lg font-semibold text-[#0F1729]">

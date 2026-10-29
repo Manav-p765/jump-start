@@ -362,7 +362,7 @@ export default function ReviewSubmission() {
       <section className="surface-card mt-8 rounded-[28px] p-6">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#188B8B]">
+            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#157A7A]">
               {t("reviewSubmission.sectionBreakdownEyebrow")}
             </p>
             <h2 className="mt-3 text-2xl font-bold text-[#0F1729]">
@@ -372,7 +372,7 @@ export default function ReviewSubmission() {
               {t("reviewSubmission.sectionBreakdownBody")}
             </p>
           </div>
-          <div className="rounded-full bg-[#F6FDFC] px-4 py-2 text-sm font-semibold text-[#188B8B]">
+          <div className="rounded-full bg-[#F6FDFC] px-4 py-2 text-sm font-semibold text-[#157A7A]">
             {t("reviewSubmission.sectionsCount", { count: sectionCards.length })}
           </div>
         </div>
@@ -406,11 +406,11 @@ export default function ReviewSubmission() {
       <div className="mt-8 grid gap-6 xl:grid-cols-[minmax(0,1.15fr)_minmax(360px,0.85fr)]">
         <section className="surface-card rounded-[28px] p-6">
           <div className="flex items-center gap-3">
-            <div className="rounded-2xl bg-[#EAFBFB] p-3 text-[#188B8B]">
+            <div className="rounded-2xl bg-[#EAFBFB] p-3 text-[#157A7A]">
               <ClipboardCheck className="h-5 w-5" />
             </div>
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#188B8B]">
+              <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#157A7A]">
                 {t("reviewSubmission.reviewNotesEyebrow")}
               </p>
               <h2 className="mt-2 text-2xl font-bold text-[#0F1729]">
@@ -455,7 +455,7 @@ export default function ReviewSubmission() {
 
             <div className="rounded-[24px] border border-[#E5EEF2] bg-[#FBFCFD] p-5">
               <div className="flex items-center gap-3">
-                <div className="rounded-2xl bg-[#EAFBFB] p-2.5 text-[#188B8B]">
+                <div className="rounded-2xl bg-[#EAFBFB] p-2.5 text-[#157A7A]">
                   <Target className="h-4 w-4" />
                 </div>
                 <h3 className="text-lg font-bold text-[#0F1729]">{t("reviewSubmission.readinessHeading")}</h3>
@@ -513,11 +513,11 @@ export default function ReviewSubmission() {
         <div className="space-y-6">
           <section className="surface-card rounded-[28px] p-6">
             <div className="flex items-center gap-3">
-              <div className="rounded-2xl bg-[#EAFBFB] p-3 text-[#188B8B]">
+              <div className="rounded-2xl bg-[#EAFBFB] p-3 text-[#157A7A]">
                 <Brain className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#188B8B]">
+                <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#157A7A]">
                   {t("reviewSubmission.personalityTypeEyebrow")}
                 </p>
                 <h2 className="mt-2 text-2xl font-bold text-[#0F1729]">
@@ -540,7 +540,7 @@ export default function ReviewSubmission() {
                 <Sparkles className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#188B8B]">
+                <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#157A7A]">
                   {t("reviewSubmission.strengthsMatchesEyebrow")}
                 </p>
                 <h2 className="mt-2 text-2xl font-bold text-[#0F1729]">
@@ -603,7 +603,7 @@ export default function ReviewSubmission() {
                             <h3 className="text-sm font-semibold text-[#0F1729]">
                               {career.title}
                             </h3>
-                            <span className="rounded-full bg-[#E2F8F7] px-2.5 py-0.5 text-[10px] font-semibold text-[#188B8B]">
+                            <span className="rounded-full bg-[#E2F8F7] px-2.5 py-0.5 text-[10px] font-semibold text-[#157A7A]">
                               {Math.round(matchValue)}% Match
                             </span>
                             {career.category ? (
@@ -614,7 +614,7 @@ export default function ReviewSubmission() {
                           </div>
                           <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-[#E6EEF2]">
                             <div
-                              className="h-1.5 rounded-full bg-[#188B8B]"
+                              className="h-1.5 rounded-full bg-[#157A7A]"
                               style={{
                                 width: `${Math.min(100, Math.max(0, matchValue))}%`,
                               }}
@@ -763,11 +763,11 @@ function StudentProfileReviewBlock({ profile, t }) {
     <section className="surface-card mt-8 rounded-[28px] p-6">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="flex items-start gap-3">
-          <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#EAFBFB] text-[#188B8B]">
+          <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#EAFBFB] text-[#157A7A]">
             <GraduationCap className="h-5 w-5" />
           </span>
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#188B8B]">
+            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#157A7A]">
               {t("reviewSubmission.studentProfileEyebrow")}
             </p>
             <h2 className="mt-1 text-2xl font-bold text-[#0F1729]">
@@ -779,7 +779,7 @@ function StudentProfileReviewBlock({ profile, t }) {
           </div>
         </div>
         {safeProfile.isComplete ? (
-          <span className="inline-flex shrink-0 items-center rounded-full bg-[#E2F8F7] px-3 py-1 text-xs font-semibold text-[#188B8B]">
+          <span className="inline-flex shrink-0 items-center rounded-full bg-[#E2F8F7] px-3 py-1 text-xs font-semibold text-[#157A7A]">
             {t("reviewSubmission.profileComplete")}
           </span>
         ) : (
@@ -1131,7 +1131,7 @@ function ManualReviewSection({
     <section className="surface-card mt-8 rounded-[28px] p-6">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#188B8B]">
+          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#157A7A]">
             {t("reviewSubmission.manualReviewEyebrow")}
           </p>
           <h2 className="mt-2 text-2xl font-bold text-[#0F1729]">
@@ -1232,7 +1232,7 @@ function ManualReviewSection({
               type="button"
               onClick={onFinalize}
               disabled={pending.length > 0 || manualReview.finalizing}
-              className="inline-flex items-center justify-center gap-2 rounded-[12px] bg-[#188B8B] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_22px_rgba(24,139,139,0.18)] hover:bg-[#147070] disabled:cursor-not-allowed disabled:opacity-60"
+              className="inline-flex items-center justify-center gap-2 rounded-[12px] bg-[#157A7A] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_22px_rgba(24,139,139,0.18)] hover:bg-[#147070] disabled:cursor-not-allowed disabled:opacity-60"
             >
               {manualReview.finalizing ? (
                 <>
@@ -1252,7 +1252,7 @@ function ManualReviewSection({
 
       {manualReview.refreshedScores ? (
         <div className="mt-5 rounded-[20px] border border-[#D4EBEE] bg-[linear-gradient(180deg,#F7FDFD_0%,#FFFFFF_100%)] p-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#188B8B]">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#157A7A]">
             {t("reviewSubmission.recomputed")}
           </p>
           <h3 className="mt-1 text-lg font-bold text-[#0F1729]">
@@ -1263,7 +1263,7 @@ function ManualReviewSection({
               <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-[#7D8CA2]">
                 {t("reviewSubmission.overallScoreLabel")}
               </p>
-              <p className="mt-1 text-2xl font-bold text-[#188B8B]">
+              <p className="mt-1 text-2xl font-bold text-[#157A7A]">
                 {manualReview.refreshedScores.overallScore ?? "—"}
               </p>
             </div>
@@ -1299,7 +1299,7 @@ function ManualReviewSection({
                       className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-semibold text-[#0F1729] shadow-[0_2px_8px_rgba(15,23,41,0.04)]"
                     >
                       {career.title}
-                      <span className="rounded-full bg-[#E2F8F7] px-2 py-0.5 text-[10px] text-[#188B8B]">
+                      <span className="rounded-full bg-[#E2F8F7] px-2 py-0.5 text-[10px] text-[#157A7A]">
                         {Math.round(Number(career.score || 0))}%
                       </span>
                     </span>

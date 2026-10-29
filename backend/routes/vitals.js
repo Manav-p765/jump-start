@@ -30,7 +30,8 @@ const MAX_BODY = "2kb";
 // so the effective ceiling is WINDOW_MAX × workers — still bounded, and
 // far below what would threaten Mongo.
 const WINDOW_MS = 60_000;
-const WINDOW_MAX = 60;
+// Each page view sends several metrics, and a school lab can share one IP.
+const WINDOW_MAX = 300;
 
 const hits = new Map();
 

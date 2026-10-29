@@ -46,12 +46,15 @@ const corsOptions = {
       return;
     }
 
-    callback(new Error(`Origin ${origin} is not allowed by CORS`));
+    // No CORS headers for unknown origins: the browser blocks the response.
+    // Passing an Error here turned every such request into a 500.
+    callback(null, false);
   },
   credentials: true,
 };
 
 const app = express();
+app.disable("x-powered-by");
 
 // Trust the reverse proxy (Nginx/Caddy, then Cloudflare) so req.ip and
 // req.protocol reflect the real client rather than 127.0.0.1. Rate

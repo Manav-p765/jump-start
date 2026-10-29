@@ -435,8 +435,8 @@ export default function Settings() {
             onClick={() => setActiveTab(tab.value)}
             className={`rounded-t-lg px-4 py-2 text-sm font-semibold transition ${
               activeTab === tab.value
-                ? "bg-[#188B8B] text-white"
-                : "bg-white text-gray-600 hover:text-[#188B8B]"
+                ? "bg-[#157A7A] text-white"
+                : "bg-white text-gray-600 hover:text-[#157A7A]"
             }`}
           >
             {tab.label}
@@ -460,7 +460,7 @@ export default function Settings() {
               key={p.id}
               onClick={() => pick(p.id)}
               className={`px-3 py-1.5 rounded-lg text-sm font-medium border ${
-                selectedId === p.id ? "bg-[#188B8B] text-white border-[#188B8B]" : "bg-white text-gray-700 border-gray-200"
+                selectedId === p.id ? "bg-[#157A7A] text-white border-[#188B8B]" : "bg-white text-gray-700 border-gray-200"
               }`}
             >
               {p.title}
@@ -491,18 +491,18 @@ export default function Settings() {
           <section className="bg-white rounded-2xl border border-gray-100 p-6">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold text-gray-900">Sections for {draft.title}</h2>
-              <button onClick={addSection} className="px-3 py-1.5 rounded-lg border border-[#188B8B] text-[#188B8B] text-sm font-semibold">+ Add Section</button>
+              <button onClick={addSection} className="px-3 py-1.5 rounded-lg border border-[#188B8B] text-[#157A7A] text-sm font-semibold">+ Add Section</button>
             </div>
 
             <div className="mb-5 rounded-xl bg-[#F8FAFA] border border-[#E4E7EC] p-4">
               <p className="text-sm text-[#0F1729] font-semibold mb-2">Download Upload Format</p>
               <div className="flex flex-wrap gap-3 text-sm">
-                <a href="/templates/section-template.csv" download className="text-[#188B8B] font-medium hover:underline">CSV Template</a>
-                <a href="/templates/section-1-personality.csv" download className="text-[#188B8B] font-medium hover:underline">Section 1 Sample</a>
-                <a href="/templates/section-2-intelligence.csv" download className="text-[#188B8B] font-medium hover:underline">Section 2 Sample</a>
-                <a href="/templates/section-3-interest.csv" download className="text-[#188B8B] font-medium hover:underline">Section 3 Sample</a>
-                <a href="/templates/section-4-aptitude.csv" download className="text-[#188B8B] font-medium hover:underline">Section 4 Sample</a>
-                <a href="/templates/section-5-ei.csv" download className="text-[#188B8B] font-medium hover:underline">Section 5 Sample</a>
+                <a href="/templates/section-template.csv" download className="text-[#157A7A] font-medium hover:underline">CSV Template</a>
+                <a href="/templates/section-1-personality.csv" download className="text-[#157A7A] font-medium hover:underline">Section 1 Sample</a>
+                <a href="/templates/section-2-intelligence.csv" download className="text-[#157A7A] font-medium hover:underline">Section 2 Sample</a>
+                <a href="/templates/section-3-interest.csv" download className="text-[#157A7A] font-medium hover:underline">Section 3 Sample</a>
+                <a href="/templates/section-4-aptitude.csv" download className="text-[#157A7A] font-medium hover:underline">Section 4 Sample</a>
+                <a href="/templates/section-5-ei.csv" download className="text-[#157A7A] font-medium hover:underline">Section 5 Sample</a>
               </div>
             </div>
 
@@ -516,7 +516,7 @@ export default function Settings() {
                         <button
                           type="button"
                           onClick={() => setEditingSection(null)}
-                          className="px-3 py-1.5 rounded-lg border border-[#188B8B] text-[#188B8B] text-xs font-semibold"
+                          className="px-3 py-1.5 rounded-lg border border-[#188B8B] text-[#157A7A] text-xs font-semibold"
                         >
                           Save Edit
                         </button>
@@ -560,7 +560,7 @@ export default function Settings() {
                     <button
                       onClick={() => syncSection(s)}
                       disabled={syncing === `${draft.id}:${s.sectionId}`}
-                      className="px-4 py-2 rounded-lg border border-[#188B8B] text-[#188B8B] text-sm font-semibold disabled:opacity-60"
+                      className="px-4 py-2 rounded-lg border border-[#188B8B] text-[#157A7A] text-sm font-semibold disabled:opacity-60"
                     >
                       {syncing === `${draft.id}:${s.sectionId}` ? "Syncing..." : "Sync Section"}
                     </button>
@@ -582,7 +582,7 @@ export default function Settings() {
                 type="button"
                 onClick={saveSupportPages}
                 disabled={savingSupportPages}
-                className="px-4 py-2 rounded-lg bg-[#188B8B] text-white text-sm font-semibold disabled:opacity-60"
+                className="px-4 py-2 rounded-lg bg-[#157A7A] text-white text-sm font-semibold disabled:opacity-60"
               >
                 {savingSupportPages ? "Saving..." : "Save Support Pages"}
               </button>
@@ -661,7 +661,7 @@ export default function Settings() {
                           <button
                             type="button"
                             onClick={() => addFaqItem(page.key)}
-                            className="px-3 py-1.5 rounded-lg border border-[#188B8B] text-[#188B8B] text-sm font-semibold"
+                            className="px-3 py-1.5 rounded-lg border border-[#188B8B] text-[#157A7A] text-sm font-semibold"
                           >
                             + Add FAQ
                           </button>
@@ -731,7 +731,7 @@ export default function Settings() {
                           <button
                             type="button"
                             onClick={() => addSupportTextItem(page.key)}
-                            className="px-3 py-1.5 rounded-lg border border-[#188B8B] text-[#188B8B] text-sm font-semibold"
+                            className="px-3 py-1.5 rounded-lg border border-[#188B8B] text-[#157A7A] text-sm font-semibold"
                           >
                             + Add Block
                           </button>

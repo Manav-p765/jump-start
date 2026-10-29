@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /result
+Disallow: /pretest
+Disallow: /livetest
+Disallow: /sectionbreak
+Disallow: /test-paused
+Disallow: /test-completed
+Disallow: /payment
+Disallow: /payment-confirmation
+Disallow: /careerdetail
+Disallow: /api/
+
+Sitemap: https://jumpstride.in/sitemap.xml
