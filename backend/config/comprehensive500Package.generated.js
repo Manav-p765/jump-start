@@ -1,6 +1,6 @@
 // AUTO-GENERATED — comprehensive 500-question package with Gujarati translations.
 // Regenerate via:  npm run translate:questions:gu  OR  node scripts/applyGujaratiTranslations.mjs
-// Last updated: 2026-10-27T17:48:35.801Z
+// Last updated: 2026-10-29T05:15:42.201Z
 
 const PACKAGE = {
   "id": "complete-aptitude-500q",
@@ -6083,7 +6083,7 @@ const PACKAGE = {
         },
         {
           "questionId": "381",
-          "text": "Which figure is the rotation of the object?",
+          "text": "Which cube can be formed by folding the given shape?",
           "type": "single",
           "options": [
             "Circle",
@@ -6105,7 +6105,7 @@ const PACKAGE = {
         },
         {
           "questionId": "382",
-          "text": "Which of the 4 figures presented (A, B, C, D) is a rotation of the first?",
+          "text": "Which figure is the rotation of the object?",
           "type": "single",
           "options": [
             "6",
@@ -6113,7 +6113,7 @@ const PACKAGE = {
             "10",
             "12"
           ],
-          "correctOption": "C",
+          "correctOption": "D",
           "reverseScored": false,
           "weight": 0.1,
           "text_gu": "કઈ આકૃતિ પદાર્થનું પરિભ્રમણ દર્શાવે છે?",
@@ -6127,7 +6127,7 @@ const PACKAGE = {
         },
         {
           "questionId": "383",
-          "text": "Which piece corresponds to the given solid?",
+          "text": "Which of the 4 figures presented (A, B, C, D) is a rotation of the first?",
           "type": "single",
           "options": [
             "View A",
@@ -6157,7 +6157,7 @@ const PACKAGE = {
             "Result C",
             "Result D"
           ],
-          "correctOption": "D",
+          "correctOption": "C",
           "reverseScored": false,
           "weight": 0.1,
           "text_gu": "આપેલ ઘન પદાર્થ સાથે કયો ટુકડો મેળ ખાય છે?",
@@ -6171,7 +6171,7 @@ const PACKAGE = {
         },
         {
           "questionId": "385",
-          "text": "Which object can be made by folding the given shape?",
+          "text": "Which piece corresponds to the given solid?",
           "type": "single",
           "options": [
             "Turn left 90°",
@@ -6179,7 +6179,7 @@ const PACKAGE = {
             "Turn 180°",
             "Don't turn"
           ],
-          "correctOption": "C",
+          "correctOption": "D",
           "reverseScored": false,
           "weight": 0.1,
           "text_gu": "આપેલ ઘન પદાર્થ સાથે કયો ટુકડો મેળ ખાય છે?",
@@ -6193,7 +6193,7 @@ const PACKAGE = {
         },
         {
           "questionId": "386",
-          "text": "Which figure can be formed using 2D rotation?",
+          "text": "Which object can be made by folding the given shape?",
           "type": "single",
           "options": [
             "6",
@@ -6201,7 +6201,7 @@ const PACKAGE = {
             "10",
             "12"
           ],
-          "correctOption": "A",
+          "correctOption": "C",
           "reverseScored": false,
           "weight": 0.1,
           "text_gu": "આપેલ આકારને ફોલ્ડ કરીને કઈ વસ્તુ બનાવી શકાય છે?",
@@ -6215,7 +6215,7 @@ const PACKAGE = {
         },
         {
           "questionId": "387",
-          "text": "Which figure can be formed with the given pieces?",
+          "text": "Which figure can be formed using 2D rotation?",
           "type": "single",
           "options": [
             "Pattern A",
@@ -6223,7 +6223,7 @@ const PACKAGE = {
             "Pattern C",
             "Pattern D"
           ],
-          "correctOption": "C",
+          "correctOption": "A",
           "reverseScored": false,
           "weight": 0.1,
           "text_gu": "2D પરિભ્રમણનો ઉપયોગ કરીને કઈ આકૃતિ બનાવી શકાય છે?",
@@ -6237,7 +6237,7 @@ const PACKAGE = {
         },
         {
           "questionId": "388",
-          "text": "To which object does the given top view correspond?",
+          "text": "Which figure can be formed with the given pieces?",
           "type": "single",
           "options": [
             "Position A",
@@ -6245,7 +6245,7 @@ const PACKAGE = {
             "Position C",
             "Position D"
           ],
-          "correctOption": "A",
+          "correctOption": "C",
           "reverseScored": false,
           "weight": 0.1,
           "text_gu": "આપેલા ટુકડાઓ વડે કઈ આકૃતિ બનાવી શકાય?",
@@ -6259,7 +6259,7 @@ const PACKAGE = {
         },
         {
           "questionId": "389",
-          "text": "Which figure is a vertical reflection across the x axis?",
+          "text": "To which object does the given top view correspond?",
           "type": "single",
           "options": [
             "Cone",
@@ -6281,7 +6281,7 @@ const PACKAGE = {
         },
         {
           "questionId": "390",
-          "text": "Which cube can be formed by folding the given shape?",
+          "text": "Which figure is a vertical reflection across the x axis?",
           "type": "single",
           "options": [
             "1",
@@ -6289,7 +6289,7 @@ const PACKAGE = {
             "3",
             "6"
           ],
-          "correctOption": "D",
+          "correctOption": "A",
           "reverseScored": false,
           "weight": 0.1,
           "text_gu": "કઈ આકૃતિ x અક્ષ પર ઊભી પ્રતિબિંબ છે?",
