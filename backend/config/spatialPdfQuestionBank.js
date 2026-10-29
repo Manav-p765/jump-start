@@ -273,9 +273,16 @@ export const SPATIAL_PDF_QUESTION_BANK = [
   },
 ];
 
+// The generator applies these by position (index 0 -> id 366), so they must
+// be ordered by liveQuestionId. The bank is in booklet order, where id 381
+// (booklet #25, filling the slot of booklet #16 which has no stimulus figure)
+// comes last; without the sort every id from 381 to 390 got the next
+// question's text and answer key.
 export const LIVE_SPATIAL_RELATIONS_OVERRIDES = SPATIAL_PDF_QUESTION_BANK.filter(
   (question) => Number(question.liveQuestionId) >= 366 && Number(question.liveQuestionId) <= 390
-).map(({ text, correctOption }) => ({
+)
+  .sort((a, b) => Number(a.liveQuestionId) - Number(b.liveQuestionId))
+  .map(({ text, correctOption }) => ({
   text,
   correctOption,
 }));
