@@ -661,6 +661,28 @@ export default function StudentReport() {
       className={`report-print-page bg-[#F7F8FA]${isGujaratiReport ? " report-lang-gu" : ""}`}
       lang={isGujaratiReport ? "gu" : undefined}
     >
+      {/* Print-only running header/footer, repeated on every printed page
+          (see .report-print-running in index.css). Outside
+          .report-print-root so the report zoom does not scale them. */}
+      <div className="report-print-running report-print-running-head" aria-hidden="true">
+        <img
+          src={jumpstrideLogo}
+          alt=""
+          width="711"
+          height="443"
+          className="report-print-running-logo"
+        />
+        <span>{F.reportHeader(reportDate)}</span>
+      </div>
+      <div className="report-print-running report-print-running-foot" aria-hidden="true">
+        <span>
+          {company.brandName} · {company.website}
+        </span>
+        <span>
+          {[studentName, student.jumpstartId].filter(Boolean).join(" · ")}
+        </span>
+      </div>
+
       <div className="report-print-root mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-10">
         {/* Screen-only top bar (hidden in the PDF) */}
         <div className="report-print-hidden mb-6 flex items-center justify-between gap-4">
@@ -699,7 +721,7 @@ export default function StudentReport() {
 
         {/* ============================ COVER ============================ */}
         <Card className="!p-0">
-          <div className="flex items-center justify-between gap-4 border-b border-[#E8EDF3] px-6 py-4 sm:px-8">
+          <div className="report-print-cover-head flex items-center justify-between gap-4 border-b border-[#E8EDF3] px-6 py-4 sm:px-8">
             <div className="flex items-center gap-3">
               <img
                 src={jumpstrideLogo}

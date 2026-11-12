@@ -21,6 +21,7 @@ export const company = {
 
   // Consumer-facing brand.
   brandName: "Jumpstride",
+  website: "jumpstride.in",
 
   address: {
     line1: "Opp. Hotel Natraj, MG Road",

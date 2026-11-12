@@ -175,6 +175,17 @@ textarea {
   background: white !important;
 }
 
+/* Printed page geometry, shared by the padding below and the running
+   header/footer bands. Top/bottom leave room for the logo band (8-20mm) and
+   the footer band (7-15mm from the bottom) plus clearance, well inside any
+   printer's non-printable edge (client review 2026-11-11: the top of pages
+   was being cut off). */
+:root {
+  --print-page-top: 26mm;
+  --print-page-bottom: 20mm;
+  --print-page-side: 12mm;
+}
+
 .jumpstart-report-print-mode .report-print-root {
   /* Fit the printable page width. A fixed 1120px here is wider than an
      A4/Letter printable area, which pushed content off the right edge and
@@ -182,8 +193,16 @@ textarea {
      header/footer text), the page margin is recreated as padding here.
      box-sizing: border-box keeps it within the sheet, so no overflow. */
   max-width: none !important;
-  padding: calc(14mm / var(--report-scale)) calc(12mm / var(--report-scale))
-    !important;
+  padding: calc(var(--print-page-top) / var(--report-scale))
+    calc(var(--print-page-side) / var(--report-scale))
+    calc(var(--print-page-bottom) / var(--report-scale)) !important;
+}
+
+/* Running header/footer: the Jumpstride logo on every printed page. Print
+   only (never shown on screen, even while the Download flow has toggled
+   print mode on). */
+.report-print-running {
+  display: none;
 }
 
 .jumpstart-report-print-mode .surface-card,
@@ -290,8 +309,9 @@ textarea {
     /* Page margin lives here now that @page margin is 0 (so no browser
        header/footer text). box-sizing: border-box keeps this within the
        page width, so no horizontal overflow. */
-    padding: calc(14mm / var(--report-scale)) calc(12mm / var(--report-scale))
-    !important;
+    padding: calc(var(--print-page-top) / var(--report-scale))
+      calc(var(--print-page-side) / var(--report-scale))
+      calc(var(--print-page-bottom) / var(--report-scale)) !important;
     /* Repeat that padding on EVERY printed page, not just the first and
        last. Without it, content that starts a new sheet (a forced break
        with no offset of its own, like the career-profiles heading, or a
@@ -327,7 +347,62 @@ textarea {
   .report-print-page-break-before {
     break-before: page;
     page-break-before: always;
+    /* Every page now starts at the same height under the running header;
+       the sections' on-screen mt-8 would push 01-06 ~9mm lower than the
+       cover, continuation and career pages. */
+    margin-top: 0 !important;
   }
+
+  /* Running header (logo + report title/date) and footer (brand, website,
+     student) repeat on every sheet: Chromium and Firefox paint
+     position:fixed boxes once per printed page. They sit inside the
+     reserved top/bottom padding, never over content. */
+  .report-print-running {
+    display: flex !important;
+    position: fixed;
+    left: var(--print-page-side);
+    right: var(--print-page-side);
+    z-index: 50;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6mm;
+    background: white;
+    color: #8a94a6;
+    font-size: 8.5pt;
+    line-height: 1.25;
+  }
+
+  .report-print-running-head {
+    top: 8mm;
+    height: 12mm;
+    padding-bottom: 2mm;
+    border-bottom: 0.3mm solid #e4eaf0;
+  }
+
+  .report-print-running-logo {
+    height: 9mm;
+    width: auto;
+  }
+
+  .report-print-running-foot {
+    bottom: 7mm;
+    height: 8mm;
+    padding-top: 1.5mm;
+    border-top: 0.3mm solid #e4eaf0;
+  }
+
+  /* The running header already carries the logo and date on page 1, so the
+     cover card's own letterhead row would repeat them. */
+  .report-print-cover-head {
+    display: none !important;
+  }
+
+  /* Engines without block-fragment `clone` (Safari; Chrome before 130) get
+     real page margins instead of the padding above. That fallback is
+     injected at runtime by usePrintableDocument: written here as
+     `@supports not (box-decoration-break: clone)`, the build's CSS minifier
+     widens it to also accept the inline-only -webkit- prefix, which those
+     engines have, so it would never match where it is needed. */
 
   /* Individual career profile blocks each get their own page. */
   .report-print-career-page {
