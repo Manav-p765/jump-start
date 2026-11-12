@@ -62,12 +62,13 @@ const GU_ID = flag("id") || "complete-aptitude-500q-gujarati";
 
 const EXPECTED_TOTAL = 500;
 const EXPECTED_SHAPE = [120, 80, 90, 160, 50];
-// Section 4 except 4.3 Abstract (341-365) was rewritten natively in Gujarati
-// by the client, with its own answer key ("a" in the gu source): 135 items.
-// MIRROR (English option labels) = 4.3 Abstract + 4.4 Spatial, whose options
-// are the A-D labels printed in the figures.
-const EXPECTED_MIRROR_COUNT = 50;
-const EXPECTED_NATIVE_COUNT = 135;
+// All of Section 4 (291-450) is the client's native Gujarati, with its own
+// answer key ("a" in the gu source): 160 items. 4.3 Abstract (341-365) joined
+// on 2026-11-12 from the client's "25 Abstract Reasoning Questions" doc.
+// MIRROR (English option labels) = 4.4 Spatial only, whose options are the
+// A-D labels printed in the figures.
+const EXPECTED_MIRROR_COUNT = 25;
+const EXPECTED_NATIVE_COUNT = 160;
 const GUJARATI_RE = /[\u0A80-\u0AFF]/; // Gujarati Unicode block
 
 const fail = (msg) => {

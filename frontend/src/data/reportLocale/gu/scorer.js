@@ -19,7 +19,7 @@ export const terms = {
   // MBTI poles
   Introversion: "અંતર્મુખતા",
   Sensing: "સંવેદન",
-  Intuition: "અંતઃસ્ફુરણા",
+  Intuition: "અંતરસ્ફૂરણા",
   Thinking: "તાર્કિક વિચાર",
   Feeling: "લાગણી",
   Judging: "નિર્ણયાત્મકતા",

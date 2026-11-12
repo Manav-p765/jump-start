@@ -17,8 +17,8 @@
 // Native Gujarati items
 // ---------------------
 // Section 4 lost its meaning in direct translation, so the client wrote
-// replacement questions in Gujarati for every block except 4.3 Abstract
-// (341-365). Those carry their own answer key in
+// replacement questions in Gujarati for every block (4.3 Abstract, 341-365,
+// joined last, on 2026-11-12). Those carry their own answer key in
 // `correctOption_gu`, which replaces the English `correctOption` here; the
 // question ids (and so the subsection scoring ranges) are unchanged.
 //

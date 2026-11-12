@@ -4,14 +4,12 @@ import { useTranslation } from "react-i18next";
 import {
   ArrowRight,
   BadgeCheck,
-  CheckCircle2,
   Clock3,
   FileText,
   Sparkles,
   X,
 } from "lucide-react";
 import api from "../api/api";
-import resultsIllustration from "../assets/results.png";
 import ResultPendingPanel from "../components/ResultPendingPanel";
 
 export default function TestCompleted() {
@@ -224,29 +222,19 @@ export default function TestCompleted() {
               <X className="h-4 w-4" />
             </button>
 
-            <div className="relative overflow-hidden bg-[linear-gradient(180deg,#166F6F_0%,#197A7A_100%)] px-6 pb-5 pt-7">
+            {/* One composition only: a single check badge in soft halos.
+                The earlier hero layered a frosted tile, a tiled PNG inside
+                it, and a path of lines/dots running behind both, which read
+                as two designs overlapping (client review, 2026-11-11). */}
+            <div className="relative overflow-hidden bg-[linear-gradient(180deg,#166F6F_0%,#197A7A_100%)] px-6 pb-6 pt-10">
               <div className="absolute -left-10 bottom-0 h-32 w-32 rounded-full bg-[#38D8D0]/20 blur-3xl" />
               <div className="absolute -right-10 top-2 h-28 w-28 rounded-full bg-[#F59F0A]/20 blur-3xl" />
-              <div className="absolute left-1/2 top-[54%] h-[2px] w-44 -translate-x-1/2 -rotate-[22deg] rounded-full bg-[#F59F0A]" />
-              <div className="absolute left-1/2 top-[60%] h-0 w-40 -translate-x-1/2 -rotate-[22deg] border-t-2 border-dashed border-white/65" />
-              <div className="absolute left-[26%] top-[38%] flex h-9 w-9 items-center justify-center rounded-full bg-white/14 text-white/90">
-                <CheckCircle2 className="h-4 w-4" />
-              </div>
-              <div className="absolute right-[24%] top-[26%] flex h-9 w-9 items-center justify-center rounded-full bg-[#F59F0A] text-[#0F1729] shadow-[0_10px_18px_rgba(245,159,10,0.22)]">
-                <ArrowRight className="h-4 w-4" />
-              </div>
 
-              <div className="relative flex items-center justify-center">
-                <div className="rounded-[24px] border border-white/10 bg-white/8 p-4 backdrop-blur">
-                  <img
-                    src={resultsIllustration}
-                    alt={t("testCompletedExtra.submissionImageAlt")}
-                    width="192"
-                    height="192"
-                    loading="lazy"
-                    decoding="async"
-                    className="h-24 w-auto object-contain sm:h-28"
-                  />
+              <div className="relative mx-auto flex h-32 w-32 items-center justify-center rounded-full bg-white/[0.07] ring-1 ring-white/10">
+                <div className="flex h-24 w-24 items-center justify-center rounded-full bg-white/[0.12] ring-1 ring-white/15">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white text-[#157A7A] shadow-[0_12px_28px_rgba(8,47,47,0.35)]">
+                    <BadgeCheck className="h-9 w-9" strokeWidth={2} aria-hidden="true" />
+                  </div>
                 </div>
               </div>
             </div>

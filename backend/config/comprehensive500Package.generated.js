@@ -1,6 +1,6 @@
 // AUTO-GENERATED — comprehensive 500-question package with Gujarati translations.
 // Regenerate via:  npm run translate:questions:gu  OR  node scripts/applyGujaratiTranslations.mjs
-// Last updated: 2026-10-29T05:15:42.201Z
+// Last updated: 2026-11-11T19:13:50.559Z
 
 const PACKAGE = {
   "id": "complete-aptitude-500q",
@@ -5239,13 +5239,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "○□○□○ ક્રમમાં, આગળ શું આવશે?",
+          "text_gu": "અનુક્રમ પૂરો કરો: 2, 4, 8, 16, ?",
           "options_gu": [
-            "○",
-            "□",
-            "△",
-            "◇"
-          ]
+            "24",
+            "64",
+            "30",
+            "32"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "342",
@@ -5260,13 +5261,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "કયો આકાર બીજાઓથી અલગ છે?",
+          "text_gu": "એક તીર ઘડિયાળની દિશામાં અનુક્રમે 45°, 90°, 135° ફરે છે. હવે પછીનું પરિભ્રમણ કેટલા અંશનું હશે?",
           "options_gu": [
-            "●",
-            "■",
-            "▲",
-            "◆"
-          ]
+            "150°",
+            "270°",
+            "180°",
+            "225°"
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "343",
@@ -5281,13 +5283,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "જો ↑→↓←↑→ પેટર્નને ચાલુ રાખે, તો આગળ શું છે?",
+          "text_gu": "ત્રિકોણ > ચોરસ > પંચકોણ > ષટ્કોણ > ?",
           "options_gu": [
-            "↑",
-            "→",
-            "↓",
-            "←"
-          ]
+            "દશકોણ",
+            "અષ્ટકોણ",
+            "વર્તુળ",
+            "સપ્તકોણ"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "344",
@@ -5302,13 +5305,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "પેટર્ન પૂર્ણ કરો: 1A, 3B, 5C, 7D, ?",
+          "text_gu": "જો 'b' નો સંબંધ 'd' સાથે છે, તો 'p' નો સંબંધ કોની સાથે થશે?",
           "options_gu": [
-            "8E",
-            "9E",
-            "8F",
-            "9F"
-          ]
+            "g",
+            "q",
+            "b",
+            "d"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "345",
@@ -5323,13 +5327,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "કયો આકાર પેટર્ન પૂર્ણ કરે છે? ◇○□◇○?",
+          "text_gu": "એક ચોરસના 4 ભાગ છે. પ્રથમ આકૃતિમાં 1 ભાગ ભરેલો (Shaded) છે, બીજીમાં 2, ત્રીજીમાં 3. ચોથી આકૃતિ કેવી હશે?",
           "options_gu": [
-            "◇",
-            "○",
-            "□",
-            "△"
-          ]
+            "1 ભાગ ભરેલો",
+            "માત્ર બાહ્ય રેખા",
+            "સંપૂર્ણ ભરેલો ચોરસ",
+            "સંપૂર્ણ ખાલી"
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "346",
@@ -5344,13 +5349,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "AZ, BY, CX, DW ક્રમમાં, આગળ શું આવશે?",
+          "text_gu": "નીચેનામાંથી કયો આકાર અન્યથી અલગ પડે છે?",
           "options_gu": [
-            "EV",
-            "EW",
-            "FV",
-            "FW"
-          ]
+            "વર્તુળ",
+            "ચોરસ",
+            "ત્રિકોણ",
+            "લંબચોરસ"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "347",
@@ -5365,13 +5371,14 @@ const PACKAGE = {
           "correctOption": "D",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "કઈ સંખ્યા બંધબેસતી નથી: 2, 4, 6, 9, 8?",
+          "text_gu": "જો વર્તુળની અંદર ત્રિકોણ = 3 (0+3), ચોરસની અંદર ત્રિકોણ = 7 (4+3), તો પંચકોણની અંદર ચોરસ = ?",
           "options_gu": [
-            "2",
-            "4",
-            "6",
-            "9"
-          ]
+            "20",
+            "1",
+            "9",
+            "8"
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "348",
@@ -5386,13 +5393,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "પૂર્ણ કરો: ●○●○●○?",
+          "text_gu": "જો અંગ્રેજી અક્ષર 'M' નું જળ પ્રતિબિંબ લેવામાં આવે, તો તે કેવો દેખાશે?",
           "options_gu": [
-            "●",
-            "○",
-            "◐",
-            "◑"
-          ]
+            "W",
+            "M",
+            "E",
+            "3"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "349",
@@ -5407,13 +5415,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "જો RED 1, BLUE 2, GREEN 3, તો YELLOW શું છે?",
+          "text_gu": "એક ચોરસ કાગળને બરાબર વચ્ચેથી બે વાર વાળવામાં આવે અને ખૂણા પર એક કાણું પાડવામાં આવે, તો કાગળ ખોલતાં કુલ કેટલાં કાણાં દેખાશે?",
           "options_gu": [
             "4",
-            "5",
             "6",
-            "7"
-          ]
+            "8",
+            "2"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "350",
@@ -5428,13 +5437,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "આગળ શું આવશે: AB, CD, EF, GH, ?",
+          "text_gu": "એક સીધી રેખા (1), કાટખૂણો/બે રેખાઓ (2), ત્રણ રેખાઓનો ખુલ્લો આકાર (3). હવે પછીનું તાર્કિક પગલું કયું હોવું જોઈએ?",
           "options_gu": [
-            "IJ",
-            "IK",
-            "JK",
-            "HI"
-          ]
+            "અનિયમિત વળાંક",
+            "બિંદુ",
+            "વર્તુળ",
+            "4 રેખાઓ ધરાવતો બંધ અથવા ખુલ્લો આકાર"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "351",
@@ -5449,13 +5459,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "પેટર્ન પૂર્ણ કરો: ▲▼▲▼▲?",
+          "text_gu": "નીચેનામાંથી કયા અંગ્રેજી મૂળાક્ષરમાં ઊભી અને આડી બંને સંમિતિ રેખાઓ છે?",
           "options_gu": [
-            "▲",
-            "▼",
-            "►",
-            "◄"
-          ]
+            "C",
+            "B",
+            "H",
+            "A"
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "352",
@@ -5470,13 +5481,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "1, 1, 2, 3, 5, 8 માં, આગળ શું છે?",
+          "text_gu": "એક કાળું ટપકું ચોરસના ચાર ખૂણાઓ પર ઘડિયાળના કાંટાની ઊલટી દિશામાં (Anti-clockwise) ફરે છે: ઉપર-જમણે, ઉપર-ડાબે, નીચે-ડાબે, ?",
           "options_gu": [
-            "11",
-            "12",
-            "13",
-            "15"
-          ]
+            "કેન્દ્રમાં",
+            "નીચે-જમણે",
+            "ઉપર-જમણે",
+            "ચોરસની બહાર"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "353",
@@ -5491,13 +5503,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "કયું અલગ છે: Monday, Tuesday, March, Thursday?",
+          "text_gu": "જો (ચોરસ + વર્તુળ) માંથી વર્તુળ દૂર કરવામાં આવે તો ચોરસ રહે. જો (ષટ્કોણ + ત્રિકોણ + પંચકોણ) માંથી (ત્રિકોણ + પંચકોણ) દૂર થાય તો શું બાકી રહે?",
           "options_gu": [
-            "Monday",
-            "Tuesday",
-            "March",
-            "Thursday"
-          ]
+            "વર્તુળ",
+            "ચોરસ",
+            "અષ્ટકોણ",
+            "ષટ્કોણ"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "354",
@@ -5512,13 +5525,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "પૂર્ણ કરો: 2, 4, 8, 16, ?",
+          "text_gu": "નીચેનામાંથી કયો આકાર સંમિત (Symmetrical) નથી?",
           "options_gu": [
-            "24",
-            "32",
-            "20",
-            "18"
-          ]
+            "વર્તુળ",
+            "વિષમબાજુ ત્રિકોણ",
+            "સમબાજુ ત્રિકોણ",
+            "ચોરસ"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "355",
@@ -5533,13 +5547,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "જો cat = dog અને dog = mouse, તો cat = ?",
+          "text_gu": "એક સ્ટાન્ડર્ડ પાસા (Standard Dice) પર '2' ની સામેની સપાટી પર કયો અંક હોય?",
           "options_gu": [
-            "dog",
-            "mouse",
-            "cat",
-            "animal"
-          ]
+            "4",
+            "5",
+            "6",
+            "3"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "356",
@@ -5554,13 +5569,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "પેટર્ન ચાલુ રાખનાર કયું છે: XYZ, WXY, VWX, ?",
+          "text_gu": "અક્ષર 'E' બનાવવા માટે 4 રેખાખંડો વપરાય છે, 'F' માટે 3. અક્ષર 'H' બનાવવા માટે કેટલા રેખાખંડો જોઈએ?",
           "options_gu": [
-            "UVW",
-            "VWX",
-            "UWV",
-            "TUV"
-          ]
+            "4",
+            "5",
+            "3",
+            "2"
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "357",
@@ -5575,13 +5591,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "પૂર્ણ કરો: ○●○●○●?",
+          "text_gu": "3x3 મેટ્રિક્સમાં દરેક હરોળમાં 1 ત્રિકોણ, 1 ચોરસ અને 1 વર્તુળ છે. ત્રીજી હરોળમાં [ત્રિકોણ], [ખાલી જગ્યા], [ચોરસ] છે. ખાલી જગ્યામાં શું આવશે?",
           "options_gu": [
-            "○",
-            "●",
-            "◐",
-            "◑"
-          ]
+            "વર્તુળ",
+            "લંબચોરસ",
+            "ત્રિકોણ",
+            "પંચકોણ"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "358",
@@ -5596,13 +5613,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "3, 6, 12, 24 માં, આગળ શું આવશે?",
+          "text_gu": "જ્યારે એક સફેદ વર્તુળ કાળા ચોરસની ઉપર મૂકવામાં આવે ત્યારે વચ્ચેનો ભાગ સફેદ થઈ જાય છે. જો કાળો ત્રિકોણ સફેદ ચોરસ પર મુકાય તો કેન્દ્ર કેવું દેખાશે?",
           "options_gu": [
-            "36",
-            "48",
-            "30",
-            "42"
-          ]
+            "પારદર્શક",
+            "કાળો ત્રિકોણ",
+            "ગ્રે રંગ",
+            "સફેદ ચોરસ"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "359",
@@ -5617,13 +5635,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "કયું બંધબેસતું નથી: apple, orange, car, banana?",
+          "text_gu": "મોટો ચોરસ :  નાનો ચોરસ\nમોટું વર્તુળ : ?",
           "options_gu": [
-            "apple",
-            "orange",
-            "car",
-            "banana"
-          ]
+            "નાનો ત્રિકોણ",
+            "મોટો પંચકોણ",
+            "અર્ધવર્તુળ",
+            "નાનું વર્તુળ"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "360",
@@ -5638,13 +5657,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "પૂર્ણ કરો: A1, B2, C3, D4, ?",
+          "text_gu": "જો કોઈ વર્તુળમાં 1 વ્યાસ દોરતાં 2 ભાગ બને છે, 2 કાટખૂણે છેદતા વ્યાસ દોરતાં 4 ભાગ બને છે. 3 પરસ્પર છેદતા વ્યાસ દોરતાં વધુમાં વધુ કેટલા ભાગ બનશે?",
           "options_gu": [
-            "E5",
-            "E4",
-            "F5",
-            "D5"
-          ]
+            "6",
+            "8",
+            "12",
+            "5"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "361",
@@ -5659,13 +5679,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "આગળ કયો આકાર આવશે: ○□△○□?",
+          "text_gu": "પેટર્ન: કાળો -> સફેદ -> કાળો -> સફેદ -> ?",
           "options_gu": [
-            "○",
-            "□",
-            "△",
-            "◇"
-          ]
+            "ગ્રે",
+            "સફેદ",
+            "કાળો",
+            "લાલ"
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "362",
@@ -5680,13 +5701,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "10, 8, 6, 4 માં, આગળ શું છે?",
+          "text_gu": "બિંદુ (0D) -> રેખા (1D) -> ચોરસ (2D) -> ?",
           "options_gu": [
-            "3",
-            "2",
-            "1",
-            "0"
-          ]
+            "પંચકોણ (Pentagon)",
+            "સમઘન (Cube)",
+            "ત્રિકોણ (Triangle)",
+            "વર્તુળ (Circle)"
+          ],
+          "correctOption_gu": "B"
         },
         {
           "questionId": "363",
@@ -5701,13 +5723,14 @@ const PACKAGE = {
           "correctOption": "A",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "પેટર્ન પૂર્ણ કરો: AB, BA, CD, DC, ?",
+          "text_gu": "બપોરે બરાબર 3:00 વાગ્યે ઘડિયાળના કલાક અને મિનિટના કાંટા વચ્ચે કેટલા અંશનો અમૂર્ત ખૂણો બને છે?",
           "options_gu": [
-            "EF",
-            "FE",
-            "EG",
-            "GE"
-          ]
+            "60°",
+            "180°",
+            "90°",
+            "45°"
+          ],
+          "correctOption_gu": "C"
         },
         {
           "questionId": "364",
@@ -5722,13 +5745,14 @@ const PACKAGE = {
           "correctOption": "C",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "કઈ સંખ્યા અલગ છે: 7, 14, 21, 29, 35?",
+          "text_gu": "જો પ્રથમ હરોળમાં રેખાઓ ડાબેથી જમણે વધી રહી હોય (1 -> 2 -> 3) અને બીજી હરોળમાં (2 -> 4 -> 6) હોય, તો ત્રીજી હરોળ (3 -> 6 -> ?) માં અંતિમ આકૃતિમાં કેટલી રેખાઓ હશે?",
           "options_gu": [
+            "9",
+            "8",
             "7",
-            "14",
-            "29",
-            "35"
-          ]
+            "12"
+          ],
+          "correctOption_gu": "A"
         },
         {
           "questionId": "365",
@@ -5743,13 +5767,14 @@ const PACKAGE = {
           "correctOption": "B",
           "reverseScored": false,
           "weight": 1,
-          "text_gu": "જો × = +, + = -, - = ÷, તો 8 4 2 6 ?",
+          "text_gu": "નીચેનામાંથી કયો અક્ષર સંપૂર્ણપણે 'બંધ આકૃતિ' બનાવે છે?",
           "options_gu": [
-            "1",
-            "2",
-            "10",
-            "15"
-          ]
+            "L",
+            "C",
+            "U",
+            "O"
+          ],
+          "correctOption_gu": "D"
         },
         {
           "questionId": "366",
