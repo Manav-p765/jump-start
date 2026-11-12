@@ -26,10 +26,10 @@ import { isManualReviewRequired } from "../utils/scoring/specs/career500qEvaluat
 const GUJARATI_RE = /[\u0A80-\u0AFF]/;
 const EXPECTED_TOTAL = 500;
 const EXPECTED_SHAPE = [120, 80, 90, 160, 50];
-// Section 4 except Abstract (341-365) is native Gujarati with its own answer
-// key (135 items); Abstract + Spatial (341-390) keep English option labels.
-const EXPECTED_MIRROR_COUNT = 50;
-const EXPECTED_NATIVE_COUNT = 135;
+// All of Section 4 is native Gujarati with its own answer key (160 items);
+// only Spatial (366-390) keeps English option labels (A-D in the figures).
+const EXPECTED_MIRROR_COUNT = 25;
+const EXPECTED_NATIVE_COUNT = 160;
 const LIKERT_LETTERS = ["A", "B", "C", "D", "E", "F"];
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -221,7 +221,7 @@ for (const q of guQuestions) {
 }
 
 // Non-MIRROR questions should have Gujarati text.
-// MIRROR questions (abstract/spatial/mechanical) keep English text since they are visual.
+// MIRROR questions (spatial) keep English option labels since they are visual.
 const nonMirrorTotal = guQuestions.length - mirrorIds.size;
 const nonMirrorWithGu = guQuestions.filter(
   (q) => !mirrorIds.has(String(q.questionId)) && GUJARATI_RE.test(String(q.text || ""))
